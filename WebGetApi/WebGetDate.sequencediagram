@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SequenceDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" dslVersion="1.0.0.0" Id="0fd321e0-2017-4a35-8230-f46708bfe155" name="WebGetDate" mode="DotNet" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner">
+  <packagedElements>
+    <packageHasNamedElement>
+      <interaction Id="6e0234de-d27b-4081-986c-a882e4c46e87" name="WebGetDate" collapseFragmentsFlag="false" isActiveClass="false" isAbstract="false" isLeaf="false" isReentrant="false">
+        <ownedCommentsInternal>
+          <comment Id="89594e8a-f1be-49b3-927b-9923f56753b4">
+            <body>采集成功：等待下次采集。
+采集失败：重新打开网页，提取数据，再提交数据库</body>
+          </comment>
+        </ownedCommentsInternal>
+        <fragments>
+          <behaviorExecutionSpecification Id="40adbac8-5ea0-4617-afc2-dd872cc3b0a2" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="f0fde502-a590-43a3-ba35-ee2b4f05ab1b" LastKnownName="浏览器插件" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="cbd038aa-dd89-4649-9cee-52bdab0054e7" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="e92a6e40-f202-4a2e-9822-d48f5ca1365a" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="5ef9fa05-7884-4ea1-a34d-1b6ea2945fcf" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="a0c6ba90-38c0-4e16-a2e3-d304eec5241c" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="a07ffe39-8dd0-4837-a20c-b53bb9534958" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="1c972973-be64-4bcc-8b05-b69977fbc4c4" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="e92a6e40-f202-4a2e-9822-d48f5ca1365a" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="2cb54e04-b3f3-47a2-8566-2eaae5d78408" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="f0fde502-a590-43a3-ba35-ee2b4f05ab1b" LastKnownName="浏览器插件" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="5c7dae7c-9a9e-4618-96c6-a5d199493639" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="e8afc9d4-f1f1-40cf-9e4f-d48d6f26699e" LastKnownName="谷歌浏览器" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="5ef9fa05-7884-4ea1-a34d-1b6ea2945fcf" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="f0fde502-a590-43a3-ba35-ee2b4f05ab1b" LastKnownName="浏览器插件" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="bf645b13-a964-4375-a9f3-9ef2e93b2989" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="26f98277-9e8a-4835-8833-be2b3553240f" LastKnownName="需要采集的网页" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="fb163b43-37a7-4be2-8367-6d819eea01d7" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="225488bf-8a8e-4c59-a27b-4105f33dd222" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="a1e8a62e-6c0b-467e-9555-fc8b7bb30c0c" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="01086b63-b29c-4a04-9c90-cd833e1a109e" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="8fadd64d-0c9b-431e-8dea-b864f1ccbef2" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="8c6c61c4-128a-4ac0-8fc1-fbd257a90875" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="225488bf-8a8e-4c59-a27b-4105f33dd222" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="6f16136b-f132-4bc1-b6a8-e5211401145c" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="26f98277-9e8a-4835-8833-be2b3553240f" LastKnownName="需要采集的网页" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="a0c6ba90-38c0-4e16-a2e3-d304eec5241c" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="f0fde502-a590-43a3-ba35-ee2b4f05ab1b" LastKnownName="浏览器插件" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="a1e8a62e-6c0b-467e-9555-fc8b7bb30c0c" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="26f98277-9e8a-4835-8833-be2b3553240f" LastKnownName="需要采集的网页" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="edefddd8-a512-4171-a3f5-175be85687f0" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="9d266580-7914-4365-b12c-462d5624af41" LastKnownName="数据库" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="73cfbf2e-872d-4a80-aca9-0e06d553e018" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="c4f4f199-7cb2-40d5-8571-0d4eea3000aa" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="9e50b784-056d-4cb9-96a3-c39882bcf709" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="d7310ee9-fddc-446e-bac6-5d757aa50640" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="c4f4f199-7cb2-40d5-8571-0d4eea3000aa" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="632ff942-ceb8-4040-847a-34e1fe61d018" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="9d266580-7914-4365-b12c-462d5624af41" LastKnownName="数据库" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="01086b63-b29c-4a04-9c90-cd833e1a109e" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="26f98277-9e8a-4835-8833-be2b3553240f" LastKnownName="需要采集的网页" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="9e50b784-056d-4cb9-96a3-c39882bcf709" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="9d266580-7914-4365-b12c-462d5624af41" LastKnownName="数据库" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="8fadd64d-0c9b-431e-8dea-b864f1ccbef2" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="26f98277-9e8a-4835-8833-be2b3553240f" LastKnownName="需要采集的网页" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="d7310ee9-fddc-446e-bac6-5d757aa50640" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="9d266580-7914-4365-b12c-462d5624af41" LastKnownName="数据库" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="73cfbf2e-872d-4a80-aca9-0e06d553e018" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="ac8ba9e0-c353-4761-a0b5-eac95c6b3b96" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="9d266580-7914-4365-b12c-462d5624af41" LastKnownName="数据库" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="a07ffe39-8dd0-4837-a20c-b53bb9534958" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="f0fde502-a590-43a3-ba35-ee2b4f05ab1b" LastKnownName="浏览器插件" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="8c6c61c4-128a-4ac0-8fc1-fbd257a90875" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="26f98277-9e8a-4835-8833-be2b3553240f" LastKnownName="需要采集的网页" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="fb163b43-37a7-4be2-8367-6d819eea01d7" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="3cc0f2f1-c247-4c2d-a4a7-9d036c0dc988" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="26f98277-9e8a-4835-8833-be2b3553240f" LastKnownName="需要采集的网页" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="1c972973-be64-4bcc-8b05-b69977fbc4c4" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="f0fde502-a590-43a3-ba35-ee2b4f05ab1b" LastKnownName="浏览器插件" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="5de2875f-01ab-461b-86dd-e2888d181bd4" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="e8afc9d4-f1f1-40cf-9e4f-d48d6f26699e" LastKnownName="谷歌浏览器" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="cbd038aa-dd89-4649-9cee-52bdab0054e7" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="6c95e436-8cb8-445a-bf4a-bd663e558fbf" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="f0fde502-a590-43a3-ba35-ee2b4f05ab1b" LastKnownName="浏览器插件" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline Id="e8afc9d4-f1f1-40cf-9e4f-d48d6f26699e" name="谷歌浏览器" isActor="false" lifelineDisplayName="‎谷歌浏览器‎">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="5c7dae7c-9a9e-4618-96c6-a5d199493639" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="5de2875f-01ab-461b-86dd-e2888d181bd4" LastKnownName="MessageOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="f0fde502-a590-43a3-ba35-ee2b4f05ab1b" name="浏览器插件" isActor="false" lifelineDisplayName="‎浏览器插件‎">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="e92a6e40-f202-4a2e-9822-d48f5ca1365a" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="cbd038aa-dd89-4649-9cee-52bdab0054e7" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="26f98277-9e8a-4835-8833-be2b3553240f" name="需要采集的网页" isActor="false" lifelineDisplayName="‎需要采集的网页‎">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="225488bf-8a8e-4c59-a27b-4105f33dd222" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="fb163b43-37a7-4be2-8367-6d819eea01d7" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="9d266580-7914-4365-b12c-462d5624af41" name="数据库" isActor="false" lifelineDisplayName="‎数据库‎">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="c4f4f199-7cb2-40d5-8571-0d4eea3000aa" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="73cfbf2e-872d-4a80-aca9-0e06d553e018" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message Id="b8a441a5-aefe-490f-95c0-beccc2b841da" name="启动时，自动运行插件" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="5c7dae7c-9a9e-4618-96c6-a5d199493639" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="5ef9fa05-7884-4ea1-a34d-1b6ea2945fcf" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="8ccf16cd-28dd-41fa-b36c-25d7e03bdb24" name="插件打开对应网页" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="a0c6ba90-38c0-4e16-a2e3-d304eec5241c" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="a1e8a62e-6c0b-467e-9555-fc8b7bb30c0c" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="a21e0d87-0f0c-48a6-ac80-f2c2116f26de" name="插件后台分析网页，提取数据，提交到数据库" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="01086b63-b29c-4a04-9c90-cd833e1a109e" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="9e50b784-056d-4cb9-96a3-c39882bcf709" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="f3d48d2c-10e7-42d7-9651-d04169be4e91" name="提交数据库状态" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="d7310ee9-fddc-446e-bac6-5d757aa50640" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="8fadd64d-0c9b-431e-8dea-b864f1ccbef2" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="d1ccfd97-5b5a-4746-957b-5393731961da" name="采集状态" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="8c6c61c4-128a-4ac0-8fc1-fbd257a90875" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="a07ffe39-8dd0-4837-a20c-b53bb9534958" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="b4965768-38f2-4d50-9812-39b5ba0c461f" name="插件状态" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="1c972973-be64-4bcc-8b05-b69977fbc4c4" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="5de2875f-01ab-461b-86dd-e2888d181bd4" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="2cb54e04-b3f3-47a2-8566-2eaae5d78408" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="6c95e436-8cb8-445a-bf4a-bd663e558fbf" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="6f16136b-f132-4bc1-b6a8-e5211401145c" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="3cc0f2f1-c247-4c2d-a4a7-9d036c0dc988" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="632ff942-ceb8-4040-847a-34e1fe61d018" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="ac8ba9e0-c353-4761-a0b5-eac95c6b3b96" name="ExecutionEvent" />
+    </packageHasNamedElement>
+  </packagedElements>
+</SequenceDesignerModel>
