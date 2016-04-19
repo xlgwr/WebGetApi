@@ -16,6 +16,7 @@ namespace EFLibForApi.emms.models
 
         public int tStatus { get; set; }
 
+        [Index]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime addDate { get; set; }
 

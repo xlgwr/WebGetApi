@@ -11,6 +11,9 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using EFLibForApi.emms;
 using EFLibForApi.emms.models;
+using System.Web;
+using log4net;
+using System.Reflection;
 
 namespace WebGetApi.Controllers
 {
@@ -18,6 +21,8 @@ namespace WebGetApi.Controllers
     [RoutePrefix("api/GWDICRIS")]
     public class gwd_ICRIS_mainController : ApiController
     {
+        private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private emmsApiDbContext db = new emmsApiDbContext();
 
         // GET: api/gwd_ICRIS_main
@@ -43,6 +48,7 @@ namespace WebGetApi.Controllers
         [Route("GetWebDatasMaxName/{id}")]
         public async Task<IHttpActionResult> GetWebDatasMaxAsync(string id)
         {
+            logger.Debug(id);
             var getWebDatas = await db.gwd_ICRIS_main.Where(a => a.ttype == id).MaxAsync(m => m.Tid);
             if (getWebDatas == null)
             {
@@ -99,6 +105,8 @@ namespace WebGetApi.Controllers
             try
             {
                 gwd_ICRIS_main.UpdateDate = DateTime.Now;
+                gwd_ICRIS_main.Remark = HttpContext.Current.Request.UserHostAddress;
+
                 if (gwd_ICRIS_main.gwd_ICRIS_items != null)
                 {
                     gwd_ICRIS_main.gwd_ICRIS_items.Tid = gwd_ICRIS_main.Tid;

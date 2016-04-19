@@ -11,15 +11,15 @@ using Newtonsoft.Json;
 
 namespace EFLibForApi.emms.models
 {
-   
+
     [Table("gwd_Judiciary_main")]
     public class gwd_Judiciary_main : entityGetWebDatas
     {
         public gwd_Judiciary_main()
         {
-            this.gwd_Judiciary_items = new gwd_Judiciary_items();
+            this.gwd_Judiciary_items = new List<gwd_Judiciary_items>();
         }
-        public gwd_Judiciary_items gwd_Judiciary_items { get; set; }
+        public ICollection<gwd_Judiciary_items> gwd_Judiciary_items { get; set; }
 
     }
 
@@ -27,7 +27,13 @@ namespace EFLibForApi.emms.models
     public class gwd_Judiciary_items : entity
     {
         [Key]
+        [Column(Order = 0)]
+        [ForeignKey("gwd_Judiciary_main")]
         public string Tid { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        public int Tindex { get; set; }
 
 
         /// <summary>
@@ -114,7 +120,6 @@ namespace EFLibForApi.emms.models
         /// </summary>
         [StringLength(100)]
         public string Representation { get; set; }
-
 
         [JsonIgnore]
         public gwd_Judiciary_main gwd_Judiciary_main { get; set; }

@@ -11,12 +11,16 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using EFLibForApi.emms;
 using EFLibForApi.emms.models;
+using System.Web;
+using log4net;
+using System.Reflection;
 
 namespace WebGetApi.Controllers
 {
-     [RoutePrefix("api/GWDJudiciary")]
+    [RoutePrefix("api/GWDJudiciary")]
     public class gwd_Judiciary_mainController : ApiController
     {
+        private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
 
         // GET: api/gwd_Judiciary_main
@@ -36,7 +40,7 @@ namespace WebGetApi.Controllers
             }
 
             return Ok(gwd_Judiciary_main);
-        }       
+        }
         // PUT: api/gwd_Judiciary_main/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Putgwd_Judiciary_main(string id, gwd_Judiciary_main gwd_Judiciary_main)
@@ -76,6 +80,7 @@ namespace WebGetApi.Controllers
         [ResponseType(typeof(gwd_Judiciary_main))]
         public async Task<IHttpActionResult> Postgwd_Judiciary_main(gwd_Judiciary_main gwd_Judiciary_main)
         {
+            logger.DebugFormat("Post");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -84,19 +89,29 @@ namespace WebGetApi.Controllers
             try
             {
                 gwd_Judiciary_main.UpdateDate = DateTime.Now;
+                gwd_Judiciary_main.Remark = HttpContext.Current.Request.UserHostAddress;
+
                 if (gwd_Judiciary_main.gwd_Judiciary_items != null)
                 {
-                    gwd_Judiciary_main.gwd_Judiciary_items.Tid = gwd_Judiciary_main.Tid;
-                    gwd_Judiciary_main.gwd_Judiciary_items.UpdateDate = DateTime.Now;
+                    foreach (var item in gwd_Judiciary_main.gwd_Judiciary_items)
+                    {
+                        item.Tid = gwd_Judiciary_main.Tid;
+                        item.UpdateDate = DateTime.Now;
+                    }
+
                 }
                 var tmpexitAs = await gwd_Judiciary_mainExistsAsync(gwd_Judiciary_main.Tid);
                 if (tmpexitAs)
                 {
                     db.Entry(gwd_Judiciary_main).State = EntityState.Modified;
-                    if (!string.IsNullOrEmpty(gwd_Judiciary_main.gwd_Judiciary_items.CourtID))
+                    foreach (var item in gwd_Judiciary_main.gwd_Judiciary_items)
                     {
-                        db.Entry(gwd_Judiciary_main.gwd_Judiciary_items).State = EntityState.Modified;
+                        if (!string.IsNullOrEmpty(item.CourtID))
+                        {
+                            db.Entry(item).State = EntityState.Modified;
+                        }
                     }
+
                 }
                 else
                 {

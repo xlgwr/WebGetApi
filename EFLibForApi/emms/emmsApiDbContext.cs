@@ -1,12 +1,16 @@
 ﻿namespace EFLibForApi.emms
 {
+    using Common.Logging;
     using EFLibForApi.emms.models;
     using System;
     using System.Data.Entity;
     using System.Linq;
+    using System.Reflection;
 
     public class emmsApiDbContext : DbContext
     {
+        private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         //您的上下文已配置为从您的应用程序的配置文件(App.config 或 Web.config)
         //使用“Model1”连接字符串。默认情况下，此连接字符串针对您的 LocalDb 实例上的
         //“EFLibForApi.emms.Model1”数据库。
@@ -16,7 +20,8 @@
         public emmsApiDbContext()
             : base("name=emmsapiConnection")
         {
-            this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            Database.Log = message => logger.DebugFormat(message);//.Replace("\n", " ")
         }
 
         //为您要在模型中包含的每种实体类型都添加 DbSet。有关配置和使用 Code First  模型
@@ -108,9 +113,9 @@
                .IsUnicode(false);
 
 
-            modelBuilder.Entity<gwd_Judiciary_main>()
-              .HasRequired(t => t.gwd_Judiciary_items)
-                .WithRequiredPrincipal(t => t.gwd_Judiciary_main);
+            //modelBuilder.Entity<gwd_Judiciary_main>()
+            //  .HasRequired(t => t.gwd_Judiciary_items)
+            //    .WithRequiredPrincipal(t => t.gwd_Judiciary_main);
 
 
             modelBuilder.Entity<gwd_ICRIS_main>()

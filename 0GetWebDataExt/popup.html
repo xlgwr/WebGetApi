@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Web Get Data</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="lib/dist/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="lib/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="lib/dist/css/bootstrap-datetimepicker.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="popup/dashboard.css" rel="stylesheet">
+
+    <title>Get Web Data</title>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Web Get Data Setting</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                    <!--<li><a href="#">Reports</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Export</a></li>-->
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1 class="page-header">参数设置</h1>
+
+                <h2 class="sub-header">1.终审及高等法院</h2>
+                <div class="row placeholders">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="evenyDataGet">每日开始采集时间:</label>
+                            <input type="text" value="" id="evenyDataGet" data-date-format="hh:ii" class="form-control" placeholder="输入每日开始采集时间" readonly>
+                        </div>
+                        <button type="submit" id="btnEvenyDataGet" class="btn btn-default">设置每日开始采集时间</button>
+                    </form>
+                </div>
+
+                <!--<h2 class="sub-header">Section title</h2>
+                <div class="row placeholders">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="exampleInputName2">Name</label>
+                            <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+                        </div>
+                        <button type="submit" class="btn btn-default">Send invitation</button>
+                    </form>
+                </div>-->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script type='text/javascript' src='lib/jquery.min.js'></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="lib/dist/js/bootstrap.min.js"></script>
+    <script src="lib/dist/js/bootstrap-datetimepicker.min.js"></script>
+    <script type='text/javascript' src='config.js'></script>
+    <script type='text/javascript' src='model/backMsg.js'></script>
+    <script type='text/javascript' src='popup/popup.js'></script>
+</body>
+
+</html>
