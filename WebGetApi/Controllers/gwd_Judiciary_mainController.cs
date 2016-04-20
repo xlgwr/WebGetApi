@@ -108,7 +108,15 @@ namespace WebGetApi.Controllers
                     {
                         if (!string.IsNullOrEmpty(item.CourtID))
                         {
-                            db.Entry(item).State = EntityState.Modified;
+                            if (gwd_Judiciary_itemExists(item.Tid,item.Tindex))
+                            {
+                                db.Entry(item).State = EntityState.Modified;
+                            }
+                            else
+                            {
+                                db.gwd_Judiciary_items.Add(item);
+                            }
+                            
                         }
                     }
 
@@ -156,6 +164,10 @@ namespace WebGetApi.Controllers
         private bool gwd_Judiciary_mainExists(string id)
         {
             return db.gwd_Judiciary_main.Count(e => e.Tid == id) > 0;
+        }
+        private bool gwd_Judiciary_itemExists(string id, int tindex)
+        {
+            return db.gwd_Judiciary_items.Count(e => e.Tid == id && e.Tindex == tindex) > 0;
         }
         private async Task<bool> gwd_Judiciary_mainExistsAsync(string id)
         {

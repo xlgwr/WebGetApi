@@ -121,8 +121,8 @@ $(function() {
     //每30秒检查一次
     var sjudiciary = window.setInterval(openURLjudiciary, 1 * 30 * 1000);
     //for 公司注册处
-    chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + $ttype });
-    chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
+    // chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + $ttype });
+    // chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
 
-    var s4 = window.setInterval(openURL, $runTnter);
+    // var s4 = window.setInterval(openURL, $runTnter);
 });

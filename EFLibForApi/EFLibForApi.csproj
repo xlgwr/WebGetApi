@@ -89,6 +89,14 @@
     <Compile Include="Migrations\201604190146346_addIndexForAllAddDate.Designer.cs">
       <DependentUpon>201604190146346_addIndexForAllAddDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604190303450_changeLengthForJudiciary.cs" />
+    <Compile Include="Migrations\201604190303450_changeLengthForJudiciary.Designer.cs">
+      <DependentUpon>201604190303450_changeLengthForJudiciary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604190334500_changeLengthForJudiciary2.cs" />
+    <Compile Include="Migrations\201604190334500_changeLengthForJudiciary2.Designer.cs">
+      <DependentUpon>201604190334500_changeLengthForJudiciary2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -110,6 +118,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604190146346_addIndexForAllAddDate.resx">
       <DependentUpon>201604190146346_addIndexForAllAddDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604190303450_changeLengthForJudiciary.resx">
+      <DependentUpon>201604190303450_changeLengthForJudiciary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604190334500_changeLengthForJudiciary2.resx">
+      <DependentUpon>201604190334500_changeLengthForJudiciary2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
