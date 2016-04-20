@@ -27,9 +27,16 @@ namespace WebGetApi
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-            name: "DefaultApiByName",
-            routeTemplate: "api/{controller}/name/{name}",
-            defaults: new { name = RouteParameter.Optional }
+            name: "DefaultApiByTowKey",
+            routeTemplate: "api/{controller}/{id}/{id2}/{id3}/{id4}/{id5}",
+            defaults: new
+            {
+                id = RouteParameter.Optional,
+                id2 = RouteParameter.Optional,
+                id3 = RouteParameter.Optional,
+                id4 = RouteParameter.Optional,
+                id5 = RouteParameter.Optional
+            }
              );
 
             config.Routes.MapHttpRoute(

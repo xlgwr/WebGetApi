@@ -14,8 +14,10 @@ var _logout_warnUrl = 'https://www.icris.cr.gov.hk/csci/logout_warn.jsp';
 
 var _CBDS_SearchUrl = "https://www.icris.cr.gov.hk/csci/CBDS_Search.do";
 // for 0for_icris***********************************************
-
+//终审及高等法院,所有裁判法院,勞資審裁處,小额钱债审裁处
 var _1for_judiciaryUrl = "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm";
+//上诉记录,//判案书//判刑理由//裁决理由
+var _2for_legalref = "http://legalref.judiciary.gov.hk/lrs/common/search/search_appeal.jsp?DIS=";//DIS=000001
 
 $(function () {
     ///********************************************************
@@ -60,6 +62,10 @@ $(function () {
         //console.log(getZhURL);
         j1_PostAll(getEnURL);
 
+    }
+    if (currLocal.indexOf(_2for_legalref) > -1) {
+        console.log("_2for_legalref");
+        legalref();
     }
     //console.log("no Listen:" + currLocal);
 });

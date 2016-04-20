@@ -510,7 +510,7 @@ function j1_PostData_1for_judiciary(url) {
     });
 }
 function j1_PostAll(arrurl) {
-    sendMsg("removeUrl", "judiciary.gov.hk");
+    sendMsg("removeUrl", "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm");
     arrurl.forEach(function (url) {
         j1_PostData_1for_judiciary(url);
     }, this);

@@ -1,6 +1,10 @@
 // chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
 //     console.log(response.farewell);
 // });
+// User-Agent: Fiddler
+// Content-Type: application/json; charset=utf-8  
+// Content-Length: 1696
+// Host: 192.168.1.136:8081
 
 var $ttype = "icrisCRNo";
 var $runTnter = 3 * 60 * 1000;
@@ -13,7 +17,7 @@ var _paramkey_1 = 'evenyDataGet';
 var _postOK_1 = true;
 
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    function (request, sender, sendResponse) {
         var tmpid = sender.tab.id;
         //console.log(request);
         //console.log(tmpid);
@@ -38,7 +42,7 @@ chrome.runtime.onMessage.addListener(
         }
     });
 
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.browserAction.onClicked.addListener(function (tab) {
     chrome.tabs.create({ url: chrome.extension.getURL("popup.html") });
 });
 
@@ -95,34 +99,66 @@ function getParameter() {
         type: 'GET',
         timeout: 10000,
         url: config.urlApim_parameter
-    }).done(function(data) {
+    }).done(function (data) {
 
         _getm_parameter = data;
         //console.log(data);
 
-        _getm_parameter.forEach(function(d) {
+        _getm_parameter.forEach(function (d) {
             if (d["paramkey"] === _paramkey_1) {
                 console.log(d["paramkey"] + ":" + d["paramvalue"])
                 _paramvalue_1evenyDataGet = d["paramvalue"];
             }
         }, this);
 
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.log(err);
         //alert("获取参数失败。");
     });
 }
+//上诉记录
+function GetWebDatasMaxTDisToOpen() {
+    ////获取上诉记录,最大一记录
+    console.log("上诉记录");
+    $.ajax({
+        type: 'GET',
+        timeout: 10000,
+        url: config.urlApi_GetWebDatasMaxTDis
+    }).done(function (data) {
+        var tmpUrl = config.urlRedict_legalrefMain + data
+        chrome.tabs.create({ url: tmpUrl });
+        console.log(tmpUrl);
+
+    }).fail(function (err) {
+        var tmpUrl = config.urlRedict_legalrefMain + "1"
+        chrome.tabs.create({ url: tmpUrl });
+        console.log(tmpUrl);
+        console.log(err);
+        //alert("上诉记录失败。");
+    });
+}
 //must be jquery
-$(function() {
+$(function () {
+    //////////////////////////////1111111111111111111111111111111    
+    //法庭数据
     //每5秒检查一次参数
     var sgetParameter = window.setInterval(getParameter, 1 * 5 * 1000);
     //法庭数据-审查案件表
     chrome.tabs.create({ url: "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm" });
     //每30秒检查一次
     var sjudiciary = window.setInterval(openURLjudiciary, 1 * 30 * 1000);
-    //for 公司注册处
+
+    ///////////////////////////////3333333333333333333333333333333333333
+    //上诉记录
+    GetWebDatasMaxTDisToOpen();
+
+    //////////////////////////////2222222222222222222222222222222222    
+    //公司注册处
     // chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + $ttype });
     // chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
-
     // var s4 = window.setInterval(openURL, $runTnter);
+
+    ///////////////////////////////3333333333333333333333333333333333333
+
+
 });

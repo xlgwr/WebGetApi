@@ -4,7 +4,7 @@
             "matches": [
                 // "http://www.icris.cr.gov.hk/*",
                 // "https://www.icris.cr.gov.hk/*",
-                "http://www.judiciary.gov.hk/*",
+                "http://*.judiciary.gov.hk/*",
                 "https://192.168.1.6:7443/*",
                 "http://192.168.1.6:7070/*"
             ],
@@ -16,6 +16,7 @@
                 "model/baseFun.js",
                 "model/0for_icris.js",
                 "model/1for_judiciary.js",
+                "model/2for_legalref.js",
                 "getwebData.js"
             ],
             "run_at": "document_end"

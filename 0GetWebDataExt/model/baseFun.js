@@ -21,3 +21,10 @@ function GetQueryString(name) {
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return (decodeURI(r[2])); return null;
 }
+function GetQueryStringUrl(url, name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var s = url.indexOf("?");
+    var t = url.substring(s + 1)
+    var r = t.match(reg);
+    if (r != null) return (decodeURI(r[2])); return null;
+}

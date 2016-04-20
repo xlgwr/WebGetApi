@@ -35,6 +35,10 @@
         public virtual DbSet<gwd_Judiciary_main> gwd_Judiciary_main { get; set; }
         public virtual DbSet<gwd_Judiciary_items> gwd_Judiciary_items { get; set; }
 
+
+        public virtual DbSet<gwd_legalref_main> gwd_legalref_main { get; set; }
+        public virtual DbSet<gwd_legalref_items> gwd_legalref_items { get; set; }
+
         public virtual DbSet<m_parameter> m_parameter { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -64,6 +68,23 @@
             modelBuilder.Entity<gwd_Judiciary_main>()
                .Property(e => e.thtml)
                .IsUnicode(false);
+
+            modelBuilder.Entity<gwd_legalref_main>()
+              .Property(e => e.Remark)
+              .IsUnicode(false);
+            modelBuilder.Entity<gwd_legalref_main>()
+               .Property(e => e.tcontent)
+               .IsUnicode(false);
+            modelBuilder.Entity<gwd_legalref_main>()
+               .Property(e => e.tGetTable)
+               .IsUnicode(false);
+            modelBuilder.Entity<gwd_legalref_main>()
+               .Property(e => e.thtml)
+               .IsUnicode(false);
+
+            modelBuilder.Entity<gwd_legalref_items>()
+           .Property(e => e.thtml)
+           .IsUnicode(false);
 
             modelBuilder.Entity<gwd_ICRIS_items>()
             .Property(e => e.tcomp)

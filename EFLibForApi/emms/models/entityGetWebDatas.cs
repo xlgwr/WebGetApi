@@ -14,6 +14,7 @@ namespace EFLibForApi.emms.models
     public abstract class entityGetWebDatas : entity
     {
         [Key]
+        [Column(Order = 0)]
         public string Tid { get; set; }
 
         [StringLength(50)]

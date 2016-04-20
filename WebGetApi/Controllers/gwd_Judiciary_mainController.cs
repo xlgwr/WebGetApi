@@ -12,8 +12,8 @@ using System.Web.Http.Description;
 using EFLibForApi.emms;
 using EFLibForApi.emms.models;
 using System.Web;
-using log4net;
 using System.Reflection;
+using Common.Logging;
 
 namespace WebGetApi.Controllers
 {
@@ -26,7 +26,7 @@ namespace WebGetApi.Controllers
         // GET: api/gwd_Judiciary_main
         public IQueryable<gwd_Judiciary_main> Getgwd_Judiciary_main()
         {
-            return db.gwd_Judiciary_main;
+            return db.gwd_Judiciary_main.Take(10);
         }
 
         // GET: api/gwd_Judiciary_main/5

@@ -73,8 +73,9 @@
     <Compile Include="emms\emmsApiDbContext.cs" />
     <Compile Include="emms\models\entity.cs" />
     <Compile Include="emms\models\entityTID.cs" />
-    <Compile Include="emms\models\GetWebDatas_judiciary.cs" />
-    <Compile Include="emms\models\GetWebDatas_ICRIS.cs" />
+    <Compile Include="emms\models\gwd_legalref_main.cs" />
+    <Compile Include="emms\models\gwd_Judiciary_main.cs" />
+    <Compile Include="emms\models\gwd_ICRIS_main.cs" />
     <Compile Include="emms\models\entityGetWebDatas.cs" />
     <Compile Include="emms\models\m_parameter.cs" />
     <Compile Include="Migrations\201604180756455_initFrist.cs" />
@@ -96,6 +97,18 @@
     <Compile Include="Migrations\201604190334500_changeLengthForJudiciary2.cs" />
     <Compile Include="Migrations\201604190334500_changeLengthForJudiciary2.Designer.cs">
       <DependentUpon>201604190334500_changeLengthForJudiciary2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604200635029_add2LegalrefTable.cs" />
+    <Compile Include="Migrations\201604200635029_add2LegalrefTable.Designer.cs">
+      <DependentUpon>201604200635029_add2LegalrefTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604200720460_add2LegalrefColTdis.cs" />
+    <Compile Include="Migrations\201604200720460_add2LegalrefColTdis.Designer.cs">
+      <DependentUpon>201604200720460_add2LegalrefColTdis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604200808535_TestChange.cs" />
+    <Compile Include="Migrations\201604200808535_TestChange.Designer.cs">
+      <DependentUpon>201604200808535_TestChange.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +137,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604190334500_changeLengthForJudiciary2.resx">
       <DependentUpon>201604190334500_changeLengthForJudiciary2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604200635029_add2LegalrefTable.resx">
+      <DependentUpon>201604200635029_add2LegalrefTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604200720460_add2LegalrefColTdis.resx">
+      <DependentUpon>201604200720460_add2LegalrefColTdis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604200808535_TestChange.resx">
+      <DependentUpon>201604200808535_TestChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
