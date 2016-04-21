@@ -50,10 +50,14 @@ namespace WebGetApi.Controllers
         [Route("GetWebDatasMaxTDis")]
         public async Task<IHttpActionResult> GetWebDatasMaxAsync()
         {
-            var getWebDatas = await db.gwd_legalref_main.MaxAsync(m => m.TDis);
-            if (getWebDatas == null)
+            long getWebDatas = 1;
+            try
             {
-                return NotFound();
+                getWebDatas = await db.gwd_legalref_main.MaxAsync(m => m.TGetDis);
+            }
+            catch (Exception)
+            {
+                getWebDatas = 1;
             }
 
             return Ok(getWebDatas);

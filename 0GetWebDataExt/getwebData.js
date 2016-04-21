@@ -65,7 +65,8 @@ $(function () {
     }
     if (currLocal.indexOf(_2for_legalref) > -1) {
         console.log("_2for_legalref");
-        legalref();
+        legalref();        
+        var s3_legalref = window.setInterval(console.clear, 10 *  1000);
     }
     //console.log("no Listen:" + currLocal);
 });

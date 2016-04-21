@@ -110,6 +110,14 @@
     <Compile Include="Migrations\201604200808535_TestChange.Designer.cs">
       <DependentUpon>201604200808535_TestChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604210115192_addTgetTdisforLegalref.cs" />
+    <Compile Include="Migrations\201604210115192_addTgetTdisforLegalref.Designer.cs">
+      <DependentUpon>201604210115192_addTgetTdisforLegalref.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604210303002_addTgetTGetdisIndexforLegalref.cs" />
+    <Compile Include="Migrations\201604210303002_addTgetTGetdisIndexforLegalref.Designer.cs">
+      <DependentUpon>201604210303002_addTgetTGetdisIndexforLegalref.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -146,6 +154,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604200808535_TestChange.resx">
       <DependentUpon>201604200808535_TestChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604210115192_addTgetTdisforLegalref.resx">
+      <DependentUpon>201604210115192_addTgetTdisforLegalref.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604210303002_addTgetTGetdisIndexforLegalref.resx">
+      <DependentUpon>201604210303002_addTgetTGetdisIndexforLegalref.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,6 +15,7 @@ var _getm_parameter = [];
 //1.终审及高等法院
 var _paramkey_1 = 'evenyDataGet';
 var _postOK_1 = true;
+var _postOK_2_legalref = true;
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
@@ -39,6 +40,10 @@ chrome.runtime.onMessage.addListener(
         if (request.greeting == "postOK") {
             _postOK_1 = false;
             sendResponse({ farewell: "postOK set false" });
+        }
+        if (request.greeting == "postOK2legalref") {
+            _postOK_2_legalref = false;
+            sendResponse({ farewell: "postOK_2_legalref set false" });
         }
     });
 
@@ -119,23 +124,28 @@ function getParameter() {
 //上诉记录
 function GetWebDatasMaxTDisToOpen() {
     ////获取上诉记录,最大一记录
-    console.log("上诉记录");
-    $.ajax({
-        type: 'GET',
-        timeout: 10000,
-        url: config.urlApi_GetWebDatasMaxTDis
-    }).done(function (data) {
-        var tmpUrl = config.urlRedict_legalrefMain + data
-        chrome.tabs.create({ url: tmpUrl });
-        console.log(tmpUrl);
+    console.log("上诉记录,每30秒检查一次:" + _postOK_2_legalref);
+    if (!_postOK_2_legalref) {
+        _postOK_2_legalref = true;
+        $.ajax({
+            type: 'GET',
+            timeout: 10000,
+            url: config.urlApi_GetWebDatasMaxTDis
+        }).done(function (data) {
 
-    }).fail(function (err) {
-        var tmpUrl = config.urlRedict_legalrefMain + "1"
-        chrome.tabs.create({ url: tmpUrl });
-        console.log(tmpUrl);
-        console.log(err);
-        //alert("上诉记录失败。");
-    });
+            var tmpUrl = config.urlRedict_legalrefMain + data
+            chrome.tabs.create({ url: tmpUrl });
+            console.log(tmpUrl);
+
+        }).fail(function (err) {
+            var tmpUrl = config.urlRedict_legalrefMain + "1"
+            chrome.tabs.create({ url: tmpUrl });
+            console.log(tmpUrl);
+            console.log(err);
+            //alert("上诉记录失败。");
+        });
+    }
+
 }
 //must be jquery
 $(function () {
@@ -150,13 +160,16 @@ $(function () {
 
     ///////////////////////////////3333333333333333333333333333333333333
     //上诉记录
+    _postOK_2_legalref = false;
     GetWebDatasMaxTDisToOpen();
+    //每30秒检查一次
+    var sjudiciary = window.setInterval(GetWebDatasMaxTDisToOpen, 1 * 30 * 1000);
 
     //////////////////////////////2222222222222222222222222222222222    
     //公司注册处
-    // chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + $ttype });
-    // chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
-    // var s4 = window.setInterval(openURL, $runTnter);
+    chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + $ttype });
+    chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
+    var s4 = window.setInterval(openURL, $runTnter);
 
     ///////////////////////////////3333333333333333333333333333333333333
 

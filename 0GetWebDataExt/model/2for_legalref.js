@@ -5,22 +5,26 @@
 //判案书
 //判刑理由
 //裁决理由
-//http://legalref.judiciary.gov.hk/lrs/common/ju/ju_body.jsp?DIS=98875
+//http://legalref.judiciary.gov.hk/lrs/common/ju/ju_body.jsp?DIS=102431
 //Press Summary ：102431
 var _legalrefTdis = GetQueryString("DIS") ? parseInt(GetQueryString("DIS"), 10) : 0;
 var _getAllMain_legalref = [];
+var _getUrl2PressPrefix = "http://legalref.judiciary.gov.hk/";
 
 function legalref() {
     sendMsg("removeUrl", config.urlRedict_legalrefMain);
-
+    
     console.log("text legalref ok. Tdis:" + _legalrefTdis);
     //每5秒开始运行，一次取5个
-    //var s1_legalref = window.setInterval(runEven5, config.getSetInterval);
-    //for test    
-    config.getEven5Count = 1;
-    runEven5();
+    var s1_legalref = window.setInterval(runEven5, config.getSetInterval);
+    // //for test    
+    // config.getEven5Count = 1;
+    // runEven5();
 
     function runEven5() {
+
+        _getAllMain_legalref = [];
+
         console.log("CurrTDis:" + _legalrefTdis + ",每:" + (config.getSetInterval / 1000) + "秒运行一次，每次取:" + config.getEven5Count);
 
         if (_legalrefTdis < 0) {
@@ -47,8 +51,8 @@ function legalref() {
                     console.log($table0TR.length);
 
                     if ($table0TR.length < 2) {
-                        console.log('没有记录。table tr Length < 2. ');
-                        console.log(data);
+                        console.log(this.tmpdata + '：没有记录。table tr Length < 2. ');
+                        //console.log(data);
                         return;
                     }
                     //读出记录
@@ -87,6 +91,7 @@ function legalref() {
                         var getWebDatas = {
                             Tdate: tmpDate1,
                             TDis: tmpTDis,
+                            TGetDis: this.tmpdata,
                             ReportedIn: tmpReportedin2,
                             gwd_legalref_items: [],
                             Tid: tmpCaseNum0,
@@ -101,19 +106,7 @@ function legalref() {
                             UpdateDate: undefined
                         }
                         //console.log(getWebDatas);
-                        var gwd_legalref_items = {
-                            $id: "2",
-                            Tid: "sample string 1",
-                            Tdate: "sample string 2",
-                            TIndex: 3,
-                            tlang: "sample string 4",
-                            isPressSummary: 5,
-                            thtml: "sample string 6",
-                            Remark: "sample string 7",
-                            tStatus: 8,
-                            addDate: undefined,
-                            UpdateDate: undefined
-                        }
+
                         _getAllMain_legalref.push(getWebDatas);
 
 
@@ -127,6 +120,7 @@ function legalref() {
                             success: function (data, state, xhr) {
 
                                 this.tmpdata.thtml = data;
+
                                 //提交数据库
                                 $.ajax({
                                     type: 'POST',
@@ -135,19 +129,126 @@ function legalref() {
                                     contentType: 'application/json; charset=utf-8',
                                     data: JSON.stringify(this.tmpdata)
                                 }).done(function (data) {
-                                    console.log(this.tmpdata.TDis + ":Post Done!");
-                                    // sendMsg('jsonDate', "Set Date Now.");
+                                    console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ":Post Done!");
+
                                     //console.log(data);
                                 }).fail(function (err) {
                                     //showError
+                                    sendMsg('postOK2legalref', "Set _postOK_2_legalref false.");
                                     _legalrefTdis -= config.getEven5Count;
                                     console.log(err);
                                 });
+                                //查询是否有摘要记录
+                                var $body2 = $('<div></div>').html(data);
+                                var $tmpGet2Urla = $body2.find('a');
+                                var aEnglisht = $tmpGet2Urla.eq(0);
+                                var aChinese = $tmpGet2Urla.eq(1);
+                                // console.log(aEnglisht.text());
+                                // console.log(aChinese.text());
+                                //提交英文
+                                if (aEnglisht.text().indexOf('Press Summary (English)') > -1) {
+                                    var getEnglishUrl = _getUrl2PressPrefix + aEnglisht.attr('href')
+                                    console.log("aEnglisht:" + getEnglishUrl);
+                                    $.ajax({
+                                        url: getEnglishUrl,
+                                        data: {},
+                                        tmpdata: this.tmpdata,
+                                        timeout: 10000,
+                                        type: "get",
+                                        success: function (data, state, xhr) {
 
+                                            var gwd_legalref_items = {
+                                                $id: "1",
+                                                Tid: this.tmpdata.Tid,
+                                                Tdate: this.tmpdata.Tdate,
+                                                TIndex: 1,
+                                                tlang: "en",
+                                                isPressSummary: 1,
+                                                thtml: data,
+                                                Remark: "本摘要由終審法院司法助理擬備",
+                                                tStatus: 1,
+                                                addDate: undefined,
+                                                UpdateDate: undefined
+                                            }
+                                            this.tmpdata.gwd_legalref_items.push(gwd_legalref_items);
+                                            //提交数据库
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: config.urlApi_legalref,
+                                                tmpdata: this.tmpdata,
+                                                contentType: 'application/json; charset=utf-8',
+                                                data: JSON.stringify(this.tmpdata)
+                                            }).done(function (data) {
+                                                console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ":Press Summary English Post Done!");
+                                                // sendMsg('jsonDate', "Set Date Now.");
+                                                //console.log(data);
+                                            }).fail(function (err) {
+                                                //showError
+                                                _legalrefTdis -= config.getEven5Count;
+                                                console.log(err);
+                                            });
+                                        },
+                                        error: function () {
+                                            console.log("提交预定请求发生错误，稍等重试！" + this.url);
+                                        },
+                                        dataType: "text"
+                                    });
+                                }
+                                //提交中文
+                                if (aChinese.text().indexOf('Press Summary (Chinese)') > -1) {
+                                    var getaChineseUrl = _getUrl2PressPrefix + aChinese.attr('href')
+                                    console.log("aChinese:" + getaChineseUrl);
+
+                                    $.ajax({
+                                        url: getaChineseUrl,
+                                        data: {},
+                                        tmpdata: this.tmpdata,
+                                        timeout: 10000,
+                                        type: "get",
+                                        success: function (data, state, xhr) {
+                                            var gwd_legalref_items = {
+                                                $id: "2",
+                                                Tid: this.tmpdata.Tid,
+                                                Tdate: this.tmpdata.Tdate,
+                                                TIndex: 2,
+                                                tlang: "zh",
+                                                isPressSummary: 1,
+                                                thtml: data,
+                                                Remark: "本摘要由終審法院司法助理擬備",
+                                                tStatus: 1,
+                                                addDate: undefined,
+                                                UpdateDate: undefined
+                                            }
+                                            this.tmpdata.gwd_legalref_items.push(gwd_legalref_items);
+                                            //提交数据库
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: config.urlApi_legalref,
+                                                tmpdata: this.tmpdata,
+                                                contentType: 'application/json; charset=utf-8',
+                                                data: JSON.stringify(this.tmpdata)
+                                            }).done(function (data) {
+                                                console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ":Press Summary Chinese Post Done!");
+                                                // sendMsg('jsonDate', "Set Date Now.");
+                                                //console.log(data);
+                                            }).fail(function (err) {
+                                                //showError
+                                                _legalrefTdis -= config.getEven5Count;
+                                                console.log(err);
+                                            });
+                                        },
+                                        error: function () {
+                                            console.log("提交预定请求发生错误，稍等重试！" + this.url);
+                                        },
+                                        dataType: "text"
+                                    });
+                                }
+                                ////////////////////////
                             },
                             error: function () {
                                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                                 _legalrefTdis -= config.getEven5Count;
+                                sendMsg('postOK2legalref', "Set _postOK_2_legalref false.");
                             },
                             dataType: "text"
                         });
@@ -157,12 +258,13 @@ function legalref() {
                         /// 
                     }
                     //show array
-                    console.log(_getAllMain_legalref);
+                    //console.log(_getAllMain_legalref);
                     //end for
                 },
                 error: function () {
                     console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                     _legalrefTdis -= config.getEven5Count;
+                    sendMsg('postOK2legalref', "Set _postOK_2_legalref false.");
                 },
                 dataType: "text"
             });

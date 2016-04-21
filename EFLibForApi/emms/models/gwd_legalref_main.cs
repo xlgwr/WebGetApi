@@ -28,6 +28,10 @@ namespace EFLibForApi.emms.models
         [Index(IsUnique = true)]
         public long TDis { get; set; }
 
+        [Required]
+        [Index]
+        public long TGetDis { get; set; }
+
         public string ReportedIn { get; set; }
 
         public ICollection<gwd_legalref_items> gwd_legalref_items { get; set; }
