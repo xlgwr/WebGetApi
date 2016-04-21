@@ -161,6 +161,7 @@ function legalref() {
                                             var tmpData1 = this.tmpdata;
                                             tmpData1.tGetTable = this.url;
                                             tmpData1.thtml = data;
+                                            tmpData1.tStatus = 1;
                                             tmpData1.TIndex = 1;
                                             //提交数据库
                                             $.ajax({
@@ -202,6 +203,7 @@ function legalref() {
                                             var tmpData2 = this.tmpdata;
                                             tmpData2.tGetTable = this.url;
                                             tmpData2.thtml = data;
+                                            tmpData2.tStatus = 1;
                                             tmpData2.TIndex = 2;
                                             //提交数据库
                                             $.ajax({

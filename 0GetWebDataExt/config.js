@@ -13,7 +13,7 @@ var config = {
     urlRedict_legalrefMain: "http://legalref.judiciary.gov.hk/lrs/common/search/search_appeal.jsp?DIS=",
     urlRedict_legalrefItem: "http://legalref.judiciary.gov.hk/lrs/common/ju/ju_body.jsp?DIS=",
     //每5秒开始运行，一次取5个
-    getSetInterval: 5 * 1000,
+    getSetInterval: 10 * 1000,
     getEven5Count: 5
 
 }
