@@ -31,7 +31,7 @@ namespace WebGetApi.Controllers
 
         // GET: api/gwd_legalref_main/5
         [ResponseType(typeof(gwd_legalref_main))]
-        public async Task<IHttpActionResult> Get(string id, string id2, string id3, string id4, string id5)
+        public async Task<IHttpActionResult> Get(string id, string id2, string id3, string id4, string id5, int id6)
         {
             ///FACC2/2015/29/01/2016
             var tid = id.Trim() + "/" + id2.Trim();
@@ -67,7 +67,7 @@ namespace WebGetApi.Controllers
                     db.m_parameter.Add(m_parameter);
                     db.SaveChanges();
                 }
-                long.TryParse(m_parameter.paramvalue,out getMaxSetValue);
+                long.TryParse(m_parameter.paramvalue, out getMaxSetValue);
 
                 getWebDatas = await db.gwd_legalref_main.MaxAsync(m => m.TGetDis);
 
@@ -99,34 +99,11 @@ namespace WebGetApi.Controllers
                 gwd_legalref_main.UpdateDate = DateTime.Now;
                 gwd_legalref_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
-                if (gwd_legalref_main.gwd_legalref_items != null)
-                {
-                    foreach (var item in gwd_legalref_main.gwd_legalref_items)
-                    {
-                        item.Tid = gwd_legalref_main.Tid;
-                        item.UpdateDate = DateTime.Now;
-                    }
 
-                }
-                var tmpexitAs = await gwtMainExistsAsync(gwd_legalref_main.TDis);
+                var tmpexitAs = await gwtMainExistsAsync(gwd_legalref_main.TDis, gwd_legalref_main.TIndex);
                 if (tmpexitAs)
                 {
                     db.Entry(gwd_legalref_main).State = EntityState.Modified;
-                    foreach (var item in gwd_legalref_main.gwd_legalref_items)
-                    {
-                        if (!string.IsNullOrEmpty(item.thtml))
-                        {
-                            if (gwdItemExists(item.Tid, item.TIndex))
-                            {
-                                db.Entry(item).State = EntityState.Modified;
-                            }
-                            else
-                            {
-                                db.gwd_legalref_items.Add(item);
-                            }
-
-                        }
-                    }
 
                 }
                 else
@@ -154,13 +131,9 @@ namespace WebGetApi.Controllers
         public void Delete(int id)
         {
         }
-        private async Task<bool> gwtMainExistsAsync(long id)
+        private async Task<bool> gwtMainExistsAsync(long id, int index)
         {
-            return await db.gwd_legalref_main.CountAsync(e => e.TDis == id) > 0;
-        }
-        private bool gwdItemExists(string id, int tindex)
-        {
-            return db.gwd_legalref_items.Count(e => e.Tid == id && e.TIndex == tindex) > 0;
+            return await db.gwd_legalref_main.CountAsync(e => e.TDis == id && e.TIndex == index) > 0;
         }
     }
 }

@@ -91,6 +91,7 @@ function legalref() {
                         var getWebDatas = {
                             Tdate: tmpDate1,
                             TDis: tmpTDis,
+                            TIndex: 0,
                             TGetDis: this.tmpdata,
                             ReportedIn: tmpReportedin2,
                             gwd_legalref_items: [],
@@ -129,7 +130,7 @@ function legalref() {
                                     contentType: 'application/json; charset=utf-8',
                                     data: JSON.stringify(this.tmpdata)
                                 }).done(function (data) {
-                                    console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ":Post Done!");
+                                    console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ",Index:" + this.tmpdata.TIndex + ":Post Done!");
                                     sendMsg('jsonDate2_legalref', "Set jsonDate2_legalref Now.");
                                     //console.log(data);
                                 }).fail(function (err) {
@@ -157,29 +158,20 @@ function legalref() {
                                         type: "get",
                                         success: function (data, state, xhr) {
 
-                                            var gwd_legalref_items = {
-                                                $id: "1",
-                                                Tid: this.tmpdata.Tid,
-                                                Tdate: this.tmpdata.Tdate,
-                                                TIndex: 1,
-                                                tlang: "en",
-                                                isPressSummary: 1,
-                                                thtml: data,
-                                                Remark: "本摘要由終審法院司法助理擬備",
-                                                tStatus: 1,
-                                                addDate: undefined,
-                                                UpdateDate: undefined
-                                            }
-                                            this.tmpdata.gwd_legalref_items.push(gwd_legalref_items);
+                                            var tmpData1 = this.tmpdata;
+                                            tmpData1.tGetTable = this.url;
+                                            tmpData1.thtml = data;
+                                            tmpData1.TIndex = 1;
                                             //提交数据库
                                             $.ajax({
                                                 type: 'POST',
                                                 url: config.urlApi_legalref,
-                                                tmpdata: this.tmpdata,
+                                                tmpdata: tmpData1,
                                                 contentType: 'application/json; charset=utf-8',
-                                                data: JSON.stringify(this.tmpdata)
+                                                data: JSON.stringify(tmpData1)
                                             }).done(function (data) {
-                                                console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ":Press Summary English Post Done!");
+                                                console.log(this.tmpdata);
+                                                console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ",Index:" + this.tmpdata.TIndex + ":Press Summary English Post Done!");
                                                 // sendMsg('jsonDate', "Set Date Now.");
                                                 //console.log(data);
                                             }).fail(function (err) {
@@ -206,29 +198,20 @@ function legalref() {
                                         timeout: 10000,
                                         type: "get",
                                         success: function (data, state, xhr) {
-                                            var gwd_legalref_items = {
-                                                $id: "2",
-                                                Tid: this.tmpdata.Tid,
-                                                Tdate: this.tmpdata.Tdate,
-                                                TIndex: 2,
-                                                tlang: "zh",
-                                                isPressSummary: 1,
-                                                thtml: data,
-                                                Remark: "本摘要由終審法院司法助理擬備",
-                                                tStatus: 1,
-                                                addDate: undefined,
-                                                UpdateDate: undefined
-                                            }
-                                            this.tmpdata.gwd_legalref_items.push(gwd_legalref_items);
+
+                                            var tmpData2 = this.tmpdata;
+                                            tmpData2.tGetTable = this.url;
+                                            tmpData2.thtml = data;
+                                            tmpData2.TIndex = 2;
                                             //提交数据库
                                             $.ajax({
                                                 type: 'POST',
                                                 url: config.urlApi_legalref,
-                                                tmpdata: this.tmpdata,
+                                                tmpdata: tmpData2,
                                                 contentType: 'application/json; charset=utf-8',
-                                                data: JSON.stringify(this.tmpdata)
+                                                data: JSON.stringify(tmpData2)
                                             }).done(function (data) {
-                                                console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ":Press Summary Chinese Post Done!");
+                                                console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ",Index:" + this.tmpdata.TIndex + ":Press Summary Chinese Post Done!");
                                                 // sendMsg('jsonDate', "Set Date Now.");
                                                 //console.log(data);
                                             }).fail(function (err) {

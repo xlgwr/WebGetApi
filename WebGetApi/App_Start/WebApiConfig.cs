@@ -28,14 +28,15 @@ namespace WebGetApi
 
             config.Routes.MapHttpRoute(
             name: "DefaultApiByTowKey",
-            routeTemplate: "api/{controller}/{id}/{id2}/{id3}/{id4}/{id5}",
+            routeTemplate: "api/{controller}/{id}/{id2}/{id3}/{id4}/{id5}/{id6}",
             defaults: new
             {
                 id = RouteParameter.Optional,
                 id2 = RouteParameter.Optional,
                 id3 = RouteParameter.Optional,
                 id4 = RouteParameter.Optional,
-                id5 = RouteParameter.Optional
+                id5 = RouteParameter.Optional,
+                id6 = RouteParameter.Optional
             }
              );
 
