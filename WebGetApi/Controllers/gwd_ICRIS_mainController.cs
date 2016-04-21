@@ -48,14 +48,41 @@ namespace WebGetApi.Controllers
         [Route("GetWebDatasMaxName/{id}")]
         public async Task<IHttpActionResult> GetWebDatasMaxAsync(string id)
         {
-            logger.Debug(id);
-            var getWebDatas = await db.gwd_ICRIS_main.Where(a => a.ttype == id).MaxAsync(m => m.Tid);
-            if (getWebDatas == null)
+            long getMaxSetCurrValue = 1;
+            try
             {
-                return NotFound();
+                logger.Info(id);
+
+                m_parameter m_parameterCurr = await db.m_parameter.FindAsync("ICRISCurrMax");
+
+                if (m_parameterCurr == null)
+                {
+                    m_parameterCurr = new m_parameter();
+                    m_parameterCurr.paramkey = "ICRISCurrMax";
+                    m_parameterCurr.paramvalue = "1";
+                    m_parameterCurr.paramtype = "0ICRIS";
+                    m_parameterCurr.Remark = "公司注册处，当前取得最大ID";
+                    m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                    m_parameterCurr.tStatus = 0;
+                    m_parameterCurr.UpdateDate = DateTime.Now;
+                    db.m_parameter.Add(m_parameterCurr);
+                    db.SaveChanges();
+                }
+                long.TryParse(m_parameterCurr.paramvalue, out getMaxSetCurrValue);
+                getMaxSetCurrValue -= 10;
+                if (getMaxSetCurrValue < 1)
+                {
+                    getMaxSetCurrValue = 1;
+                }
+                return Ok((getMaxSetCurrValue).ToString("0000000"));
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
-            return Ok(getWebDatas);
+
         }
 
         // PUT: api/gwd_ICRIS_main/5
@@ -97,6 +124,8 @@ namespace WebGetApi.Controllers
         [ResponseType(typeof(gwd_ICRIS_main))]
         public async Task<IHttpActionResult> Postgwd_ICRIS_main(gwd_ICRIS_main gwd_ICRIS_main)
         {
+            long getMaxSetCurrValue = 1;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -104,6 +133,13 @@ namespace WebGetApi.Controllers
 
             try
             {
+                m_parameter m_parameterCurr = await db.m_parameter.FindAsync("ICRISCurrMax");
+
+                if (m_parameterCurr != null)
+                {
+                    long.TryParse(m_parameterCurr.paramvalue, out getMaxSetCurrValue);
+                }
+
                 gwd_ICRIS_main.UpdateDate = DateTime.Now;
                 gwd_ICRIS_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
@@ -125,6 +161,18 @@ namespace WebGetApi.Controllers
                 {
                     db.gwd_ICRIS_main.Add(gwd_ICRIS_main);
                 }
+                if (m_parameterCurr != null)
+                {
+                    long tmpGetSave = 1;
+                    long.TryParse(gwd_ICRIS_main.Tid, out tmpGetSave);
+                    if (tmpGetSave > getMaxSetCurrValue)
+                    {
+                        m_parameterCurr.paramvalue = tmpGetSave.ToString();
+                        m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                        m_parameterCurr.UpdateDate = DateTime.Now;
+                    }
+                }
+
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateException)

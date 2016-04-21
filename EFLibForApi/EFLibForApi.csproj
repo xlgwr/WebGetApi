@@ -130,6 +130,10 @@
     <Compile Include="Migrations\201604210531146_addIndexForLegalref.Designer.cs">
       <DependentUpon>201604210531146_addIndexForLegalref.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604210655271_addKeyForLegalref.cs" />
+    <Compile Include="Migrations\201604210655271_addKeyForLegalref.Designer.cs">
+      <DependentUpon>201604210655271_addKeyForLegalref.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -181,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604210531146_addIndexForLegalref.resx">
       <DependentUpon>201604210531146_addIndexForLegalref.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604210655271_addKeyForLegalref.resx">
+      <DependentUpon>201604210655271_addKeyForLegalref.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -42,8 +42,8 @@ $(function () {
         subWeb1();
     }
     if (currLocal === _subWeb2iguestUrl) {
-        console.log("_subWeb2iguestUrl");
-        subWeb2_CBDS_Search(config.urlApi_GetWebDatasMaxName, $ttype);
+        console.log("_subWeb2iguestUrl");        
+        sendMsg('openURLForICRIS', "openURLForICRIS.");
     }
     if (currLocal === _logout_warnUrl) {
         console.log("_logout_warnUrl");
@@ -62,8 +62,8 @@ $(function () {
     }
     if (currLocal.indexOf(_2for_legalref) > -1) {
         console.log("_2for_legalref");
-        legalref();        
-        var s3_legalref = window.setInterval(console.clear, 10 *  1000);
+        legalref();
+        var s3_legalref = window.setInterval(console.clear, 10 * 1000);
     }
     //console.log("no Listen:" + currLocal);
 });

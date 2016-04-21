@@ -21,14 +21,15 @@ namespace EFLibForApi.emms.models
 
         [Key]
         [Column(Order = 2)]
+        public long TDis { get; set; }
+
+        [Key]
+        [Column(Order = 3)]
         public int TIndex { get; set; }
+
 
         [Required]
         [Index(Order = 0)]
-        public long TDis { get; set; }
-
-        [Required]
-        [Index(Order = 1)]
         public long TGetDis { get; set; }
 
         public string ReportedIn { get; set; }

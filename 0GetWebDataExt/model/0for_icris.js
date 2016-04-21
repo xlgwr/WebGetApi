@@ -55,21 +55,9 @@ function subWeb2_CBDS_Search(getURLApi, icrisCRNo) {
     //var $urlApi = "https://192.168.1.136/api/GetWebDatas/GetWebDatasMaxName/" + icrisCRNo;//api/GetWebDatas/name/{name}
     //var $urlApi = "https://localhost:44300/api/GetWebDatas/GetWebDatasMaxName/" + "icrisCRNo";//api/GetWebDatas/name/{name}
     //this.location.href = this.location.href;
-    $.ajax({
-        type: 'GET',
-        url: $urlApigetmax,
-        timeout: 10000
-    }).done(function (data) {
-        console.log(data);
-        window.open('https://www.icris.cr.gov.hk/csci/CBDS_Search.do?nextAction=CBDS_Search&CRNo=' + data + '&showMedium=true&showBack=true&searchPage=True')
-        //window.close();
-    }).fail(function (err) {
-        //showError
-        window.open('https://www.icris.cr.gov.hk/csci/CBDS_Search.do?nextAction=CBDS_Search&CRNo=0000000&showMedium=true&showBack=true&searchPage=True')
-        //window.close();
-    });
+    console.log($urlApigetmax);
+    sendMsg('openURLForICRIS', "www.icris.cr.gov.hk/csci");
 }
-
 
 //******************************************//
 

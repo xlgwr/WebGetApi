@@ -34,6 +34,11 @@ chrome.runtime.onMessage.addListener(
             removeTabUrl(tmpid, request.msg);
             sendResponse({ farewell: "goodbye Url" });
         }
+        //openURLForICRIS
+        if (request.greeting == "openURLForICRIS") {                            
+            removeTabUrl(tmpid, request.msg);
+            openURLForICRIS("icrisCRNo");        
+        }
         ///Post OK
         if (request.greeting == "jsonDate") {
             $jsonDate = Date.now();
@@ -126,6 +131,24 @@ function getParameter() {
     }).fail(function (err) {
         console.log(err);
         //alert("获取参数失败。");
+    });
+}
+function openURLForICRIS(ttype) {
+
+    $.ajax({
+        type: 'GET',
+        url: config.urlApi_GetWebDatasMaxName + ttype,
+        timeout: 10000
+    }).done(function (data) {
+        console.log(data);
+        var tmpUrl = 'https://www.icris.cr.gov.hk/csci/CBDS_Search.do?nextAction=CBDS_Search&CRNo=' + data + '&showMedium=true&showBack=true&searchPage=True';
+        chrome.tabs.create({ url: tmpUrl });
+        console.log(tmpUrl);
+    }).fail(function (err) {
+        //showError
+        var tmpUrl = 'https://www.icris.cr.gov.hk/csci/CBDS_Search.do?nextAction=CBDS_Search&CRNo=0000000&showMedium=true&showBack=true&searchPage=True';
+        chrome.tabs.create({ url: tmpUrl });
+        console.log(tmpUrl);
     });
 }
 //上诉记录

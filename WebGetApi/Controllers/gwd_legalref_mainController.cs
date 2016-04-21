@@ -52,8 +52,10 @@ namespace WebGetApi.Controllers
         {
             long getWebDatas = 1;
             long getMaxSetValue = 999999;
+            long getMaxSetCurrValue = 1;
             try
             {
+                m_parameter m_parameterCurr = await db.m_parameter.FindAsync("legalrefCurrMax");
                 m_parameter m_parameter = await db.m_parameter.FindAsync("legalrefMax");
                 if (m_parameter == null)
                 {
@@ -61,15 +63,30 @@ namespace WebGetApi.Controllers
                     m_parameter.paramkey = "legalrefMax";
                     m_parameter.paramvalue = "999999";
                     m_parameter.paramtype = "2legalref";
+                    m_parameter.Remark = "上诉记录，范围最大ID";
                     m_parameter.ClientIP = HttpContext.Current.Request.UserHostAddress;
                     m_parameter.tStatus = 0;
                     m_parameter.UpdateDate = DateTime.Now;
                     db.m_parameter.Add(m_parameter);
                     db.SaveChanges();
                 }
+                if (m_parameterCurr == null)
+                {
+                    m_parameterCurr = new m_parameter();
+                    m_parameterCurr.paramkey = "legalrefCurrMax";
+                    m_parameterCurr.paramvalue = "1";
+                    m_parameterCurr.paramtype = "2legalref";
+                    m_parameterCurr.Remark = "上诉记录，当前取得最大ID";
+                    m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                    m_parameterCurr.tStatus = 0;
+                    m_parameterCurr.UpdateDate = DateTime.Now;
+                    db.m_parameter.Add(m_parameterCurr);
+                    db.SaveChanges();
+                }
                 long.TryParse(m_parameter.paramvalue, out getMaxSetValue);
+                long.TryParse(m_parameterCurr.paramvalue, out getMaxSetCurrValue);
 
-                getWebDatas = await db.gwd_legalref_main.MaxAsync(m => m.TGetDis);
+                getWebDatas = getMaxSetCurrValue - 10;// await db.gwd_legalref_main.MaxAsync(m => m.TGetDis);
 
             }
             catch (Exception ex)
@@ -78,10 +95,11 @@ namespace WebGetApi.Controllers
                 getMaxSetValue = 999999;
                 logger.Error(ex);
             }
-            if (getWebDatas > getMaxSetValue)
+            if (getWebDatas > getMaxSetValue || getWebDatas < 1)
             {
                 getWebDatas = 1;
             }
+
             return Ok(getWebDatas);
         }
         // POST: api/gwd_legalref_main
@@ -89,6 +107,7 @@ namespace WebGetApi.Controllers
         public async Task<IHttpActionResult> Post(gwd_legalref_main gwd_legalref_main)
         {
             logger.DebugFormat("Post");
+            long tmpCurrMax = 1;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -99,8 +118,13 @@ namespace WebGetApi.Controllers
                 gwd_legalref_main.UpdateDate = DateTime.Now;
                 gwd_legalref_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
+                m_parameter m_parameterCurr = await db.m_parameter.FindAsync("legalrefCurrMax");
+                if (m_parameterCurr != null)
+                {
+                    long.TryParse(m_parameterCurr.paramvalue, out tmpCurrMax);
+                }
 
-                var tmpexitAs = await gwtMainExistsAsync(gwd_legalref_main.TDis, gwd_legalref_main.TIndex);
+                var tmpexitAs = gwtMainExistsAsync(gwd_legalref_main.Tid, gwd_legalref_main.Tdate, gwd_legalref_main.TDis, gwd_legalref_main.TIndex);
                 if (tmpexitAs)
                 {
                     db.Entry(gwd_legalref_main).State = EntityState.Modified;
@@ -109,6 +133,16 @@ namespace WebGetApi.Controllers
                 else
                 {
                     db.gwd_legalref_main.Add(gwd_legalref_main);
+                }
+
+                if (m_parameterCurr != null)
+                {
+                    if (gwd_legalref_main.TGetDis > tmpCurrMax)
+                    {
+                        m_parameterCurr.paramvalue = gwd_legalref_main.TGetDis.ToString();
+                        m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                        m_parameterCurr.UpdateDate = DateTime.Now;
+                    }
                 }
 
                 await db.SaveChangesAsync();
@@ -131,9 +165,9 @@ namespace WebGetApi.Controllers
         public void Delete(int id)
         {
         }
-        private async Task<bool> gwtMainExistsAsync(long id, int index)
+        private bool gwtMainExistsAsync(string id, string tdate, long tdis, int index)
         {
-            return await db.gwd_legalref_main.CountAsync(e => e.TDis == id && e.TIndex == index) > 0;
+            return db.gwd_legalref_main.Count(e => e.Tid == id && e.Tdate == tdate && e.TDis == tdis && e.TIndex == index) > 0;
         }
     }
 }

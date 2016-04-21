@@ -58,6 +58,12 @@ function legalref() {
                     //读出记录
                     //取第二行第一单元格记录
                     var tmpTname = $table0TR.eq(1).find('td').eq(0).text().trim();
+                    var tmpCaseNum0 = "";
+                    var tmpDate1 = "";
+                    var tmpReportedin2 = "";
+                    var tmpRemarks3 = "";
+                    var tmpGetItemURL = "";
+                    var tmpTDis = 0;
                     for (m = 1; m < $table0TR.length; m++) {
                         var $tmpCurrTrPre = $table0TR.eq(m - 1);
                         var $tmpCurrTr = $table0TR.eq(m);
@@ -66,15 +72,11 @@ function legalref() {
                         var $tmpCurrTrTdPre = $tmpCurrTrPre.find('td');
 
                         console.log("TD Len:" + $tmpCurrTrTd.length);
-                        var tmpCaseNum0 = "";
-                        var tmpDate1 = "";
-                        var tmpReportedin2 = "";
-                        var tmpRemarks3 = "";
-                        var tmpGetItemURL = "";
-                        var tmpTDis = 0;
 
                         if ($tmpCurrTrTd.length < 4) {
-                            tmpCaseNum0 = $tmpCurrTrTdPre.eq(0).text().trim();
+                            if ($tmpCurrTrTdPre.length >= 4) {
+                                tmpCaseNum0 = $tmpCurrTrTdPre.eq(0).text().trim();
+                            }
                             tmpDate1 = $tmpCurrTrTd.eq(0).text().trim();
                             tmpGetItemURL = $tmpCurrTrTd.eq(0).find('a').eq(0).attr('href');
                             tmpReportedin2 = $tmpCurrTrTd.eq(1).text().trim();
