@@ -51,15 +51,37 @@ namespace WebGetApi.Controllers
         public async Task<IHttpActionResult> GetWebDatasMaxAsync()
         {
             long getWebDatas = 1;
+            long getMaxSetValue = 999999;
             try
             {
+                m_parameter m_parameter = await db.m_parameter.FindAsync("legalrefMax");
+                if (m_parameter == null)
+                {
+                    m_parameter = new m_parameter();
+                    m_parameter.paramkey = "legalrefMax";
+                    m_parameter.paramvalue = "999999";
+                    m_parameter.paramtype = "2legalref";
+                    m_parameter.Remark = HttpContext.Current.Request.UserHostAddress;
+                    m_parameter.tStatus = 0;
+                    m_parameter.UpdateDate = DateTime.Now;
+                    db.m_parameter.Add(m_parameter);
+                    db.SaveChanges();
+                }
+                long.TryParse(m_parameter.paramvalue,out getMaxSetValue);
+
                 getWebDatas = await db.gwd_legalref_main.MaxAsync(m => m.TGetDis);
+
             }
-            catch (Exception)
+            catch (Exception ex)
+            {
+                getWebDatas = 1;
+                getMaxSetValue = 999999;
+                logger.Error(ex);
+            }
+            if (getWebDatas > getMaxSetValue)
             {
                 getWebDatas = 1;
             }
-
             return Ok(getWebDatas);
         }
         // POST: api/gwd_legalref_main

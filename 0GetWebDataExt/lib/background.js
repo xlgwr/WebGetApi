@@ -9,6 +9,7 @@
 var $ttype = "icrisCRNo";
 var $runTnter = 3 * 60 * 1000;
 var $jsonDate = Date.now();
+var $jsonDate2_legalref = Date.now();
 var _clickOne = false;
 var _paramvalue_1evenyDataGet = "04:30";
 var _getm_parameter = [];
@@ -33,10 +34,16 @@ chrome.runtime.onMessage.addListener(
             removeTabUrl(tmpid, request.msg);
             sendResponse({ farewell: "goodbye Url" });
         }
+        ///Post OK
         if (request.greeting == "jsonDate") {
             $jsonDate = Date.now();
             sendResponse({ farewell: "jsonDate set now" });
         }
+        if (request.greeting == "jsonDate2_legalref") {
+            $jsonDate2_legalref = Date.now();
+            sendResponse({ farewell: "jsonDate2_legalref set now" });
+        }
+        //Post fail
         if (request.greeting == "postOK") {
             _postOK_1 = false;
             sendResponse({ farewell: "postOK set false" });
@@ -144,6 +151,29 @@ function GetWebDatasMaxTDisToOpen() {
             console.log(err);
             //alert("上诉记录失败。");
         });
+    }
+    var $nowDate2 = Date.now();
+    if ($nowDate2 - $jsonDate2_legalref >= (1 * 60 * 1000)) {
+        console.log("2legalref Json Post is Over,Open new Windows。Now:" + $nowDate2 + ",JsonDate:" + $jsonDate2_legalref + ",Diff:" + ($nowDate2 - $jsonDate2_legalref) / (60 * 1000) + " Min");
+        $.ajax({
+            type: 'GET',
+            timeout: 10000,
+            url: config.urlApi_GetWebDatasMaxTDis
+        }).done(function (data) {
+
+            var tmpUrl = config.urlRedict_legalrefMain + data
+            chrome.tabs.create({ url: tmpUrl });
+            console.log(tmpUrl);
+
+        }).fail(function (err) {
+            var tmpUrl = config.urlRedict_legalrefMain + "1"
+            chrome.tabs.create({ url: tmpUrl });
+            console.log(tmpUrl);
+            console.log(err);
+            //alert("上诉记录失败。");
+        });
+    } else {
+        console.log("2legalref Json Post is Run。Now:" + $nowDate2 + ",JsonDate:" + $jsonDate2_legalref + ",Diff:" + ($nowDate2 - $jsonDate2_legalref) / (60 * 1000) + " Min");
     }
 
 }

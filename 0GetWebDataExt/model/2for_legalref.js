@@ -13,7 +13,7 @@ var _getUrl2PressPrefix = "http://legalref.judiciary.gov.hk/";
 
 function legalref() {
     sendMsg("removeUrl", config.urlRedict_legalrefMain);
-    
+
     console.log("text legalref ok. Tdis:" + _legalrefTdis);
     //每5秒开始运行，一次取5个
     var s1_legalref = window.setInterval(runEven5, config.getSetInterval);
@@ -130,7 +130,7 @@ function legalref() {
                                     data: JSON.stringify(this.tmpdata)
                                 }).done(function (data) {
                                     console.log(this.tmpdata.TGetDis + "," + this.tmpdata.TDis + ":Post Done!");
-
+                                    sendMsg('jsonDate2_legalref', "Set jsonDate2_legalref Now.");
                                     //console.log(data);
                                 }).fail(function (err) {
                                     //showError
