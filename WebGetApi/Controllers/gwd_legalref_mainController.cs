@@ -61,7 +61,7 @@ namespace WebGetApi.Controllers
                     m_parameter.paramkey = "legalrefMax";
                     m_parameter.paramvalue = "999999";
                     m_parameter.paramtype = "2legalref";
-                    m_parameter.Remark = HttpContext.Current.Request.UserHostAddress;
+                    m_parameter.ClientIP = HttpContext.Current.Request.UserHostAddress;
                     m_parameter.tStatus = 0;
                     m_parameter.UpdateDate = DateTime.Now;
                     db.m_parameter.Add(m_parameter);
@@ -97,7 +97,7 @@ namespace WebGetApi.Controllers
             try
             {
                 gwd_legalref_main.UpdateDate = DateTime.Now;
-                gwd_legalref_main.Remark = HttpContext.Current.Request.UserHostAddress;
+                gwd_legalref_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
                 if (gwd_legalref_main.gwd_legalref_items != null)
                 {

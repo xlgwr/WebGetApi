@@ -118,6 +118,10 @@
     <Compile Include="Migrations\201604210303002_addTgetTGetdisIndexforLegalref.Designer.cs">
       <DependentUpon>201604210303002_addTgetTGetdisIndexforLegalref.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604210401257_addClientIpForAll.cs" />
+    <Compile Include="Migrations\201604210401257_addClientIpForAll.Designer.cs">
+      <DependentUpon>201604210401257_addClientIpForAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -160,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604210303002_addTgetTGetdisIndexforLegalref.resx">
       <DependentUpon>201604210303002_addTgetTGetdisIndexforLegalref.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604210401257_addClientIpForAll.resx">
+      <DependentUpon>201604210401257_addClientIpForAll.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

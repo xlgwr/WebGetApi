@@ -89,7 +89,7 @@ namespace WebGetApi.Controllers
             try
             {
                 gwd_Judiciary_main.UpdateDate = DateTime.Now;
-                gwd_Judiciary_main.Remark = HttpContext.Current.Request.UserHostAddress;
+                gwd_Judiciary_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
                 if (gwd_Judiciary_main.gwd_Judiciary_items != null)
                 {

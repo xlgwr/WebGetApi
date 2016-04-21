@@ -105,7 +105,7 @@ namespace WebGetApi.Controllers
             try
             {
                 gwd_ICRIS_main.UpdateDate = DateTime.Now;
-                gwd_ICRIS_main.Remark = HttpContext.Current.Request.UserHostAddress;
+                gwd_ICRIS_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
                 if (gwd_ICRIS_main.gwd_ICRIS_items != null)
                 {

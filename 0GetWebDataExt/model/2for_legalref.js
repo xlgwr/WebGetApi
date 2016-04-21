@@ -78,13 +78,13 @@ function legalref() {
                             tmpDate1 = $tmpCurrTrTd.eq(0).text().trim();
                             tmpGetItemURL = $tmpCurrTrTd.eq(0).find('a').eq(0).attr('href');
                             tmpReportedin2 = $tmpCurrTrTd.eq(1).text().trim();
-                            tmpRemarks3 = $tmpCurrTrTd.eq(2).text().trim().substring(0, 100);
+                            tmpRemarks3 = $tmpCurrTrTd.eq(2).text().trim();
                         } else {
                             tmpCaseNum0 = $tmpCurrTrTd.eq(0).text().trim();
                             tmpDate1 = $tmpCurrTrTd.eq(1).text().trim();
                             tmpGetItemURL = $tmpCurrTrTd.eq(1).find('a').eq(0).attr('href');
                             tmpReportedin2 = $tmpCurrTrTd.eq(2).text().trim();
-                            tmpRemarks3 = $tmpCurrTrTd.eq(3).text().trim().substring(0, 100);
+                            tmpRemarks3 = $tmpCurrTrTd.eq(3).text().trim();
                         }
                         tmpTDis = GetQueryStringUrl(tmpGetItemURL, "DIS");
                         //提交到数据库
@@ -97,10 +97,10 @@ function legalref() {
                             Tid: tmpCaseNum0,
                             tname: tmpTname,
                             ttype: "上诉记录",
-                            tcontent: tmpRemarks3,
+                            tcontent: "上诉记录",
                             tGetTable: tmpGetItemURL,
                             thtml: "记录判案书",
-                            Remark: "上诉记录",
+                            Remark: tmpRemarks3,
                             tStatus: 0,
                             addDate: undefined,
                             UpdateDate: undefined
