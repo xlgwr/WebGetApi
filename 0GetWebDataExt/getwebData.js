@@ -57,9 +57,6 @@ $(function () {
     if (currLocal === _1for_judiciaryUrl) {
         console.log("_1for_judiciaryUrl");
         var getEnURL = j1_gotoListGetAllURLNow(_arrcrtkey, "MainCourtCal", true);
-        //var getZhURL = j1_gotoListGetAllURL("cacfi", "MainCourtCal", false);
-        //console.log(getEnURL);
-        //console.log(getZhURL);
         j1_PostAll(getEnURL);
 
     }
