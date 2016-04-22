@@ -9,6 +9,7 @@ var config = {
     urlApi_legalref: $gbHttPip + "/api/gwd_legalref_main",
     urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDlegalref/GetWebDatasMaxTDis",
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
+    urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",
     //for 上诉记录
     urlRedict_legalrefMain: "http://legalref.judiciary.gov.hk/lrs/common/search/search_appeal.jsp?DIS=",
     urlRedict_legalrefItem: "http://legalref.judiciary.gov.hk/lrs/common/ju/ju_body.jsp?DIS=",

@@ -53,6 +53,7 @@ function legalref() {
                     if ($table0TR.length < 2) {
                         console.log(this.tmpdata + '：没有记录。table tr Length < 2. ');
                         //console.log(data);
+                        setMsg('m_parameterSetMax', "legalrefCurrMax", this.tmpdata);
                         return;
                     }
                     //读出记录

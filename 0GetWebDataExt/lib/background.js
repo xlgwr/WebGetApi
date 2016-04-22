@@ -34,10 +34,29 @@ chrome.runtime.onMessage.addListener(
             removeTabUrl(tmpid, request.msg);
             sendResponse({ farewell: "goodbye Url" });
         }
+        if (request.greeting == "m_parameterSetMax") {
+            var ttype = "";
+            switch (request.msg) {
+                case 'ICRISCurrMax':
+                    $jsonDate = Date.now();
+                    ttype = '0ICRIS'
+                    break;
+                case 'legalrefCurrMax':
+                    $jsonDate2_legalref = Date.now();
+                    ttype = '2legalref'
+                    break;
+                default:
+                    break;
+            }
+            console.log(request);
+            m_parameterSetMax(request.msg, request.value, ttype)
+            sendResponse({ farewell: "set m_parameterSetMax:" + request.msg + ",Value:" + request.value });
+
+        }
         //openURLForICRIS
-        if (request.greeting == "openURLForICRIS") {                            
+        if (request.greeting == "openURLForICRIS") {
             removeTabUrl(tmpid, request.msg);
-            openURLForICRIS("icrisCRNo");        
+            openURLForICRIS("icrisCRNo");
         }
         ///Post OK
         if (request.greeting == "jsonDate") {
@@ -62,7 +81,31 @@ chrome.runtime.onMessage.addListener(
 chrome.browserAction.onClicked.addListener(function (tab) {
     chrome.tabs.create({ url: chrome.extension.getURL("popup.html") });
 });
-
+function m_parameterSetMax(key, value, type) {
+    var m_parameter = {
+        "paramkey": key,
+        "paramvalue": value,
+        "paramtype": type,
+        "Remark": undefined,
+        "tStatus": 1,
+        "addDate": undefined,
+        "UpdateDate": undefined
+    };
+    $.ajax({
+        type: 'POST',
+        timeout: 10000,
+        url: config.urlApim_parameterMax,
+        tmpdata: key,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(m_parameter)
+    }).done(function (data) {
+        console.log(this.tmpdata + ":Post Done!");
+        console.log(this.tmpdata + "," + data);
+    }).fail(function (err) {
+        //showError
+        console.log(err);
+    });
+}
 function openURLjudiciary() {
     try {
         var tmpCurrDate = new Date();

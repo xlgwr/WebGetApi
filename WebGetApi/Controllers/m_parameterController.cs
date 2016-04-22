@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using EFLibForApi.emms;
 using EFLibForApi.emms.models;
+using System.Web;
 
 namespace WebGetApi.Controllers
 {
@@ -86,6 +87,7 @@ namespace WebGetApi.Controllers
             try
             {
                 m_parameter.UpdateDate = DateTime.Now;
+                m_parameter.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
                 if (m_parameterExists(m_parameter.paramkey))
                 {
@@ -106,20 +108,68 @@ namespace WebGetApi.Controllers
             return CreatedAtRoute("DefaultApi", new { id = m_parameter.paramkey }, m_parameter);
         }
 
+        // POST: api/m_parameter
+        [HttpPost]
+        [ResponseType(typeof(m_parameter))]
+        [Route("api/m_parameterSetMax")]
+        public async Task<IHttpActionResult> m_parameterSetMax(m_parameter m_parameter)
+        {
+            long tmpCurrGetValue = 1;
+            long tmpCurrNowValue = 1;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            try
+            {
+
+                m_parameter m_parameterDB = await db.m_parameter.FindAsync(m_parameter.paramkey);
+                if (m_parameter == null)
+                {
+                    return Ok(m_parameter);
+                }
+                else
+                {
+                    long.TryParse(m_parameterDB.paramvalue, out tmpCurrNowValue);
+                    long.TryParse(m_parameter.paramvalue, out tmpCurrGetValue);
+
+                    if (tmpCurrGetValue > tmpCurrNowValue)
+                    {
+                        m_parameterDB.UpdateDate = DateTime.Now;
+                        m_parameterDB.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                        m_parameterDB.tStatus = 1;
+                        m_parameterDB.paramvalue = tmpCurrGetValue.ToString();
+                    }
+
+                }
+                await db.SaveChangesAsync();
+
+            }
+            catch (DbUpdateException)
+            {
+
+                throw;
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = m_parameter.paramkey }, m_parameter);
+        }
+
         // DELETE: api/m_parameter/5
         [ResponseType(typeof(m_parameter))]
         public async Task<IHttpActionResult> Deletem_parameter(string id)
         {
-            m_parameter m_parameter = await db.m_parameter.FindAsync(id);
-            if (m_parameter == null)
-            {
-                return NotFound();
-            }
+            //m_parameter m_parameter = await db.m_parameter.FindAsync(id);
+            //if (m_parameter == null)
+            //{
+            //    return NotFound();
+            //}
 
-            db.m_parameter.Remove(m_parameter);
-            await db.SaveChangesAsync();
+            //db.m_parameter.Remove(m_parameter);
+            //await db.SaveChangesAsync();
 
-            return Ok(m_parameter);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)

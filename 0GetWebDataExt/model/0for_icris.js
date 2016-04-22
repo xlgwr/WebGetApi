@@ -136,6 +136,7 @@ function PostData() {
                     var $table1 = $findTable.find('table').eq(1);
                     if (!$findTable) {
                         console.log('没有记录。');
+                        setMsg('m_parameterSetMax', "ICRISCurrMax", this.tmpdata);
                         return;
                     }
                     //console.log($findTable);
