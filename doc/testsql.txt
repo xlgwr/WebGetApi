@@ -1,0 +1,10 @@
+SELECT top 100 a.addDate,* from gwd_ICRIS_main a ORDER BY a.addDate DESC
+SELECT top 100 a.addDate,* from gwd_ICRIS_items a ORDER BY a.addDate DESC
+SELECT count(*) from gwd_ICRIS_main
+
+SELECT top 100 a.addDate,* from gwd_Judiciary_main a  ORDER BY a.addDate DESC
+SELECT top 100 a.addDate,* from gwd_Judiciary_items a ORDER BY a.addDate DESC
+SELECT count(*) from gwd_Judiciary_main
+
+SELECT top 100 a.addDate,* from gwd_legalref_main a  ORDER BY a.addDate DESC
+SELECT count(*) from gwd_Judiciary_main

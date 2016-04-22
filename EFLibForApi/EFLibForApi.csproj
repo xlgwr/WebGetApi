@@ -78,61 +78,9 @@
     <Compile Include="emms\models\gwd_ICRIS_main.cs" />
     <Compile Include="emms\models\entityGetWebDatas.cs" />
     <Compile Include="emms\models\m_parameter.cs" />
-    <Compile Include="Migrations\201604180756455_initFrist.cs" />
-    <Compile Include="Migrations\201604180756455_initFrist.Designer.cs">
-      <DependentUpon>201604180756455_initFrist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604190115223_addTindexForJudicicary.cs" />
-    <Compile Include="Migrations\201604190115223_addTindexForJudicicary.Designer.cs">
-      <DependentUpon>201604190115223_addTindexForJudicicary.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604190146346_addIndexForAllAddDate.cs" />
-    <Compile Include="Migrations\201604190146346_addIndexForAllAddDate.Designer.cs">
-      <DependentUpon>201604190146346_addIndexForAllAddDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604190303450_changeLengthForJudiciary.cs" />
-    <Compile Include="Migrations\201604190303450_changeLengthForJudiciary.Designer.cs">
-      <DependentUpon>201604190303450_changeLengthForJudiciary.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604190334500_changeLengthForJudiciary2.cs" />
-    <Compile Include="Migrations\201604190334500_changeLengthForJudiciary2.Designer.cs">
-      <DependentUpon>201604190334500_changeLengthForJudiciary2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604200635029_add2LegalrefTable.cs" />
-    <Compile Include="Migrations\201604200635029_add2LegalrefTable.Designer.cs">
-      <DependentUpon>201604200635029_add2LegalrefTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604200720460_add2LegalrefColTdis.cs" />
-    <Compile Include="Migrations\201604200720460_add2LegalrefColTdis.Designer.cs">
-      <DependentUpon>201604200720460_add2LegalrefColTdis.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604200808535_TestChange.cs" />
-    <Compile Include="Migrations\201604200808535_TestChange.Designer.cs">
-      <DependentUpon>201604200808535_TestChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604210115192_addTgetTdisforLegalref.cs" />
-    <Compile Include="Migrations\201604210115192_addTgetTdisforLegalref.Designer.cs">
-      <DependentUpon>201604210115192_addTgetTdisforLegalref.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604210303002_addTgetTGetdisIndexforLegalref.cs" />
-    <Compile Include="Migrations\201604210303002_addTgetTGetdisIndexforLegalref.Designer.cs">
-      <DependentUpon>201604210303002_addTgetTGetdisIndexforLegalref.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604210401257_addClientIpForAll.cs" />
-    <Compile Include="Migrations\201604210401257_addClientIpForAll.Designer.cs">
-      <DependentUpon>201604210401257_addClientIpForAll.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604210459364_removeLegalrefItems.cs" />
-    <Compile Include="Migrations\201604210459364_removeLegalrefItems.Designer.cs">
-      <DependentUpon>201604210459364_removeLegalrefItems.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604210531146_addIndexForLegalref.cs" />
-    <Compile Include="Migrations\201604210531146_addIndexForLegalref.Designer.cs">
-      <DependentUpon>201604210531146_addIndexForLegalref.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604210655271_addKeyForLegalref.cs" />
-    <Compile Include="Migrations\201604210655271_addKeyForLegalref.Designer.cs">
-      <DependentUpon>201604210655271_addKeyForLegalref.cs</DependentUpon>
+    <Compile Include="Migrations\201604220359528_initFirst.cs" />
+    <Compile Include="Migrations\201604220359528_initFirst.Designer.cs">
+      <DependentUpon>201604220359528_initFirst.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,47 +95,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604180756455_initFrist.resx">
-      <DependentUpon>201604180756455_initFrist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604190115223_addTindexForJudicicary.resx">
-      <DependentUpon>201604190115223_addTindexForJudicicary.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604190146346_addIndexForAllAddDate.resx">
-      <DependentUpon>201604190146346_addIndexForAllAddDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604190303450_changeLengthForJudiciary.resx">
-      <DependentUpon>201604190303450_changeLengthForJudiciary.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604190334500_changeLengthForJudiciary2.resx">
-      <DependentUpon>201604190334500_changeLengthForJudiciary2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604200635029_add2LegalrefTable.resx">
-      <DependentUpon>201604200635029_add2LegalrefTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604200720460_add2LegalrefColTdis.resx">
-      <DependentUpon>201604200720460_add2LegalrefColTdis.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604200808535_TestChange.resx">
-      <DependentUpon>201604200808535_TestChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604210115192_addTgetTdisforLegalref.resx">
-      <DependentUpon>201604210115192_addTgetTdisforLegalref.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604210303002_addTgetTGetdisIndexforLegalref.resx">
-      <DependentUpon>201604210303002_addTgetTGetdisIndexforLegalref.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604210401257_addClientIpForAll.resx">
-      <DependentUpon>201604210401257_addClientIpForAll.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604210459364_removeLegalrefItems.resx">
-      <DependentUpon>201604210459364_removeLegalrefItems.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604210531146_addIndexForLegalref.resx">
-      <DependentUpon>201604210531146_addIndexForLegalref.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604210655271_addKeyForLegalref.resx">
-      <DependentUpon>201604210655271_addKeyForLegalref.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604220359528_initFirst.resx">
+      <DependentUpon>201604220359528_initFirst.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

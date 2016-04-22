@@ -3,7 +3,7 @@ namespace EFLibForApi.Migrations
     using System;
     using System.Data.Entity.Migrations;
 
-    public partial class initFrist : DbMigration
+    public partial class initFirst : DbMigration
     {
         public override void Up()
         {
@@ -26,12 +26,14 @@ namespace EFLibForApi.Migrations
                         tSearchRes = c.String(maxLength: 100),
                         Remark = c.String(unicode: false, storeType: "text"),
                         tStatus = c.Int(nullable: false),
+                        ClientIP = c.String(),
                         addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
                         UpdateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Tid)
                 .ForeignKey("dbo.gwd_ICRIS_main", t => t.Tid)
-                .Index(t => t.Tid);
+                .Index(t => t.Tid)
+                .Index(t => t.addDate);
 
             CreateTable(
                 "dbo.gwd_ICRIS_main",
@@ -45,37 +47,42 @@ namespace EFLibForApi.Migrations
                         thtml = c.String(unicode: false, storeType: "text"),
                         Remark = c.String(unicode: false, storeType: "text"),
                         tStatus = c.Int(nullable: false),
+                        ClientIP = c.String(),
                         addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
                         UpdateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Tid);
+                .PrimaryKey(t => t.Tid)
+                .Index(t => t.addDate);
 
             CreateTable(
                 "dbo.gwd_Judiciary_items",
                 c => new
                     {
                         Tid = c.String(nullable: false, maxLength: 128),
+                        Tindex = c.Int(nullable: false),
                         SerialNo = c.Int(nullable: false),
-                        CourtID = c.String(maxLength: 100, unicode: false),
-                        Judge = c.String(maxLength: 200, unicode: false),
-                        CYear = c.String(maxLength: 100),
-                        CourtDay = c.String(maxLength: 100, unicode: false),
-                        Hearing = c.String(maxLength: 100, unicode: false),
-                        CaseNo = c.String(maxLength: 100, unicode: false),
-                        CaseType = c.String(maxLength: 100, unicode: false),
-                        PlainTiff = c.String(maxLength: 200, unicode: false),
-                        Defendant = c.String(maxLength: 200, unicode: false),
-                        Cause = c.String(maxLength: 500),
-                        Nature = c.String(maxLength: 100, unicode: false),
-                        Representation = c.String(maxLength: 100, unicode: false),
+                        CourtID = c.String(unicode: false, storeType: "text"),
+                        Judge = c.String(unicode: false, storeType: "text"),
+                        CYear = c.String(unicode: false, storeType: "text"),
+                        CourtDay = c.String(unicode: false, storeType: "text"),
+                        Hearing = c.String(unicode: false, storeType: "text"),
+                        CaseNo = c.String(unicode: false, storeType: "text"),
+                        CaseType = c.String(unicode: false, storeType: "text"),
+                        PlainTiff = c.String(unicode: false, storeType: "text"),
+                        Defendant = c.String(unicode: false, storeType: "text"),
+                        Cause = c.String(unicode: false, storeType: "text"),
+                        Nature = c.String(unicode: false, storeType: "text"),
+                        Representation = c.String(unicode: false, storeType: "text"),
                         Remark = c.String(unicode: false, storeType: "text"),
                         tStatus = c.Int(nullable: false),
+                        ClientIP = c.String(),
                         addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
                         UpdateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Tid)
-                .ForeignKey("dbo.gwd_Judiciary_main", t => t.Tid)
-                .Index(t => t.Tid);
+                .PrimaryKey(t => new { t.Tid, t.Tindex })
+                .ForeignKey("dbo.gwd_Judiciary_main", t => t.Tid, cascadeDelete: true)
+                .Index(t => t.Tid)
+                .Index(t => t.addDate);
 
             CreateTable(
                 "dbo.gwd_Judiciary_main",
@@ -89,10 +96,37 @@ namespace EFLibForApi.Migrations
                         thtml = c.String(unicode: false, storeType: "text"),
                         Remark = c.String(unicode: false, storeType: "text"),
                         tStatus = c.Int(nullable: false),
+                        ClientIP = c.String(),
                         addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
                         UpdateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Tid);
+                .PrimaryKey(t => t.Tid)
+                .Index(t => t.addDate);
+
+            CreateTable(
+                "dbo.gwd_legalref_main",
+                c => new
+                    {
+                        Tid = c.String(nullable: false, maxLength: 128),
+                        Tdate = c.String(nullable: false, maxLength: 128),
+                        TDis = c.Long(nullable: false),
+                        TIndex = c.Int(nullable: false),
+                        TGetDis = c.Long(nullable: false),
+                        ReportedIn = c.String(),
+                        tname = c.String(maxLength: 50),
+                        ttype = c.String(maxLength: 50),
+                        tcontent = c.String(maxLength: 100, unicode: false),
+                        tGetTable = c.String(unicode: false, storeType: "text"),
+                        thtml = c.String(unicode: false, storeType: "text"),
+                        Remark = c.String(unicode: false, storeType: "text"),
+                        tStatus = c.Int(nullable: false),
+                        ClientIP = c.String(),
+                        addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
+                        UpdateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Tid, t.Tdate, t.TDis, t.TIndex })
+                .Index(t => t.TGetDis)
+                .Index(t => t.addDate);
 
             CreateTable(
                 "dbo.m_parameter",
@@ -103,10 +137,12 @@ namespace EFLibForApi.Migrations
                         paramtype = c.String(maxLength: 16),
                         Remark = c.String(unicode: false, storeType: "text"),
                         tStatus = c.Int(nullable: false),
+                        ClientIP = c.String(),
                         addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
                         UpdateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.paramkey);
+                .PrimaryKey(t => t.paramkey)
+                .Index(t => t.addDate);
 
         }
 
@@ -114,9 +150,17 @@ namespace EFLibForApi.Migrations
         {
             DropForeignKey("dbo.gwd_Judiciary_items", "Tid", "dbo.gwd_Judiciary_main");
             DropForeignKey("dbo.gwd_ICRIS_items", "Tid", "dbo.gwd_ICRIS_main");
+            DropIndex("dbo.m_parameter", new[] { "addDate" });
+            DropIndex("dbo.gwd_legalref_main", new[] { "addDate" });
+            DropIndex("dbo.gwd_legalref_main", new[] { "TGetDis" });
+            DropIndex("dbo.gwd_Judiciary_main", new[] { "addDate" });
+            DropIndex("dbo.gwd_Judiciary_items", new[] { "addDate" });
             DropIndex("dbo.gwd_Judiciary_items", new[] { "Tid" });
+            DropIndex("dbo.gwd_ICRIS_main", new[] { "addDate" });
+            DropIndex("dbo.gwd_ICRIS_items", new[] { "addDate" });
             DropIndex("dbo.gwd_ICRIS_items", new[] { "Tid" });
             DropTable("dbo.m_parameter");
+            DropTable("dbo.gwd_legalref_main");
             DropTable("dbo.gwd_Judiciary_main");
             DropTable("dbo.gwd_Judiciary_items");
             DropTable("dbo.gwd_ICRIS_main");
