@@ -112,7 +112,7 @@ function j1_PostData_1for_judiciary(url) {
         url: url,
         data: {},
         tmpdata: url,
-        timeout: 10000,
+        timeout: 20000,
         type: "get",
         success: function (data, state, xhr) {
             console.log(this.tmpdata);

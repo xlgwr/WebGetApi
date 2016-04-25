@@ -38,7 +38,7 @@ function legalref() {
                 url: config.urlRedict_legalrefMain + currCRNo,
                 data: {},
                 tmpdata: currCRNo,
-                timeout: 10000,
+                timeout: 20000,
                 type: "get",
                 success: function (data, state, xhr) {
                     //当前查询Tdis this.tmpdata
@@ -119,7 +119,7 @@ function legalref() {
                             url: config.urlRedict_legalrefItem + getWebDatas.TDis,
                             data: {},
                             tmpdata: getWebDatas,
-                            timeout: 10000,
+                            timeout: 20000,
                             type: "get",
                             success: function (data, state, xhr) {
 
@@ -157,7 +157,7 @@ function legalref() {
                                         url: getEnglishUrl,
                                         data: {},
                                         tmpdata: this.tmpdata,
-                                        timeout: 10000,
+                                        timeout: 20000,
                                         type: "get",
                                         success: function (data, state, xhr) {
 
@@ -199,7 +199,7 @@ function legalref() {
                                         url: getaChineseUrl,
                                         data: {},
                                         tmpdata: this.tmpdata,
-                                        timeout: 10000,
+                                        timeout: 20000,
                                         type: "get",
                                         success: function (data, state, xhr) {
 

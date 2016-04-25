@@ -7,9 +7,10 @@
 // Host: 192.168.1.136:8081
 
 var $ttype = "icrisCRNo";
-var $runTnter = 3 * 60 * 1000;
+var $runTnter = 2 * 60 * 1000;
 var $jsonDate = Date.now();
 var $jsonDate2_legalref = Date.now();
+
 var _clickOne = false;
 var _paramvalue_1evenyDataGet = "04:30";
 var _getm_parameter = [];
@@ -93,7 +94,7 @@ function m_parameterSetMax(key, value, type) {
     };
     $.ajax({
         type: 'POST',
-        timeout: 10000,
+        timeout: 20000,
         url: config.urlApim_parameterMax,
         tmpdata: key,
         contentType: 'application/json; charset=utf-8',
@@ -149,15 +150,17 @@ function openURL() {
         chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
     } else {
         console.log("Json Post is Run。Now:" + $nowDate + ",JsonDate:" + $jsonDate + ",Diff:" + ($nowDate - $jsonDate) / (60 * 1000) + " Min");
+
     }
 
 }
+
 function getParameter() {
     ////获取参数
     console.log("获取参数");
     $.ajax({
         type: 'GET',
-        timeout: 10000,
+        timeout: 20000,
         url: config.urlApim_parameter
     }).done(function (data) {
 
@@ -181,7 +184,7 @@ function openURLForICRIS(ttype) {
     $.ajax({
         type: 'GET',
         url: config.urlApi_GetWebDatasMaxName + ttype,
-        timeout: 10000
+        timeout: 20000
     }).done(function (data) {
         console.log(data);
         var tmpUrl = 'https://www.icris.cr.gov.hk/csci/CBDS_Search.do?nextAction=CBDS_Search&CRNo=' + data + '&showMedium=true&showBack=true&searchPage=True';
@@ -202,7 +205,7 @@ function GetWebDatasMaxTDisToOpen() {
         _postOK_2_legalref = true;
         $.ajax({
             type: 'GET',
-            timeout: 10000,
+            timeout: 20000,
             url: config.urlApi_GetWebDatasMaxTDis
         }).done(function (data) {
 
@@ -223,7 +226,7 @@ function GetWebDatasMaxTDisToOpen() {
         console.log("2legalref Json Post is Over,Open new Windows。Now:" + $nowDate2 + ",JsonDate:" + $jsonDate2_legalref + ",Diff:" + ($nowDate2 - $jsonDate2_legalref) / (60 * 1000) + " Min");
         $.ajax({
             type: 'GET',
-            timeout: 10000,
+            timeout: 20000,
             url: config.urlApi_GetWebDatasMaxTDis
         }).done(function (data) {
 
@@ -243,30 +246,52 @@ function GetWebDatasMaxTDisToOpen() {
     }
 
 }
-//must be jquery
-$(function () {
-    //////////////////////////////1111111111111111111111111111111    
-    //法庭数据
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//公司注册处
+function fun0icris() {
+    chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + $ttype });
+    chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
+    var s4icris = window.setInterval(openURL, $runTnter);
+}
+
+//法庭数据
+function fun1sjudiciary() {
     //每5秒检查一次参数
     var sgetParameter = window.setInterval(getParameter, 1 * 5 * 1000);
     //法庭数据-审查案件表
     chrome.tabs.create({ url: "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm" });
     //每30秒检查一次
     var sjudiciary = window.setInterval(openURLjudiciary, 1 * 30 * 1000);
+}
+//上诉记录
+function fun1TDis() {
 
-    ///////////////////////////////3333333333333333333333333333333333333
-    //上诉记录
     _postOK_2_legalref = false;
     GetWebDatasMaxTDisToOpen();
     //每30秒检查一次
     var sjudiciary = window.setInterval(GetWebDatasMaxTDisToOpen, 1 * 30 * 1000);
+}
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
-    //////////////////////////////2222222222222222222222222222222222    
-    //公司注册处
-    chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + $ttype });
-    chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
-    var s4 = window.setInterval(openURL, $runTnter);
-
+//must be jquery
+$(function () {
+    
+    // //公司注册处
+    // fun0icris();
+    //////////////////////////////1111111111111111111111111111111    
+    // //法庭数据
+    // fun1sjudiciary();
+    ///////////////////////////////3333333333333333333333333333333333333
+    // //上诉记录
+    // fun1TDis();
+    //////////////////////////////2222222222222222222222222222222222 
+    //公共网页  
     ///////////////////////////////3333333333333333333333333333333333333
 
 

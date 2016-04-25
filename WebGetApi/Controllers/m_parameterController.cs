@@ -126,11 +126,7 @@ namespace WebGetApi.Controllers
             {
 
                 m_parameter m_parameterDB = await db.m_parameter.FindAsync(m_parameter.paramkey);
-                if (m_parameter == null)
-                {
-                    return Ok(m_parameter);
-                }
-                else
+                if (m_parameterDB != null)
                 {
                     long.TryParse(m_parameterDB.paramvalue, out tmpCurrNowValue);
                     long.TryParse(m_parameter.paramvalue, out tmpCurrGetValue);
@@ -143,8 +139,8 @@ namespace WebGetApi.Controllers
                         m_parameterDB.paramvalue = tmpCurrGetValue.ToString();
                     }
 
+                    await db.SaveChangesAsync();
                 }
-                await db.SaveChangesAsync();
 
             }
             catch (DbUpdateException)
@@ -153,7 +149,7 @@ namespace WebGetApi.Controllers
                 throw;
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = m_parameter.paramkey }, m_parameter);
+            return Ok(m_parameter);
         }
 
         // DELETE: api/m_parameter/5

@@ -73,6 +73,7 @@
     <Compile Include="emms\emmsApiDbContext.cs" />
     <Compile Include="emms\models\entity.cs" />
     <Compile Include="emms\models\entityTID.cs" />
+    <Compile Include="emms\models\gwd_hklawsoc_main.cs" />
     <Compile Include="emms\models\gwd_legalref_main.cs" />
     <Compile Include="emms\models\gwd_Judiciary_main.cs" />
     <Compile Include="emms\models\gwd_ICRIS_main.cs" />
@@ -81,6 +82,22 @@
     <Compile Include="Migrations\201604220359528_initFirst.cs" />
     <Compile Include="Migrations\201604220359528_initFirst.Designer.cs">
       <DependentUpon>201604220359528_initFirst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604220616019_addgwd_ICRIS_DisOrders.cs" />
+    <Compile Include="Migrations\201604220616019_addgwd_ICRIS_DisOrders.Designer.cs">
+      <DependentUpon>201604220616019_addgwd_ICRIS_DisOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604220856350_changeItemNoToInt_DisOrders.cs" />
+    <Compile Include="Migrations\201604220856350_changeItemNoToInt_DisOrders.Designer.cs">
+      <DependentUpon>201604220856350_changeItemNoToInt_DisOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604220941020_changeItemsColLen.cs" />
+    <Compile Include="Migrations\201604220941020_changeItemsColLen.Designer.cs">
+      <DependentUpon>201604220941020_changeItemsColLen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604250600412_addHKlawsocTable.cs" />
+    <Compile Include="Migrations\201604250600412_addHKlawsocTable.Designer.cs">
+      <DependentUpon>201604250600412_addHKlawsocTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +114,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604220359528_initFirst.resx">
       <DependentUpon>201604220359528_initFirst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604220616019_addgwd_ICRIS_DisOrders.resx">
+      <DependentUpon>201604220616019_addgwd_ICRIS_DisOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604220856350_changeItemNoToInt_DisOrders.resx">
+      <DependentUpon>201604220856350_changeItemNoToInt_DisOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604220941020_changeItemsColLen.resx">
+      <DependentUpon>201604220941020_changeItemsColLen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604250600412_addHKlawsocTable.resx">
+      <DependentUpon>201604250600412_addHKlawsocTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -22,7 +22,7 @@ $(function() {
     //获取参数
     $.ajax({
         type: 'GET',
-        timeout: 10000,
+        timeout: 20000,
         url: config.urlApim_parameter
     }).done(function(data) {
 
@@ -54,7 +54,7 @@ $(function() {
             "paramkey": _paramkey_1,
             "paramvalue": tmpGetdate,
             "paramtype": _paramkey_1_type,
-            "Remark": _paramkey_1_type,
+            "Remark": "终审及高等法院,每日开始采集时间",
             "tStatus": 0,
             "addDate": undefined,
             "UpdateDate": undefined
@@ -62,7 +62,7 @@ $(function() {
         $('#btnEvenyDataGet').attr('disabled', 'disabled');
         $.ajax({
             type: 'POST',
-            timeout: 10000,
+            timeout: 20000,
             url: config.urlApim_parameter,
             tmpdata: _paramkey_1,
             contentType: 'application/json; charset=utf-8',

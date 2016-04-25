@@ -31,12 +31,14 @@
 
         public virtual DbSet<gwd_ICRIS_main> gwd_ICRIS_main { get; set; }
         public virtual DbSet<gwd_ICRIS_items> gwd_ICRIS_items { get; set; }
+        public virtual DbSet<gwd_ICRIS_DisOrders> gwd_ICRIS_DisOrders { get; set; }
 
         public virtual DbSet<gwd_Judiciary_main> gwd_Judiciary_main { get; set; }
         public virtual DbSet<gwd_Judiciary_items> gwd_Judiciary_items { get; set; }
 
 
         public virtual DbSet<gwd_legalref_main> gwd_legalref_main { get; set; }
+        public virtual DbSet<gwd_hklawsoc_main> gwd_hklawsoc_main { get; set; }
 
         public virtual DbSet<m_parameter> m_parameter { get; set; }
 
@@ -126,6 +128,19 @@
                .IsUnicode(false);
             modelBuilder.Entity<gwd_Judiciary_items>()
                .Property(e => e.Representation)
+               .IsUnicode(false);
+
+            modelBuilder.Entity<gwd_hklawsoc_main>()
+                .Property(e => e.Remark)
+                .IsUnicode(false);
+            modelBuilder.Entity<gwd_hklawsoc_main>()
+               .Property(e => e.tcontent)
+               .IsUnicode(false);
+            modelBuilder.Entity<gwd_hklawsoc_main>()
+               .Property(e => e.tGetTable)
+               .IsUnicode(false);
+            modelBuilder.Entity<gwd_hklawsoc_main>()
+               .Property(e => e.thtml)
                .IsUnicode(false);
 
 

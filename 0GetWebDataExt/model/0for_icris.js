@@ -74,8 +74,13 @@ function PostData() {
     if (GetQueryString("CRNo")) {
         $countCurr = parseInt(GetQueryString("CRNo"), 10)
     }
+    
+    runeven50()
+    openURLForGetDisOrderICRIS() 
+    
+    var s1 = window.setInterval(runeven50, (10 * 1000));
+    var s1_dis = window.setInterval(openURLForGetDisOrderICRIS, (3 * 60 * 1000));
 
-    var s1 = window.setInterval(runeven50, 10000);
     function runeven50() {
         closeTabs("www.icris.cr.gov.hk");
         console.log("CurrNo:" + $countCurr);
@@ -112,7 +117,7 @@ function PostData() {
                 url: 'https://www.icris.cr.gov.hk/csci/CBDS_Search.do?nextAction=CBDS_Search&CRNo=' + tmpCRNo + '&showMedium=true&showBack=true&searchPage=True',
                 data: {},
                 tmpdata: tmpCRNo,
-                timeout: 10000,
+                timeout: 20000,
                 type: "get",
                 success: function (data, state, xhr) {
 
@@ -216,6 +221,7 @@ function PostData() {
                         url: config.urlApi_icris,
                         tmpdata: this.tmpdata,
                         contentType: 'application/json; charset=utf-8',
+                        timeout: 20000,
                         data: JSON.stringify(getWebDatas)
                     }).done(function (data) {
                         console.log(this.tmpdata + ":Post Done!");
@@ -235,7 +241,119 @@ function PostData() {
             });
         }
         $countCurr += $countPost;
-    }
 
+
+    }
+    ///每3分钟更新一次
+    function openURLForGetDisOrderICRIS() {
+        var tmpPostUrl = "https://www.icris.cr.gov.hk/csci/DO_Index.do?PageNO=";
+        //$('select[name="SelectPage"]').length
+        $.ajax({
+            type: 'GET',
+            timeout: 20000,
+            url: tmpPostUrl + "1"
+        }).done(function (data) {
+            if (data.length < 10) {
+                console.log('PageNO=1没有记录. ：' + data.length);
+                return;
+            }
+            if (data.indexOf('验证密码') > -1) {
+                console.log('PageNO=1要验证密码. ：' + data.length);
+                return;
+            }
+            var $div = $('<div></div>').html(data);
+            var $findDiv = $div.find('div#PageContent').eq(0);
+            var $findform = $findDiv.find('form[name="DOIndex"]').eq(0);
+            var $findTable = $findform.find('table');
+            var $table0 = $findTable.eq(0);
+            var $table1 = $findTable.eq(1);
+            var $seletPagesselect = $table1.find('select[name="SelectPage"]').eq(0).find('option');
+
+            // console.log($findform);
+            // console.log($seletPagesselect);
+            var Tindex = 0;
+            for (x = 1; x <= $seletPagesselect.length; x++) {
+                $.ajax({
+                    type: 'GET',
+                    tmpdata: x,
+                    timeout: 20000,
+                    url: tmpPostUrl + x
+                }).done(function (data) {
+                    if (data.length < 10) {
+                        console.log(this.tmpdata + ":" + '没有记录. ：' + data.length);
+                        return;
+                    }
+                    if (data.indexOf('验证密码') > -1) {
+                        console.log(this.tmpdata + ":" + '要验证密码. ：' + data.length);
+                        return;
+                    }
+                    var $div = $('<div></div>').html(data);
+                    var $findDiv = $div.find('div#PageContent').eq(0);
+                    var $findform = $findDiv.find('form[name="DOIndex"]').eq(0);
+                    var $findTable = $findform.find('table');
+                    var $table0 = $findTable.eq(0);
+                    var $table0TR = $table0.find('tr');
+
+                    var arrToPost = [];
+
+                    for (y = 2; y < $table0TR.length; y++) {
+                        var $table0TRTD = $table0TR.eq(y).find('td');
+                        console.log(this.tmpdata + ":" + $table0TRTD.length);
+
+                        var tmpitem = {
+                            $id: $table0TRTD.eq(0).text().trim(),
+                            RecordID: $table0TRTD.eq(1).text().trim(),
+                            ItemNo: $table0TRTD.eq(0).text().trim(),
+                            CampanyNo: $table0TRTD.eq(1).text().trim(),
+                            CorporateName: getText($table0TRTD.eq(2).text().trim()),
+                            ChineseName: getText($table0TRTD.eq(3).text().trim()),
+                            IDCard: getText($table0TRTD.eq(4).text().trim()),
+                            OverseasPassportID: getText($table0TRTD.eq(5).text().trim()),
+                            PassportCountry: getText($table0TRTD.eq(6).text().trim()),
+                            SameNo: getText($table0TRTD.eq(7).text().trim()),
+                            Remark: "取消资格令纪录册:" + this.url,
+                            tStatus: 0,
+                            addDate: undefined,
+                            UpdateDate: undefined
+                        }
+                        arrToPost.push(tmpitem);
+                    }
+                    // console.log(arrToPost);
+                    if (arrToPost.length > 0) {
+                        $.ajax({
+                            type: 'POST',
+                            url: config.urlApi_icris_DisOrders,
+                            tmpdata: this.tmpdata,
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify(arrToPost),
+                            timeout: 20000
+                        }).done(function (data) {
+                            console.log(this.tmpdata + ":Page Post Done!");
+                            //console.log(data);
+                        }).fail(function (err) {
+                            //showError
+                            console.log(err);
+                        });
+                    }
+
+
+                }).fail(function (err) {
+                    console.log(err);
+                });
+            }
+            //end for
+
+        }).fail(function (err) {
+            console.log(err);
+        });
+    }
+    function getText(value) {
+        if (value.indexOf("'") > -1) {
+            var arrS = value.split("'");
+            return arrS[1];
+        } else {
+            return value;
+        }
+    }
 }
 //******************************************//

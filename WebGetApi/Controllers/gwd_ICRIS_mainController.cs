@@ -119,6 +119,44 @@ namespace WebGetApi.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+        [HttpPost]
+        // POST: api/gwd_ICRIS_DisOrders
+        [ResponseType(typeof(bool))]
+        [Route("gwd_ICRIS_DisOrders")]
+        public async Task<IHttpActionResult> gwd_ICRIS_DisOrders(ICollection<gwd_ICRIS_DisOrders> gwd_ICRIS_DisOrders)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                foreach (var item in gwd_ICRIS_DisOrders)
+                {
+                    item.UpdateDate = DateTime.Now;
+                    item.ClientIP = HttpContext.Current.Request.UserHostAddress;
+
+                    if (gwd_ICRIS_DisOrdersExists(item.RecordID))
+                    {
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.gwd_ICRIS_DisOrders.Add(item);
+                    }
+                }
+
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return Ok(true);
+        }
 
         // POST: api/gwd_ICRIS_main
         [ResponseType(typeof(gwd_ICRIS_main))]
@@ -211,6 +249,11 @@ namespace WebGetApi.Controllers
         private bool gwd_ICRIS_mainExists(string id)
         {
             return db.gwd_ICRIS_main.Count(e => e.Tid == id) > 0;
+        }
+        private bool gwd_ICRIS_DisOrdersExists(string id)
+        {
+
+            return db.gwd_ICRIS_DisOrders.Count(e => e.RecordID == id) > 0;
         }
     }
 }
