@@ -2,20 +2,36 @@
 var _allColNameZH = [];
 var _allColNameEN = []
 var _allPage = 100;
+var _allcount = 0;
 var currPage = 1;
 var evenRun = 1;
+var _intervalTime = 15 * 1000;
+var tmpmsg = "";
 
-function gwd_mem_withcert(msgid) {
+$(function () {
+    console.log("律师界名录初始化..");
+    $('#btn1hklaw').click(function () {
+        $(this).attr('disabled', 'disabled');
+        var $msg = $('#msg1')
+        gwd_mem_withcert($(this), $msg);
+        //$(this).attr('disabled', null);
+    });
+
+})
+
+function gwd_mem_withcert(btn, msgid) {
 
     console.log("律师界名录初始化..");
-
+    msgid.text("律师界名录采集初始化..");
     //每10秒开始运行，一次取5个
-    var s1_hklaw = window.setInterval(runEven5, (20 * 1000));
+    var s1_hklaw = window.setInterval(runEven5, _intervalTime);
     runEven5();
 
     function runEven5() {
         console.clear();
-        console.log("AllPage:" + _allPage + "currPage:" + currPage + ",每:" + (20 * 1000 / 1000) + " 秒运行一次，每次取:" + evenRun);
+        tmpmsg = "正在运行--》当前更新页:" + currPage + ",总页数:" + _allPage + ",每:" + (_intervalTime / 1000) + " 秒运行一次，每次取:" + evenRun
+        console.log(tmpmsg);
+
 
         if (currPage < 0) {
             currPage = 1;
@@ -24,7 +40,10 @@ function gwd_mem_withcert(msgid) {
 
             console.log("CurrNowPage:" + currPage);
             if (currPage > _allPage) {
+
                 clearInterval(s1_hklaw);
+                msgid.text("有:" + _allPage + " 页已全部更新完成。总数量为：" + _allcount);
+                btn.attr('disabled', null);
                 break;
             }
 
@@ -32,7 +51,7 @@ function gwd_mem_withcert(msgid) {
                 url: configGetUrl.getUrl_fjt2_mem_withcert,
                 data: { name: '', pg: currPage, sj: 0 },
                 tmpdata: currPage,
-                timeout: 20000,
+                timeout: 50000,
                 type: "get",
                 success: function (data, state, xhr) {
                     console.log(this.url);
@@ -56,11 +75,13 @@ function gwd_mem_withcert(msgid) {
 
                             var $table0TR3Table3TRB = $table0TR3Table3TR.eq(0).find('b');
 
-                            var _allcount = parseInt($table0TR3Table3TRB.eq(0).text().trim(), 10);
+                            _allcount = parseInt($table0TR3Table3TRB.eq(0).text().trim(), 10);
                             _allPage = Math.ceil((_allcount + 50) / 50);
                             console.log("总记录：" + _allcount + ",页：" + _allPage);
                             console.log(this.tmpdata + " 页有:" + $table0TR3Table5TR.length + " 条记录。");
 
+                            tmpmsg = "正在运行--》当前更新页:" + this.tmpdata + "，有:" + ($table0TR3Table5TR.length - 1) + "条记录,总页数:" + _allPage + ", 每:" + (_intervalTime / 1000) + " 秒运行一次，每次取: " + evenRun + " 页."
+                            msgid.text(tmpmsg);
                             // var $table0TR3Table5TR1TD = $table0TR3Table5TR.eq(1).find('td');
                             // console.log($table0TR3Table5TR1TD.eq(0).text().trim() + "," + $table0TR3Table5TR1TD.eq(1).text().trim() + "," + $table0TR3Table5TR1TD.eq(2).text().trim());
 
@@ -69,6 +90,7 @@ function gwd_mem_withcert(msgid) {
                             for (var m = 1; m < $table0TR3Table5TR.length; m++) {
                                 var tr = $table0TR3Table5TR.eq(m);
                                 var allTd = tr.find('td');
+                                var nameId = allTd.eq(0).text().trim();
                                 var nameEn = allTd.eq(1).find('a').eq(0);
                                 var nameZH = allTd.eq(2).find('a').eq(0);
                                 var toHref = nameEn.attr('href');
@@ -97,7 +119,7 @@ function gwd_mem_withcert(msgid) {
                                         CompanyFax: undefined,
                                         Dxnumber: undefined,
                                         CompanyEmail: undefined,
-                                        tname: undefined,
+                                        tname: nameId,
                                         ttype: undefined,
                                         tcontent: undefined,
                                         tGetTable: undefined,
@@ -113,7 +135,7 @@ function gwd_mem_withcert(msgid) {
                                         url: configGetUrl.getUrl_fjt2_mem_withcertPageEN,
                                         data: { id: toPostMain.Tid },
                                         tmpdata: toPostMain,
-                                        timeout: 20000,
+                                        timeout: 50000,
                                         type: "get",
                                         success: function (data, state, xhr) {
                                             console.log("英文:" + this.url);
@@ -144,7 +166,7 @@ function gwd_mem_withcert(msgid) {
                                                 CompanyFax: undefined,
                                                 Dxnumber: undefined,
                                                 CompanyEmail: undefined,
-                                                tname: undefined,
+                                                tname: this.tmpdata.tname,
                                                 ttype: undefined,
                                                 tcontent: undefined,
                                                 tGetTable: undefined,
@@ -238,6 +260,8 @@ function gwd_mem_withcert(msgid) {
                                                         break;
                                                 }
                                             }
+
+                                            msgid.text(tmpmsg + "，正在提交第：" + this.tmpdata.tname + " 条记录。");
                                             //console.log(toPostMainEN);
                                             //console.log(_allColNameEN.length + "," + _allColNameEN);
                                             //提交数据库
@@ -245,7 +269,7 @@ function gwd_mem_withcert(msgid) {
                                                 type: 'POST',
                                                 url: config.urlApi_hklawsoc,
                                                 tmpdata: toPostMainEN,
-                                                timeout: 20000,
+                                                timeout: 50000,
                                                 contentType: 'application/json; charset=utf-8',
                                                 data: JSON.stringify(toPostMainEN)
                                             }).done(function (data) {
@@ -269,7 +293,7 @@ function gwd_mem_withcert(msgid) {
                                         url: configGetUrl.getUrl_fjt2_mem_withcertPageCN,
                                         data: { id: toPostMain.Tid },
                                         tmpdata: toPostMain,
-                                        timeout: 20000,
+                                        timeout: 50000,
                                         type: "get",
                                         success: function (data, state, xhr) {
                                             console.log("中文:" + this.url);
@@ -300,7 +324,7 @@ function gwd_mem_withcert(msgid) {
                                                 CompanyFax: undefined,
                                                 Dxnumber: undefined,
                                                 CompanyEmail: undefined,
-                                                tname: undefined,
+                                                tname: this.tmpdata.tname,
                                                 ttype: undefined,
                                                 tcontent: undefined,
                                                 tGetTable: undefined,
@@ -401,7 +425,7 @@ function gwd_mem_withcert(msgid) {
                                                 type: 'POST',
                                                 url: config.urlApi_hklawsoc,
                                                 tmpdata: toPostMainCN,
-                                                timeout: 20000,
+                                                timeout: 50000,
                                                 contentType: 'application/json; charset=utf-8',
                                                 data: JSON.stringify(toPostMainCN)
                                             }).done(function (data) {
@@ -452,7 +476,3 @@ function gwd_mem_withcert(msgid) {
 
 }
 
-$(function () {
-    console.log("律师界名录初始化..");
-    gwd_mem_withcert("dd");
-})

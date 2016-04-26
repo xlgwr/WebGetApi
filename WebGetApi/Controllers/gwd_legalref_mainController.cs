@@ -45,9 +45,28 @@ namespace WebGetApi.Controllers
 
             return Ok(gwd_legalref_main);
         }
-        // GET: api/GetWebDatas/GetWebDatasMaxTDis
+
+        // GET: api/GetWebDatas/GetWebDatasMaxDBTDis
         [ResponseType(typeof(long))]
         [Route("GetWebDatasMaxTDis")]
+        public async Task<IHttpActionResult> GetWebDatasDBMaxAsync()
+        {
+            //最大获取id
+            var dbMax = await db.gwd_legalref_main.MaxAsync(m => m.TGetDis);
+            if (dbMax < 10)
+            {
+                dbMax = 1;
+            }
+            else
+            {
+                dbMax -= 10;
+            }
+            return Ok(dbMax);
+            //////////////
+        }
+        // GET: api/GetWebDatas/GetWebDatasMaxTDis
+        [ResponseType(typeof(long))]
+        [Route("GetWebDatasMaxM_parameterTDis")]
         public async Task<IHttpActionResult> GetWebDatasMaxAsync()
         {
             long getWebDatas = 1;
