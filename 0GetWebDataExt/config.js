@@ -29,5 +29,6 @@ var configGetUrl = {
     getUrl_fjt2_mem_withcertPageEN: "http://www.hklawsoc.org.hk/pub_e/memberlawlist/member.asp",
     getUrl_fjt2_mem_withcertPageCN: "http://www.hklawsoc.org.hk/pub_c/memberlawlist/member.asp",
     //注册外地律师
-    getUrl_fjt2_mem_foreignlawyers: "http://www.fjt2.net/gate/gb/www.hklawsoc.org.hk/pub_c/memberlawlist/mem_foreignlawyers.asp"
+    //?name=&pg=2&sort=eng&order=&sj=&sessionid=
+    getUrl_fjt2_mem_foreignlawyers: "http://www.hklawsoc.org.hk/pub_c/memberlawlist/mem_foreignlawyers.asp"
 }

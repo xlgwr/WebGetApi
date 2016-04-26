@@ -35,16 +35,20 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                    <!--<li><a href="#">Reports</a></li>
-                    <li><a href="#">Analytics</a></li>
+                    <li class="active"><a href="#main1">参数设置 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#main1">1.终审及高等法院</a></li>
+                    <!--<li><a href="#">Analytics</a></li>
                     <li><a href="#">Export</a></li>-->
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#main2">公共信息采集 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#main2">1.律师界名录</a></li>
+                    <li><a href="#h2Get2">2.注册外地律师</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">参数设置</h1>
-
-                <h2 class="sub-header">1.终审及高等法院</h2>
+                <h1 id="main1" class="page-header">参数设置</h1>
+                <h2 id="h2set1" class="sub-header">1.终审及高等法院</h2>
                 <div class="row placeholders">
                     <form class="form-inline">
                         <div class="form-group">
@@ -54,29 +58,30 @@
                         <button type="submit" id="btnEvenyDataGet" class="btn btn-default">设置每日开始采集时间</button>
                     </form>
                 </div>
-                <h1 class="page-header">公共信息采集</h1>
-                <h2 class="sub-header">1.律师界名录</h2>
+                
+                <h1 id="main2" class="page-header">公共信息采集</h1>
+                <h2 id="h2Get1" class="sub-header">1.律师界名录</h2>
                 <div class="row placeholders">
-                    <div class="panel panel-success">
+                    <div id='panelhklaw' class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title"><button type="button" id="btn1hklaw" class="btn btn-default">开始更新</button></h3>
                         </div>
                         <div class="panel-body">
-                            <p id="msg1" class="alert alert-warning" role="alert">
+                            <p id="msg1" class="alert alert-warning hide" role="alert">
                                 更新情况
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <h2 class="sub-header">2.注册外地律师</h2>
+                <h2 id="h2Get2" class="sub-header">2.注册外地律师</h2>
                 <div class="row placeholders">
-                    <div class="panel panel-default">
+                    <div id='panelhklaw2' class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><button type="button" class="btn btn-default">开始更新</button></h3>
+                            <h3 class="panel-title"><button type="button" id="btn1hklaw2" class="btn btn-default">开始更新</button></h3>
                         </div>
                         <div class="panel-body">
-                            <p>
+                            <p id="msg2" class="alert alert-warning hide" role="alert">
                                 更新情况
                             </p>
                         </div>
