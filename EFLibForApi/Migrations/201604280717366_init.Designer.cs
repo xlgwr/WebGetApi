@@ -7,13 +7,13 @@ namespace EFLibForApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addHKlawsocTable : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addHKlawsocTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604250600412_addHKlawsocTable"; }
+            get { return "201604280717366_init"; }
         }
         
         string IMigrationMetadata.Source

@@ -12,7 +12,7 @@ var _getAllMain_legalref = [];
 var _getUrl2PressPrefix = "http://legalref.judiciary.gov.hk/";
 
 function legalref() {
-    sendMsg("removeUrl", config.urlRedict_legalrefMain);
+    sendMsg("removeUrl", config.urlRedict_legalrefHOME);
 
     console.log("text legalref ok. Tdis:" + _legalrefTdis);
     //每5秒开始运行，一次取5个
@@ -41,6 +41,12 @@ function legalref() {
                 timeout: 20000,
                 type: "get",
                 success: function (data, state, xhr) {
+                    if (data.indexOf('绿色上网提示') > -1) {
+                        console.log("绿色上网提示");
+                        _legalrefTdis -= config.getEven5Count;
+                        document.location.href = document.location.href;
+                        return;
+                    }
                     //当前查询Tdis this.tmpdata
                     console.log("Curr:" + this.tmpdata);
                     //   console.log(data);
@@ -91,20 +97,37 @@ function legalref() {
                         }
                         tmpTDis = GetQueryStringUrl(tmpGetItemURL, "DIS");
                         //提交到数据库
+                        var dd = {
+                            "Tdate": "sample string 1",
+                            "TDis": 2,
+                            "TIndex": 3,
+                            "TGetDis": 4,
+                            "ReportedIn": "sample string 5",
+                            "tLang": 6,
+                            "tname": "sample string 7",
+                            "ttype": "sample string 8",
+                            "thtml": "sample string 9",
+                            "Tid": 10,
+                            "Remark": "sample string 11",
+                            "tStatus": 12,
+                            "ClientIP": "sample string 13",
+                            "addDate": "2016-04-29T09:31:55.9370164+08:00",
+                            "UpdateDate": "2016-04-29T09:31:55.9370164+08:00"
+                        }
                         var getWebDatas = {
+                            caseNo: tmpCaseNum0,
                             Tdate: tmpDate1,
                             TDis: tmpTDis,
-                            TIndex: 0,
+                            TIndex: m,
+                            tLang: 0,
                             TGetDis: this.tmpdata,
                             ReportedIn: tmpReportedin2,
                             gwd_legalref_items: [],
-                            Tid: tmpCaseNum0,
+                            Tid: 0,
                             tname: tmpTname,
                             ttype: "上诉记录",
-                            tcontent: "上诉记录",
-                            tGetTable: tmpGetItemURL,
                             thtml: "记录判案书",
-                            Remark: tmpRemarks3,
+                            Remark: tmpGetItemURL,
                             tStatus: 0,
                             addDate: undefined,
                             UpdateDate: undefined
@@ -122,7 +145,12 @@ function legalref() {
                             timeout: 20000,
                             type: "get",
                             success: function (data, state, xhr) {
-
+                                if (data.indexOf('绿色上网提示') > -1) {
+                                    console.log("绿色上网提示");
+                                    _legalrefTdis -= config.getEven5Count;
+                                    document.location.href = document.location.href;
+                                    return;
+                                }
                                 this.tmpdata.thtml = data;
 
                                 //提交数据库
@@ -160,12 +188,17 @@ function legalref() {
                                         timeout: 20000,
                                         type: "get",
                                         success: function (data, state, xhr) {
-
+                                            if (data.indexOf('绿色上网提示') > -1) {
+                                                console.log("绿色上网提示");
+                                                _legalrefTdis -= config.getEven5Count;
+                                                document.location.href = document.location.href;
+                                                return;
+                                            }
                                             var tmpData1 = this.tmpdata;
-                                            tmpData1.tGetTable = this.url;
+                                            tmpData1.Remark = this.url;
                                             tmpData1.thtml = data;
                                             tmpData1.tStatus = 1;
-                                            tmpData1.TIndex = 1;
+                                            tmpData1.tLang = 1;
                                             //提交数据库
                                             $.ajax({
                                                 type: 'POST',
@@ -202,12 +235,17 @@ function legalref() {
                                         timeout: 20000,
                                         type: "get",
                                         success: function (data, state, xhr) {
-
+                                            if (data.indexOf('绿色上网提示') > -1) {
+                                                console.log("绿色上网提示");
+                                                _legalrefTdis -= config.getEven5Count;
+                                                document.location.href = document.location.href;
+                                                return;
+                                            }
                                             var tmpData2 = this.tmpdata;
-                                            tmpData2.tGetTable = this.url;
+                                            tmpData2.Remark = this.url;
                                             tmpData2.thtml = data;
                                             tmpData2.tStatus = 1;
-                                            tmpData2.TIndex = 2;
+                                            tmpData2.tLang = 2;
                                             //提交数据库
                                             $.ajax({
                                                 type: 'POST',

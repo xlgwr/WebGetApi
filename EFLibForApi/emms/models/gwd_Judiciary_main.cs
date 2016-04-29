@@ -13,7 +13,7 @@ namespace EFLibForApi.emms.models
 {
 
     [Table("gwd_Judiciary_main")]
-    public class gwd_Judiciary_main : entityGetWebDatas
+    public class gwd_Judiciary_main : entityMain
     {
         public gwd_Judiciary_main()
         {
@@ -24,17 +24,11 @@ namespace EFLibForApi.emms.models
     }
 
     [Table("gwd_Judiciary_items")]
-    public class gwd_Judiciary_items : entity
+    public class gwd_Judiciary_items : entityItems
     {
-        [Key]
-        [Column(Order = 0)]
+        [Index]
         [ForeignKey("gwd_Judiciary_main")]
-        public string Tid { get; set; }
-
-        [Key]
-        [Column(Order = 1)]
-        public int Tindex { get; set; }
-
+        public long htmlID { get; set; }
 
         /// <summary>
         /// 序号

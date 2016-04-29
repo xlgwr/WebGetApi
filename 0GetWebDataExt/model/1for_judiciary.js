@@ -126,20 +126,20 @@ function j1_PostData_1for_judiciary(url) {
 
             var gwd_Judiciary_items = [];
 
-            //提交到数据库
             var getWebDatas = {
                 gwd_Judiciary_items: gwd_Judiciary_items,
-                Tid: _haxCrtKeyID[this.tmpdata],
+                tLang: 0,
                 tname: _haxCrtKey[this.tmpdata],
                 ttype: $PostType1for_judiciary,
-                tcontent: this.tmpdata,
-                tGetTable: $tableAllDiv.html(),
                 thtml: data,
-                Remark: this.tmpdata,
+                Tid: 0,
+                Remark: undefined,
                 tStatus: 0,
+                ClientIP: undefined,
                 addDate: undefined,
                 UpdateDate: undefined
             }
+            //提交到数据库
 
             if ($tableAll.length < 2) {
                 var tmpmsg = "当日,无资料"
@@ -157,38 +157,56 @@ function j1_PostData_1for_judiciary(url) {
                         console.log(tmpremark + _haxCrtKey[this.tmpdata]);
                         //审查案件表-终审及高等法院
                         //所有表，从第4个表开始
-                        for (var r = 3; r < ($tableAll.length - 1); r++) {
+                        var tmpStartTable = 3;
+                        var tmpStartTR = 0;
+                        switch (_haxCrtKey[this.tmpdata]) {
+                            case "dc": case "dcmc":
+                                tmpStartTable = 1;
+                                tmpStartTR = 1;
+                                break;
+                            default:
+                                tmpStartTable = 3;
+                                tmpStartTR = 0;
+                                break;
+                        }
+
+                        for (var r = tmpStartTable; r < ($tableAll.length - 1); r++) {
                             var $tableAllTr = $tableAll.eq(r).find('tr');
                             console.log("TR:" + $tableAllTr.length);
 
-                            for (var t = 0; t < $tableAllTr.length; t++) {
+                            for (var t = tmpStartTR; t < $tableAllTr.length; t++) {
 
                                 var $tmptr = $tableAllTr.eq(t);
                                 var $tmptrTDall = $tmptr.find('td');
 
                                 console.log($tmptrTDall.length);
 
-                                if ($tmptrTDall.length < 7 || ($tmptrTDall.eq(4).text().length <= 7 && $tmptrTDall.eq(0).text() <= 7)) {
-                                    //console.log("td<7,td4:" + $tmptrTDall.eq(4).text().length);
+                                if ($tmptrTDall.length < 7 || ($tmptrTDall.eq(4).text().trim().length < 7 && $tmptrTDall.eq(0).text().trim().length < 7)) {
+                                    console.log("td<7,td4:" + $tmptrTDall.eq(4).text().trim().length + $tmptrTDall.eq(0).text().trim().length);
                                     //console.log($tmptr.text());
                                     continue;
                                 }
                                 tIndex++;
                                 var tmpItem = {
                                     $id: tIndex,
-                                    Tid: _haxCrtKeyID[this.tmpdata],
-                                    Tindex: tIndex,
+                                    htmlID: 0,
+                                    Tid: 0,
+                                    tLang: 0,
+                                    tkeyNo: _haxCrtKeyID[this.tmpdata],
+                                    tIndex: tIndex,
+                                    tname: _haxCrtKey[this.tmpdata],
+                                    ttype: $PostType1for_judiciary,
                                     SerialNo: tIndex,
                                     CourtID: $tmptrTDall.eq(0).html(),
                                     Judge: $tmptrTDall.eq(1).html(),
-                                    CYear: curDate.getFullYear(),// $tmptrTDall.eq(2).html(),
+                                    CYear: curDate.getFullYear(),// $tmptrTDall.eq(2).text(),
                                     CourtDay: $tmptrTDall.eq(2).html(),
-                                    Hearing: undefined,// $tmptrTDall.eq(2).html(),
+                                    Hearing: undefined,// $tmptrTDall.eq(2).text(),
                                     CaseNo: $tmptrTDall.eq(3).html(),
-                                    CaseType: undefined,//$tmptrTDall.eq(3).html(),
+                                    CaseType: undefined,//$tmptrTDall.eq(3).text(),
                                     PlainTiff: $tmptrTDall.eq(4).html(),
-                                    Defendant: undefined,//$tmptrTDall.eq(4).html(),
-                                    Cause: undefined,//$tmptrTDall.eq(5).html(),
+                                    Defendant: undefined,//$tmptrTDall.eq(4).text(),
+                                    Cause: undefined,//$tmptrTDall.eq(5).text(),
                                     Nature: $tmptrTDall.eq(5).html(),
                                     Representation: $tmptrTDall.eq(6).html(),
                                     Remark: tmpremark + _haxCrtKey[this.tmpdata],
@@ -252,8 +270,13 @@ function j1_PostData_1for_judiciary(url) {
                                     tIndex++;
                                     var tmpItem = {
                                         $id: tIndex,
-                                        Tid: _haxCrtKeyID[this.tmpdata],
-                                        Tindex: tIndex,
+                                        htmlID: 0,
+                                        Tid: 0,
+                                        tLang: 0,
+                                        tkeyNo: _haxCrtKeyID[this.tmpdata],
+                                        tIndex: tIndex,
+                                        tname: _haxCrtKey[this.tmpdata],
+                                        ttype: $PostType1for_judiciary,
                                         SerialNo: tIndex,
                                         CourtID: _tmpCourtID,
                                         Judge: _Judge,
@@ -310,8 +333,13 @@ function j1_PostData_1for_judiciary(url) {
                                 tIndex++;
                                 var tmpItem = {
                                     $id: tIndex,
-                                    Tid: _haxCrtKeyID[this.tmpdata],
-                                    Tindex: tIndex,
+                                    htmlID: 0,
+                                    Tid: 0,
+                                    tLang: 0,
+                                    tkeyNo: _haxCrtKeyID[this.tmpdata],
+                                    tIndex: tIndex,
+                                    tname: _haxCrtKey[this.tmpdata],
+                                    ttype: $PostType1for_judiciary,
                                     SerialNo: tIndex,
                                     CourtID: _tmpCourtID,
                                     Judge: _Judge,
@@ -370,8 +398,13 @@ function j1_PostData_1for_judiciary(url) {
                                 tIndex++;
                                 var tmpItem = {
                                     $id: tIndex,
-                                    Tid: _haxCrtKeyID[this.tmpdata],
-                                    Tindex: tIndex,
+                                    htmlID: 0,
+                                    Tid: 0,
+                                    tLang: 0,
+                                    tkeyNo: _haxCrtKeyID[this.tmpdata],
+                                    tIndex: tIndex,
+                                    tname: _haxCrtKey[this.tmpdata],
+                                    ttype: $PostType1for_judiciary,
                                     SerialNo: tIndex,
                                     CourtID: _tmpCourtID,
                                     Judge: _Judge,
@@ -451,8 +484,13 @@ function j1_PostData_1for_judiciary(url) {
                                         tIndex++;
                                         var tmpItem = {
                                             $id: tIndex,
-                                            Tid: _haxCrtKeyID[this.tmpdata],
-                                            Tindex: tIndex,
+                                            htmlID: 0,
+                                            Tid: 0,
+                                            tLang: 0,
+                                            tkeyNo: _haxCrtKeyID[this.tmpdata],
+                                            tIndex: tIndex,
+                                            tname: _haxCrtKey[this.tmpdata],
+                                            ttype: $PostType1for_judiciary,
                                             SerialNo: tIndex,
                                             CourtID: _tmpCourtID,
                                             Judge: _Judge,
@@ -484,7 +522,7 @@ function j1_PostData_1for_judiciary(url) {
                 //end switch
             }
 
-            //console.log(getWebDatas);
+            console.log(getWebDatas);
 
             $.ajax({
                 type: 'POST',

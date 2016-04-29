@@ -17,20 +17,20 @@ using Common.Logging;
 
 namespace WebGetApi.Controllers
 {
-    [RoutePrefix("api/GWDhklawsoc")]
-    public class gwd_hklawsoc_mainController : ApiController
+    [RoutePrefix("api/GWDhkba")]
+    public class gwd_hkba_mainController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
-        // GET: api/gwd_hklawsoc_main
-        public IQueryable<gwd_hklawsoc_items> Get()
+        // GET: api/gwd_hkba_main
+        public IQueryable<gwd_hkba_main> Get()
         {
-            return db.gwd_hklawsoc_main.Take(10);
+            return db.gwd_hkba_main.Take(10);
         }
 
-        // POST: api/gwd_hklawsoc_main
-        [ResponseType(typeof(gwd_hklawsoc_items))]
-        public async Task<IHttpActionResult> Post(gwd_hklawsoc_items gwd_hklawsoc_main)
+        // POST: api/gwd_hkba_main
+        [ResponseType(typeof(gwd_hkba_main))]
+        public async Task<IHttpActionResult> Post(gwd_hkba_main gwd_hkba_main)
         {
             if (!ModelState.IsValid)
             {
@@ -39,19 +39,19 @@ namespace WebGetApi.Controllers
 
             try
             {
-                gwd_hklawsoc_main.UpdateDate = DateTime.Now;
-                gwd_hklawsoc_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                gwd_hkba_main.UpdateDate = DateTime.Now;
+                gwd_hkba_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
-                var tmpexitAs = gwtMainExistsAsync(gwd_hklawsoc_main.Tid, gwd_hklawsoc_main.TIndex);
+                var tmpexitAs = gwtMainExistsAsync(gwd_hkba_main.Tid, gwd_hkba_main.TIndex);
                 if (tmpexitAs)
                 {
-                    gwd_hklawsoc_main.tStatus = 5;
-                    db.Entry(gwd_hklawsoc_main).State = EntityState.Modified;
+                    gwd_hkba_main.tStatus = 5;
+                    db.Entry(gwd_hkba_main).State = EntityState.Modified;
 
                 }
                 else
                 {
-                    db.gwd_hklawsoc_main.Add(gwd_hklawsoc_main);
+                    db.gwd_hkba_main.Add(gwd_hkba_main);
                 }
 
 
@@ -63,12 +63,12 @@ namespace WebGetApi.Controllers
                 throw;
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = gwd_hklawsoc_main.Tid }, gwd_hklawsoc_main);
+            return CreatedAtRoute("DefaultApi", new { id = gwd_hkba_main.Tid }, gwd_hkba_main);
 
         }
         private bool gwtMainExistsAsync(string id, int index)
         {
-            return db.gwd_hklawsoc_main.Count(e => e.Tid == id && e.TIndex == index) > 0;
+            return db.gwd_hkba_main.Count(e => e.Tid == id && e.TIndex == index) > 0;
         }
     }
 }

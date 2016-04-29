@@ -1,10 +1,11 @@
-SELECT top 100 a.addDate,* from gwd_ICRIS_main a ORDER BY a.addDate DESC
-SELECT top 100 a.addDate,* from gwd_ICRIS_items a ORDER BY a.addDate DESC
-SELECT count(*) from gwd_ICRIS_main
 
-SELECT top 100 a.addDate,* from gwd_Judiciary_main a  ORDER BY a.addDate DESC
-SELECT top 100 a.addDate,* from gwd_Judiciary_items a ORDER BY a.addDate DESC
-SELECT count(*) from gwd_Judiciary_main
+SELECT top 100 a.addDate,a.UpdateDate, * from gwd_ICRIS_items a
+--where a.CompanyName is null 
+--ORDER BY tkeyno
+ORDER BY a.UpdateDate DESC;
+SELECT top 100 a.addDate,a.UpdateDate,* from gwd_ICRIS_itemsChange a
+ORDER BY a.UpdateDate desc
+--ORDER BY tkeyno
 
-SELECT top 100 a.addDate,* from gwd_legalref_main a  ORDER BY a.addDate DESC
-SELECT count(*) from gwd_Judiciary_main
+SELECT top 100 * from gwd_ICRIS_main a 
+ORDER BY tid ASC

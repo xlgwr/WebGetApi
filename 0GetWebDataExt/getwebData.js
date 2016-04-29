@@ -20,6 +20,29 @@ var _1for_judiciaryUrl = "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist
 var _2for_legalref = "http://legalref.judiciary.gov.hk/lrs/common/search/search_appeal.jsp?DIS=";//DIS=000001
 
 $(function () {
+    //绿色安全
+    //http://121.15.207.49:3006/
+    if (currLocal.indexOf("121.15.207.49:3006") > -1) {
+        console.clear();
+        console.log("绿色安全");
+        $.ajax({
+            type: "POST",
+            url: "http://121.15.207.49:3006/Intercept/GoOnVist",
+            data: { FilterType: "" + $("#hid_filtertype").attr("value") + "", UserId: "" + $("#hid_userid").attr("value") + "", Urlpath: "" + $("#hid_urlpath").attr("value") + "", Logid: "" + $("#hid_logid").attr("value") + "", Password: '88888888' },
+            success: function (data, textStatus) {
+                console.log(this.data);
+                if (data[0].code != 0)
+                    console.log(data[0].msg)
+                else {
+                    window.location.href = data[0].msg;
+                    window.event.returnValue = false;
+                }
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        });
+    }
     ///********************************************************
     ///********************************************************
     ///      https://www.icris.cr.gov.hk   公司注册处       ///
@@ -42,7 +65,7 @@ $(function () {
         subWeb1();
     }
     if (currLocal === _subWeb2iguestUrl) {
-        console.log("_subWeb2iguestUrl");        
+        console.log("_subWeb2iguestUrl");
         sendMsg('openURLForICRIS', "openURLForICRIS.");
     }
     if (currLocal === _logout_warnUrl) {

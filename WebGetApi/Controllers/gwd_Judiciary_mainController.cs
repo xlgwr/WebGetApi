@@ -31,7 +31,7 @@ namespace WebGetApi.Controllers
 
         // GET: api/gwd_Judiciary_main/5
         [ResponseType(typeof(gwd_Judiciary_main))]
-        public async Task<IHttpActionResult> Getgwd_Judiciary_main(string id)
+        public async Task<IHttpActionResult> Getgwd_Judiciary_main(long id)
         {
             gwd_Judiciary_main gwd_Judiciary_main = await db.gwd_Judiciary_main.FindAsync(id);
             if (gwd_Judiciary_main == null)
@@ -43,7 +43,7 @@ namespace WebGetApi.Controllers
         }
         // PUT: api/gwd_Judiciary_main/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putgwd_Judiciary_main(string id, gwd_Judiciary_main gwd_Judiciary_main)
+        public async Task<IHttpActionResult> Putgwd_Judiciary_main(long id, gwd_Judiciary_main gwd_Judiciary_main)
         {
             if (!ModelState.IsValid)
             {
@@ -95,37 +95,81 @@ namespace WebGetApi.Controllers
                 {
                     foreach (var item in gwd_Judiciary_main.gwd_Judiciary_items)
                     {
-                        item.Tid = gwd_Judiciary_main.Tid;
+                        item.htmlID = gwd_Judiciary_main.Tid;
+                        item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         item.UpdateDate = DateTime.Now;
                     }
 
-                }
-                var tmpexitAs = await gwd_Judiciary_mainExistsAsync(gwd_Judiciary_main.Tid);
-                if (tmpexitAs)
-                {
-                    db.Entry(gwd_Judiciary_main).State = EntityState.Modified;
-                    foreach (var item in gwd_Judiciary_main.gwd_Judiciary_items)
+                    if (gwd_Judiciary_main.gwd_Judiciary_items.Count > 0)
                     {
-                        if (!string.IsNullOrEmpty(item.CourtID))
+                        var tmpfirst = gwd_Judiciary_main.gwd_Judiciary_items.First();
+
+                        var tmpExitItem = gwd_Judiciary_itemExists(tmpfirst.tkeyNo, tmpfirst.tLang, tmpfirst.tIndex);
+                        if (tmpExitItem)
                         {
-                            if (gwd_Judiciary_itemExists(item.Tid,item.Tindex))
+                            long tmpHtmlId = 0;
+                            foreach (var item in gwd_Judiciary_main.gwd_Judiciary_items)
                             {
-                                db.Entry(item).State = EntityState.Modified;
+                                if (!string.IsNullOrEmpty(item.CourtID))
+                                {
+                                    var getItem = gwd_Judiciary_itemByNo(item.tkeyNo, item.tLang, item.tIndex);
+                                    if (getItem != null)
+                                    {
+                                        tmpHtmlId = getItem.htmlID;
+
+                                        getItem.CaseNo = item.CaseNo;
+                                        getItem.CaseType = item.CaseType;
+                                        getItem.Cause = item.Cause;
+                                        getItem.ClientIP = item.ClientIP;
+                                        getItem.CourtDay = item.CourtDay;
+                                        getItem.CourtID = item.CourtID;
+                                        getItem.CYear = item.CYear;
+                                        getItem.Defendant = item.Defendant;
+                                        getItem.Hearing = item.Hearing;
+                                        getItem.Judge = item.Judge;
+                                        getItem.Nature = item.Nature;
+                                        getItem.PlainTiff = item.PlainTiff;
+                                        getItem.Remark = item.Remark;
+                                        getItem.Representation = item.Representation;
+                                        getItem.SerialNo = item.SerialNo;
+                                        getItem.tname = item.tname;
+                                        getItem.tStatus = item.tStatus;
+                                        getItem.ttype = item.ttype;
+                                        getItem.UpdateDate = DateTime.Now;
+                                    }
+
+                                }
                             }
-                            else
+                            //change main
+                            if (tmpHtmlId > 0)
                             {
-                                db.gwd_Judiciary_items.Add(item);
+                                var getMain = gwd_Judiciary_mainByID(tmpHtmlId);
+
+                                if (getMain != null)
+                                {
+
+                                    getMain.thtml = gwd_Judiciary_main.thtml;
+                                    getMain.tLang = gwd_Judiciary_main.tLang;
+                                    getMain.ClientIP = gwd_Judiciary_main.ClientIP;
+                                    getMain.Remark = gwd_Judiciary_main.Remark;
+                                    getMain.tname = gwd_Judiciary_main.tname;
+                                    getMain.tStatus = gwd_Judiciary_main.tStatus;
+                                    getMain.ttype = gwd_Judiciary_main.ttype;
+                                    getMain.UpdateDate = DateTime.Now;
+                                }
                             }
-                            
                         }
+                        else
+                        {
+                            db.gwd_Judiciary_main.Add(gwd_Judiciary_main);
+                        }
+
+
+
                     }
+                    //end if count
 
                 }
-                else
-                {
-                    db.gwd_Judiciary_main.Add(gwd_Judiciary_main);
-                }
-
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateException)
@@ -140,16 +184,17 @@ namespace WebGetApi.Controllers
         [ResponseType(typeof(gwd_Judiciary_main))]
         public async Task<IHttpActionResult> Deletegwd_Judiciary_main(string id)
         {
-            gwd_Judiciary_main gwd_Judiciary_main = await db.gwd_Judiciary_main.FindAsync(id);
-            if (gwd_Judiciary_main == null)
-            {
-                return NotFound();
-            }
+            //gwd_Judiciary_main gwd_Judiciary_main = await db.gwd_Judiciary_main.FindAsync(id);
+            //if (gwd_Judiciary_main == null)
+            //{
+            //    return NotFound();
+            //}
 
-            db.gwd_Judiciary_main.Remove(gwd_Judiciary_main);
-            await db.SaveChangesAsync();
+            //db.gwd_Judiciary_main.Remove(gwd_Judiciary_main);
+            //await db.SaveChangesAsync();
 
-            return Ok(gwd_Judiciary_main);
+            //return Ok(gwd_Judiciary_main);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
@@ -161,15 +206,26 @@ namespace WebGetApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool gwd_Judiciary_mainExists(string id)
+        private bool gwd_Judiciary_mainExists(long id)
         {
             return db.gwd_Judiciary_main.Count(e => e.Tid == id) > 0;
         }
-        private bool gwd_Judiciary_itemExists(string id, int tindex)
+        private gwd_Judiciary_main gwd_Judiciary_mainByID(long id)
         {
-            return db.gwd_Judiciary_items.Count(e => e.Tid == id && e.Tindex == tindex) > 0;
+            return db.gwd_Judiciary_main.Where(e => e.Tid == id).FirstOrDefault();
         }
-        private async Task<bool> gwd_Judiciary_mainExistsAsync(string id)
+
+
+        private bool gwd_Judiciary_itemExists(string id, long lang, long tindex)
+        {
+            return db.gwd_Judiciary_items.Count(e => e.tkeyNo == id && e.tLang == lang && e.tIndex == tindex) > 0;
+        }
+        private gwd_Judiciary_items gwd_Judiciary_itemByNo(string id, long lang, long tindex)
+        {
+            return db.gwd_Judiciary_items.Where(e => e.tkeyNo == id && e.tLang == lang && e.tIndex == tindex).FirstOrDefault();
+        }
+
+        private async Task<bool> gwd_Judiciary_mainExistsAsync(long id)
         {
             return await db.gwd_Judiciary_main.CountAsync(e => e.Tid == id) > 0;
         }

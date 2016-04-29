@@ -52,16 +52,16 @@ namespace WebGetApi.Controllers
             try
             {
                 logger.Info(id);
-
-                m_parameter m_parameterCurr = await db.m_parameter.FindAsync("ICRISCurrMax");
+                var tmpkey = "ICRISCurrMax" + id;
+                m_parameter m_parameterCurr = await db.m_parameter.FindAsync(tmpkey);
 
                 if (m_parameterCurr == null)
                 {
                     m_parameterCurr = new m_parameter();
-                    m_parameterCurr.paramkey = "ICRISCurrMax";
+                    m_parameterCurr.paramkey = tmpkey;
                     m_parameterCurr.paramvalue = "1";
                     m_parameterCurr.paramtype = "0ICRIS";
-                    m_parameterCurr.Remark = "公司注册处，当前取得最大ID";
+                    m_parameterCurr.Remark = "公司注册处，当前取得最大ID,0:英文,1:繁体,2:简体.0:US,en,1:HK,zh,2:CN,zh";
                     m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
                     m_parameterCurr.tStatus = 0;
                     m_parameterCurr.UpdateDate = DateTime.Now;
@@ -87,7 +87,7 @@ namespace WebGetApi.Controllers
 
         // PUT: api/gwd_ICRIS_main/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putgwd_ICRIS_main(string id, gwd_ICRIS_main gwd_ICRIS_main)
+        public async Task<IHttpActionResult> Putgwd_ICRIS_main(long id, gwd_ICRIS_main gwd_ICRIS_main)
         {
             if (!ModelState.IsValid)
             {
@@ -171,7 +171,8 @@ namespace WebGetApi.Controllers
 
             try
             {
-                m_parameter m_parameterCurr = await db.m_parameter.FindAsync("ICRISCurrMax");
+                var tmpkeyParam = "ICRISCurrMax" + gwd_ICRIS_main.tLang;
+                m_parameter m_parameterCurr = await db.m_parameter.FindAsync(tmpkeyParam);
 
                 if (m_parameterCurr != null)
                 {
@@ -183,32 +184,127 @@ namespace WebGetApi.Controllers
 
                 if (gwd_ICRIS_main.gwd_ICRIS_items != null)
                 {
-                    gwd_ICRIS_main.gwd_ICRIS_items.Tid = gwd_ICRIS_main.Tid;
-                    gwd_ICRIS_main.gwd_ICRIS_items.UpdateDate = DateTime.Now;
-                }
 
-                if (gwd_ICRIS_mainExists(gwd_ICRIS_main.Tid))
-                {
-                    db.Entry(gwd_ICRIS_main).State = EntityState.Modified;
-                    if (!string.IsNullOrEmpty(gwd_ICRIS_main.gwd_ICRIS_items.tcomp))
+                    foreach (var item in gwd_ICRIS_main.gwd_ICRIS_items)
                     {
-                        db.Entry(gwd_ICRIS_main.gwd_ICRIS_items).State = EntityState.Modified;
+                        item.htmlID = gwd_ICRIS_main.Tid;
+                        item.UpdateDate = DateTime.Now;
+                        item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                     }
-                }
-                else
-                {
-                    db.gwd_ICRIS_main.Add(gwd_ICRIS_main);
-                }
-                if (m_parameterCurr != null)
-                {
-                    long tmpGetSave = 1;
-                    long.TryParse(gwd_ICRIS_main.Tid, out tmpGetSave);
-                    if (tmpGetSave > getMaxSetCurrValue)
+                    foreach (var item in gwd_ICRIS_main.gwd_ICRIS_itemsChange)
                     {
-                        m_parameterCurr.paramvalue = tmpGetSave.ToString();
-                        m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
-                        m_parameterCurr.UpdateDate = DateTime.Now;
+                        item.htmlID = gwd_ICRIS_main.Tid;
+                        item.UpdateDate = DateTime.Now;
+                        item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                     }
+
+                    if (gwd_ICRIS_main.gwd_ICRIS_items.Count > 0)
+                    {
+                        var tmpfirst = gwd_ICRIS_main.gwd_ICRIS_items.First();
+                        var tmpexit = gwd_ICRIS_itemsExists(tmpfirst.tkeyNo, tmpfirst.tLang);
+                        if (tmpexit)
+                        {
+                            foreach (var item in gwd_ICRIS_main.gwd_ICRIS_items)
+                            {
+                                if (!string.IsNullOrEmpty(item.CompanyName) || !string.IsNullOrEmpty(item.CompanyNameZH))
+                                {
+                                    var getItem = gwd_ICRIS_itemsExistsByTkeyNo(item.tkeyNo, item.tLang);
+                                    if (getItem != null)
+                                    {
+                                        //item.Tid = getItem.Tid;
+                                        //item.htmlID = getItem.htmlID;
+                                        //item.tkeyNo = getItem.tkeyNo;
+                                        //item.tLang = getItem.tLang;
+                                        //item.tIndex = getItem.tIndex;                                        
+
+                                        //change item
+                                        getItem.ChargeState = item.ChargeState;
+                                        getItem.CompanyName = item.CompanyName;
+                                        getItem.CompanyNameZH = item.CompanyNameZH;
+                                        getItem.ClientIP = item.ClientIP;
+                                        getItem.CompanyType = item.CompanyType;
+                                        getItem.CurrentState = item.CurrentState;
+                                        getItem.DisbandDate = item.DisbandDate;
+                                        getItem.FoundDate = item.FoundDate;
+                                        getItem.Important = item.Important;
+                                        getItem.LiquidationMode = item.LiquidationMode;
+                                        getItem.Remark = item.Remark;
+                                        getItem.tIndex = item.tIndex;
+                                        getItem.tname = item.tname;
+                                        getItem.tRemarkNow = item.tRemarkNow;
+                                        getItem.tSearchRes = item.tSearchRes;
+                                        getItem.tStatus = item.tStatus;
+                                        getItem.ttype = item.ttype;
+                                        getItem.UpdateDate = DateTime.Now;
+
+                                        //change main
+                                        var getMain = gwd_ICRIS_mainById(getItem.htmlID);
+                                        if (getMain != null)
+                                        {
+                                            getMain.thtml = gwd_ICRIS_main.thtml;
+                                            getMain.tLang = gwd_ICRIS_main.tLang;
+                                            getMain.ClientIP = gwd_ICRIS_main.ClientIP;
+                                            getMain.Remark = gwd_ICRIS_main.Remark;
+                                            getMain.tname = gwd_ICRIS_main.tname;
+                                            getMain.tStatus = gwd_ICRIS_main.tStatus;
+                                            getMain.ttype = gwd_ICRIS_main.ttype;
+                                            getMain.UpdateDate = DateTime.Now;
+
+                                        }
+                                    }
+                                    //end fi
+                                }
+                            }
+
+                            //for change
+                            foreach (var item in gwd_ICRIS_main.gwd_ICRIS_itemsChange)
+                            {
+                                if (!string.IsNullOrEmpty(item.CompanyName) || !string.IsNullOrEmpty(item.CompanyNameZH))
+                                {
+                                    var getItemChange = gwd_ICRIS_itemsChangeExistsByTkeyNo(item.tkeyNo, item.tLang, item.tIndex);
+                                    if (getItemChange != null)
+                                    {
+                                        //item.Tid = getItem.Tid;
+                                        //item.htmlID = getItem.htmlID;
+                                        //item.tkeyNo = getItem.tkeyNo;
+                                        //item.tLang = getItem.tLang;
+                                        //item.tIndex = getItem.tIndex;    
+                                        getItemChange.ClientIP = item.ClientIP;
+                                        getItemChange.CompanyName = item.CompanyName;
+                                        getItemChange.CompanyNameZH = item.CompanyNameZH;
+                                        getItemChange.EffectiveDate = item.EffectiveDate;
+                                        getItemChange.Remark = item.Remark;
+                                        getItemChange.tname = item.tname;
+                                        getItemChange.ttype = item.ttype;
+                                        getItemChange.tStatus = item.tStatus;
+                                        getItemChange.UpdateDate = DateTime.Now;
+                                    }
+                                }
+                            }
+                            /////////////////////////////////////end
+
+                        }
+                        else
+                        {
+                            db.gwd_ICRIS_main.Add(gwd_ICRIS_main);
+                        }
+
+                        if (m_parameterCurr != null)
+                        {
+
+                            long tmpGetSave = 1;
+                            long.TryParse(gwd_ICRIS_main.gwd_ICRIS_items.First().tkeyNo, out tmpGetSave);
+
+                            if (tmpGetSave > getMaxSetCurrValue)
+                            {
+                                m_parameterCurr.paramvalue = tmpGetSave.ToString();
+                                m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                                m_parameterCurr.UpdateDate = DateTime.Now;
+                            }
+
+                        }
+                    }
+
                 }
 
                 await db.SaveChangesAsync();
@@ -225,16 +321,17 @@ namespace WebGetApi.Controllers
         [ResponseType(typeof(gwd_ICRIS_main))]
         public async Task<IHttpActionResult> Deletegwd_ICRIS_main(string id)
         {
-            gwd_ICRIS_main gwd_ICRIS_main = await db.gwd_ICRIS_main.FindAsync(id);
-            if (gwd_ICRIS_main == null)
-            {
-                return NotFound();
-            }
+            //gwd_ICRIS_main gwd_ICRIS_main = await db.gwd_ICRIS_main.FindAsync(id);
+            //if (gwd_ICRIS_main == null)
+            //{
+            //    return NotFound();
+            //}
 
-            db.gwd_ICRIS_main.Remove(gwd_ICRIS_main);
-            await db.SaveChangesAsync();
+            //db.gwd_ICRIS_main.Remove(gwd_ICRIS_main);
+            //await db.SaveChangesAsync();
+            //gwd_ICRIS_main
 
-            return Ok(gwd_ICRIS_main);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
@@ -246,10 +343,31 @@ namespace WebGetApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool gwd_ICRIS_mainExists(string id)
+        private bool gwd_ICRIS_mainExists(long id)
         {
             return db.gwd_ICRIS_main.Count(e => e.Tid == id) > 0;
         }
+        private gwd_ICRIS_main gwd_ICRIS_mainById(long id)
+        {
+            return db.gwd_ICRIS_main.Where(e => e.Tid == id).FirstOrDefault();
+        }
+
+        private bool gwd_ICRIS_itemsExists(string id, long lang)
+        {
+            var item = db.gwd_ICRIS_items.Count(e => e.tkeyNo == id && e.tLang == lang) > 0;
+            return item;
+        }
+        private gwd_ICRIS_items gwd_ICRIS_itemsExistsByTkeyNo(string id, long lang)
+        {
+            var item = db.gwd_ICRIS_items.Where(e => e.tkeyNo == id && e.tLang == lang).FirstOrDefault();
+            return item;
+        }
+        private gwd_ICRIS_itemsChange gwd_ICRIS_itemsChangeExistsByTkeyNo(string id, long lang, long index)
+        {
+            var item = db.gwd_ICRIS_itemsChange.Where(e => e.tkeyNo == id && e.tLang == lang && e.tIndex == index).FirstOrDefault();
+            return item;
+        }
+
         private bool gwd_ICRIS_DisOrdersExists(string id)
         {
 

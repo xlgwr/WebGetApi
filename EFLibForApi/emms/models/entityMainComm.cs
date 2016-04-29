@@ -11,26 +11,17 @@ using Newtonsoft.Json;
 
 namespace EFLibForApi.emms.models
 {
-    public abstract class entityGetWebDatas : entity
+    public abstract class entityMainComm : entityTID
     {
-        [Key]
-        [Column(Order = 0)]
-        public string Tid { get; set; }
+        public long tLang { get; set; }
 
-        [StringLength(50)]
+        [StringLength(200)]
         public string tname { get; set; }
 
 
-        [StringLength(50)]
+        [StringLength(200)]
         public string ttype { get; set; }
 
-
-        [StringLength(100)]
-        public string tcontent { get; set; }
-
-
-        [Column(TypeName = "text")]
-        public string tGetTable { get; set; }
 
         [Column(TypeName = "text")]
         public string thtml { get; set; }

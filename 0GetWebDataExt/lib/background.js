@@ -57,7 +57,7 @@ chrome.runtime.onMessage.addListener(
         //openURLForICRIS
         if (request.greeting == "openURLForICRIS") {
             removeTabUrl(tmpid, request.msg);
-            openURLForICRIS("icrisCRNo");
+            openURLForICRIS(configGetUrl.url_icris_home_lang.flag);
         }
         ///Post OK
         if (request.greeting == "jsonDate") {
@@ -252,7 +252,7 @@ function GetWebDatasMaxTDisToOpen() {
 ////////////////////////////////////////////////////////////////////////////
 //公司注册处
 function fun0icris() {
-    chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + $ttype });
+    chrome.tabs.create({ url: config.urlApi_GetWebDatasMaxName + configGetUrl.url_icris_home_lang.flag });
     chrome.tabs.create({ url: "https://www.icris.cr.gov.hk/csci/" });
     var s4icris = window.setInterval(openURL, $runTnter);
 }
@@ -281,15 +281,15 @@ function fun1TDis() {
 
 //must be jquery
 $(function () {
-    
+
     // //公司注册处
-    // fun0icris();
+    fun0icris();
     // ////////////////////////////1111111111111111111111111111111    
     // //法庭数据
-    // fun1sjudiciary();
+    fun1sjudiciary();
     // /////////////////////////////3333333333333333333333333333333333333
     // //上诉记录
-    // fun1TDis();
+     fun1TDis();
     // ////////////////////////////2222222222222222222222222222222222 
     // //公共网页  
     // /////////////////////////////3333333333333333333333333333333333333

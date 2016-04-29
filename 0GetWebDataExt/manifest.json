@@ -2,6 +2,7 @@
     "content_scripts": [
         {
             "matches": [
+                "http://121.15.207.49:3006/*",
                 "http://www.icris.cr.gov.hk/*",
                 "https://www.icris.cr.gov.hk/*",
                 "http://*.judiciary.gov.hk/*",

@@ -12,61 +12,53 @@ using Newtonsoft.Json;
 namespace EFLibForApi.emms.models
 {
     [Table("gwd_ICRIS_main")]
-    public class gwd_ICRIS_main : entityGetWebDatas
+    public class gwd_ICRIS_main : entityMain
     {
         public gwd_ICRIS_main()
         {
-            this.gwd_ICRIS_items = new gwd_ICRIS_items();
+            this.gwd_ICRIS_items = new List<gwd_ICRIS_items>();
+            this.gwd_ICRIS_itemsChange = new List<gwd_ICRIS_itemsChange>();
         }
-        public gwd_ICRIS_items gwd_ICRIS_items { get; set; }
+        public ICollection<gwd_ICRIS_items> gwd_ICRIS_items { get; set; }
+        public ICollection<gwd_ICRIS_itemsChange> gwd_ICRIS_itemsChange { get; set; }
     }
 
 
     [Table("gwd_ICRIS_items")]
-    public class gwd_ICRIS_items : entity
+    public class gwd_ICRIS_items : entityItems
     {
-        [Key]
-        public string Tid { get; set; }
-        /// <summary>
-        /// 公司编号
-        /// </summary>
+        [Index]
+        [ForeignKey("gwd_ICRIS_main")]
+        public long htmlID { get; set; }
 
         /// <summary>
-        /// 公司名称
+        /// 公司名称 英文
         /// </summary>
         // [StringLength(200)]
-        public string tcomp { get; set; }
+        public string CompanyName { get; set; }
+        /// <summary>
+        /// 公司名称 中文
+        /// </summary>
+        public string CompanyNameZH { get; set; }
 
 
         /// <summary>
         /// 公司类别
         /// </summary>
         // [StringLength(100)]
-        public string tclass { get; set; }
+        public string CompanyType { get; set; }
 
         /// <summary>
         /// 成立日期
         /// </summary>
         // [StringLength(100)]
-        public string tStartDate { get; set; }
-
-        /// <summary>
-        /// 名称生效日期
-        /// </summary>
-        // [StringLength(100)]
-        public string tCompStartDate { get; set; }
-
-        /// <summary>
-        /// 使用名称
-        /// </summary>
-        // [StringLength(200)]
-        public string tCompStart { get; set; }
+        public string FoundDate { get; set; }
 
         /// <summary>
         /// 公司现况
         /// </summary>
         // [StringLength(100)]
-        public string tNows { get; set; }
+        public string CurrentState { get; set; }
 
         /// <summary>
         /// 备注
@@ -79,26 +71,26 @@ namespace EFLibForApi.emms.models
         /// 清盘模式
         /// </summary>
         // [StringLength(100)]
-        public string tModel { get; set; }
+        public string LiquidationMode { get; set; }
 
         /// <summary>
         /// 已告解散日期
         /// </summary>
         // [StringLength(100)]
-        public string tCloseDate { get; set; }
+        public string DisbandDate { get; set; }
 
         /// <summary>
         /// 押记登记册
         /// </summary>
         // [StringLength(50)]
-        public string tSaveBook { get; set; }
+        public string ChargeState { get; set; }
 
 
         /// <summary>
         /// 重要事项
         /// </summary>
         // [StringLength(100)]
-        public string tImEvens { get; set; }
+        public string Important { get; set; }
 
         /// <summary>
         /// 董事资料 可供查阅
@@ -112,6 +104,31 @@ namespace EFLibForApi.emms.models
     }
 
 
+    [Table("gwd_ICRIS_itemsChange")]
+    public class gwd_ICRIS_itemsChange : entityItems
+    {
+        [Index]
+        [ForeignKey("gwd_ICRIS_main")]
+        public long htmlID { get; set; }
+
+        /// <summary>
+        /// 公司名称 英文
+        /// </summary>
+        // [StringLength(200)]
+        public string CompanyName { get; set; }
+        /// <summary>
+        /// 公司名称 中文
+        /// </summary>
+        public string CompanyNameZH { get; set; }
+        /// <summary>
+        /// 名称生效日期
+        /// </summary>
+        public string EffectiveDate { get; set; }
+
+        [JsonIgnore]
+        public gwd_ICRIS_main gwd_ICRIS_main { get; set; }
+
+    }
     [Table("gwd_ICRIS_DisOrders")]
     public class gwd_ICRIS_DisOrders : entity
     {
@@ -149,5 +166,8 @@ namespace EFLibForApi.emms.models
         /// 相同项目编号
         /// </summary>
         public string SameNo { get; set; }
+
+        [Column(TypeName = "text")]
+        public string thtml { get; set; }
     }
 }

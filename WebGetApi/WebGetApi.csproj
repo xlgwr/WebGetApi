@@ -214,11 +214,18 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\gwd_hklawsoc_mainController.cs" />
-    <Compile Include="Controllers\gwd_ICRIS_mainController.cs" />
-    <Compile Include="Controllers\gwd_Judiciary_mainController.cs" />
-    <Compile Include="Controllers\gwd_legalref_mainController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\gwd_ICRIS_mainController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\gwd_Judiciary_mainController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\gwd_legalref_mainController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\HomeController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\m_parameterController.cs" />
     <Compile Include="Filters\MvcHandleErrorAttribute.cs" />
     <Compile Include="Filters\WebApiExceptionFilter.cs" />

@@ -51,16 +51,27 @@ namespace WebGetApi.Controllers
         [Route("GetWebDatasMaxTDis")]
         public async Task<IHttpActionResult> GetWebDatasDBMaxAsync()
         {
-            //最大获取id
-            var dbMax = await db.gwd_legalref_main.MaxAsync(m => m.TGetDis);
-            if (dbMax < 10)
+            long dbMax = 1;
+            try
             {
+                //最大获取id
+                dbMax = await db.gwd_legalref_main.MaxAsync(m => m.TGetDis);
+
+                if (dbMax < 10)
+                {
+                    dbMax = 1;
+                }
+                else
+                {
+                    dbMax -= 10;
+                }
+            }
+            catch (Exception)
+            {
+
                 dbMax = 1;
             }
-            else
-            {
-                dbMax -= 10;
-            }
+
             return Ok(dbMax);
             //////////////
         }
@@ -143,7 +154,7 @@ namespace WebGetApi.Controllers
                     long.TryParse(m_parameterCurr.paramvalue, out tmpCurrMax);
                 }
 
-                var tmpexitAs = gwtMainExistsAsync(gwd_legalref_main.Tid, gwd_legalref_main.Tdate, gwd_legalref_main.TDis, gwd_legalref_main.TIndex);
+                var tmpexitAs = gwtMainExistsAsync(gwd_legalref_main.caseNo, gwd_legalref_main.tLang, gwd_legalref_main.Tdate, gwd_legalref_main.TDis, gwd_legalref_main.TIndex);
                 if (tmpexitAs)
                 {
                     db.Entry(gwd_legalref_main).State = EntityState.Modified;
@@ -184,9 +195,9 @@ namespace WebGetApi.Controllers
         public void Delete(int id)
         {
         }
-        private bool gwtMainExistsAsync(string id, string tdate, long tdis, int index)
+        private bool gwtMainExistsAsync(string caseNo, long tlang, string tdate, long tdis, int index)
         {
-            return db.gwd_legalref_main.Count(e => e.Tid == id && e.Tdate == tdate && e.TDis == tdis && e.TIndex == index) > 0;
+            return db.gwd_legalref_main.Count(e => e.tLang == tlang && e.caseNo == caseNo && e.Tdate == tdate && e.TDis == tdis && e.TIndex == index) > 0;
         }
     }
 }

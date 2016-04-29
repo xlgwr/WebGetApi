@@ -11,13 +11,23 @@ using Newtonsoft.Json;
 
 namespace EFLibForApi.emms.models
 {
-
     [Table("gwd_hklawsoc_main")]
-    public class gwd_hklawsoc_main : entityGetWebDatas
+    public class gwd_hklawsoc_main : entityMainComm
     {
-        [Key]
-        [Column(Order = 1)]
-        public int TIndex { get; set; }
+        public gwd_hklawsoc_main()
+        {
+            this.gwd_hklawsoc_items = new List<gwd_hklawsoc_items>();
+        }
+        public ICollection<gwd_hklawsoc_items> gwd_hklawsoc_items { get; set; }
+    }
+
+
+    [Table("gwd_hklawsoc_items")]
+    public class gwd_hklawsoc_items : entityItems
+    {
+        [Index]
+        [ForeignKey("gwd_hklawsoc_main")]
+        public long htmlID { get; set; }
 
         /// <summary>
         /// 姓名（英文）
@@ -96,6 +106,9 @@ namespace EFLibForApi.emms.models
         /// 律师行邮箱
         /// </summary>
         public string CompanyEmail { get; set; }
+
+        [JsonIgnore]
+        public gwd_hklawsoc_main gwd_hklawsoc_main { get; set; }
     }
 
 }

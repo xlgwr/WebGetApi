@@ -31,6 +31,7 @@
 
         public virtual DbSet<gwd_ICRIS_main> gwd_ICRIS_main { get; set; }
         public virtual DbSet<gwd_ICRIS_items> gwd_ICRIS_items { get; set; }
+        public virtual DbSet<gwd_ICRIS_itemsChange> gwd_ICRIS_itemsChange { get; set; }
         public virtual DbSet<gwd_ICRIS_DisOrders> gwd_ICRIS_DisOrders { get; set; }
 
         public virtual DbSet<gwd_Judiciary_main> gwd_Judiciary_main { get; set; }
@@ -38,120 +39,64 @@
 
 
         public virtual DbSet<gwd_legalref_main> gwd_legalref_main { get; set; }
+
         public virtual DbSet<gwd_hklawsoc_main> gwd_hklawsoc_main { get; set; }
+        public virtual DbSet<gwd_hklawsoc_items> gwd_hklawsoc_items { get; set; }
+
+        public virtual DbSet<gwd_hkba_main> gwd_hkba_main { get; set; }
+        public virtual DbSet<gwd_hkba_items> gwd_hkba_items { get; set; }
+
+        public virtual DbSet<gwd_directory_main> gwd_directory_main { get; set; }
+        public virtual DbSet<gwd_directory_items> gwd_directory_items { get; set; }
 
         public virtual DbSet<m_parameter> m_parameter { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<gwd_ICRIS_main>()
+            modelBuilder.Entity<entityMainComm>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
-            modelBuilder.Entity<gwd_ICRIS_main>()
-               .Property(e => e.tcontent)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_ICRIS_main>()
-               .Property(e => e.tGetTable)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_ICRIS_main>()
-               .Property(e => e.thtml)
-               .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_Judiciary_main>()
-              .Property(e => e.Remark)
-              .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_main>()
-               .Property(e => e.tcontent)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_main>()
-               .Property(e => e.tGetTable)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_main>()
-               .Property(e => e.thtml)
-               .IsUnicode(false);
-
-            modelBuilder.Entity<gwd_legalref_main>()
-              .Property(e => e.Remark)
-              .IsUnicode(false);
-            modelBuilder.Entity<gwd_legalref_main>()
-               .Property(e => e.tcontent)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_legalref_main>()
-               .Property(e => e.tGetTable)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_legalref_main>()
-               .Property(e => e.thtml)
-               .IsUnicode(false);
-
-            modelBuilder.Entity<gwd_ICRIS_items>()
-            .Property(e => e.tcomp)
+            modelBuilder.Entity<gwd_ICRIS_main>()
+            .Property(e => e.Remark)
             .IsUnicode(false);
             modelBuilder.Entity<gwd_ICRIS_items>()
-               .Property(e => e.tclass)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_ICRIS_items>()
-               .Property(e => e.tCompStart)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_ICRIS_items>()
-               .Property(e => e.tImEvens)
-               .IsUnicode(false);
+            .Property(e => e.Remark)
+            .IsUnicode(false);
+            modelBuilder.Entity<gwd_ICRIS_itemsChange>()
+            .Property(e => e.Remark)
+            .IsUnicode(false);
+            modelBuilder.Entity<gwd_ICRIS_DisOrders>()
+            .Property(e => e.Remark)
+            .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.CaseNo)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.CourtID)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.Judge)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.CourtDay)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.Hearing)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.CaseNo)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.CaseType)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.PlainTiff)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.Defendant)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.Nature)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
-               .Property(e => e.Representation)
-               .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_hklawsoc_main>()
+            modelBuilder.Entity<gwd_Judiciary_main>()
+            .Property(e => e.Remark)
+            .IsUnicode(false);
+            modelBuilder.Entity<gwd_Judiciary_items>()
+              .Property(e => e.Remark)
+              .IsUnicode(false);
+
+            modelBuilder.Entity<gwd_legalref_main>()
+            .Property(e => e.Remark)
+            .IsUnicode(false);
+
+            modelBuilder.Entity<gwd_hklawsoc_items>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
-            modelBuilder.Entity<gwd_hklawsoc_main>()
-               .Property(e => e.tcontent)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_hklawsoc_main>()
-               .Property(e => e.tGetTable)
-               .IsUnicode(false);
-            modelBuilder.Entity<gwd_hklawsoc_main>()
-               .Property(e => e.thtml)
-               .IsUnicode(false);
 
+            modelBuilder.Entity<gwd_hkba_items>()
+                .Property(e => e.Remark)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gwd_directory_items>()
+                .Property(e => e.Remark)
+                .IsUnicode(false);
 
             //modelBuilder.Entity<gwd_Judiciary_main>()
             //  .HasRequired(t => t.gwd_Judiciary_items)
             //    .WithRequiredPrincipal(t => t.gwd_Judiciary_main);
-
-
-            modelBuilder.Entity<gwd_ICRIS_main>()
-              .HasRequired(t => t.gwd_ICRIS_items)
-                .WithRequiredPrincipal(t => t.gwd_ICRIS_main);
 
         }
         public static emmsApiDbContext Create()

@@ -1,5 +1,4 @@
 
-var $urlHome = "https://www.icris.cr.gov.hk/csci/";
 var $getHtml = "";
 var $countCurr = 0;
 //每10秒提交数 5
@@ -27,9 +26,12 @@ function loginIguest() {
 //******************subWeb1************************//
 // "https://www.icris.cr.gov.hk/csci/login_i.jsp"
 function subWeb1() {
-    //this.location.href = this.location.href;
-    var $submit = $("input[value=\'接受并登入\']");
+    //this.location.href = this.location.href;  
+    var $submit = $("input:submit");
+    console.log($submit);
     if ($submit) {
+        SetCookie('web.country', configGetUrl.url_icris_home_lang.country, 1, '/csci')
+        SetCookie('web.language', configGetUrl.url_icris_home_lang.language, 1, '/csci')
         //console.log($submit);
         $submit.click();
         //window.open ('https://www.icris.cr.gov.hk/csci/cps_criteria.jsp') 
@@ -44,7 +46,7 @@ function subWeb1() {
 
 function subWeb2_logout_warn() {
     console.log(currLocal + ",20 min is over.");
-    window.open('https://www.icris.cr.gov.hk/csci');
+    window.open(configGetUrl.url_icris_home);
 }
 
 function subWeb2_CBDS_Search(getURLApi, icrisCRNo) {
@@ -74,12 +76,12 @@ function PostData() {
     if (GetQueryString("CRNo")) {
         $countCurr = parseInt(GetQueryString("CRNo"), 10)
     }
-    
+
     runeven50()
-    openURLForGetDisOrderICRIS() 
-    
-    var s1 = window.setInterval(runeven50, (10 * 1000));
-    var s1_dis = window.setInterval(openURLForGetDisOrderICRIS, (3 * 60 * 1000));
+    openURLForGetDisOrderICRIS()
+
+    var s1_icris = window.setInterval(runeven50, (10 * 1000));
+    var s1_icris_dis = window.setInterval(openURLForGetDisOrderICRIS, (3 * 60 * 1000));
 
     function runeven50() {
         closeTabs("www.icris.cr.gov.hk");
@@ -93,10 +95,10 @@ function PostData() {
             //alert(msg);
             SetCookie('JSESSIONID', '', -1, '/')
             SetCookie('BIGipServerUXPWEB_443', '', -1, '/')
-            location.href = $urlHome;
+            location.href = configGetUrl.url_icris_home;
             isCheck = false;
             $countCurr -= 5;
-            //window.open($urlHome);
+            //window.open(configGetUrl.url_icris_home);
             //window.close();
             return;
         }
@@ -127,7 +129,7 @@ function PostData() {
                         return;
                     }
 
-                    if (data.indexOf('验证密码') > -1) {
+                    if (data.indexOf('验证密码') > -1 || data.indexOf('驗證密碼') > -1 || data.indexOf('VERIFICATION CODE') > -1) {
                         console.log("需要有验证密码ajax:" + this.url);
                         SetCookie('JSESSIONID', '', -1, '/')
                         SetCookie('BIGipServerUXPWEB_443', '', -1, '/')
@@ -144,6 +146,7 @@ function PostData() {
                         setMsg('m_parameterSetMax', "ICRISCurrMax", this.tmpdata);
                         return;
                     }
+
                     //console.log($findTable);
                     //console.log($table0.html());
                     //console.log($table0.html());
@@ -171,48 +174,100 @@ function PostData() {
                     //console.log($getHtml);
                     //console.log(dd);
                     $table0Tr.eq(1).find('td').eq(1).find('br').replaceWith("@");
-
+                    var tmpname = $table0Tr.eq(1).find('td').eq(1).text().trim().split('@');
+                    var tmpnameZh = tmpname.length > 1 ? tmpname[1].replace('-THE-', '').trim() : undefined;
 
                     //提交到数据库
                     var getWebDatas = {
-                        gwd_ICRIS_items: {
-                            $id: 2,
-                            Tid: this.tmpdata,
-                            tcomp: $table0Tr.eq(1).find('td').eq(1).text().trim(),
-                            tclass: $table0Tr.eq(2).find('td').eq(1).text().trim(),
-                            tStartDate: $table0Tr.eq(3).find('td').eq(1).text().trim(),
-                            tCompStartDate: $table1Tr.eq(1).find('td').eq(0).text().trim(),
-                            tCompStart: $table1Tr.eq(1).find('td').eq(1).text().trim() + '@' + $table1Tr.eq(2).find('td').eq(0).text().trim() + '|' + $table1Tr.eq(2).find('td').eq(1).text().trim(),
-                            tNows: $table0Tr.eq(4).find('td').eq(1).text().trim(),
-                            tRemarkNow: $table0Tr.eq(5).find('td').eq(1).text().trim(),
-                            tModel: $table0Tr.eq(6).find('td').eq(1).text().trim(),
-                            tCloseDate: $table0Tr.eq(7).find('td').eq(1).text().trim(),
-                            tSaveBook: $table0Tr.eq(8).find('td').eq(1).text().trim(),
-                            tImEvens: $table0Tr.eq(9).find('td').eq(1).text().trim(),
-                            tSearchRes: $table0Tr.eq(10).find('td').eq(1).text().trim(),
-                            Remark: $table0Tr.eq(5).find('td').eq(1).text().trim(),
-                            addDate: undefined,
-                            UpdateDate: undefined
-                        },
-                        Tid: this.tmpdata,
+                        gwd_ICRIS_items: [],
+                        gwd_ICRIS_itemsChange: [],
                         tname: "icris",
                         ttype: $ttype,
-                        tcontent: "https://www.icris.cr.gov.hk/csci/",
-                        tGetTable: $findTable.html(),
                         thtml: data,
-                        Remark: "https://www.icris.cr.gov.hk/csci/ CRNo",
+                        Tid: 0,
+                        tLang: configGetUrl.url_icris_home_lang.flag,//0:US,1:HK,2:ZH
+                        Remark: undefined,
                         tStatus: 0,
+                        ClientIP: undefined,
                         addDate: undefined,
                         UpdateDate: undefined
                     }
-                    if (data.indexOf('没有纪录与输入的查询资料相符') > -1) {
+                    var gwd_ICRIS_items = {
+                        $id: "1",
+                        htmlID: 0,
+                        CompanyName: tmpname[0].replace('-THE-', '').trim(),
+                        CompanyNameZH: tmpnameZh,
+                        CompanyType: $table0Tr.eq(2).find('td').eq(1).text().trim(),
+                        FoundDate: $table0Tr.eq(3).find('td').eq(1).text().trim(),
+                        CurrentState: $table0Tr.eq(4).find('td').eq(1).text().trim(),
+                        tRemarkNow: $table0Tr.eq(5).find('td').eq(1).text().trim(),
+                        LiquidationMode: $table0Tr.eq(6).find('td').eq(1).text().trim(),
+                        DisbandDate: $table0Tr.eq(7).find('td').eq(1).text().trim(),
+                        ChargeState: $table0Tr.eq(8).find('td').eq(1).text().trim(),
+                        Important: $table0Tr.eq(9).find('td').eq(1).text().trim(),
+                        tSearchRes: $table0Tr.eq(10).find('td').eq(1).text().trim(),
+                        tLang: configGetUrl.url_icris_home_lang.flag,//0:US,1:HK,2:ZH
+                        tkeyNo: this.tmpdata,
+                        tIndex: 0,
+                        tname: "icris",
+                        ttype: $ttype,
+                        Tid: 0,
+                        Remark: undefined,
+                        tStatus: 0,
+                        ClientIP: undefined,
+                        addDate: undefined,
+                        UpdateDate: undefined
+                    }
+                    getWebDatas.gwd_ICRIS_items.push(gwd_ICRIS_items);
+
+                    var tmpindex = 1;
+                    var tmpDate = "";
+                    var tmpName = "";
+                    for (r = 1; r < $table1Tr.length; r++) {
+                        var alltd = $table1Tr.eq(r).children('td');
+
+                        tmpName = alltd.eq(1).text().trim();
+                        var gwd_ICRIS_itemsChange = {
+                            $id: tmpindex + 1,
+                            htmlID: 0,
+                            CompanyName: undefined,
+                            CompanyNameZH: undefined,
+                            EffectiveDate: undefined,
+                            tLang: configGetUrl.url_icris_home_lang.flag,//0:US,1:HK,2:ZH
+                            tkeyNo: this.tmpdata,
+                            tIndex: tmpindex,
+                            tname: "icris",
+                            ttype: $ttype,
+                            Tid: 0,
+                            Remark: undefined,
+                            tStatus: 0,
+                            ClientIP: undefined,
+                            addDate: undefined,
+                            UpdateDate: undefined
+                        }
+
+                        if (alltd.length > 1) {
+                            tmpDate = alltd.eq(0).text().trim();
+                            gwd_ICRIS_itemsChange.CompanyName = tmpName.replace('-THE-', '').trim();
+                        } else {
+                            tmpName = alltd.eq(0).text().trim();
+                            gwd_ICRIS_itemsChange.CompanyNameZH = tmpName.replace('-THE-', '').trim();
+                        }
+
+                        gwd_ICRIS_itemsChange.EffectiveDate = tmpDate;
+
+                        getWebDatas.gwd_ICRIS_itemsChange.push(gwd_ICRIS_itemsChange);
+                        tmpindex += 1;
+                    }
+
+                    if ($table0Tr.length < 7) {
 
                         console.log('没有纪录与输入的查询资料相符');
-
                         getWebDatas.tStatus = 1;
-                        getWebDatas.tGetTable = '没有纪录与输入的查询资料相符';
-                        //getWebDatas.thtml = '没有纪录与输入的查询资料相符';
-                        getWebDatas.GetWebDatas_ICRIS = undefined;
+                        getWebDatas.Remark = '没有纪录与输入的查询资料相符';
+                        getWebDatas.gwd_ICRIS_items = undefined;
+                        getWebDatas.gwd_ICRIS_itemsChange = undefined;
+                        
                     };
                     //console.log(getWebDatas);
 
@@ -257,7 +312,7 @@ function PostData() {
                 console.log('PageNO=1没有记录. ：' + data.length);
                 return;
             }
-            if (data.indexOf('验证密码') > -1) {
+            if (data.indexOf('验证密码') > -1 || data.indexOf('驗證密碼') > -1 || data.indexOf('VERIFICATION CODE') > -1) {
                 console.log('PageNO=1要验证密码. ：' + data.length);
                 return;
             }
@@ -283,7 +338,7 @@ function PostData() {
                         console.log(this.tmpdata + ":" + '没有记录. ：' + data.length);
                         return;
                     }
-                    if (data.indexOf('验证密码') > -1) {
+                    if (data.indexOf('验证密码') > -1 || data.indexOf('驗證密碼') > -1 || data.indexOf('VERIFICATION CODE') > -1) {
                         console.log(this.tmpdata + ":" + '要验证密码. ：' + data.length);
                         return;
                     }
@@ -313,6 +368,7 @@ function PostData() {
                             SameNo: getText($table0TRTD.eq(7).text().trim()),
                             Remark: "取消资格令纪录册:" + this.url,
                             tStatus: 0,
+                            thtml: data,
                             addDate: undefined,
                             UpdateDate: undefined
                         }

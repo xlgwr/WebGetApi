@@ -11,7 +11,6 @@ namespace EFLibForApi.emms.models
 {
     public abstract class entity
     {
-        [Column(TypeName = "text")]
         public string Remark { get; set; }
 
         public int tStatus { get; set; }

@@ -1,6 +1,5 @@
 ////律师界名录
-var _allColNameZH = [];
-var _allColNameEN = []
+
 $(function () {
 
     console.log("律师界名录初始化..");
@@ -27,6 +26,8 @@ $(function () {
 })
 
 function gwd_mem_withcert(btn, msgid) {
+    var _allColNameZH = [];
+    var _allColNameEN = []
     var _allPage = 100;
     var _allcount = 0;
     var currPage = 1;
@@ -137,7 +138,7 @@ function gwd_mem_withcert(btn, msgid) {
                                         ttype: "律师界名录",
                                         tcontent: undefined,
                                         tGetTable: undefined,
-                                        thtml: undefined,
+                                        thtml: data,
                                         Remark: undefined,
                                         tStatus: 1,
                                         ClientIP: undefined,
@@ -184,7 +185,7 @@ function gwd_mem_withcert(btn, msgid) {
                                                 ttype: this.tmpdata.ttype,
                                                 tcontent: undefined,
                                                 tGetTable: undefined,
-                                                thtml: undefined,
+                                                thtml: data,
                                                 Remark: undefined,
                                                 tStatus: this.tmpdata.tStatus,
                                                 ClientIP: undefined,
@@ -345,7 +346,7 @@ function gwd_mem_withcert(btn, msgid) {
                                                 ttype: this.tmpdata.ttype,
                                                 tcontent: undefined,
                                                 tGetTable: undefined,
-                                                thtml: undefined,
+                                                thtml: data,
                                                 Remark: undefined,
                                                 tStatus: this.tmpdata.tStatus,
                                                 ClientIP: undefined,
@@ -494,6 +495,8 @@ function gwd_mem_withcert(btn, msgid) {
 }
 
 function gwd_mem_foreignlawyers(btn, msgid) {
+    var _allColNameZH = [];
+    var _allColNameEN = []
     var _allPage = 100;
     var _allcount = 0;
     var currPage = 1;
@@ -607,7 +610,7 @@ function gwd_mem_foreignlawyers(btn, msgid) {
                                         ttype: _ttype,
                                         tcontent: Jurisdiction,
                                         tGetTable: undefined,
-                                        thtml: undefined,
+                                        thtml: data,
                                         Remark: undefined,
                                         tStatus: 2,
                                         ClientIP: undefined,
@@ -654,7 +657,7 @@ function gwd_mem_foreignlawyers(btn, msgid) {
                                                 ttype: this.tmpdata.ttype,
                                                 tcontent: this.tmpdata.tcontent,
                                                 tGetTable: undefined,
-                                                thtml: undefined,
+                                                thtml: data,
                                                 Remark: undefined,
                                                 tStatus: this.tmpdata.tStatus,
                                                 ClientIP: undefined,
@@ -814,7 +817,7 @@ function gwd_mem_foreignlawyers(btn, msgid) {
                                                 ttype: this.tmpdata.ttype,
                                                 tcontent: this.tmpdata.tcontent,
                                                 tGetTable: undefined,
-                                                thtml: undefined,
+                                                thtml: data,
                                                 Remark: undefined,
                                                 tStatus: this.tmpdata.tStatus,
                                                 ClientIP: undefined,
