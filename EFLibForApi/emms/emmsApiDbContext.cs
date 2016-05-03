@@ -40,20 +40,20 @@
 
         public virtual DbSet<gwd_AppealRecord_main> gwd_AppealRecord_main { get; set; }
 
-        public virtual DbSet<gwd_Lawyers_main> gwd_Lawyers_main { get; set; }
+        //公共主表
+        public virtual DbSet<entityCommMain> entityCommMain { get; set; }
+
         public virtual DbSet<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
-
-        public virtual DbSet<gwd_Barristers_main> gwd_Barristers_main { get; set; }
         public virtual DbSet<gwd_Barristers_items> gwd_Barristers_items { get; set; }
-
-        public virtual DbSet<gwd_GovernmentPhonebook_main> gwd_GovernmentPhonebook_main { get; set; }
         public virtual DbSet<gwd_GovernmentPhonebook_items> gwd_GovernmentPhonebook_items { get; set; }
+
+
 
         public virtual DbSet<m_parameter> m_parameter { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<entityMainComm>()
+            modelBuilder.Entity<entityCommMain>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
@@ -82,9 +82,6 @@
             .Property(e => e.Remark)
             .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_Lawyers_main>()
-          .Property(e => e.Remark)
-          .IsUnicode(false);
             modelBuilder.Entity<gwd_Lawyers_items>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);

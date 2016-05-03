@@ -73,7 +73,7 @@
     <Compile Include="emms\emmsApiDbContext.cs" />
     <Compile Include="emms\models\entity.cs" />
     <Compile Include="emms\models\entityItems.cs" />
-    <Compile Include="emms\models\entityMainComm.cs" />
+    <Compile Include="emms\models\entityCommMain.cs" />
     <Compile Include="emms\models\entityTID.cs" />
     <Compile Include="emms\models\gwd_GovernmentPhonebook_main.cs" />
     <Compile Include="emms\models\gwd_Barristers_main.cs" />
@@ -83,13 +83,9 @@
     <Compile Include="emms\models\gwd_CompaniesRegistry_main.cs" />
     <Compile Include="emms\models\entityMain.cs" />
     <Compile Include="emms\models\m_parameter.cs" />
-    <Compile Include="Migrations\201605030601422_init.cs" />
-    <Compile Include="Migrations\201605030601422_init.Designer.cs">
-      <DependentUpon>201605030601422_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605030626338_changeParam.cs" />
-    <Compile Include="Migrations\201605030626338_changeParam.Designer.cs">
-      <DependentUpon>201605030626338_changeParam.cs</DependentUpon>
+    <Compile Include="Migrations\201605030731020_init.cs" />
+    <Compile Include="Migrations\201605030731020_init.Designer.cs">
+      <DependentUpon>201605030731020_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,11 +100,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605030601422_init.resx">
-      <DependentUpon>201605030601422_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605030626338_changeParam.resx">
-      <DependentUpon>201605030626338_changeParam.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605030731020_init.resx">
+      <DependentUpon>201605030731020_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

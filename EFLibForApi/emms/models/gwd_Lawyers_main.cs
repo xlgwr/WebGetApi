@@ -11,22 +11,22 @@ using Newtonsoft.Json;
 
 namespace EFLibForApi.emms.models
 {
-    [Table("gwd_Lawyers_main")]
-    public class gwd_Lawyers_main : entityMainComm
-    {
-        public gwd_Lawyers_main()
-        {
-            this.gwd_Lawyers_items = new List<gwd_Lawyers_items>();
-        }
-        public ICollection<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
-    }
+    //[Table("gwd_Lawyers_main")]
+    //public class gwd_Lawyers_main : entityCommMain
+    //{
+    //    public gwd_Lawyers_main()
+    //    {
+    //        this.gwd_Lawyers_items = new List<gwd_Lawyers_items>();
+    //    }
+    //    public ICollection<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
+    //}
 
 
     [Table("gwd_Lawyers_items")]
     public class gwd_Lawyers_items : entityItems
     {
         [Index]
-        [ForeignKey("gwd_Lawyers_main")]
+        [ForeignKey("entityCommMain")]
         public long htmlID { get; set; }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace EFLibForApi.emms.models
         public string CompanyEmail { get; set; }
 
         [JsonIgnore]
-        public gwd_Lawyers_main gwd_Lawyers_main { get; set; }
+        public entityCommMain entityCommMain { get; set; }
     }
 
 }

@@ -8,16 +8,10 @@ namespace EFLibForApi.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.gwd_AppealRecord_main",
+                "dbo.entityCommMain",
                 c => new
                     {
                         Tid = c.Long(nullable: false, identity: true),
-                        caseNo = c.String(nullable: false, maxLength: 128),
-                        Tdate = c.String(nullable: false, maxLength: 128),
-                        TDis = c.Long(nullable: false),
-                        TIndex = c.Int(nullable: false),
-                        TGetDis = c.Long(nullable: false),
-                        ReportedIn = c.String(),
                         tLang = c.Long(nullable: false),
                         tname = c.String(maxLength: 200),
                         ttype = c.String(maxLength: 200),
@@ -28,8 +22,7 @@ namespace EFLibForApi.Migrations
                         addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
                         UpdateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Tid, t.caseNo, t.Tdate, t.TDis, t.TIndex })
-                .Index(t => t.TGetDis)
+                .PrimaryKey(t => t.Tid)
                 .Index(t => t.addDate);
 
             CreateTable(
@@ -63,15 +56,87 @@ namespace EFLibForApi.Migrations
                         UpdateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Tid, t.tLang, t.tkeyNo, t.tIndex })
-                .ForeignKey("dbo.gwd_Barristers_main", t => t.htmlID)
+                .ForeignKey("dbo.entityCommMain", t => t.htmlID, cascadeDelete: true)
                 .Index(t => t.htmlID)
                 .Index(t => t.addDate);
 
             CreateTable(
-                "dbo.entityMainComms",
+                "dbo.gwd_GovernmentPhonebook_items",
                 c => new
                     {
                         Tid = c.Long(nullable: false, identity: true),
+                        tLang = c.Long(nullable: false),
+                        tkeyNo = c.String(nullable: false, maxLength: 128),
+                        tIndex = c.Long(nullable: false),
+                        htmlID = c.Long(nullable: false),
+                        FullName = c.String(),
+                        Title = c.String(),
+                        Address = c.String(),
+                        Fax = c.String(),
+                        OfficePhone = c.String(),
+                        Email = c.String(),
+                        tname = c.String(maxLength: 200),
+                        ttype = c.String(maxLength: 200),
+                        Remark = c.String(unicode: false),
+                        tStatus = c.Int(nullable: false),
+                        ClientIP = c.String(),
+                        addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
+                        UpdateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Tid, t.tLang, t.tkeyNo, t.tIndex })
+                .ForeignKey("dbo.entityCommMain", t => t.htmlID, cascadeDelete: true)
+                .Index(t => t.htmlID)
+                .Index(t => t.addDate);
+
+            CreateTable(
+                "dbo.gwd_Lawyers_items",
+                c => new
+                    {
+                        Tid = c.Long(nullable: false, identity: true),
+                        tLang = c.Long(nullable: false),
+                        tkeyNo = c.String(nullable: false, maxLength: 128),
+                        tIndex = c.Long(nullable: false),
+                        htmlID = c.Long(nullable: false),
+                        LawyerName = c.String(),
+                        ChineseName = c.String(),
+                        BeforeName = c.String(),
+                        ApproveDate = c.String(),
+                        ApproveCountry = c.String(),
+                        OtherDate = c.String(),
+                        LawyerEmail = c.String(),
+                        Title = c.String(),
+                        LawyerCompany = c.String(),
+                        ChineseCompany = c.String(),
+                        CompanyAddress = c.String(),
+                        ChineseAddress = c.String(),
+                        Companytel = c.String(),
+                        CompanyFax = c.String(),
+                        Dxnumber = c.String(),
+                        CompanyEmail = c.String(),
+                        tname = c.String(maxLength: 200),
+                        ttype = c.String(maxLength: 200),
+                        Remark = c.String(unicode: false),
+                        tStatus = c.Int(nullable: false),
+                        ClientIP = c.String(),
+                        addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
+                        UpdateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Tid, t.tLang, t.tkeyNo, t.tIndex })
+                .ForeignKey("dbo.entityCommMain", t => t.htmlID, cascadeDelete: true)
+                .Index(t => t.htmlID)
+                .Index(t => t.addDate);
+
+            CreateTable(
+                "dbo.gwd_AppealRecord_main",
+                c => new
+                    {
+                        Tid = c.Long(nullable: false, identity: true),
+                        caseNo = c.String(nullable: false, maxLength: 128),
+                        Tdate = c.String(nullable: false, maxLength: 128),
+                        TDis = c.Long(nullable: false),
+                        TIndex = c.Int(nullable: false),
+                        TGetDis = c.Long(nullable: false),
+                        ReportedIn = c.String(),
                         tLang = c.Long(nullable: false),
                         tname = c.String(maxLength: 200),
                         ttype = c.String(maxLength: 200),
@@ -82,7 +147,8 @@ namespace EFLibForApi.Migrations
                         addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
                         UpdateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Tid)
+                .PrimaryKey(t => new { t.Tid, t.caseNo, t.Tdate, t.TDis, t.TIndex })
+                .Index(t => t.TGetDis)
                 .Index(t => t.addDate);
 
             CreateTable(
@@ -238,78 +304,12 @@ namespace EFLibForApi.Migrations
                 .Index(t => t.addDate);
 
             CreateTable(
-                "dbo.gwd_GovernmentPhonebook_items",
-                c => new
-                    {
-                        Tid = c.Long(nullable: false, identity: true),
-                        tLang = c.Long(nullable: false),
-                        tkeyNo = c.String(nullable: false, maxLength: 128),
-                        tIndex = c.Long(nullable: false),
-                        htmlID = c.Long(nullable: false),
-                        FullName = c.String(),
-                        Title = c.String(),
-                        Address = c.String(),
-                        Fax = c.String(),
-                        OfficePhone = c.String(),
-                        Email = c.String(),
-                        tname = c.String(maxLength: 200),
-                        ttype = c.String(maxLength: 200),
-                        Remark = c.String(unicode: false),
-                        tStatus = c.Int(nullable: false),
-                        ClientIP = c.String(),
-                        addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
-                        UpdateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Tid, t.tLang, t.tkeyNo, t.tIndex })
-                .ForeignKey("dbo.gwd_GovernmentPhonebook_main", t => t.htmlID)
-                .Index(t => t.htmlID)
-                .Index(t => t.addDate);
-
-            CreateTable(
-                "dbo.gwd_Lawyers_items",
-                c => new
-                    {
-                        Tid = c.Long(nullable: false, identity: true),
-                        tLang = c.Long(nullable: false),
-                        tkeyNo = c.String(nullable: false, maxLength: 128),
-                        tIndex = c.Long(nullable: false),
-                        htmlID = c.Long(nullable: false),
-                        LawyerName = c.String(),
-                        ChineseName = c.String(),
-                        BeforeName = c.String(),
-                        ApproveDate = c.String(),
-                        ApproveCountry = c.String(),
-                        OtherDate = c.String(),
-                        LawyerEmail = c.String(),
-                        Title = c.String(),
-                        LawyerCompany = c.String(),
-                        ChineseCompany = c.String(),
-                        CompanyAddress = c.String(),
-                        ChineseAddress = c.String(),
-                        Companytel = c.String(),
-                        CompanyFax = c.String(),
-                        Dxnumber = c.String(),
-                        CompanyEmail = c.String(),
-                        tname = c.String(maxLength: 200),
-                        ttype = c.String(maxLength: 200),
-                        Remark = c.String(unicode: false),
-                        tStatus = c.Int(nullable: false),
-                        ClientIP = c.String(),
-                        addDate = c.DateTime(nullable: false, defaultValueSql: "getdate()"),
-                        UpdateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Tid, t.tLang, t.tkeyNo, t.tIndex })
-                .ForeignKey("dbo.gwd_Lawyers_main", t => t.htmlID)
-                .Index(t => t.htmlID)
-                .Index(t => t.addDate);
-
-            CreateTable(
                 "dbo.m_parameter",
                 c => new
                     {
-                        paramkey = c.String(nullable: false, maxLength: 16),
-                        paramvalue = c.String(maxLength: 50),
-                        paramtype = c.String(maxLength: 16),
+                        paramkey = c.String(nullable: false, maxLength: 128),
+                        paramvalue = c.String(maxLength: 128),
+                        paramtype = c.String(maxLength: 128),
                         Remark = c.String(),
                         tStatus = c.Int(nullable: false),
                         ClientIP = c.String(),
@@ -319,57 +319,17 @@ namespace EFLibForApi.Migrations
                 .PrimaryKey(t => t.paramkey)
                 .Index(t => t.addDate);
 
-            CreateTable(
-                "dbo.gwd_Barristers_main",
-                c => new
-                    {
-                        Tid = c.Long(nullable: false),
-                    })
-                .PrimaryKey(t => t.Tid)
-                .ForeignKey("dbo.entityMainComms", t => t.Tid)
-                .Index(t => t.Tid);
-
-            CreateTable(
-                "dbo.gwd_GovernmentPhonebook_main",
-                c => new
-                    {
-                        Tid = c.Long(nullable: false),
-                    })
-                .PrimaryKey(t => t.Tid)
-                .ForeignKey("dbo.entityMainComms", t => t.Tid)
-                .Index(t => t.Tid);
-
-            CreateTable(
-                "dbo.gwd_Lawyers_main",
-                c => new
-                    {
-                        Tid = c.Long(nullable: false),
-                    })
-                .PrimaryKey(t => t.Tid)
-                .ForeignKey("dbo.entityMainComms", t => t.Tid)
-                .Index(t => t.Tid);
-
         }
 
         public override void Down()
         {
-            DropForeignKey("dbo.gwd_Lawyers_main", "Tid", "dbo.entityMainComms");
-            DropForeignKey("dbo.gwd_GovernmentPhonebook_main", "Tid", "dbo.entityMainComms");
-            DropForeignKey("dbo.gwd_Barristers_main", "Tid", "dbo.entityMainComms");
-            DropForeignKey("dbo.gwd_Lawyers_items", "htmlID", "dbo.gwd_Lawyers_main");
-            DropForeignKey("dbo.gwd_GovernmentPhonebook_items", "htmlID", "dbo.gwd_GovernmentPhonebook_main");
             DropForeignKey("dbo.gwd_CompaniesRegistry_items", "htmlID", "dbo.gwd_CompaniesRegistry_main");
             DropForeignKey("dbo.gwd_CompaniesRegistry_itemsChange", "htmlID", "dbo.gwd_CompaniesRegistry_main");
             DropForeignKey("dbo.gwd_Case_items", "htmlID", "dbo.gwd_Case_main");
-            DropForeignKey("dbo.gwd_Barristers_items", "htmlID", "dbo.gwd_Barristers_main");
-            DropIndex("dbo.gwd_Lawyers_main", new[] { "Tid" });
-            DropIndex("dbo.gwd_GovernmentPhonebook_main", new[] { "Tid" });
-            DropIndex("dbo.gwd_Barristers_main", new[] { "Tid" });
+            DropForeignKey("dbo.gwd_Lawyers_items", "htmlID", "dbo.entityCommMain");
+            DropForeignKey("dbo.gwd_GovernmentPhonebook_items", "htmlID", "dbo.entityCommMain");
+            DropForeignKey("dbo.gwd_Barristers_items", "htmlID", "dbo.entityCommMain");
             DropIndex("dbo.m_parameter", new[] { "addDate" });
-            DropIndex("dbo.gwd_Lawyers_items", new[] { "addDate" });
-            DropIndex("dbo.gwd_Lawyers_items", new[] { "htmlID" });
-            DropIndex("dbo.gwd_GovernmentPhonebook_items", new[] { "addDate" });
-            DropIndex("dbo.gwd_GovernmentPhonebook_items", new[] { "htmlID" });
             DropIndex("dbo.gwd_CompaniesRegistry_itemsChange", new[] { "addDate" });
             DropIndex("dbo.gwd_CompaniesRegistry_itemsChange", new[] { "htmlID" });
             DropIndex("dbo.gwd_CompaniesRegistry_main", new[] { "addDate" });
@@ -379,26 +339,27 @@ namespace EFLibForApi.Migrations
             DropIndex("dbo.gwd_Case_main", new[] { "addDate" });
             DropIndex("dbo.gwd_Case_items", new[] { "addDate" });
             DropIndex("dbo.gwd_Case_items", new[] { "htmlID" });
-            DropIndex("dbo.entityMainComms", new[] { "addDate" });
-            DropIndex("dbo.gwd_Barristers_items", new[] { "addDate" });
-            DropIndex("dbo.gwd_Barristers_items", new[] { "htmlID" });
             DropIndex("dbo.gwd_AppealRecord_main", new[] { "addDate" });
             DropIndex("dbo.gwd_AppealRecord_main", new[] { "TGetDis" });
-            DropTable("dbo.gwd_Lawyers_main");
-            DropTable("dbo.gwd_GovernmentPhonebook_main");
-            DropTable("dbo.gwd_Barristers_main");
+            DropIndex("dbo.gwd_Lawyers_items", new[] { "addDate" });
+            DropIndex("dbo.gwd_Lawyers_items", new[] { "htmlID" });
+            DropIndex("dbo.gwd_GovernmentPhonebook_items", new[] { "addDate" });
+            DropIndex("dbo.gwd_GovernmentPhonebook_items", new[] { "htmlID" });
+            DropIndex("dbo.gwd_Barristers_items", new[] { "addDate" });
+            DropIndex("dbo.gwd_Barristers_items", new[] { "htmlID" });
+            DropIndex("dbo.entityCommMain", new[] { "addDate" });
             DropTable("dbo.m_parameter");
-            DropTable("dbo.gwd_Lawyers_items");
-            DropTable("dbo.gwd_GovernmentPhonebook_items");
             DropTable("dbo.gwd_CompaniesRegistry_itemsChange");
             DropTable("dbo.gwd_CompaniesRegistry_main");
             DropTable("dbo.gwd_CompaniesRegistry_items");
             DropTable("dbo.gwd_CompaniesRegistry_DisOrders");
             DropTable("dbo.gwd_Case_main");
             DropTable("dbo.gwd_Case_items");
-            DropTable("dbo.entityMainComms");
-            DropTable("dbo.gwd_Barristers_items");
             DropTable("dbo.gwd_AppealRecord_main");
+            DropTable("dbo.gwd_Lawyers_items");
+            DropTable("dbo.gwd_GovernmentPhonebook_items");
+            DropTable("dbo.gwd_Barristers_items");
+            DropTable("dbo.entityCommMain");
         }
     }
 }

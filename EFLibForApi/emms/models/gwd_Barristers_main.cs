@@ -14,21 +14,21 @@ namespace EFLibForApi.emms.models
     /// <summary>
     /// 香港大律师表
     /// </summary>
-    [Table("gwd_Barristers_main")]
-    public class gwd_Barristers_main : entityMainComm
-    {
-        public gwd_Barristers_main()
-        {
-            this.gwd_Barristers_items = new List<gwd_Barristers_items>();
-        }
-        public ICollection<gwd_Barristers_items> gwd_Barristers_items { get; set; }
-    }
+    //[Table("gwd_Barristers_main")]
+    //public class gwd_Barristers_main : entityCommMain
+    //{
+    //    public gwd_Barristers_main()
+    //    {
+    //        this.gwd_Barristers_items = new List<gwd_Barristers_items>();
+    //    }
+    //    public ICollection<gwd_Barristers_items> gwd_Barristers_items { get; set; }
+    //}
 
     [Table("gwd_Barristers_items")]
     public class gwd_Barristers_items : entityItems
     {
         [Index]
-        [ForeignKey("gwd_Barristers_main")]
+        [ForeignKey("entityCommMain")]
         public long htmlID { get; set; }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace EFLibForApi.emms.models
         public string IsMandarin { get; set; }
 
         [JsonIgnore]
-        public gwd_Barristers_main gwd_Barristers_main { get; set; }
+        public entityCommMain entityCommMain { get; set; }
 
     }
 

@@ -197,6 +197,8 @@ function gwd_tel_directory(btn, msgid) {
                                         Title: undefined,
                                         OfficePhone: undefined,
                                         Email: undefined,
+                                        Address: undefined,
+                                        Fax: undefined,
                                         tLang: _langFlag,
                                         tkeyNo: this.tmpdata,
                                         tIndex: 1,
@@ -224,13 +226,13 @@ function gwd_tel_directory(btn, msgid) {
                                         //["地址", "辦公室電話", "傳真", "電郵"]
                                         switch (tmptitle) {
                                             case "地址": case "Address":
-                                                postItemTop.FullName = $ctd1;
+                                                postItemTop.Address = $ctd1;
                                                 break;
                                             case "辦公室電話": case "Office Tel":
                                                 postItemTop.OfficePhone = $ctd1;
                                                 break;
                                             case "傳真": case "Fax":
-                                                postItemTop.Title = $ctd1;
+                                                postItemTop.Fax = $ctd1;
                                                 break;
                                             case "電郵": case "Email":
                                                 postItemTop.Email = getEmail($ctd1);
@@ -484,6 +486,8 @@ function gwd_tel_directory(btn, msgid) {
                                         Title: undefined,
                                         OfficePhone: undefined,
                                         Email: undefined,
+                                        Address: undefined,
+                                        Fax: undefined,
                                         tLang: _langFlag,
                                         tkeyNo: this.tmpdata,
                                         tIndex: 1,
@@ -511,13 +515,13 @@ function gwd_tel_directory(btn, msgid) {
                                         //["地址", "辦公室電話", "傳真", "電郵"]
                                         switch (tmptitle) {
                                             case "地址": case "Address":
-                                                postItemTop.FullName = $ctd1;
+                                                postItemTop.Address = $ctd1;
                                                 break;
                                             case "辦公室電話": case "Office Tel":
                                                 postItemTop.OfficePhone = $ctd1;
                                                 break;
                                             case "傳真": case "Fax":
-                                                postItemTop.Title = $ctd1;
+                                                postItemTop.Fax = $ctd1;
                                                 break;
                                             case "電郵": case "Email":
                                                 postItemTop.Email = getEmail($ctd1);

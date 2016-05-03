@@ -25,15 +25,15 @@ namespace WebGetApi.Controllers
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
-        // GET: api/gwd_Barristers_main
-        public IQueryable<gwd_Barristers_main> Get()
+        // GET: api/entityCommMain
+        public IQueryable<entityCommMain> Get()
         {
-            return db.gwd_Barristers_main.Take(10);
+            return db.entityCommMain.Take(10);
         }
 
-        // POST: api/gwd_Barristers_main
-        [ResponseType(typeof(gwd_Barristers_main))]
-        public async Task<IHttpActionResult> Post(gwd_Barristers_main gwd_Barristers_main)
+        // POST: api/entityCommMain
+        [ResponseType(typeof(entityCommMain))]
+        public async Task<IHttpActionResult> Post(entityCommMain entityCommMain)
         {
             if (!ModelState.IsValid)
             {
@@ -42,27 +42,27 @@ namespace WebGetApi.Controllers
 
             try
             {
-                gwd_Barristers_main.UpdateDate = DateTime.Now;
-                gwd_Barristers_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                entityCommMain.UpdateDate = DateTime.Now;
+                entityCommMain.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
-                if (gwd_Barristers_main.gwd_Barristers_items != null)
+                if (entityCommMain.gwd_Barristers_items != null)
                 {
-                    foreach (var item in gwd_Barristers_main.gwd_Barristers_items)
+                    foreach (var item in entityCommMain.gwd_Barristers_items)
                     {
-                        item.htmlID = gwd_Barristers_main.Tid;
+                        item.htmlID = entityCommMain.Tid;
                         item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         item.UpdateDate = DateTime.Now;
                     }
 
-                    if (gwd_Barristers_main.gwd_Barristers_items.Count > 0)
+                    if (entityCommMain.gwd_Barristers_items.Count > 0)
                     {
-                        var tmpfirst = gwd_Barristers_main.gwd_Barristers_items.First();
+                        var tmpfirst = entityCommMain.gwd_Barristers_items.First();
 
                         var tmpExitItem = gwd_Barristers_itemsExists(tmpfirst.tkeyNo, tmpfirst.tLang, tmpfirst.tIndex);
                         if (tmpExitItem)
                         {
                             long tmpHtmlId = 0;
-                            foreach (var item in gwd_Barristers_main.gwd_Barristers_items)
+                            foreach (var item in entityCommMain.gwd_Barristers_items)
                             {
                                 if (!string.IsNullOrEmpty(item.LawyerName) || !string.IsNullOrEmpty(item.ChineseName))
                                 {
@@ -98,25 +98,25 @@ namespace WebGetApi.Controllers
                             //change main
                             if (tmpHtmlId > 0)
                             {
-                                var getMain = gwd_Barristers_mainByID(tmpHtmlId);
+                                var getMain = entityCommMainByID(tmpHtmlId);
 
                                 if (getMain != null)
                                 {
 
-                                    getMain.thtml = gwd_Barristers_main.thtml;
-                                    getMain.tLang = gwd_Barristers_main.tLang;
-                                    getMain.ClientIP = gwd_Barristers_main.ClientIP;
-                                    getMain.Remark = gwd_Barristers_main.Remark;
-                                    getMain.tname = gwd_Barristers_main.tname;
-                                    getMain.tStatus = gwd_Barristers_main.tStatus;
-                                    getMain.ttype = gwd_Barristers_main.ttype;
+                                    getMain.thtml = entityCommMain.thtml;
+                                    getMain.tLang = entityCommMain.tLang;
+                                    getMain.ClientIP = entityCommMain.ClientIP;
+                                    getMain.Remark = entityCommMain.Remark;
+                                    getMain.tname = entityCommMain.tname;
+                                    getMain.tStatus = entityCommMain.tStatus;
+                                    getMain.ttype = entityCommMain.ttype;
                                     getMain.UpdateDate = DateTime.Now;
                                 }
                             }
                         }
                         else
                         {
-                            db.gwd_Barristers_main.Add(gwd_Barristers_main);
+                            db.entityCommMain.Add(entityCommMain);
                         }
 
 
@@ -133,16 +133,16 @@ namespace WebGetApi.Controllers
             }
 
             return Ok();
-            //return CreatedAtRoute("DefaultApi", new { id = gwd_Barristers_main.Tid }, gwd_Barristers_main);
+            //return CreatedAtRoute("DefaultApi", new { id = entityCommMain.Tid }, entityCommMain);
 
         }
         private bool gwtMainExistsAsync(long id)
         {
-            return db.gwd_Barristers_main.Count(e => e.Tid == id) > 0;
+            return db.entityCommMain.Count(e => e.Tid == id) > 0;
         }
-        private gwd_Barristers_main gwd_Barristers_mainByID(long id)
+        private entityCommMain entityCommMainByID(long id)
         {
-            return db.gwd_Barristers_main.Where(e => e.Tid == id).FirstOrDefault();
+            return db.entityCommMain.Where(e => e.Tid == id).FirstOrDefault();
         }
 
         private bool gwd_Barristers_itemsExists(string id, long lang, long tindex)

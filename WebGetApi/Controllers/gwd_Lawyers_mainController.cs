@@ -22,15 +22,15 @@ namespace WebGetApi.Controllers
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
-        // GET: api/gwd_Lawyers_main
-        public IQueryable<gwd_Lawyers_main> Get()
+        // GET: api/entityMainComm
+        public IQueryable<entityCommMain> Get()
         {
-            return db.gwd_Lawyers_main.Take(10);
+            return db.entityCommMain.Take(10);
         }
 
-        // POST: api/gwd_Lawyers_main
-        [ResponseType(typeof(gwd_Lawyers_main))]
-        public async Task<IHttpActionResult> Post(gwd_Lawyers_main gwd_Lawyers_main)
+        // POST: api/entityMainComm
+        [ResponseType(typeof(entityCommMain))]
+        public async Task<IHttpActionResult> Post(entityCommMain entityMainComm)
         {
             if (!ModelState.IsValid)
             {
@@ -39,27 +39,27 @@ namespace WebGetApi.Controllers
 
             try
             {
-                gwd_Lawyers_main.UpdateDate = DateTime.Now;
-                gwd_Lawyers_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                entityMainComm.UpdateDate = DateTime.Now;
+                entityMainComm.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
-                if (gwd_Lawyers_main.gwd_Lawyers_items != null)
+                if (entityMainComm.gwd_Lawyers_items != null)
                 {
-                    foreach (var item in gwd_Lawyers_main.gwd_Lawyers_items)
+                    foreach (var item in entityMainComm.gwd_Lawyers_items)
                     {
-                        item.htmlID = gwd_Lawyers_main.Tid;
+                        item.htmlID = entityMainComm.Tid;
                         item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         item.UpdateDate = DateTime.Now;
                     }
 
-                    if (gwd_Lawyers_main.gwd_Lawyers_items.Count > 0)
+                    if (entityMainComm.gwd_Lawyers_items.Count > 0)
                     {
-                        var tmpfirst = gwd_Lawyers_main.gwd_Lawyers_items.First();
+                        var tmpfirst = entityMainComm.gwd_Lawyers_items.First();
 
                         var tmpExitItem = gwd_Lawyers_itemsExists(tmpfirst.tkeyNo, tmpfirst.tLang, tmpfirst.tIndex);
                         if (tmpExitItem)
                         {
                             long tmpHtmlId = 0;
-                            foreach (var item in gwd_Lawyers_main.gwd_Lawyers_items)
+                            foreach (var item in entityMainComm.gwd_Lawyers_items)
                             {
                                 if (!string.IsNullOrEmpty(item.LawyerName) || !string.IsNullOrEmpty(item.ChineseName))
                                 {
@@ -98,25 +98,25 @@ namespace WebGetApi.Controllers
                             //change main
                             if (tmpHtmlId > 0)
                             {
-                                var getMain = gwd_Lawyers_mainByID(tmpHtmlId);
+                                var getMain = entityMainCommByID(tmpHtmlId);
 
                                 if (getMain != null)
                                 {
 
-                                    getMain.thtml = gwd_Lawyers_main.thtml;
-                                    getMain.tLang = gwd_Lawyers_main.tLang;
-                                    getMain.ClientIP = gwd_Lawyers_main.ClientIP;
-                                    getMain.Remark = gwd_Lawyers_main.Remark;
-                                    getMain.tname = gwd_Lawyers_main.tname;
-                                    getMain.tStatus = gwd_Lawyers_main.tStatus;
-                                    getMain.ttype = gwd_Lawyers_main.ttype;
+                                    getMain.thtml = entityMainComm.thtml;
+                                    getMain.tLang = entityMainComm.tLang;
+                                    getMain.ClientIP = entityMainComm.ClientIP;
+                                    getMain.Remark = entityMainComm.Remark;
+                                    getMain.tname = entityMainComm.tname;
+                                    getMain.tStatus = entityMainComm.tStatus;
+                                    getMain.ttype = entityMainComm.ttype;
                                     getMain.UpdateDate = DateTime.Now;
                                 }
                             }
                         }
                         else
                         {
-                            db.gwd_Lawyers_main.Add(gwd_Lawyers_main);
+                            db.entityCommMain.Add(entityMainComm);
                         }
 
 
@@ -133,16 +133,16 @@ namespace WebGetApi.Controllers
             }
 
             return Ok();
-            //return CreatedAtRoute("DefaultApi", new { id = gwd_Lawyers_main.Tid }, gwd_Lawyers_main);
+            //return CreatedAtRoute("DefaultApi", new { id = entityMainComm.Tid }, entityMainComm);
 
         }
         private bool gwtMainExistsAsync(long id)
         {
-            return db.gwd_Lawyers_main.Count(e => e.Tid == id) > 0;
+            return db.entityCommMain.Count(e => e.Tid == id) > 0;
         }
-        private gwd_Lawyers_main gwd_Lawyers_mainByID(long id)
+        private entityCommMain entityMainCommByID(long id)
         {
-            return db.gwd_Lawyers_main.Where(e => e.Tid == id).FirstOrDefault();
+            return db.entityCommMain.Where(e => e.Tid == id).FirstOrDefault();
         }
 
         private bool gwd_Lawyers_itemsExists(string id, long lang, long tindex)
