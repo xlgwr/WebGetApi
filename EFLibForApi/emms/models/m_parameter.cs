@@ -16,15 +16,15 @@ namespace EFLibForApi.emms.models
     {
 
         [Key]
-        [StringLength(16)]
+        [StringLength(128)]
         public string paramkey { get; set; }
 
 
-        [StringLength(50)]
+        [StringLength(128)]
         public string paramvalue { get; set; }
 
 
-        [StringLength(16)]
+        [StringLength(128)]
         public string paramtype { get; set; }
 
     }

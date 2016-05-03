@@ -7,13 +7,13 @@ namespace EFLibForApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addCaseNoForLegalref : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addCaseNoForLegalref));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604290151528_addCaseNoForLegalref"; }
+            get { return "201605030601422_init"; }
         }
         
         string IMigrationMetadata.Source

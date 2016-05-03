@@ -12,8 +12,8 @@ using Newtonsoft.Json;
 namespace EFLibForApi.emms.models
 {
 
-    [Table("gwd_legalref_main")]
-    public class gwd_legalref_main : entityMain
+    [Table("gwd_AppealRecord_main")]
+    public class gwd_AppealRecord_main : entityMain
     {
 
         [Key]

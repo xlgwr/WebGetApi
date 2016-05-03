@@ -22,7 +22,7 @@ $(function () {
     //获取参数
     $.ajax({
         type: 'GET',
-        timeout: 20000,
+        timeout: 10000,
         url: config.urlApim_parameter
     }).done(function (data) {
 

@@ -94,7 +94,7 @@ function gwd_hkba_barlist(btn, msgid) {
             //console.log(_allColNameList_seniorityZH);
 
             //获取明细
-            getItems_seniorityStep5(0, "資深大律師(中文)");
+            getItems_seniorityStep5(1, "資深大律師(中文)");
         },
         error: function (err) {
             console.log("資深大律師:" + this.url);
@@ -156,11 +156,24 @@ function gwd_hkba_barlist(btn, msgid) {
 
                         console.log($table0TR.length);
                         console.log($table0NextAllTable.length);
-
+                        var toPostMain = {
+                            tLang: tindex,
+                            tname: this.tmpdata.id.split(".")[0],
+                            ttype: this.tmpdata.Title,
+                            thtml: data,
+                            Tid: 0,
+                            Remark: this.url,
+                            tStatus: 0,
+                            ClientIP: undefined,
+                            addDate: undefined,
+                            UpdateDate: undefined,
+                            gwd_Barristers_items: []
+                        }
                         var postItem = {
-
-                            Tid: this.tmpdata.id.split(".")[0],
-                            TIndex: tindex,
+                            tLang: tindex,
+                            tkeyNo: this.tmpdata.id.split(".")[0],
+                            tIndex: 0,
+                            Tid: 0,
                             LawyerName: this.tmpdata.LawyerName,
                             ChineseName: this.tmpdata.LawyerName,
                             Sex: this.tmpdata.Sex,
@@ -175,7 +188,7 @@ function gwd_hkba_barlist(btn, msgid) {
                             ApproveYear: undefined,
                             IsMandarin: tmpIsMandarin,
                             tname: undefined,
-                            ttype: undefined,
+                            ttype: this.tmpdata.Title,
                             tcontent: undefined,
                             tGetTable: undefined,
                             thtml: data,
@@ -236,16 +249,17 @@ function gwd_hkba_barlist(btn, msgid) {
                         /////
                         //console.log(_allColNameZH);
                         //console.log(postItem);
+                        toPostMain.gwd_Barristers_items.push(postItem);
                         //提交数据库
                         $.ajax({
                             type: 'POST',
                             url: config.urlApi_hkba,
-                            tmpdata: postItem,
+                            tmpdata: toPostMain,
                             timeout: 50000,
                             contentType: 'application/json; charset=utf-8',
-                            data: JSON.stringify(postItem)
+                            data: JSON.stringify(toPostMain)
                         }).done(function (data) {
-                            console.log(_ttype + "," + typemsg + "," + this.tmpdata.Tid + "," + ",Index:" + this.tmpdata.TIndex + ":中文 Post Done!");
+                            console.log(_ttype + "," + typemsg + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                             // sendMsg('jsonDate', "Set Date Now.");
                             //console.log(data);
                         }).fail(function (err) {
@@ -324,7 +338,7 @@ function gwd_hkba_barlist(btn, msgid) {
             //console.log(_allColNameList_seniorityZH);
 
             //获取明细
-            getItems_Counsel_EnStep5(1, "資深大律師 英文");
+            getItems_Counsel_EnStep5(0, "資深大律師 英文");
         },
         error: function (err) {
             console.log(this.url);
@@ -387,10 +401,24 @@ function gwd_hkba_barlist(btn, msgid) {
                         console.log($table0TR.length);
                         console.log($table0NextAllTable.length);
 
+                        var toPostMain = {
+                            tLang: tindex,
+                            tname: this.tmpdata.id.split(".")[0],
+                            ttype: this.tmpdata.Title,
+                            thtml: data,
+                            Tid: 0,
+                            Remark: this.url,
+                            tStatus: 0,
+                            ClientIP: undefined,
+                            addDate: undefined,
+                            UpdateDate: undefined,
+                            gwd_Barristers_items: []
+                        }
                         var postItem = {
-
-                            Tid: this.tmpdata.id.split(".")[0],
-                            TIndex: tindex,
+                            tLang: tindex,
+                            tkeyNo: this.tmpdata.id.split(".")[0],
+                            tIndex: 0,
+                            Tid: 0,
                             LawyerName: this.tmpdata.LawyerName,
                             ChineseName: this.tmpdata.LawyerName,
                             Sex: this.tmpdata.Sex,
@@ -405,7 +433,7 @@ function gwd_hkba_barlist(btn, msgid) {
                             ApproveYear: undefined,
                             IsMandarin: tmpIsMandarin,
                             tname: undefined,
-                            ttype: undefined,
+                            ttype: this.tmpdata.Title,
                             tcontent: undefined,
                             tGetTable: undefined,
                             thtml: data,
@@ -466,17 +494,17 @@ function gwd_hkba_barlist(btn, msgid) {
                         /////
                         //console.log(_allColNameZH);
                         //console.log(postItem);
-
+                        toPostMain.gwd_Barristers_items.push(postItem);
                         //提交数据库
                         $.ajax({
                             type: 'POST',
                             url: config.urlApi_hkba,
-                            tmpdata: postItem,
+                            tmpdata: toPostMain,
                             timeout: 50000,
                             contentType: 'application/json; charset=utf-8',
-                            data: JSON.stringify(postItem)
+                            data: JSON.stringify(toPostMain)
                         }).done(function (data) {
-                            console.log(_ttype + "," + typemsg + "," + this.tmpdata.Tid + "," + ",Index:" + this.tmpdata.TIndex + ":中文 Post Done!");
+                            console.log(_ttype + "," + typemsg + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                             // sendMsg('jsonDate', "Set Date Now.");
                             //console.log(data);
                         }).fail(function (err) {
@@ -555,7 +583,7 @@ function gwd_hkba_barlist(btn, msgid) {
             //console.log(_allColNameList_seniorityZH);
 
             //获取明细
-            getItems_JuniorCounselStep5(2, "大律師（中文）");
+            getItems_JuniorCounselStep5(1, "大律師（中文）");
         },
         error: function (err) {
             console.log("大律師:" + this.url);
@@ -620,10 +648,24 @@ function gwd_hkba_barlist(btn, msgid) {
                         console.log($table0TR.length);
                         console.log($table0NextAllTable.length);
 
+                        var toPostMain = {
+                            tLang: tindex,
+                            tname: this.tmpdata.id.split(".")[0],
+                            ttype: this.tmpdata.Title,
+                            thtml: data,
+                            Tid: 0,
+                            Remark: this.url,
+                            tStatus: 0,
+                            ClientIP: undefined,
+                            addDate: undefined,
+                            UpdateDate: undefined,
+                            gwd_Barristers_items: []
+                        }
                         var postItem = {
-
-                            Tid: this.tmpdata.id.split(".")[0],
-                            TIndex: tindex,
+                            tLang: tindex,
+                            tkeyNo: this.tmpdata.id.split(".")[0],
+                            tIndex: 0,
+                            Tid: 0,
                             LawyerName: this.tmpdata.LawyerName,
                             ChineseName: this.tmpdata.LawyerName,
                             Sex: this.tmpdata.Sex,
@@ -638,7 +680,7 @@ function gwd_hkba_barlist(btn, msgid) {
                             ApproveYear: undefined,
                             IsMandarin: tmpIsMandarin,
                             tname: undefined,
-                            ttype: undefined,
+                            ttype: this.tmpdata.Title,
                             tcontent: undefined,
                             tGetTable: undefined,
                             thtml: data,
@@ -699,17 +741,17 @@ function gwd_hkba_barlist(btn, msgid) {
                         /////
                         //console.log(_allColNameZH);
                         //console.log(postItem);
-
+                        toPostMain.gwd_Barristers_items.push(postItem);
                         //提交数据库
                         $.ajax({
                             type: 'POST',
                             url: config.urlApi_hkba,
-                            tmpdata: postItem,
+                            tmpdata: toPostMain,
                             timeout: 50000,
                             contentType: 'application/json; charset=utf-8',
-                            data: JSON.stringify(postItem)
+                            data: JSON.stringify(toPostMain)
                         }).done(function (data) {
-                            console.log(_ttype + "," + typemsg + "," + this.tmpdata.Tid + "," + ",Index:" + this.tmpdata.TIndex + ":中文 Post Done!");
+                            console.log(_ttype + "," + typemsg + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                             // sendMsg('jsonDate', "Set Date Now.");
                             //console.log(data);
                         }).fail(function (err) {
@@ -786,7 +828,7 @@ function gwd_hkba_barlist(btn, msgid) {
             //console.log(_allColNameList_seniorityZH);
 
             //获取明细
-            getItems_JuniorCounselEnStep5(3, "大律師（英文）");
+            getItems_JuniorCounselEnStep5(0, "大律師（英文）");
         },
         error: function (err) {
             console.log(this.url);
@@ -850,10 +892,24 @@ function gwd_hkba_barlist(btn, msgid) {
                         console.log($table0TR.length);
                         console.log($table0NextAllTable.length);
 
+                        var toPostMain = {
+                            tLang: tindex,
+                            tname: this.tmpdata.id.split(".")[0],
+                            ttype: this.tmpdata.Title,
+                            thtml: data,
+                            Tid: 0,
+                            Remark: this.url,
+                            tStatus: 0,
+                            ClientIP: undefined,
+                            addDate: undefined,
+                            UpdateDate: undefined,
+                            gwd_Barristers_items: []
+                        }
                         var postItem = {
-
-                            Tid: this.tmpdata.id.split(".")[0],
-                            TIndex: tindex,
+                            tLang: tindex,
+                            tkeyNo: this.tmpdata.id.split(".")[0],
+                            tIndex: 0,
+                            Tid: 0,
                             LawyerName: this.tmpdata.LawyerName,
                             ChineseName: this.tmpdata.LawyerName,
                             Sex: this.tmpdata.Sex,
@@ -868,7 +924,7 @@ function gwd_hkba_barlist(btn, msgid) {
                             ApproveYear: undefined,
                             IsMandarin: tmpIsMandarin,
                             tname: undefined,
-                            ttype: undefined,
+                            ttype: this.tmpdata.Title,
                             tcontent: undefined,
                             tGetTable: undefined,
                             thtml: data,
@@ -929,17 +985,17 @@ function gwd_hkba_barlist(btn, msgid) {
                         /////
                         //console.log(_allColNameZH);
                         //console.log(postItem);
-
+                        toPostMain.gwd_Barristers_items.push(postItem);
                         //提交数据库
                         $.ajax({
                             type: 'POST',
                             url: config.urlApi_hkba,
-                            tmpdata: postItem,
+                            tmpdata: toPostMain,
                             timeout: 50000,
                             contentType: 'application/json; charset=utf-8',
-                            data: JSON.stringify(postItem)
+                            data: JSON.stringify(toPostMain)
                         }).done(function (data) {
-                            console.log(_ttype + "," + typemsg + "," + this.tmpdata.Tid + "," + ",Index:" + this.tmpdata.TIndex + ":中文 Post Done!");
+                            console.log(_ttype + "," + typemsg + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                             // sendMsg('jsonDate', "Set Date Now.");
                             //console.log(data);
                         }).fail(function (err) {

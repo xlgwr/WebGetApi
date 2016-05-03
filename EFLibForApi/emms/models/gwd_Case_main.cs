@@ -12,22 +12,22 @@ using Newtonsoft.Json;
 namespace EFLibForApi.emms.models
 {
 
-    [Table("gwd_Judiciary_main")]
-    public class gwd_Judiciary_main : entityMain
+    [Table("gwd_Case_main")]
+    public class gwd_Case_main : entityMain
     {
-        public gwd_Judiciary_main()
+        public gwd_Case_main()
         {
-            this.gwd_Judiciary_items = new List<gwd_Judiciary_items>();
+            this.gwd_Case_items = new List<gwd_Case_items>();
         }
-        public ICollection<gwd_Judiciary_items> gwd_Judiciary_items { get; set; }
+        public ICollection<gwd_Case_items> gwd_Case_items { get; set; }
 
     }
 
-    [Table("gwd_Judiciary_items")]
-    public class gwd_Judiciary_items : entityItems
+    [Table("gwd_Case_items")]
+    public class gwd_Case_items : entityItems
     {
         [Index]
-        [ForeignKey("gwd_Judiciary_main")]
+        [ForeignKey("gwd_Case_main")]
         public long htmlID { get; set; }
 
         /// <summary>
@@ -116,6 +116,6 @@ namespace EFLibForApi.emms.models
         public string Representation { get; set; }
 
         [JsonIgnore]
-        public gwd_Judiciary_main gwd_Judiciary_main { get; set; }
+        public gwd_Case_main gwd_Case_main { get; set; }
     }
 }

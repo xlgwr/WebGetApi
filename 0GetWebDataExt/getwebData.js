@@ -9,7 +9,7 @@ var _mainwebUrl1 = "http://www.icris.cr.gov.hk/csci/";
 
 var _subWeb1Url = "https://www.icris.cr.gov.hk/csci/login_i.jsp";
 
-var _subWeb2iguestUrl = "https://www.icris.cr.gov.hk/csci/login_i.do?loginType=iguest&username=iguest";
+var _subWeb2iguestUrl = "https://www.icris.cr.gov.hk/csci/login_i.do?loginType=iguest";
 var _logout_warnUrl = 'https://www.icris.cr.gov.hk/csci/logout_warn.jsp';
 
 var _CBDS_SearchUrl = "https://www.icris.cr.gov.hk/csci/CBDS_Search.do";
@@ -64,7 +64,7 @@ $(function () {
         console.log("subWeb1");
         subWeb1();
     }
-    if (currLocal === _subWeb2iguestUrl) {
+    if (currLocal.indexOf(_subWeb2iguestUrl) > -1) {
         console.log("_subWeb2iguestUrl");
         sendMsg('openURLForICRIS', "openURLForICRIS.");
     }

@@ -11,21 +11,21 @@ using Newtonsoft.Json;
 
 namespace EFLibForApi.emms.models
 {
-    [Table("gwd_directory_main")]
-    public class gwd_directory_main : entityMainComm
+    [Table("gwd_GovernmentPhonebook_main")]
+    public class gwd_GovernmentPhonebook_main : entityMainComm
     {
-        public gwd_directory_main()
+        public gwd_GovernmentPhonebook_main()
         {
-            this.gwd_directory_items = new List<gwd_directory_items>();
+            this.gwd_GovernmentPhonebook_items = new List<gwd_GovernmentPhonebook_items>();
         }
-        public ICollection<gwd_directory_items> gwd_directory_items { get; set; }
+        public ICollection<gwd_GovernmentPhonebook_items> gwd_GovernmentPhonebook_items { get; set; }
     }
 
-    [Table("gwd_directory_items")]
-    public class gwd_directory_items : entityItems
+    [Table("gwd_GovernmentPhonebook_items")]
+    public class gwd_GovernmentPhonebook_items : entityItems
     {
         [Index]
-        [ForeignKey("gwd_directory_main")]
+        [ForeignKey("gwd_GovernmentPhonebook_main")]
         public long htmlID { get; set; }
 
         /// <summary>
@@ -39,6 +39,16 @@ namespace EFLibForApi.emms.models
         public string Title { get; set; }
 
         /// <summary>
+        /// 地址
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Fax { get; set; }
+
+        /// <summary>
         /// 电话
         /// </summary>
         public string OfficePhone { get; set; }
@@ -49,7 +59,7 @@ namespace EFLibForApi.emms.models
         public string Email { get; set; }
 
         [JsonIgnore]
-        public gwd_directory_main gwd_directory_main { get; set; }
+        public gwd_GovernmentPhonebook_main gwd_GovernmentPhonebook_main { get; set; }
 
     }
 

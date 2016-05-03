@@ -27,6 +27,12 @@ function loginIguest() {
 // "https://www.icris.cr.gov.hk/csci/login_i.jsp"
 function subWeb1() {
     //this.location.href = this.location.href;  
+    var $checkbox = $("input:checkbox");
+    if ($checkbox) {
+        console.log($checkbox.length);
+        $checkbox.eq(0).click();
+        $checkbox.eq(6).click();
+    }
     var $submit = $("input:submit");
     console.log($submit);
     if ($submit) {
@@ -119,7 +125,7 @@ function PostData() {
                 url: 'https://www.icris.cr.gov.hk/csci/CBDS_Search.do?nextAction=CBDS_Search&CRNo=' + tmpCRNo + '&showMedium=true&showBack=true&searchPage=True',
                 data: {},
                 tmpdata: tmpCRNo,
-                timeout: 20000,
+                timeout: 50000,
                 type: "get",
                 success: function (data, state, xhr) {
 
@@ -175,27 +181,27 @@ function PostData() {
                     //console.log(dd);
                     $table0Tr.eq(1).find('td').eq(1).find('br').replaceWith("@");
                     var tmpname = $table0Tr.eq(1).find('td').eq(1).text().trim().split('@');
-                    var tmpnameZh = tmpname.length > 1 ? tmpname[1].replace('-THE-', '').trim() : undefined;
+                    var tmpnameZh = tmpname.length > 1 ? tmpname[1].replace('-THE-', '').replace('-The-', '').trim() : undefined;
 
                     //提交到数据库
                     var getWebDatas = {
-                        gwd_ICRIS_items: [],
-                        gwd_ICRIS_itemsChange: [],
+                        gwd_CompaniesRegistry_items: [],
+                        gwd_CompaniesRegistry_itemsChange: [],
                         tname: "icris",
                         ttype: $ttype,
                         thtml: data,
                         Tid: 0,
                         tLang: configGetUrl.url_icris_home_lang.flag,//0:US,1:HK,2:ZH
-                        Remark: undefined,
+                        Remark: this.url,
                         tStatus: 0,
                         ClientIP: undefined,
                         addDate: undefined,
                         UpdateDate: undefined
                     }
-                    var gwd_ICRIS_items = {
+                    var gwd_CompaniesRegistry_items = {
                         $id: "1",
                         htmlID: 0,
-                        CompanyName: tmpname[0].replace('-THE-', '').trim(),
+                        CompanyName: tmpname[0].replace('-THE-', '').replace('-The-', '').trim(),
                         CompanyNameZH: tmpnameZh,
                         CompanyType: $table0Tr.eq(2).find('td').eq(1).text().trim(),
                         FoundDate: $table0Tr.eq(3).find('td').eq(1).text().trim(),
@@ -212,13 +218,13 @@ function PostData() {
                         tname: "icris",
                         ttype: $ttype,
                         Tid: 0,
-                        Remark: undefined,
+                        Remark: this.url,
                         tStatus: 0,
                         ClientIP: undefined,
                         addDate: undefined,
                         UpdateDate: undefined
                     }
-                    getWebDatas.gwd_ICRIS_items.push(gwd_ICRIS_items);
+                    getWebDatas.gwd_CompaniesRegistry_items.push(gwd_CompaniesRegistry_items);
 
                     var tmpindex = 1;
                     var tmpDate = "";
@@ -227,7 +233,7 @@ function PostData() {
                         var alltd = $table1Tr.eq(r).children('td');
 
                         tmpName = alltd.eq(1).text().trim();
-                        var gwd_ICRIS_itemsChange = {
+                        var gwd_CompaniesRegistry_itemsChange = {
                             $id: tmpindex + 1,
                             htmlID: 0,
                             CompanyName: undefined,
@@ -239,7 +245,7 @@ function PostData() {
                             tname: "icris",
                             ttype: $ttype,
                             Tid: 0,
-                            Remark: undefined,
+                            Remark: this.url,
                             tStatus: 0,
                             ClientIP: undefined,
                             addDate: undefined,
@@ -248,15 +254,15 @@ function PostData() {
 
                         if (alltd.length > 1) {
                             tmpDate = alltd.eq(0).text().trim();
-                            gwd_ICRIS_itemsChange.CompanyName = tmpName.replace('-THE-', '').trim();
+                            gwd_CompaniesRegistry_itemsChange.CompanyName = tmpName.replace('-THE-', '').trim();
                         } else {
                             tmpName = alltd.eq(0).text().trim();
-                            gwd_ICRIS_itemsChange.CompanyNameZH = tmpName.replace('-THE-', '').trim();
+                            gwd_CompaniesRegistry_itemsChange.CompanyNameZH = tmpName.replace('-THE-', '').trim();
                         }
 
-                        gwd_ICRIS_itemsChange.EffectiveDate = tmpDate;
+                        gwd_CompaniesRegistry_itemsChange.EffectiveDate = tmpDate;
 
-                        getWebDatas.gwd_ICRIS_itemsChange.push(gwd_ICRIS_itemsChange);
+                        getWebDatas.gwd_CompaniesRegistry_itemsChange.push(gwd_CompaniesRegistry_itemsChange);
                         tmpindex += 1;
                     }
 
@@ -266,17 +272,18 @@ function PostData() {
                         getWebDatas.tStatus = 1;
                         getWebDatas.Remark = '没有纪录与输入的查询资料相符';
                         getWebDatas.gwd_ICRIS_items = undefined;
-                        getWebDatas.gwd_ICRIS_itemsChange = undefined;
-                        
+                        getWebDatas.gwd_CompaniesRegistry_itemsChange = undefined;
+
                     };
-                    //console.log(getWebDatas);
+                    
+                    console.log(getWebDatas);
 
                     $.ajax({
                         type: 'POST',
                         url: config.urlApi_icris,
                         tmpdata: this.tmpdata,
                         contentType: 'application/json; charset=utf-8',
-                        timeout: 20000,
+                        timeout: 50000,
                         data: JSON.stringify(getWebDatas)
                     }).done(function (data) {
                         console.log(this.tmpdata + ":Post Done!");
@@ -285,6 +292,7 @@ function PostData() {
                     }).fail(function (err) {
                         //showError
                         $countCurr -= 5;
+                        console.log(this.url);
                         console.log(err);
                     });
                 },
@@ -305,7 +313,7 @@ function PostData() {
         //$('select[name="SelectPage"]').length
         $.ajax({
             type: 'GET',
-            timeout: 20000,
+            timeout: 50000,
             url: tmpPostUrl + "1"
         }).done(function (data) {
             if (data.length < 10) {
@@ -331,7 +339,7 @@ function PostData() {
                 $.ajax({
                     type: 'GET',
                     tmpdata: x,
-                    timeout: 20000,
+                    timeout: 50000,
                     url: tmpPostUrl + x
                 }).done(function (data) {
                     if (data.length < 10) {
@@ -382,24 +390,27 @@ function PostData() {
                             tmpdata: this.tmpdata,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(arrToPost),
-                            timeout: 20000
+                            timeout: 50000
                         }).done(function (data) {
-                            console.log(this.tmpdata + ":Page Post Done!");
+                            console.log(this.tmpdata + ":Page 取消资格令纪录册 Post Done!");
                             //console.log(data);
                         }).fail(function (err) {
                             //showError
+                            console.log(this.url);
                             console.log(err);
                         });
                     }
 
 
                 }).fail(function (err) {
+                    console.log(this.url);
                     console.log(err);
                 });
             }
             //end for
 
         }).fail(function (err) {
+            console.log(this.url);
             console.log(err);
         });
     }

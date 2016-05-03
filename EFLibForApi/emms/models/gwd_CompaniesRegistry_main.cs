@@ -11,24 +11,24 @@ using Newtonsoft.Json;
 
 namespace EFLibForApi.emms.models
 {
-    [Table("gwd_ICRIS_main")]
-    public class gwd_ICRIS_main : entityMain
+    [Table("gwd_CompaniesRegistry_main")]
+    public class gwd_CompaniesRegistry_main : entityMain
     {
-        public gwd_ICRIS_main()
+        public gwd_CompaniesRegistry_main()
         {
-            this.gwd_ICRIS_items = new List<gwd_ICRIS_items>();
-            this.gwd_ICRIS_itemsChange = new List<gwd_ICRIS_itemsChange>();
+            this.gwd_CompaniesRegistry_items = new List<gwd_CompaniesRegistry_items>();
+            this.gwd_CompaniesRegistry_itemsChange = new List<gwd_CompaniesRegistry_itemsChange>();
         }
-        public ICollection<gwd_ICRIS_items> gwd_ICRIS_items { get; set; }
-        public ICollection<gwd_ICRIS_itemsChange> gwd_ICRIS_itemsChange { get; set; }
+        public ICollection<gwd_CompaniesRegistry_items> gwd_CompaniesRegistry_items { get; set; }
+        public ICollection<gwd_CompaniesRegistry_itemsChange> gwd_CompaniesRegistry_itemsChange { get; set; }
     }
 
 
-    [Table("gwd_ICRIS_items")]
-    public class gwd_ICRIS_items : entityItems
+    [Table("gwd_CompaniesRegistry_items")]
+    public class gwd_CompaniesRegistry_items : entityItems
     {
         [Index]
-        [ForeignKey("gwd_ICRIS_main")]
+        [ForeignKey("gwd_CompaniesRegistry_main")]
         public long htmlID { get; set; }
 
         /// <summary>
@@ -100,15 +100,15 @@ namespace EFLibForApi.emms.models
         public string tSearchRes { get; set; }
 
         [JsonIgnore]
-        public gwd_ICRIS_main gwd_ICRIS_main { get; set; }
+        public gwd_CompaniesRegistry_main gwd_CompaniesRegistry_main { get; set; }
     }
 
 
-    [Table("gwd_ICRIS_itemsChange")]
-    public class gwd_ICRIS_itemsChange : entityItems
+    [Table("gwd_CompaniesRegistry_itemsChange")]
+    public class gwd_CompaniesRegistry_itemsChange : entityItems
     {
         [Index]
-        [ForeignKey("gwd_ICRIS_main")]
+        [ForeignKey("gwd_CompaniesRegistry_main")]
         public long htmlID { get; set; }
 
         /// <summary>
@@ -126,11 +126,11 @@ namespace EFLibForApi.emms.models
         public string EffectiveDate { get; set; }
 
         [JsonIgnore]
-        public gwd_ICRIS_main gwd_ICRIS_main { get; set; }
+        public gwd_CompaniesRegistry_main gwd_CompaniesRegistry_main { get; set; }
 
     }
-    [Table("gwd_ICRIS_DisOrders")]
-    public class gwd_ICRIS_DisOrders : entity
+    [Table("gwd_CompaniesRegistry_DisOrders")]
+    public class gwd_CompaniesRegistry_DisOrders : entity
     {
         [Key]
         public string RecordID { get; set; }

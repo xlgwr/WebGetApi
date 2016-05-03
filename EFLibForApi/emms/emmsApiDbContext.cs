@@ -29,25 +29,25 @@
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
 
-        public virtual DbSet<gwd_ICRIS_main> gwd_ICRIS_main { get; set; }
-        public virtual DbSet<gwd_ICRIS_items> gwd_ICRIS_items { get; set; }
-        public virtual DbSet<gwd_ICRIS_itemsChange> gwd_ICRIS_itemsChange { get; set; }
-        public virtual DbSet<gwd_ICRIS_DisOrders> gwd_ICRIS_DisOrders { get; set; }
+        public virtual DbSet<gwd_CompaniesRegistry_main> gwd_CompaniesRegistry_main { get; set; }
+        public virtual DbSet<gwd_CompaniesRegistry_items> gwd_CompaniesRegistry_items { get; set; }
+        public virtual DbSet<gwd_CompaniesRegistry_itemsChange> gwd_CompaniesRegistry_itemsChange { get; set; }
+        public virtual DbSet<gwd_CompaniesRegistry_DisOrders> gwd_CompaniesRegistry_DisOrders { get; set; }
 
-        public virtual DbSet<gwd_Judiciary_main> gwd_Judiciary_main { get; set; }
-        public virtual DbSet<gwd_Judiciary_items> gwd_Judiciary_items { get; set; }
+        public virtual DbSet<gwd_Case_main> gwd_Case_main { get; set; }
+        public virtual DbSet<gwd_Case_items> gwd_Case_items { get; set; }
 
 
-        public virtual DbSet<gwd_legalref_main> gwd_legalref_main { get; set; }
+        public virtual DbSet<gwd_AppealRecord_main> gwd_AppealRecord_main { get; set; }
 
-        public virtual DbSet<gwd_hklawsoc_main> gwd_hklawsoc_main { get; set; }
-        public virtual DbSet<gwd_hklawsoc_items> gwd_hklawsoc_items { get; set; }
+        public virtual DbSet<gwd_Lawyers_main> gwd_Lawyers_main { get; set; }
+        public virtual DbSet<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
 
-        public virtual DbSet<gwd_hkba_main> gwd_hkba_main { get; set; }
-        public virtual DbSet<gwd_hkba_items> gwd_hkba_items { get; set; }
+        public virtual DbSet<gwd_Barristers_main> gwd_Barristers_main { get; set; }
+        public virtual DbSet<gwd_Barristers_items> gwd_Barristers_items { get; set; }
 
-        public virtual DbSet<gwd_directory_main> gwd_directory_main { get; set; }
-        public virtual DbSet<gwd_directory_items> gwd_directory_items { get; set; }
+        public virtual DbSet<gwd_GovernmentPhonebook_main> gwd_GovernmentPhonebook_main { get; set; }
+        public virtual DbSet<gwd_GovernmentPhonebook_items> gwd_GovernmentPhonebook_items { get; set; }
 
         public virtual DbSet<m_parameter> m_parameter { get; set; }
 
@@ -57,46 +57,49 @@
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_ICRIS_main>()
+            modelBuilder.Entity<gwd_CompaniesRegistry_main>()
             .Property(e => e.Remark)
             .IsUnicode(false);
-            modelBuilder.Entity<gwd_ICRIS_items>()
+            modelBuilder.Entity<gwd_CompaniesRegistry_items>()
             .Property(e => e.Remark)
             .IsUnicode(false);
-            modelBuilder.Entity<gwd_ICRIS_itemsChange>()
+            modelBuilder.Entity<gwd_CompaniesRegistry_itemsChange>()
             .Property(e => e.Remark)
             .IsUnicode(false);
-            modelBuilder.Entity<gwd_ICRIS_DisOrders>()
+            modelBuilder.Entity<gwd_CompaniesRegistry_DisOrders>()
             .Property(e => e.Remark)
             .IsUnicode(false);
 
 
-            modelBuilder.Entity<gwd_Judiciary_main>()
+            modelBuilder.Entity<gwd_Case_main>()
             .Property(e => e.Remark)
             .IsUnicode(false);
-            modelBuilder.Entity<gwd_Judiciary_items>()
+            modelBuilder.Entity<gwd_Case_items>()
               .Property(e => e.Remark)
               .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_legalref_main>()
+            modelBuilder.Entity<gwd_AppealRecord_main>()
             .Property(e => e.Remark)
             .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_hklawsoc_items>()
+            modelBuilder.Entity<gwd_Lawyers_main>()
+          .Property(e => e.Remark)
+          .IsUnicode(false);
+            modelBuilder.Entity<gwd_Lawyers_items>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_hkba_items>()
+            modelBuilder.Entity<gwd_Barristers_items>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_directory_items>()
+            modelBuilder.Entity<gwd_GovernmentPhonebook_items>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
-            //modelBuilder.Entity<gwd_Judiciary_main>()
-            //  .HasRequired(t => t.gwd_Judiciary_items)
-            //    .WithRequiredPrincipal(t => t.gwd_Judiciary_main);
+            //modelBuilder.Entity<gwd_Case_main>()
+            //  .HasRequired(t => t.gwd_Case_items)
+            //    .WithRequiredPrincipal(t => t.gwd_Case_main);
 
         }
         public static emmsApiDbContext Create()

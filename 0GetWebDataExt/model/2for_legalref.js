@@ -97,23 +97,6 @@ function legalref() {
                         }
                         tmpTDis = GetQueryStringUrl(tmpGetItemURL, "DIS");
                         //提交到数据库
-                        var dd = {
-                            "Tdate": "sample string 1",
-                            "TDis": 2,
-                            "TIndex": 3,
-                            "TGetDis": 4,
-                            "ReportedIn": "sample string 5",
-                            "tLang": 6,
-                            "tname": "sample string 7",
-                            "ttype": "sample string 8",
-                            "thtml": "sample string 9",
-                            "Tid": 10,
-                            "Remark": "sample string 11",
-                            "tStatus": 12,
-                            "ClientIP": "sample string 13",
-                            "addDate": "2016-04-29T09:31:55.9370164+08:00",
-                            "UpdateDate": "2016-04-29T09:31:55.9370164+08:00"
-                        }
                         var getWebDatas = {
                             caseNo: tmpCaseNum0,
                             Tdate: tmpDate1,

@@ -11,21 +11,24 @@ using Newtonsoft.Json;
 
 namespace EFLibForApi.emms.models
 {
-    [Table("gwd_hkba_main")]
-    public class gwd_hkba_main : entityMainComm
+    /// <summary>
+    /// 香港大律师表
+    /// </summary>
+    [Table("gwd_Barristers_main")]
+    public class gwd_Barristers_main : entityMainComm
     {
-        public gwd_hkba_main()
+        public gwd_Barristers_main()
         {
-            this.gwd_hkba_items = new List<gwd_hkba_items>();
+            this.gwd_Barristers_items = new List<gwd_Barristers_items>();
         }
-        public ICollection<gwd_hkba_items> gwd_hkba_items { get; set; }
+        public ICollection<gwd_Barristers_items> gwd_Barristers_items { get; set; }
     }
 
-    [Table("gwd_hkba_items")]
-    public class gwd_hkba_items : entityItems
+    [Table("gwd_Barristers_items")]
+    public class gwd_Barristers_items : entityItems
     {
         [Index]
-        [ForeignKey("gwd_hkba_main")]
+        [ForeignKey("gwd_Barristers_main")]
         public long htmlID { get; set; }
 
         /// <summary>
@@ -92,7 +95,7 @@ namespace EFLibForApi.emms.models
         public string IsMandarin { get; set; }
 
         [JsonIgnore]
-        public gwd_hkba_main gwd_hkba_main { get; set; }
+        public gwd_Barristers_main gwd_Barristers_main { get; set; }
 
     }
 

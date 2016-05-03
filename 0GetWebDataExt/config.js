@@ -6,19 +6,26 @@ var $gbHttPSip = "https://192.168.1.6:7443";
 
 var config = {
     //API 接口
-    urlApi_icris: $gbHttPSip + "/api/gwd_ICRIS_main",//post    
-    urlApi_icris_DisOrders: $gbHttPSip + "/api/GWDICRIS/gwd_ICRIS_DisOrders",//post    
-    urlApi_GetWebDatasMaxName: $gbHttPSip + "/api/GWDICRIS/GetWebDatasMaxName/",
-    urlApi_judiciary: $gbHttPip + "/api/gwd_Judiciary_main",//post
-    urlApi_legalref: $gbHttPip + "/api/gwd_legalref_main",//post
-    urlApi_hklawsoc: $gbHttPip + "/api/gwd_hklawsoc_main",//post
-    urlApi_directory: $gbHttPip + "/api/gwd_directory_main",//post
-    urlApi_hkba: $gbHttPip + "/api/gwd_hkba_main",//post
-    urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDlegalref/GetWebDatasMaxTDis",
+    //公司注册处
+    urlApi_icris: $gbHttPSip + "/api/gwd_CompaniesRegistry_main",//post    
+    urlApi_icris_DisOrders: $gbHttPSip + "/api/GWDCompaniesRegistry/gwd_CompaniesRegistry_DisOrders",//post    
+    urlApi_GetWebDatasMaxName: $gbHttPSip + "/api/GWDCompaniesRegistry/GetWebDatasMaxName/",
+    //案件，法院
+    urlApi_judiciary: $gbHttPip + "/api/gwd_Case_main",//post
+    //上诉记录
+    urlApi_legalref: $gbHttPip + "/api/gwd_AppealRecord_main",//post    
+    urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealRecord/GetWebDatasMaxTDis",
+    //律师界名录
+    urlApi_hklawsoc: $gbHttPip + "/api/gwd_Lawyers_main",//post
+    //电话本
+    urlApi_directory: $gbHttPip + "/api/gwd_GovernmentPhonebook_main",//post
+    //大律师
+    urlApi_hkba: $gbHttPip + "/api/gwd_Barristers_main",//post
+    //参数
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
     urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",
     //for 上诉记录
-    urlRedict_legalrefHOME:"http://legalref.judiciary.gov.hk",
+    urlRedict_legalrefHOME: "http://legalref.judiciary.gov.hk",
     urlRedict_legalrefMain: "http://legalref.judiciary.gov.hk/lrs/common/search/search_appeal.jsp?DIS=",
     urlRedict_legalrefItem: "http://legalref.judiciary.gov.hk/lrs/common/ju/ju_body.jsp?DIS=",
     //每5秒开始运行，一次取5个
@@ -65,7 +72,10 @@ var configGetUrl = {
     ///
     //香港特别行政区政府及有关机构电话薄
     getUrl_tel_directory_prefix: "http://tel.directory.gov.hk/",
-    getUrl_tel_directory: "http://tel.directory.gov.hk/index_CHI.html"
+    //中文
+    getUrl_tel_directory: "http://tel.directory.gov.hk/index_CHI.html",
+    //英文
+    getUrl_tel_directoryEN: "http://tel.directory.gov.hk/index_ENG.html"
 
 
 

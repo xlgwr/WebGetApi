@@ -7,13 +7,13 @@ namespace EFLibForApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class changeParam : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(changeParam));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604280717366_init"; }
+            get { return "201605030626338_changeParam"; }
         }
         
         string IMigrationMetadata.Source
