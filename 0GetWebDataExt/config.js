@@ -13,8 +13,9 @@ var config = {
     //案件，法院
     urlApi_judiciary: $gbHttPip + "/api/gwd_Case_main",//post
     //上诉记录
-    urlApi_legalref: $gbHttPip + "/api/gwd_AppealRecord_main",//post    
-    urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealRecord/GetWebDatasMaxTDis",
+    urlApi_legalref: $gbHttPip + "/api/gwd_AppealCases",//post    
+    urlApi_legalref_html: $gbHttPip + "/api/gwd_RatioDecidendis",//post 
+    urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealCases/GetWebDatasMaxTDis",
     //律师界名录
     urlApi_hklawsoc: $gbHttPip + "/api/gwd_Lawyers_main",//post
     //电话本
@@ -41,9 +42,9 @@ var configGetUrl = {
     //0:英文,1:繁体,2:简体
     //0:US,en,1:HK,zh,2:CN,zh
 
-    // url_icris_home_lang: { country: "US", language: "en", flag: 0 },
+    url_icris_home_lang: { country: "US", language: "en", flag: 0 },
 
-    url_icris_home_lang: { country: "HK", language: "zh", flag: 1 },
+    // url_icris_home_lang: { country: "HK", language: "zh", flag: 1 },
 
     // url_icris_home_lang: {country:"CN",language:"zh", flag: 2},
 

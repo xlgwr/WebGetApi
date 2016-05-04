@@ -17,33 +17,33 @@ using Common.Logging;
 
 namespace WebGetApi.Controllers
 {
-    [RoutePrefix("api/GWDAppealRecord")]
-    public class gwd_AppealRecord_mainController : ApiController
+    [RoutePrefix("api/GWDAppealCases")]
+    public class gwd_AppealCasesController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
 
-        // GET: api/gwd_AppealRecord_main
-        public IQueryable<gwd_AppealRecord_main> Get()
+        // GET: api/gwd_AppealCases
+        public IQueryable<gwd_AppealCases> Get()
         {
-            return db.gwd_AppealRecord_main.Take(10);
+            return db.gwd_AppealCases.Take(10);
         }
 
-        // GET: api/gwd_AppealRecord_main/5
-        [ResponseType(typeof(gwd_AppealRecord_main))]
+        // GET: api/gwd_AppealCases/5
+        [ResponseType(typeof(gwd_AppealCases))]
         public async Task<IHttpActionResult> Get(string id, string id2, string id3, string id4, string id5, int id6)
         {
             ///FACC2/2015/29/01/2016
             var tid = id.Trim() + "/" + id2.Trim();
             var tDate = id3.Trim() + "/" + id4.Trim() + "/" + id5.Trim();
 
-            gwd_AppealRecord_main gwd_AppealRecord_main = await db.gwd_AppealRecord_main.FindAsync(new object[] { tid, tDate });
-            if (gwd_AppealRecord_main == null)
+            gwd_AppealCases gwd_AppealCases = await db.gwd_AppealCases.FindAsync(new object[] { tid, tDate });
+            if (gwd_AppealCases == null)
             {
                 return NotFound();
             }
 
-            return Ok(gwd_AppealRecord_main);
+            return Ok(gwd_AppealCases);
         }
 
         // GET: api/GetWebDatas/GetWebDatasMaxDBTDis
@@ -55,7 +55,7 @@ namespace WebGetApi.Controllers
             try
             {
                 //最大获取id
-                dbMax = await db.gwd_AppealRecord_main.MaxAsync(m => m.TGetDis);
+                dbMax = await db.gwd_AppealCases.MaxAsync(m => m.TGetDis);
 
                 if (dbMax < 10)
                 {
@@ -116,7 +116,7 @@ namespace WebGetApi.Controllers
                 long.TryParse(m_parameter.paramvalue, out getMaxSetValue);
                 long.TryParse(m_parameterCurr.paramvalue, out getMaxSetCurrValue);
 
-                getWebDatas = getMaxSetCurrValue - 10;// await db.gwd_AppealRecord_main.MaxAsync(m => m.TGetDis);
+                getWebDatas = getMaxSetCurrValue - 10;// await db.gwd_AppealCases.MaxAsync(m => m.TGetDis);
 
             }
             catch (Exception ex)
@@ -132,9 +132,9 @@ namespace WebGetApi.Controllers
 
             return Ok(getWebDatas);
         }
-        // POST: api/gwd_AppealRecord_main
-        [ResponseType(typeof(gwd_AppealRecord_main))]
-        public async Task<IHttpActionResult> Post(gwd_AppealRecord_main gwd_AppealRecord_main)
+        // POST: api/gwd_AppealCases
+        [ResponseType(typeof(gwd_AppealCases))]
+        public async Task<IHttpActionResult> Post(gwd_AppealCases gwd_AppealCases)
         {
             logger.DebugFormat("Post");
             long tmpCurrMax = 1;
@@ -145,8 +145,8 @@ namespace WebGetApi.Controllers
 
             try
             {
-                gwd_AppealRecord_main.UpdateDate = DateTime.Now;
-                gwd_AppealRecord_main.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                gwd_AppealCases.UpdateDate = DateTime.Now;
+                gwd_AppealCases.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
                 m_parameter m_parameterCurr = await db.m_parameter.FindAsync("AppealRecordCurrMax");
                 if (m_parameterCurr != null)
@@ -154,22 +154,30 @@ namespace WebGetApi.Controllers
                     long.TryParse(m_parameterCurr.paramvalue, out tmpCurrMax);
                 }
 
-                var tmpexitAs = gwtMainExistsAsync(gwd_AppealRecord_main.caseNo, gwd_AppealRecord_main.tLang, gwd_AppealRecord_main.Tdate, gwd_AppealRecord_main.TDis, gwd_AppealRecord_main.TIndex);
+                var tmpexitAs = gwtMainExistsAsync(gwd_AppealCases.caseNo, gwd_AppealCases.tLang, gwd_AppealCases.caseDate, gwd_AppealCases.TDis, gwd_AppealCases.tIndex);
                 if (tmpexitAs)
                 {
-                    db.Entry(gwd_AppealRecord_main).State = EntityState.Modified;
+                    var getModel = gwtMainModel(gwd_AppealCases.caseNo, gwd_AppealCases.tLang, gwd_AppealCases.caseDate, gwd_AppealCases.TDis, gwd_AppealCases.tIndex);
+
+                    getModel.ClientIP = gwd_AppealCases.ClientIP;
+                    getModel.Remark = gwd_AppealCases.Remark;
+                    getModel.ReportedIn = gwd_AppealCases.ReportedIn;
+                    getModel.tname = gwd_AppealCases.tname;
+                    getModel.tStatus = gwd_AppealCases.tStatus;
+                    getModel.ttype = gwd_AppealCases.ttype;
+                    getModel.UpdateDate = gwd_AppealCases.UpdateDate;
 
                 }
                 else
                 {
-                    db.gwd_AppealRecord_main.Add(gwd_AppealRecord_main);
+                    db.gwd_AppealCases.Add(gwd_AppealCases);
                 }
 
                 if (m_parameterCurr != null)
                 {
-                    if (gwd_AppealRecord_main.TGetDis > tmpCurrMax)
+                    if (gwd_AppealCases.TGetDis > tmpCurrMax)
                     {
-                        m_parameterCurr.paramvalue = gwd_AppealRecord_main.TGetDis.ToString();
+                        m_parameterCurr.paramvalue = gwd_AppealCases.TGetDis.ToString();
                         m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         m_parameterCurr.UpdateDate = DateTime.Now;
                     }
@@ -183,12 +191,16 @@ namespace WebGetApi.Controllers
             }
 
             return Ok();
-            //return CreatedAtRoute("DefaultApi", new { id = gwd_AppealRecord_main.Tid }, gwd_AppealRecord_main);
+            //return CreatedAtRoute("DefaultApi", new { id = gwd_AppealCases.Tid }, gwd_AppealCases);
 
         }
-        private bool gwtMainExistsAsync(string caseNo, long tlang, string tdate, long tdis, int index)
+        private bool gwtMainExistsAsync(string caseNo, long tlang, string tdate, long tdis, long index)
         {
-            return db.gwd_AppealRecord_main.Count(e => e.tLang == tlang && e.caseNo == caseNo && e.Tdate == tdate && e.TDis == tdis && e.TIndex == index) > 0;
+            return db.gwd_AppealCases.Count(e => e.tLang == tlang && e.caseNo == caseNo && e.caseDate == tdate && e.TDis == tdis && e.tIndex == index) > 0;
+        }
+        private gwd_AppealCases gwtMainModel(string caseNo, long tlang, string tdate, long tdis, long index)
+        {
+            return db.gwd_AppealCases.Where(e => e.tLang == tlang && e.caseNo == caseNo && e.caseDate == tdate && e.TDis == tdis && e.tIndex == index).FirstOrDefault();
         }
     }
 }

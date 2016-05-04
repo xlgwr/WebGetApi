@@ -78,7 +78,7 @@
     <Compile Include="emms\models\gwd_GovernmentPhonebook_main.cs" />
     <Compile Include="emms\models\gwd_Barristers_main.cs" />
     <Compile Include="emms\models\gwd_Lawyers_main.cs" />
-    <Compile Include="emms\models\gwd_AppealRecord_main.cs" />
+    <Compile Include="emms\models\gwd_AppealCases.cs" />
     <Compile Include="emms\models\gwd_Case_main.cs" />
     <Compile Include="emms\models\gwd_CompaniesRegistry_main.cs" />
     <Compile Include="emms\models\entityMain.cs" />
@@ -86,6 +86,14 @@
     <Compile Include="Migrations\201605030731020_init.cs" />
     <Compile Include="Migrations\201605030731020_init.Designer.cs">
       <DependentUpon>201605030731020_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605030956528_initCaseStable.cs" />
+    <Compile Include="Migrations\201605030956528_initCaseStable.Designer.cs">
+      <DependentUpon>201605030956528_initCaseStable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605040614487_addDisStable.cs" />
+    <Compile Include="Migrations\201605040614487_addDisStable.Designer.cs">
+      <DependentUpon>201605040614487_addDisStable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +110,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605030731020_init.resx">
       <DependentUpon>201605030731020_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605030956528_initCaseStable.resx">
+      <DependentUpon>201605030956528_initCaseStable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605040614487_addDisStable.resx">
+      <DependentUpon>201605040614487_addDisStable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

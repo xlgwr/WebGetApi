@@ -38,7 +38,8 @@
         public virtual DbSet<gwd_Case_items> gwd_Case_items { get; set; }
 
 
-        public virtual DbSet<gwd_AppealRecord_main> gwd_AppealRecord_main { get; set; }
+        public virtual DbSet<gwd_AppealCases> gwd_AppealCases { get; set; }
+        public virtual DbSet<gwd_RatioDecidendis> gwd_RatioDecidendis { get; set; }
 
         //公共主表
         public virtual DbSet<entityCommMain> entityCommMain { get; set; }
@@ -78,7 +79,11 @@
               .Property(e => e.Remark)
               .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_AppealRecord_main>()
+            modelBuilder.Entity<gwd_AppealCases>()
+            .Property(e => e.Remark)
+            .IsUnicode(false);
+
+            modelBuilder.Entity<gwd_RatioDecidendis>()
             .Property(e => e.Remark)
             .IsUnicode(false);
 
