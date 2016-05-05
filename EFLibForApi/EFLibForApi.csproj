@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="emms\emmsApiDbContext.cs" />
+    <Compile Include="emms\models\gwd_InstituteSurveyors_items.cs" />
     <Compile Include="emms\models\entity.cs" />
     <Compile Include="emms\models\entityItems.cs" />
     <Compile Include="emms\models\entityCommMain.cs" />
@@ -104,6 +105,10 @@
     <Compile Include="Migrations\201605040847279_addZhName.Designer.cs">
       <DependentUpon>201605040847279_addZhName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605050330410_addInstituteSurveyors.cs" />
+    <Compile Include="Migrations\201605050330410_addInstituteSurveyors.Designer.cs">
+      <DependentUpon>201605050330410_addInstituteSurveyors.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -131,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605040847279_addZhName.resx">
       <DependentUpon>201605040847279_addZhName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605050330410_addInstituteSurveyors.resx">
+      <DependentUpon>201605050330410_addInstituteSurveyors.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

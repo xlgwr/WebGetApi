@@ -24,6 +24,8 @@ var config = {
     urlApi_hkba: $gbHttPip + "/api/gwd_Barristers_main",//post
     //注册药剂师名单
     urlApi_RP_items: $gbHttPip + "/api/gwd_RegisteredPharmacists_items",//post
+    //香港测量师学会
+    urlApi_IS_items: $gbHttPip + "/api/gwd_InstituteSurveyors_items",//post
     //参数
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
     urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",
@@ -85,7 +87,16 @@ var configGetUrl = {
     //中文(繁体)
     getUrl_RP_items: "http://www.ppbhk.org.hk/tc_chi/list_pharmacists/list.php",
     //英文
-    getUrl_RP_itemsEN: "http://www.ppbhk.org.hk/eng/list_pharmacists/list.php"
+    getUrl_RP_itemsEN: "http://www.ppbhk.org.hk/eng/list_pharmacists/list.php",
+    
+    
+    //InstituteSurveyors 香港测量师学会
+    getUrl_IS_items_prefix: "http://www.hkis.org.hk/",
+    //中文(繁体) ?id=47
+    getUrl_IS_items: "http://www.hkis.org.hk/zh/company_list2.php",
+    //英文 ?id=47
+    getUrl_IS_itemsEN: "http://www.hkis.org.hk/en/company_list2.php",
+    
 
 
 

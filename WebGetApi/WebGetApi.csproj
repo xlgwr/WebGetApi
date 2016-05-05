@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -219,6 +220,7 @@
     <Compile Include="Controllers\gwd_Barristers_mainController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\gwd_InstituteSurveyors_itemsController.cs" />
     <Compile Include="Controllers\gwd_Lawyers_mainController.cs">
       <SubType>Code</SubType>
     </Compile>
