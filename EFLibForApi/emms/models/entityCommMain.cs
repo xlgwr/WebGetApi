@@ -37,10 +37,13 @@ namespace EFLibForApi.emms.models
             this.gwd_Lawyers_items = new List<gwd_Lawyers_items>();
 
             this.gwd_GovernmentPhonebook_items = new List<gwd_GovernmentPhonebook_items>();
+
+            this.gwd_RegisteredPharmacists_items = new List<gwd_RegisteredPharmacists_items>();
         }
         public ICollection<gwd_Barristers_items> gwd_Barristers_items { get; set; }
         public ICollection<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
         public ICollection<gwd_GovernmentPhonebook_items> gwd_GovernmentPhonebook_items { get; set; }
+        public ICollection<gwd_RegisteredPharmacists_items> gwd_RegisteredPharmacists_items { get; set; }
 
     }
 }

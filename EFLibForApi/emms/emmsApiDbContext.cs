@@ -47,6 +47,7 @@
         public virtual DbSet<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
         public virtual DbSet<gwd_Barristers_items> gwd_Barristers_items { get; set; }
         public virtual DbSet<gwd_GovernmentPhonebook_items> gwd_GovernmentPhonebook_items { get; set; }
+        public virtual DbSet<gwd_RegisteredPharmacists_items> gwd_RegisteredPharmacists_items { get; set; }
 
 
 

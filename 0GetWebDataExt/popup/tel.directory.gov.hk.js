@@ -443,6 +443,9 @@ function gwd_tel_directory(btn, msgid) {
                         var $getAllaLink = $divList.find('a');
 
                         console.log($getAllaLink.length);
+
+
+
                         for (var a = 0; a < $getAllaLink.length; a++) {
                             var currA = $getAllaLink.eq(a);
                             var currTitle = this.tmpdata.tTitle + "-" + currA.text().trim();
@@ -454,7 +457,7 @@ function gwd_tel_directory(btn, msgid) {
                                 url: currHref,
                                 data: { accept_disclaimer: 'yes' },
                                 tmpdata: currTitle,
-                                timeout: 50000,
+                                timeout: (2 * 60 * 1000),
                                 type: "get",
                                 success: function (data, state, xhr) {
                                     console.log(_tTitle + "," + this.tmpdata + "," + this.url);

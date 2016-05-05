@@ -22,6 +22,8 @@ var config = {
     urlApi_directory: $gbHttPip + "/api/gwd_GovernmentPhonebook_main",//post
     //大律师
     urlApi_hkba: $gbHttPip + "/api/gwd_Barristers_main",//post
+    //注册药剂师名单
+    urlApi_RP_items: $gbHttPip + "/api/gwd_RegisteredPharmacists_items",//post
     //参数
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
     urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",
@@ -73,10 +75,17 @@ var configGetUrl = {
     ///
     //香港特别行政区政府及有关机构电话薄
     getUrl_tel_directory_prefix: "http://tel.directory.gov.hk/",
-    //中文
+    //中文(繁体)
     getUrl_tel_directory: "http://tel.directory.gov.hk/index_CHI.html",
     //英文
-    getUrl_tel_directoryEN: "http://tel.directory.gov.hk/index_ENG.html"
+    getUrl_tel_directoryEN: "http://tel.directory.gov.hk/index_ENG.html",
+    
+    //注册药剂师名单
+    getUrl_RP_items_prefix: "http://www.ppbhk.org.hk/",
+    //中文(繁体)
+    getUrl_RP_items: "http://www.ppbhk.org.hk/tc_chi/list_pharmacists/list.php",
+    //英文
+    getUrl_RP_itemsEN: "http://www.ppbhk.org.hk/eng/list_pharmacists/list.php"
 
 
 

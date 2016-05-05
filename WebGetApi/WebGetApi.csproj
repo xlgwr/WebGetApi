@@ -232,6 +232,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\gwd_RatioDecidendisController.cs" />
+    <Compile Include="Controllers\gwd_RegisteredPharmacists_itemsController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>Code</SubType>
     </Compile>

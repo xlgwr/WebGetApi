@@ -75,13 +75,14 @@
     <Compile Include="emms\models\entityItems.cs" />
     <Compile Include="emms\models\entityCommMain.cs" />
     <Compile Include="emms\models\entityTID.cs" />
-    <Compile Include="emms\models\gwd_GovernmentPhonebook_main.cs" />
-    <Compile Include="emms\models\gwd_Barristers_main.cs" />
-    <Compile Include="emms\models\gwd_Lawyers_main.cs" />
+    <Compile Include="emms\models\gwd_GovernmentPhonebook_items.cs" />
+    <Compile Include="emms\models\gwd_Barristers_items.cs" />
+    <Compile Include="emms\models\gwd_Lawyers_items.cs" />
     <Compile Include="emms\models\gwd_AppealCases.cs" />
     <Compile Include="emms\models\gwd_Case_main.cs" />
     <Compile Include="emms\models\gwd_CompaniesRegistry_main.cs" />
     <Compile Include="emms\models\entityMain.cs" />
+    <Compile Include="emms\models\gwd_RegisteredPharmacists_items.cs" />
     <Compile Include="emms\models\m_parameter.cs" />
     <Compile Include="Migrations\201605030731020_init.cs" />
     <Compile Include="Migrations\201605030731020_init.Designer.cs">
@@ -94,6 +95,14 @@
     <Compile Include="Migrations\201605040614487_addDisStable.cs" />
     <Compile Include="Migrations\201605040614487_addDisStable.Designer.cs">
       <DependentUpon>201605040614487_addDisStable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605040725590_addgwd_RegisteredPharmacists_items.cs" />
+    <Compile Include="Migrations\201605040725590_addgwd_RegisteredPharmacists_items.Designer.cs">
+      <DependentUpon>201605040725590_addgwd_RegisteredPharmacists_items.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605040847279_addZhName.cs" />
+    <Compile Include="Migrations\201605040847279_addZhName.Designer.cs">
+      <DependentUpon>201605040847279_addZhName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +125,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605040614487_addDisStable.resx">
       <DependentUpon>201605040614487_addDisStable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605040725590_addgwd_RegisteredPharmacists_items.resx">
+      <DependentUpon>201605040725590_addgwd_RegisteredPharmacists_items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605040847279_addZhName.resx">
+      <DependentUpon>201605040847279_addZhName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

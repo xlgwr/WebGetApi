@@ -43,80 +43,143 @@
                 <ul class="nav nav-sidebar">
                     <li class="active"><a href="#main2">公共信息采集 <span class="sr-only">(current)</span></a></li>
                     <li><a href="#main2">1.律师界名录</a></li>
-                    <li><a href="#h2Get1">2.注册外地律师</a></li>
-                    <li><a href="#h2Get2">3.香港大律师</a></li>
-                    <li><a href="#h2Get3">4.香港特别行政区政府电话薄</a></li>
+                    <li><a href="#main2">2.注册外地律师</a></li>
+                    <li><a href="#h2Get1">3.香港大律师</a></li>
+                    <li><a href="#h2Get1">4.香港特别行政区政府电话薄</a></li>
+                    <li><a href="#h2Get3">5.注册药剂师名单</a></li>
+                    <li><a href="#h2Get3">6.香港测量师学会</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 id="main1" class="page-header">参数设置</h1>
-                <h2 id="h2set1" class="sub-header">1.终审及高等法院</h2>
-                <div class="row placeholders">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <label for="evenyDataGet">每日开始采集时间:</label>
-                            <input type="text" value="" id="evenyDataGet" data-date-format="hh:ii" class="form-control" placeholder="输入每日开始采集时间" readonly>
-                        </div>
-                        <button type="submit" id="btnEvenyDataGet" class="btn btn-default">设置每日开始采集时间</button>
-                    </form>
+                <div>
+                    <h2 id="h2set1" class="sub-header">1.终审及高等法院</h2>
+                    <div class="row placeholders">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="evenyDataGet">每日开始采集时间:</label>
+                                <input type="text" value="" id="evenyDataGet" data-date-format="hh:ii" class="form-control" placeholder="输入每日开始采集时间" readonly>
+                            </div>
+                            <button type="submit" id="btnEvenyDataGet" class="btn btn-default">设置每日开始采集时间</button>
+                        </form>
+                    </div>
                 </div>
-
                 <h1 id="main2" class="page-header">公共信息采集</h1>
-                <h2 id="h2Get1" class="sub-header">1.律师界名录</h2>
-                <div class="row placeholders">
-                    <div id='panelhklaw' class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><button type="button" id="btn1hklaw" class="btn btn-default">开始更新</button></h3>
-                        </div>
-                        <div class="panel-body">
-                            <p id="msg1" class="alert alert-warning hide" role="alert">
-                                更新情况
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <div>
+                    <div class="row placeholders">
+                        <div class="col-md-6">
+                            <div id='panelhklaw' class="panel panel-default">
+                                <h2 id="h2Get1" class="sub-header">1.律师界名录</h2>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><button type="button" id="btn1hklaw" class="btn btn-default">开始更新</button></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p id="msg1" class="alert alert-warning hide" role="alert">
+                                        更新情况
+                                    </p>
+                                </div>
+                            </div>
 
-                <h2 id="h2Get2" class="sub-header">2.注册外地律师</h2>
-                <div class="row placeholders">
-                    <div id='panelhklaw2' class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><button type="button" id="btn1hklaw2" class="btn btn-default">开始更新</button></h3>
                         </div>
-                        <div class="panel-body">
-                            <p id="msg2" class="alert alert-warning hide" role="alert">
-                                更新情况
-                            </p>
+                        <div class="col-md-6">
+                            <div id='panelhklaw2' class="panel panel-default">
+                                <h2 id="h2Get2" class="sub-header">2.注册外地律师</h2>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><button type="button" id="btn1hklaw2" class="btn btn-default">开始更新</button></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p id="msg2" class="alert alert-warning hide" role="alert">
+                                        更新情况
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row placeholders">
+                        <div class="col-md-6">
+                            <div id='panelhklaw3' class="panel panel-default">
+                                <h2 id="h2Get3" class="sub-header">3.香港大律师</h2>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><button type="button" id="btn1hklaw3" class="btn btn-default">开始更新</button></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p id="msg3" class="alert alert-warning hide" role="alert">
+                                        更新情况
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id='panel4' class="panel panel-default">
+                                <h2 id="h2Get4" class="sub-header">4.香港特别行政区政府及有关机构电话薄</h2>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><button type="button" id="btn4" class="btn btn-default">开始更新</button></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p id="msg4" class="alert alert-warning hide" role="alert">
+                                        更新情况
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row placeholders">
+                        <div class="col-md-6">
+                            <div id='panel5' class="panel panel-default">
+                                <h2 id="h2Get5" class="sub-header">5.注册药剂师名单</h2>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><button type="button" id="btn5" class="btn btn-default">开始更新</button></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p id="msg5" class="alert alert-warning hide" role="alert">
+                                        更新情况
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id='panel6' class="panel panel-default">
+                                <h2 id="h2Get6" class="sub-header">6.香港测量师学会</h2>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><button type="button" id="btn6" class="btn btn-default">开始更新</button></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p id="msg6" class="alert alert-warning hide" role="alert">
+                                        更新情况
+                                    </p>
+                                </div>
+                            </div>
 
-                </div>
-                <h2 id="h2Get3" class="sub-header">3.香港大律师</h2>
-                <div class="row placeholders">
-                    <div id='panelhklaw3' class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><button type="button" id="btn1hklaw3" class="btn btn-default">开始更新</button></h3>
-                        </div>
-                        <div class="panel-body">
-                            <p id="msg3" class="alert alert-warning hide" role="alert">
-                                更新情况
-                            </p>
                         </div>
                     </div>
-                </div>
-                 <h2 id="h2Get4" class="sub-header">4.香港特别行政区政府及有关机构电话薄</h2>
-                <div class="row placeholders">
-                    <div id='panel4' class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><button type="button" id="btn4" class="btn btn-default">开始更新</button></h3>
+                    <div class="row placeholders">
+                        <div class="col-md-6">
+
+
                         </div>
-                        <div class="panel-body">
-                            <p id="msg4" class="alert alert-warning hide" role="alert">
-                                更新情况
-                            </p>
+                        <div class="col-md-6">
+
                         </div>
                     </div>
-                </div>
-                <!--<h2 class="sub-header">Section title</h2>
+                    <div class="row placeholders">
+                        <div class="col-md-6">
+
+
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                    <div class="row placeholders">
+                        <div class="col-md-6">
+
+
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                    <!--<h2 class="sub-header">Section title</h2>
                 <div class="row placeholders">
                     <form class="form-inline">
                         <div class="form-group">
@@ -130,6 +193,7 @@
                         <button type="submit" class="btn btn-default">Send invitation</button>
                     </form>
                 </div>-->
+                </div>
 
             </div>
         </div>
@@ -148,7 +212,8 @@
     <script type='text/javascript' src='popup/www.hklawsoc.org.hk.js'></script>
     <script type='text/javascript' src='popup/barlist.hkba.org.js'></script>
     <script type='text/javascript' src='popup/tel.directory.gov.hk.js'></script>
-    
+    <script type='text/javascript' src='popup/RegisteredPharmacists.js'></script>
+
 
 </body>
 

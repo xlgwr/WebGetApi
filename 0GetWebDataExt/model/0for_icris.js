@@ -87,7 +87,7 @@ function PostData() {
     openURLForGetDisOrderICRIS()
 
     var s1_icris = window.setInterval(runeven50, (10 * 1000));
-    var s1_icris_dis = window.setInterval(openURLForGetDisOrderICRIS, (3 * 60 * 1000));
+    var s1_icris_dis = window.setInterval(openURLForGetDisOrderICRIS, (5 * 60 * 1000));
 
     function runeven50() {
         closeTabs("www.icris.cr.gov.hk");
