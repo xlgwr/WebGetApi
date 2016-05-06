@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="emms\emmsApiDbContext.cs" />
+    <Compile Include="emms\models\gwd_PsychologistsList_items.cs" />
     <Compile Include="emms\models\gwd_InstituteSurveyors_items.cs" />
     <Compile Include="emms\models\entity.cs" />
     <Compile Include="emms\models\entityItems.cs" />
@@ -83,6 +84,8 @@
     <Compile Include="emms\models\gwd_Case_main.cs" />
     <Compile Include="emms\models\gwd_CompaniesRegistry_main.cs" />
     <Compile Include="emms\models\entityMain.cs" />
+    <Compile Include="emms\models\gwd_RegBuildingCompany_items.cs" />
+    <Compile Include="emms\models\gwd_RegArchitect_items.cs" />
     <Compile Include="emms\models\gwd_RegisteredPharmacists_items.cs" />
     <Compile Include="emms\models\m_parameter.cs" />
     <Compile Include="Migrations\201605030731020_init.cs" />
@@ -108,6 +111,18 @@
     <Compile Include="Migrations\201605050330410_addInstituteSurveyors.cs" />
     <Compile Include="Migrations\201605050330410_addInstituteSurveyors.Designer.cs">
       <DependentUpon>201605050330410_addInstituteSurveyors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605050721139_addPsychologistsList.cs" />
+    <Compile Include="Migrations\201605050721139_addPsychologistsList.Designer.cs">
+      <DependentUpon>201605050721139_addPsychologistsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605060224014_addRegPersonCompany.cs" />
+    <Compile Include="Migrations\201605060224014_addRegPersonCompany.Designer.cs">
+      <DependentUpon>201605060224014_addRegPersonCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605060641311_addColCompany.cs" />
+    <Compile Include="Migrations\201605060641311_addColCompany.Designer.cs">
+      <DependentUpon>201605060641311_addColCompany.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,6 +154,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605050330410_addInstituteSurveyors.resx">
       <DependentUpon>201605050330410_addInstituteSurveyors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605050721139_addPsychologistsList.resx">
+      <DependentUpon>201605050721139_addPsychologistsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605060224014_addRegPersonCompany.resx">
+      <DependentUpon>201605060224014_addRegPersonCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605060641311_addColCompany.resx">
+      <DependentUpon>201605060641311_addColCompany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

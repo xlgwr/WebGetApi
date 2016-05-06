@@ -41,12 +41,21 @@ namespace EFLibForApi.emms.models
             this.gwd_RegisteredPharmacists_items = new List<gwd_RegisteredPharmacists_items>();
 
             this.gwd_InstituteSurveyors_items = new List<gwd_InstituteSurveyors_items>();
+
+            this.gwd_PsychologistsList_items = new List<gwd_PsychologistsList_items>();
+
+            this.gwd_RegArchitect_items = new List<gwd_RegArchitect_items>();
+
+            this.gwd_RegBuildingCompany_items = new List<gwd_RegBuildingCompany_items>();
         }
         public ICollection<gwd_Barristers_items> gwd_Barristers_items { get; set; }
         public ICollection<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
         public ICollection<gwd_GovernmentPhonebook_items> gwd_GovernmentPhonebook_items { get; set; }
         public ICollection<gwd_RegisteredPharmacists_items> gwd_RegisteredPharmacists_items { get; set; }
         public ICollection<gwd_InstituteSurveyors_items> gwd_InstituteSurveyors_items { get; set; }
+        public ICollection<gwd_PsychologistsList_items> gwd_PsychologistsList_items { get; set; }
+        public ICollection<gwd_RegArchitect_items> gwd_RegArchitect_items { get; set; }
+        public ICollection<gwd_RegBuildingCompany_items> gwd_RegBuildingCompany_items { get; set; }
 
     }
 }

@@ -20,8 +20,8 @@ namespace WebGetApi.Controllers
     /// <summary>
     /// Registered Pharmacists
     /// </summary>
-    [RoutePrefix("api/GWDInstituteSurveyors")]
-    public class gwd_InstituteSurveyors_itemsController : ApiController
+    [RoutePrefix("api/GWDRegBuildingCompany")]
+    public class gwd_RegBuildingCompany_itemsController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
@@ -47,39 +47,44 @@ namespace WebGetApi.Controllers
                 entityCommMain.UpdateDate = DateTime.Now;
                 entityCommMain.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
-                if (entityCommMain.gwd_InstituteSurveyors_items != null)
+                if (entityCommMain.gwd_RegBuildingCompany_items != null)
                 {
-                    foreach (var item in entityCommMain.gwd_InstituteSurveyors_items)
+                    foreach (var item in entityCommMain.gwd_RegBuildingCompany_items)
                     {
                         item.htmlID = entityCommMain.Tid;
                         item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         item.UpdateDate = DateTime.Now;
                     }
 
-                    if (entityCommMain.gwd_InstituteSurveyors_items.Count > 0)
+                    if (entityCommMain.gwd_RegBuildingCompany_items.Count > 0)
                     {
-                        var tmpfirst = entityCommMain.gwd_InstituteSurveyors_items.First();
+                        var tmpfirst = entityCommMain.gwd_RegBuildingCompany_items.First();
 
-                        var tmpExitItem = gwd_InstituteSurveyors_itemsExists(tmpfirst.tkeyNo, tmpfirst.tLang, tmpfirst.tIndex);
+                        var tmpExitItem = gwd_RegBuildingCompany_itemsExists(tmpfirst.tkeyNo, tmpfirst.tLang, tmpfirst.tIndex);
                         if (tmpExitItem)
                         {
                             long tmpHtmlId = 0;
-                            foreach (var item in entityCommMain.gwd_InstituteSurveyors_items)
+                            foreach (var item in entityCommMain.gwd_RegBuildingCompany_items)
                             {
                                 if (!string.IsNullOrEmpty(item.CompanyName))
                                 {
-                                    var getItem = gwd_InstituteSurveyors_itemsByNo(item.tkeyNo, item.tLang, item.tIndex);
+                                    var getItem = gwd_RegBuildingCompany_itemsByNo(item.tkeyNo, item.tLang, item.tIndex);
                                     if (getItem != null)
                                     {
                                         tmpHtmlId = getItem.htmlID;
-                                        
+
+                                        getItem.tIndex = item.tIndex;
                                         getItem.CompanyName = item.CompanyName;
-                                        getItem.ContactPerson = item.ContactPerson;
-                                        getItem.Email = item.Email;
-                                        getItem.Fax = item.Fax;
-                                        getItem.Address = item.Address;
-                                        getItem.TelNo = item.TelNo;
-                                        getItem.Website = item.Website;
+                                        getItem.CompanyNameZH = item.CompanyNameZH;
+                                        getItem.AuthorizedSignatory = item.AuthorizedSignatory;
+                                        getItem.classType = item.classType;
+                                        getItem.BuildingSafety = item.BuildingSafety;
+                                        getItem.ExpiryDate = item.ExpiryDate;
+                                        getItem.PhoneNo = item.PhoneNo;
+                                        getItem.RegNo = item.RegNo;
+                                        getItem.Districtarea = item.Districtarea;
+                                        getItem.Emailaddress = item.Emailaddress;
+                                        getItem.Faxno = item.Faxno;
 
                                         getItem.ClientIP = item.ClientIP;
                                         getItem.Remark = item.Remark;
@@ -91,7 +96,7 @@ namespace WebGetApi.Controllers
                                     }
                                     else
                                     {
-                                        tmpMain.gwd_InstituteSurveyors_items.Add(getItem);
+                                        tmpMain.gwd_RegBuildingCompany_items.Add(getItem);
                                     }
 
                                 }
@@ -161,13 +166,13 @@ namespace WebGetApi.Controllers
             return db.entityCommMain.Where(e => e.Tid == id).FirstOrDefault();
         }
 
-        private bool gwd_InstituteSurveyors_itemsExists(string id, long lang, long tindex)
+        private bool gwd_RegBuildingCompany_itemsExists(string id, long lang, long tindex)
         {
-            return db.gwd_InstituteSurveyors_items.Count(e => e.tkeyNo == id && e.tLang == lang) > 0;
+            return db.gwd_RegBuildingCompany_items.Count(e => e.tkeyNo == id && e.tLang == lang) > 0;
         }
-        private gwd_InstituteSurveyors_items gwd_InstituteSurveyors_itemsByNo(string id, long lang, long tindex)
+        private gwd_RegBuildingCompany_items gwd_RegBuildingCompany_itemsByNo(string id, long lang, long tindex)
         {
-            return db.gwd_InstituteSurveyors_items.Where(e => e.tkeyNo == id && e.tLang == lang).FirstOrDefault();
+            return db.gwd_RegBuildingCompany_items.Where(e => e.tkeyNo == id && e.tLang == lang).FirstOrDefault();
         }
         protected override void Dispose(bool disposing)
         {

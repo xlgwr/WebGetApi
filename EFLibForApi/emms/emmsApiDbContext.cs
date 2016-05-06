@@ -49,6 +49,9 @@
         public virtual DbSet<gwd_GovernmentPhonebook_items> gwd_GovernmentPhonebook_items { get; set; }
         public virtual DbSet<gwd_RegisteredPharmacists_items> gwd_RegisteredPharmacists_items { get; set; }
         public virtual DbSet<gwd_InstituteSurveyors_items> gwd_InstituteSurveyors_items { get; set; }
+        public virtual DbSet<gwd_PsychologistsList_items> gwd_PsychologistsList_items { get; set; }
+        public virtual DbSet<gwd_RegBuildingCompany_items> gwd_RegBuildingCompany_items { get; set; }
+        public virtual DbSet<gwd_RegArchitect_items> gwd_RegArchitect_items { get; set; }
 
 
 

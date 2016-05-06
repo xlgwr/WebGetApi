@@ -26,6 +26,11 @@ var config = {
     urlApi_RP_items: $gbHttPip + "/api/gwd_RegisteredPharmacists_items",//post
     //香港测量师学会
     urlApi_IS_items: $gbHttPip + "/api/gwd_InstituteSurveyors_items",//post
+    //香港心理学会 PsychologistsList
+    urlApi_PL_items: $gbHttPip + "/api/gwd_PsychologistsList_items",//post
+    //注册建筑师(Registered Professionals or Contractors)
+    urlApi_RPC_P_items: $gbHttPip + "/api/gwd_RegArchitect_items",//post
+    urlApi_RPC_C_items: $gbHttPip + "/api/gwd_RegBuildingCompany_items",//post
     //参数
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
     urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",
@@ -45,14 +50,10 @@ var configGetUrl = {
     //0:US,1:HK,2:ZH
     //0:英文,1:繁体,2:简体
     //0:US,en,1:HK,zh,2:CN,zh
-
     url_icris_home_lang: { country: "US", language: "en", flag: 0 },
-
     // url_icris_home_lang: { country: "HK", language: "zh", flag: 1 },
-
     // url_icris_home_lang: {country:"CN",language:"zh", flag: 2},
-
-
+    
     ///律师界名录
     //{ name: '', pg: currCRNo, sj: 0 }
     getUrl_fjt2_mem_withcert: "http://www.hklawsoc.org.hk/pub_c/memberlawlist/mem_withcert.asp",
@@ -81,22 +82,36 @@ var configGetUrl = {
     getUrl_tel_directory: "http://tel.directory.gov.hk/index_CHI.html",
     //英文
     getUrl_tel_directoryEN: "http://tel.directory.gov.hk/index_ENG.html",
-    
+
     //注册药剂师名单
     getUrl_RP_items_prefix: "http://www.ppbhk.org.hk/",
     //中文(繁体)
     getUrl_RP_items: "http://www.ppbhk.org.hk/tc_chi/list_pharmacists/list.php",
     //英文
     getUrl_RP_itemsEN: "http://www.ppbhk.org.hk/eng/list_pharmacists/list.php",
-    
-    
+
+
     //InstituteSurveyors 香港测量师学会
     getUrl_IS_items_prefix: "http://www.hkis.org.hk/",
     //中文(繁体) ?id=47
     getUrl_IS_items: "http://www.hkis.org.hk/zh/company_list2.php",
     //英文 ?id=47
     getUrl_IS_itemsEN: "http://www.hkis.org.hk/en/company_list2.php",
+
+    //香港心理学会 PsychologistsList
+    getUrl_PL_items_prefix: "http://www.hkis.org.hk/",
+    //中文(繁体) ?fi=public&lang=1
+    getUrl_PL_items: "http://www.hkps.org.hk/index.php",
+    //英文 ?fi=public&lang=2
+    getUrl_PL_itemsEN: "http://www.hkps.org.hk/index.php",
     
+    
+    //注册建筑师(Registered Professionals or Contractors)
+    getUrl_RPC_items_prefix: "https://mwerdr.bd.gov.hk",
+    getUrl_RPC_items: "https://mwerdr.bd.gov.hk/REGISTER/RegistrationSearch.do",
+    
+    
+
 
 
 

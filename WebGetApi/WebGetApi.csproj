@@ -220,6 +220,9 @@
     <Compile Include="Controllers\gwd_Barristers_mainController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\gwd_RegBuildingCompany_itemsController.cs" />
+    <Compile Include="Controllers\gwd_RegArchitect_itemsController.cs" />
+    <Compile Include="Controllers\gwd_PsychologistsList_itemsController.cs" />
     <Compile Include="Controllers\gwd_InstituteSurveyors_itemsController.cs" />
     <Compile Include="Controllers\gwd_Lawyers_mainController.cs">
       <SubType>Code</SubType>
