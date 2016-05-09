@@ -67,5 +67,8 @@ var validateMe = {
     },
     digits: function (value) {
         return /^\d+$/.test(value);
+    },
+    isAlt: function (value) {
+        return /^[A-Za-z]+$/.test(value);
     }
 }

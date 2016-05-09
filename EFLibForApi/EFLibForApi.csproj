@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="emms\emmsApiDbContext.cs" />
+    <Compile Include="emms\models\gwd_SecurityBureau_items.cs" />
+    <Compile Include="emms\models\gwd_ConstructionCompany_items.cs" />
     <Compile Include="emms\models\gwd_PsychologistsList_items.cs" />
     <Compile Include="emms\models\gwd_InstituteSurveyors_items.cs" />
     <Compile Include="emms\models\entity.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="emms\models\gwd_Case_main.cs" />
     <Compile Include="emms\models\gwd_CompaniesRegistry_main.cs" />
     <Compile Include="emms\models\entityMain.cs" />
+    <Compile Include="emms\models\gwd_architect_items.cs" />
     <Compile Include="emms\models\gwd_RegBuildingCompany_items.cs" />
     <Compile Include="emms\models\gwd_RegArchitect_items.cs" />
     <Compile Include="emms\models\gwd_RegisteredPharmacists_items.cs" />
@@ -124,6 +127,26 @@
     <Compile Include="Migrations\201605060641311_addColCompany.Designer.cs">
       <DependentUpon>201605060641311_addColCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605090105133_addChangeNameLength.cs" />
+    <Compile Include="Migrations\201605090105133_addChangeNameLength.Designer.cs">
+      <DependentUpon>201605090105133_addChangeNameLength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605090109045_addChangeNameLength2.cs" />
+    <Compile Include="Migrations\201605090109045_addChangeNameLength2.Designer.cs">
+      <DependentUpon>201605090109045_addChangeNameLength2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605090123210_addArchitectAndCompanyTable.cs" />
+    <Compile Include="Migrations\201605090123210_addArchitectAndCompanyTable.Designer.cs">
+      <DependentUpon>201605090123210_addArchitectAndCompanyTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605090355413_addcolCompanyTable.cs" />
+    <Compile Include="Migrations\201605090355413_addcolCompanyTable.Designer.cs">
+      <DependentUpon>201605090355413_addcolCompanyTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605090704347_addSecurityBureauTable.cs" />
+    <Compile Include="Migrations\201605090704347_addSecurityBureauTable.Designer.cs">
+      <DependentUpon>201605090704347_addSecurityBureauTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -163,6 +186,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605060641311_addColCompany.resx">
       <DependentUpon>201605060641311_addColCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090105133_addChangeNameLength.resx">
+      <DependentUpon>201605090105133_addChangeNameLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090109045_addChangeNameLength2.resx">
+      <DependentUpon>201605090109045_addChangeNameLength2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090123210_addArchitectAndCompanyTable.resx">
+      <DependentUpon>201605090123210_addArchitectAndCompanyTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090355413_addcolCompanyTable.resx">
+      <DependentUpon>201605090355413_addcolCompanyTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090704347_addSecurityBureauTable.resx">
+      <DependentUpon>201605090704347_addSecurityBureauTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

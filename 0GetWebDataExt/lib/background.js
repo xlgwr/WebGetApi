@@ -222,7 +222,7 @@ function GetWebDatasMaxTDisToOpen() {
         });
     }
     var $nowDate2 = Date.now();
-    if ($nowDate2 - $jsonDate2_legalref >= (1 * 60 * 1000)) {
+    if ($nowDate2 - $jsonDate2_legalref >= (5 * 60 * 1000)) {
         console.log("2legalref Json Post is Over,Open new Windows。Now:" + $nowDate2 + ",JsonDate:" + $jsonDate2_legalref + ",Diff:" + ($nowDate2 - $jsonDate2_legalref) / (60 * 1000) + " Min");
         $.ajax({
             type: 'GET',
@@ -272,7 +272,7 @@ function fun1TDis() {
     _postOK_2_legalref = false;
     GetWebDatasMaxTDisToOpen();
     //每30秒检查一次
-    var sjudiciary = window.setInterval(GetWebDatasMaxTDisToOpen, 1 * 30 * 1000);
+    var sjudiciary = window.setInterval(GetWebDatasMaxTDisToOpen, 1 * 60 * 1000);
 }
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////

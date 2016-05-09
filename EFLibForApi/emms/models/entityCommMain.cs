@@ -19,11 +19,11 @@ namespace EFLibForApi.emms.models
     {
         public long tLang { get; set; }
 
-        [StringLength(200)]
+        [StringLength(500)]
         public string tname { get; set; }
 
 
-        [StringLength(200)]
+        [StringLength(300)]
         public string ttype { get; set; }
 
 
@@ -47,6 +47,12 @@ namespace EFLibForApi.emms.models
             this.gwd_RegArchitect_items = new List<gwd_RegArchitect_items>();
 
             this.gwd_RegBuildingCompany_items = new List<gwd_RegBuildingCompany_items>();
+
+            this.gwd_architect_items = new List<gwd_architect_items>();
+
+            this.gwd_ConstructionCompany_items = new List<gwd_ConstructionCompany_items>();
+
+            this.gwd_SecurityBureau_items = new List<gwd_SecurityBureau_items>();
         }
         public ICollection<gwd_Barristers_items> gwd_Barristers_items { get; set; }
         public ICollection<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
@@ -56,6 +62,9 @@ namespace EFLibForApi.emms.models
         public ICollection<gwd_PsychologistsList_items> gwd_PsychologistsList_items { get; set; }
         public ICollection<gwd_RegArchitect_items> gwd_RegArchitect_items { get; set; }
         public ICollection<gwd_RegBuildingCompany_items> gwd_RegBuildingCompany_items { get; set; }
+        public ICollection<gwd_architect_items> gwd_architect_items { get; set; }
+        public ICollection<gwd_ConstructionCompany_items> gwd_ConstructionCompany_items { get; set; }
+        public ICollection<gwd_SecurityBureau_items> gwd_SecurityBureau_items { get; set; }
 
     }
 }

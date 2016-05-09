@@ -31,6 +31,11 @@ var config = {
     //注册建筑师(Registered Professionals or Contractors)
     urlApi_RPC_P_items: $gbHttPip + "/api/gwd_RegArchitect_items",//post
     urlApi_RPC_C_items: $gbHttPip + "/api/gwd_RegBuildingCompany_items",//post
+    //建筑师,公司
+    urlApi_A_items: $gbHttPip + "/api/gwd_architect_items",//post
+    urlApi_AC_items: $gbHttPip + "/api/gwd_ConstructionCompany_items",//post
+    //香港特别行政区政府保安局
+    urlApi_SB_items: $gbHttPip + "/api/gwd_SecurityBureau_items",//post
     //参数
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
     urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",
@@ -110,9 +115,14 @@ var configGetUrl = {
     getUrl_RPC_items_prefix: "https://mwerdr.bd.gov.hk",
     getUrl_RPC_items: "https://mwerdr.bd.gov.hk/REGISTER/RegistrationSearch.do",
     
-    
-
-
-
+    //建筑师 architect
+    getUrl_A_items_prefix: "http://218.188.25.84/",
+    //?keyword=a
+    getUrl_A_items: "http://218.188.25.84/member_list_name.php",
+    //?search=A
+    //建筑公司
+    getUrl_AC_items: "http://218.188.25.84/corporate_member/contact.php",
+    //香港特别行政区政府保安局
+    getUrl_SB_items: "http://www.sb.gov.hk/sc/links/sgsia/tall.htm" 
 
 }

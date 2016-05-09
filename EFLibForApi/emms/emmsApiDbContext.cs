@@ -52,6 +52,9 @@
         public virtual DbSet<gwd_PsychologistsList_items> gwd_PsychologistsList_items { get; set; }
         public virtual DbSet<gwd_RegBuildingCompany_items> gwd_RegBuildingCompany_items { get; set; }
         public virtual DbSet<gwd_RegArchitect_items> gwd_RegArchitect_items { get; set; }
+        public virtual DbSet<gwd_architect_items> gwd_architect_items { get; set; }
+        public virtual DbSet<gwd_ConstructionCompany_items> gwd_ConstructionCompany_items { get; set; }
+        public virtual DbSet<gwd_SecurityBureau_items> gwd_SecurityBureau_items { get; set; }
 
 
 

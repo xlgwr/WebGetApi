@@ -15,11 +15,11 @@ namespace EFLibForApi.emms.models
     {
         public long tLang { get; set; }
 
-        [StringLength(200)]
+        [StringLength(500)]
         public string tname { get; set; }
 
 
-        [StringLength(200)]
+        [StringLength(300)]
         public string ttype { get; set; }
 
 

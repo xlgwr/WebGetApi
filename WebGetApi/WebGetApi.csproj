@@ -214,12 +214,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\gwd_architect_itemsController.cs" />
+    <Compile Include="Controllers\gwd_ConstructionCompany_itemsController - Copy.cs" />
     <Compile Include="Controllers\gwd_GovernmentPhonebook_mainController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\gwd_Barristers_mainController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\gwd_ConstructionCompany_itemsController.cs" />
     <Compile Include="Controllers\gwd_RegBuildingCompany_itemsController.cs" />
     <Compile Include="Controllers\gwd_RegArchitect_itemsController.cs" />
     <Compile Include="Controllers\gwd_PsychologistsList_itemsController.cs" />
