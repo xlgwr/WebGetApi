@@ -55,6 +55,7 @@
         public virtual DbSet<gwd_architect_items> gwd_architect_items { get; set; }
         public virtual DbSet<gwd_ConstructionCompany_items> gwd_ConstructionCompany_items { get; set; }
         public virtual DbSet<gwd_SecurityBureau_items> gwd_SecurityBureau_items { get; set; }
+        public virtual DbSet<gwd_Secretaries_items> gwd_Secretaries_items { get; set; }
 
 
 

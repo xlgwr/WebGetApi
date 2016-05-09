@@ -36,6 +36,8 @@ var config = {
     urlApi_AC_items: $gbHttPip + "/api/gwd_ConstructionCompany_items",//post
     //香港特别行政区政府保安局
     urlApi_SB_items: $gbHttPip + "/api/gwd_SecurityBureau_items",//post
+    //Secretaries
+    urlApi_ST_items: $gbHttPip + "/api/gwd_Secretaries_items",//post    
     //参数
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
     urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",
@@ -58,7 +60,7 @@ var configGetUrl = {
     url_icris_home_lang: { country: "US", language: "en", flag: 0 },
     // url_icris_home_lang: { country: "HK", language: "zh", flag: 1 },
     // url_icris_home_lang: {country:"CN",language:"zh", flag: 2},
-    
+
     ///律师界名录
     //{ name: '', pg: currCRNo, sj: 0 }
     getUrl_fjt2_mem_withcert: "http://www.hklawsoc.org.hk/pub_c/memberlawlist/mem_withcert.asp",
@@ -109,12 +111,12 @@ var configGetUrl = {
     getUrl_PL_items: "http://www.hkps.org.hk/index.php",
     //英文 ?fi=public&lang=2
     getUrl_PL_itemsEN: "http://www.hkps.org.hk/index.php",
-    
-    
+
+
     //注册建筑师(Registered Professionals or Contractors)
     getUrl_RPC_items_prefix: "https://mwerdr.bd.gov.hk",
     getUrl_RPC_items: "https://mwerdr.bd.gov.hk/REGISTER/RegistrationSearch.do",
-    
+
     //建筑师 architect
     getUrl_A_items_prefix: "http://218.188.25.84/",
     //?keyword=a
@@ -123,6 +125,8 @@ var configGetUrl = {
     //建筑公司
     getUrl_AC_items: "http://218.188.25.84/corporate_member/contact.php",
     //香港特别行政区政府保安局
-    getUrl_SB_items: "http://www.sb.gov.hk/sc/links/sgsia/tall.htm" 
-
+    getUrl_SB_items: "http://www.sb.gov.hk/sc/links/sgsia/tall.htm",
+    //Secretarie 特许秘书
+    //?_room=member&searchDone=1&_page=112
+    getUrl_ST_items: "https://www.hkics.org.hk/index.php"
 }

@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="emms\emmsApiDbContext.cs" />
+    <Compile Include="emms\models\gwd_Secretaries_items.cs" />
     <Compile Include="emms\models\gwd_SecurityBureau_items.cs" />
     <Compile Include="emms\models\gwd_ConstructionCompany_items.cs" />
     <Compile Include="emms\models\gwd_PsychologistsList_items.cs" />
@@ -147,6 +148,10 @@
     <Compile Include="Migrations\201605090704347_addSecurityBureauTable.Designer.cs">
       <DependentUpon>201605090704347_addSecurityBureauTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605090822382_addSecretariesTable.cs" />
+    <Compile Include="Migrations\201605090822382_addSecretariesTable.Designer.cs">
+      <DependentUpon>201605090822382_addSecretariesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -201,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605090704347_addSecurityBureauTable.resx">
       <DependentUpon>201605090704347_addSecurityBureauTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090822382_addSecretariesTable.resx">
+      <DependentUpon>201605090822382_addSecretariesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

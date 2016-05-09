@@ -53,6 +53,8 @@ namespace EFLibForApi.emms.models
             this.gwd_ConstructionCompany_items = new List<gwd_ConstructionCompany_items>();
 
             this.gwd_SecurityBureau_items = new List<gwd_SecurityBureau_items>();
+
+            this.gwd_Secretaries_items = new List<gwd_Secretaries_items>();
         }
         public ICollection<gwd_Barristers_items> gwd_Barristers_items { get; set; }
         public ICollection<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
@@ -65,6 +67,7 @@ namespace EFLibForApi.emms.models
         public ICollection<gwd_architect_items> gwd_architect_items { get; set; }
         public ICollection<gwd_ConstructionCompany_items> gwd_ConstructionCompany_items { get; set; }
         public ICollection<gwd_SecurityBureau_items> gwd_SecurityBureau_items { get; set; }
+        public ICollection<gwd_Secretaries_items> gwd_Secretaries_items { get; set; }
 
     }
 }

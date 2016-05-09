@@ -215,7 +215,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\gwd_architect_itemsController.cs" />
-    <Compile Include="Controllers\gwd_ConstructionCompany_itemsController - Copy.cs" />
+    <Compile Include="Controllers\gwd_Secretaries_itemsController.cs" />
+    <Compile Include="Controllers\gwd_SecurityBureau_itemsController.cs" />
     <Compile Include="Controllers\gwd_GovernmentPhonebook_mainController.cs">
       <SubType>Code</SubType>
     </Compile>
