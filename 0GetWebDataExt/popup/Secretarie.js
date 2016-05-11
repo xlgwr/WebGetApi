@@ -71,11 +71,11 @@ $(function () {
                 for (var x = 0; x < evenRun; x++) {
 
                     if (currX > currCount) {
-                        Showtmpmsg = tmpmsg + ",处理完成.数量：" + currX + " ,Time:" + (new Date()).Format("yyyy-MM-dd hh:mm:ss.S");
+                        Showtmpmsg = tmpmsg + ",处理完成.数量：" + currCount + " ,Time:" + (new Date()).Format("yyyy-MM-dd hh:mm:ss.S");
                         console.log(Showtmpmsg);
                         msgid.text(Showtmpmsg);
                         clearInterval(s1_ST_CN);
-                        // btn.attr('disabled', null);
+                        btn.attr('disabled', null);
                         break;
                     }
                     if (currX <= 0) {

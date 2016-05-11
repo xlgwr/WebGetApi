@@ -112,7 +112,7 @@ function j1_PostData_1for_judiciary(url) {
         url: url,
         data: {},
         tmpdata: url,
-        timeout: 20000,
+        timeout: 50000,
         type: "get",
         success: function (data, state, xhr) {
             console.log(this.tmpdata);
@@ -133,7 +133,7 @@ function j1_PostData_1for_judiciary(url) {
                 ttype: $PostType1for_judiciary,
                 thtml: data,
                 Tid: 0,
-                 Remark: this.url,
+                Remark: this.url,
                 tStatus: 0,
                 ClientIP: undefined,
                 addDate: undefined,
@@ -164,6 +164,10 @@ function j1_PostData_1for_judiciary(url) {
                                 tmpStartTable = 1;
                                 tmpStartTR = 1;
                                 break;
+                            case "lands":
+                                tmpStartTable = 2;
+                                tmpStartTR = 0;
+                                break;
                             default:
                                 tmpStartTable = 3;
                                 tmpStartTR = 0;
@@ -174,6 +178,13 @@ function j1_PostData_1for_judiciary(url) {
                             var $tableAllTr = $tableAll.eq(r).find('tr');
                             console.log("TR:" + $tableAllTr.length);
 
+                            var tmpCourtID = '';
+                            var tmpJudge = '';
+                            var tmpCourtDay = '';
+                            var tmpCaseNo = '';
+                            var tmpPlainTiff = '';
+                            var tmpNature = '';
+                            var tmpRepresentation = '';
                             for (var t = tmpStartTR; t < $tableAllTr.length; t++) {
 
                                 var $tmptr = $tableAllTr.eq(t);
@@ -186,6 +197,16 @@ function j1_PostData_1for_judiciary(url) {
                                     //console.log($tmptr.text());
                                     continue;
                                 }
+                                tmpCourtID = getContenTD($tmptrTDall.eq(0), tmpCourtID, 2);
+                                tmpJudge = getContenTD($tmptrTDall.eq(1), tmpJudge, 2);
+                                tmpCourtDay = getContenTD($tmptrTDall.eq(2), tmpCourtDay, 2);
+                                tmpCaseNo = getContenTD($tmptrTDall.eq(3), tmpCaseNo, 2);
+                                tmpPlainTiff = getContenTD($tmptrTDall.eq(4), tmpPlainTiff, 2);
+                                tmpNature = getContenTD($tmptrTDall.eq(5), tmpNature, 2);
+                                tmpRepresentation = getContenTD($tmptrTDall.eq(6), tmpRepresentation, 2);
+
+                                if (!tmpCourtID) continue;
+
                                 tIndex++;
                                 var tmpItem = {
                                     $id: tIndex,
@@ -197,18 +218,18 @@ function j1_PostData_1for_judiciary(url) {
                                     tname: _haxCrtKey[this.tmpdata],
                                     ttype: $PostType1for_judiciary,
                                     SerialNo: tIndex,
-                                    CourtID: $tmptrTDall.eq(0).html(),
-                                    Judge: $tmptrTDall.eq(1).html(),
-                                    CYear: curDate.getFullYear(),// $tmptrTDall.eq(2).text(),
-                                    CourtDay: $tmptrTDall.eq(2).html(),
-                                    Hearing: undefined,// $tmptrTDall.eq(2).text(),
-                                    CaseNo: $tmptrTDall.eq(3).html(),
-                                    CaseType: undefined,//$tmptrTDall.eq(3).text(),
-                                    PlainTiff: $tmptrTDall.eq(4).html(),
-                                    Defendant: undefined,//$tmptrTDall.eq(4).text(),
+                                    CourtID: tmpCourtID,
+                                    Judge: tmpJudge,
+                                    CYear: curDate.getFullYear(),
+                                    CourtDay: tmpCourtDay,
+                                    Hearing: undefined,
+                                    CaseNo: tmpCaseNo,
+                                    CaseType: undefined,
+                                    PlainTiff: tmpPlainTiff,
+                                    Defendant: undefined,
                                     Cause: undefined,//$tmptrTDall.eq(5).text(),
-                                    Nature: $tmptrTDall.eq(5).html(),
-                                    Representation: $tmptrTDall.eq(6).html(),
+                                    Nature: tmpNature,
+                                    Representation: tmpRepresentation,
                                     Remark: tmpremark + _haxCrtKey[this.tmpdata],
                                     tStatus: 0,
                                     addDate: undefined,
@@ -253,8 +274,14 @@ function j1_PostData_1for_judiciary(url) {
                                 // console.log($next1table.find('tr').eq(0).text());
                                 // console.log($next2table.find('tr').eq(0).text());
 
-                                var _tmpCourtID = $next1tableTR.eq(0).find('td').eq(2).html();
-                                var _Judge = $next1tableTR.eq(1).find('td').eq(2).html();
+                                var _tmpCourtID = getContenP($next1tableTR.eq(0).find('td').eq(2), 1, 1);
+                                var _Judge = getContenP($next1tableTR.eq(1).find('td').eq(2), 1, 1);
+
+                                var tmpCourtDay = '';
+                                var tmpCaseNo = '';
+                                var tmpPlainTiff = '';
+                                var tmpNature = '';
+                                var tmpHearing = '';
 
                                 for (var m = 0; m <= $next2tableTR.length; m++) {
                                     var $tmptr = $next2tableTR.eq(m);
@@ -267,6 +294,13 @@ function j1_PostData_1for_judiciary(url) {
                                         // console.log($tmptr.text());
                                         continue;
                                     }
+
+                                    tmpCourtDay = getContenP($tmptrTDall.eq(0), tmpCourtDay, 1, 1);
+                                    tmpCaseNo = getContenP($tmptrTDall.eq(1), tmpCaseNo, 1, 1);
+                                    tmpPlainTiff = getContenP($tmptrTDall.eq(2), tmpPlainTiff, 1, 1);
+                                    tmpNature = getContenP($tmptrTDall.eq(3), tmpPlainTiff, 1, 1);
+                                    tmpHearing = getContenP($tmptrTDall.eq(4), tmpPlainTiff, 1, 1);
+
                                     tIndex++;
                                     var tmpItem = {
                                         $id: tIndex,
@@ -278,17 +312,17 @@ function j1_PostData_1for_judiciary(url) {
                                         tname: _haxCrtKey[this.tmpdata],
                                         ttype: $PostType1for_judiciary,
                                         SerialNo: tIndex,
-                                        CourtID: _tmpCourtID,
-                                        Judge: _Judge,
-                                        CYear: curDate.getFullYear(),// $tmptrTDall.eq(2).html(),
-                                        CourtDay: $tmptrTDall.eq(0).html(),
-                                        Hearing: $tmptrTDall.eq(4).html(),
-                                        CaseNo: $tmptrTDall.eq(1).html(),
-                                        CaseType: undefined,//$tmptrTDall.eq(3).html(),
-                                        PlainTiff: $tmptrTDall.eq(2).html(),
-                                        Defendant: undefined,//$tmptrTDall.eq(4).html(),
-                                        Cause: undefined,//$tmptrTDall.eq(5).html(),
-                                        Nature: $tmptrTDall.eq(3).html(),
+                                        CourtID: _tmpCourtID.replace(/[\↵\t\n\v\r]/g, ''),
+                                        Judge: _Judge.replace(/[\↵\t\n\v\r]/g, ''),
+                                        CYear: curDate.getFullYear(),
+                                        CourtDay: tmpCourtDay,
+                                        Hearing: tmpHearing,
+                                        CaseNo: tmpCaseNo,
+                                        CaseType: undefined,
+                                        PlainTiff: tmpPlainTiff,
+                                        Defendant: undefined,
+                                        Cause: undefined,
+                                        Nature: tmpNature,
                                         Representation: undefined,
                                         Remark: _haxCrtKey[this.tmpdata],
                                         tStatus: 1,
@@ -316,8 +350,14 @@ function j1_PostData_1for_judiciary(url) {
                             var $next2tableTR = $next2table.find('tr');
                             // console.log($next1table.find('tr').eq(0).text());
                             // console.log($next2table.find('tr').eq(0).text());
-                            var _tmpCourtID = $next1tableTR.eq(0).find('td').eq(2).html();
-                            var _Judge = $next1tableTR.eq(1).find('td').eq(2).html();
+                            var _tmpCourtID = getContenP($next1tableTR.eq(0).find('td').eq(2), '', 1, 1);
+                            var _Judge = getContenP($next1tableTR.eq(1).find('td').eq(2), '', 1, 0);
+
+                            var tmpCourtDay = '';
+                            var tmpCaseNo = '';
+                            var tmpPlainTiff = '';
+                            var tmpNature = '';
+                            var tmpHearing = '';
 
                             for (var m = 0; m <= $next2tableTR.length; m++) {
                                 var $tmptr = $next2tableTR.eq(m);
@@ -331,6 +371,12 @@ function j1_PostData_1for_judiciary(url) {
                                     continue;
                                 }
                                 tIndex++;
+
+                                tmpCourtDay = getContenP($tmptrTDall.eq(0), tmpCourtDay, 1, 0);
+                                tmpCaseNo = getContenP($tmptrTDall.eq(1), tmpCaseNo, 1, 0);
+                                tmpPlainTiff = getContenP($tmptrTDall.eq(2), tmpPlainTiff, 1, 0);
+                                tmpNature = getContenP($tmptrTDall.eq(3), tmpNature, 1, 0);
+                                tmpHearing = getContenP($tmptrTDall.eq(4), tmpHearing, 1, 0);
                                 var tmpItem = {
                                     $id: tIndex,
                                     htmlID: 0,
@@ -341,17 +387,17 @@ function j1_PostData_1for_judiciary(url) {
                                     tname: _haxCrtKey[this.tmpdata],
                                     ttype: $PostType1for_judiciary,
                                     SerialNo: tIndex,
-                                    CourtID: _tmpCourtID,
-                                    Judge: _Judge,
-                                    CYear: curDate.getFullYear(),// $tmptrTDall.eq(2).html(),
-                                    CourtDay: $tmptrTDall.eq(0).html(),
-                                    Hearing: $tmptrTDall.eq(4).html(),
-                                    CaseNo: $tmptrTDall.eq(1).html(),
-                                    CaseType: undefined,//$tmptrTDall.eq(3).html(),
-                                    PlainTiff: $tmptrTDall.eq(2).html(),
-                                    Defendant: undefined,//$tmptrTDall.eq(4).html(),
-                                    Cause: undefined,//$tmptrTDall.eq(5).html(),
-                                    Nature: $tmptrTDall.eq(3).html(),
+                                    CourtID: _tmpCourtID.replace(/[\↵\t\n\v\r]/g, ''),
+                                    Judge: _Judge.replace(/[\↵\t\n\v\r]/g, ''),
+                                    CYear: curDate.getFullYear(),
+                                    CourtDay: tmpCourtDay,
+                                    Hearing: tmpHearing,
+                                    CaseNo: tmpCaseNo,
+                                    CaseType: undefined,
+                                    PlainTiff: tmpPlainTiff,
+                                    Defendant: undefined,
+                                    Cause: undefined,
+                                    Nature: tmpNature,
                                     Representation: undefined,
                                     Remark: tmpremark + _haxCrtKey[this.tmpdata],
                                     tStatus: 0,
@@ -381,8 +427,12 @@ function j1_PostData_1for_judiciary(url) {
                             var $currLtDivTable2 = $currLtDivTable.eq(1);
                             var $currLtDivTable2TR = $currLtDivTable2.find('tr');
 
-                            var _tmpCourtID = $currLtDivTable1TR.eq(0).find('td').eq(0).html();
-                            var _Judge = $currLtDivTable2TR.eq(0).find('td').eq(0).html();
+                            var _tmpCourtID = $currLtDivTable1TR.eq(0).find('td').eq(0).text().trim();
+                            var _Judge = $currLtDivTable2TR.eq(0).find('td').eq(0).text().trim();
+
+                            var tmpCourtDay = '';
+                            var tmpCaseNo = '';
+                            var tmpPlainTiff = '';
                             //从第三行开始
                             for (var m = 3; m <= $currLtDivTable2TR.length; m++) {
                                 var $tmptr = $currLtDivTable2TR.eq(m);
@@ -395,6 +445,11 @@ function j1_PostData_1for_judiciary(url) {
                                     // console.log($tmptr.text());
                                     continue;
                                 }
+
+                                tmpCourtDay = getContenTD($tmptrTDall.eq(2), tmpCourtDay, 1);
+                                tmpCaseNo = getContenTD($tmptrTDall.eq(0), tmpCaseNo, 1);
+                                tmpPlainTiff = getContenTD($tmptrTDall.eq(1), tmpPlainTiff, 1);
+
                                 tIndex++;
                                 var tmpItem = {
                                     $id: tIndex,
@@ -406,17 +461,17 @@ function j1_PostData_1for_judiciary(url) {
                                     tname: _haxCrtKey[this.tmpdata],
                                     ttype: $PostType1for_judiciary,
                                     SerialNo: tIndex,
-                                    CourtID: _tmpCourtID,
-                                    Judge: _Judge,
-                                    CYear: curDate.getFullYear(),// $tmptrTDall.eq(2).html(),
-                                    CourtDay: $tmptrTDall.eq(2).html(),
-                                    Hearing: undefined,//$tmptrTDall.eq(4).text(),
-                                    CaseNo: $tmptrTDall.eq(0).html(),
-                                    CaseType: undefined,//$tmptrTDall.eq(3).html(),
-                                    PlainTiff: $tmptrTDall.eq(1).html(),
-                                    Defendant: undefined,//$tmptrTDall.eq(4).html(),
-                                    Cause: undefined,//$tmptrTDall.eq(5).html(),
-                                    Nature: undefined,//$tmptrTDall.eq(3).text(),
+                                    CourtID: _tmpCourtID.replace(/[\↵\t\n\v\r]/g, ''),
+                                    Judge: _Judge.replace(/[\↵\t\n\v\r]/g, ''),
+                                    CYear: curDate.getFullYear(),
+                                    CourtDay: tmpCourtDay,
+                                    Hearing: undefined,
+                                    CaseNo: tmpCaseNo,
+                                    CaseType: undefined,
+                                    PlainTiff: tmpPlainTiff,
+                                    Defendant: undefined,
+                                    Cause: undefined,
+                                    Nature: undefined,
                                     Representation: undefined,
                                     Remark: tmpremark + _haxCrtKey[this.tmpdata],
                                     tStatus: 1,
@@ -459,6 +514,13 @@ function j1_PostData_1for_judiciary(url) {
                                 var _tmpCourtID = $currParTableNTR3.eq(0).text() + "@" +
                                     $currParTableNTR4.eq(0).text();
 
+                                var tmpCourtDay = '';
+                                var tmpCaseNo = '';
+                                var tmpPlainTiff = '';
+                                var tmpNature = '';
+                                var tmpHearing = '';
+                                var tmpDefendant = '';
+
                                 //console.log("nextTableCount:" + $curNextTable.length);
                                 for (var t = 5; t < $curNextTable.length; t++) {
 
@@ -471,6 +533,7 @@ function j1_PostData_1for_judiciary(url) {
                                         break;
                                     }
 
+
                                     for (var z = 0; z < $currNextTableCurrTR.length; z++) {
                                         var $tmptr = $currNextTableCurrTR.eq(z);
                                         var $tmptrTDall = $tmptr.find('td');
@@ -481,6 +544,14 @@ function j1_PostData_1for_judiciary(url) {
                                             // console.log($tmptr.text());
                                             continue;
                                         }
+
+                                        tmpCourtDay = getContenP($tmptrTDall.eq(0), tmpCourtDay, 1, 1);
+                                        tmpCaseNo = getContenP($tmptrTDall.eq(1), tmpCaseNo, 1, 1);
+                                        tmpPlainTiff = getContenP($tmptrTDall.eq(2), tmpPlainTiff, 1, 1);
+                                        tmpDefendant = getContenP($tmptrTDall.eq(3), tmpDefendant, 1, 1);
+                                        tmpNature = getContenP($tmptrTDall.eq(4), tmpNature, 1, 1);
+                                        tmpHearing = getContenP($tmptrTDall.eq(5), tmpHearing, 1, 1);
+
                                         tIndex++;
                                         var tmpItem = {
                                             $id: tIndex,
@@ -492,17 +563,17 @@ function j1_PostData_1for_judiciary(url) {
                                             tname: _haxCrtKey[this.tmpdata],
                                             ttype: $PostType1for_judiciary,
                                             SerialNo: tIndex,
-                                            CourtID: _tmpCourtID,
-                                            Judge: _Judge,
-                                            CYear: curDate.getFullYear(),// $tmptrTDall.eq(2).html(),
-                                            CourtDay: $tmptrTDall.eq(0).html(),
-                                            Hearing: $tmptrTDall.eq(5).html(),
-                                            CaseNo: $tmptrTDall.eq(1).html(),
-                                            CaseType: undefined,//$tmptrTDall.eq(3).html(),
-                                            PlainTiff: $tmptrTDall.eq(2).html(),
-                                            Defendant: $tmptrTDall.eq(3).html(),
-                                            Cause: undefined,//$tmptrTDall.eq(5).html(),
-                                            Nature: $tmptrTDall.eq(4).html(),
+                                            CourtID: _tmpCourtID.replace(/[\↵\t\n\v\r]/g, ''),
+                                            Judge: _Judge.replace(/[\↵\t\n\v\r]/g, ''),
+                                            CYear: curDate.getFullYear(),
+                                            CourtDay: tmpCourtDay,
+                                            Hearing: tmpHearing,
+                                            CaseNo: tmpCaseNo,
+                                            CaseType: undefined,
+                                            PlainTiff: tmpPlainTiff,
+                                            Defendant: tmpDefendant,
+                                            Cause: undefined,
+                                            Nature: tmpNature,
                                             Representation: undefined,
                                             Remark: tmpremark + _haxCrtKey[this.tmpdata],
                                             tStatus: 1,
@@ -552,4 +623,40 @@ function j1_PostAll(arrurl) {
     arrurl.forEach(function (url) {
         j1_PostData_1for_judiciary(url);
     }, this);
+}
+function getContenTD($td, tmptext, lenP) {
+    var allp = $td.children('p');
+
+    if (allp.length === 1) return (allp.find('span').length > 0 && allp.eq(0).text().trim().length < 6) ? tmptext : allp.eq(0).text().trim();
+    if (allp.length < lenP) return tmptext;
+
+    var tmpAllText = '';
+    for (var x = 0; x < allp.length; x++) {
+        var p = allp.eq(x);
+
+        if (!p.text().trim()) continue;
+
+        tmpAllText = !tmpAllText ? p.text().trim() : tmpAllText + "@" + p.text().trim()
+    }
+    return tmpAllText.replace(/[\↵\t\n\v\r]/g, '').trim();
+}
+function getContenP($td, tmpText, lenP, isTwoRe) {
+    var allp = $td.children('p');
+    if (allp.length < lenP) return tmpText;
+    if (allp.length === 1) if (!allp.eq(0).text().trim()) return tmpText;
+
+    for (var x = 0; x < allp.length; x++) {
+        var $p = allp.eq(x);
+
+        var allspan = $p.children('span');
+        if (allspan.length < 1) continue;
+
+        for (var x = 0; x < allspan.length; x++) {
+            var span = allspan.eq(x);
+            var reText = isTwoRe === 1 ? "@" + span.text().trim() + "@" : span.text().trim() + "@"
+            span.replaceWith(reText);
+        }
+    }
+
+    return $td.text().replace(/[\↵\t\n\v\r]/g, '').trim();
 }

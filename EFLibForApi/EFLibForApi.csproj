@@ -152,6 +152,10 @@
     <Compile Include="Migrations\201605090822382_addSecretariesTable.Designer.cs">
       <DependentUpon>201605090822382_addSecretariesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605110618249_changeColforCaseTable.cs" />
+    <Compile Include="Migrations\201605110618249_changeColforCaseTable.Designer.cs">
+      <DependentUpon>201605110618249_changeColforCaseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -209,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605090822382_addSecretariesTable.resx">
       <DependentUpon>201605090822382_addSecretariesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605110618249_changeColforCaseTable.resx">
+      <DependentUpon>201605110618249_changeColforCaseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

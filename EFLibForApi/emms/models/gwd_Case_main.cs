@@ -38,73 +38,73 @@ namespace EFLibForApi.emms.models
         /// <summary>
         /// 法院ID
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string CourtID { get; set; }
 
 
         /// <summary>
         /// 法官
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string Judge { get; set; }
 
 
         /// <summary>
         /// 案件年份
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string CYear { get; set; }
 
 
         /// <summary>
         /// 开庭日期
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string CourtDay { get; set; }
 
 
         /// <summary>
         /// 聆讯
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string Hearing { get; set; }
 
 
         /// <summary>
         /// 案件编号
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string CaseNo { get; set; }
 
         /// <summary>
         /// 案件类别
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string CaseType { get; set; }
 
         /// <summary>
         /// 原告
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string PlainTiff { get; set; }
 
 
         /// <summary>
         /// 被告
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string Defendant { get; set; }
 
         /// <summary>
         /// 原因
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string Cause { get; set; }
 
         /// <summary>
         /// 性质
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string Nature { get; set; }
 
 
@@ -112,7 +112,7 @@ namespace EFLibForApi.emms.models
         /// <summary>
         /// 应讯代表
         /// </summary>
-        [Column(TypeName = "text")]
+       // [Column(TypeName = "text")]
         public string Representation { get; set; }
 
         [JsonIgnore]
