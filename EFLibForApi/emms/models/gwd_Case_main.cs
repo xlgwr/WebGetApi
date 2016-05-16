@@ -115,6 +115,23 @@ namespace EFLibForApi.emms.models
        // [Column(TypeName = "text")]
         public string Representation { get; set; }
 
+        /// <summary>
+        /// 计划行动日期
+        /// </summary>
+        public string Actiondate { get; set; }
+        /// <summary>
+        /// 币别
+        /// </summary>
+        public string Currency { get; set; }
+        /// <summary>
+        /// 总金额
+        /// </summary>
+        public string Amount { get; set; }
+        /// <summary>
+        /// 检验区
+        /// </summary>
+        public string CheckField { get; set; }
+
         [JsonIgnore]
         public gwd_Case_main gwd_Case_main { get; set; }
     }

@@ -39,12 +39,12 @@ function getListURL(key, day, eng) {
     }
     if (key == "wtnmag") {
         return urlforward + "/en/crt_lists/lists/" + day + '/' + "allmag" + ".html";
-    }
-    else {
+    } else {
         return urlforward + "/en/crt_lists/lists/" + day + '/' + key + ".html";
     }
 
 }
+
 function listdaykey(day) {
     var r = '';
     r += ((day.getDate() < 10) ? '0' : '') + day.getDate();
@@ -106,6 +106,7 @@ function j1_gotoListGetAllURLNow(arrCrtKey, calname, eng) {
     console.log(_haxCrtKeyID);
     return allUrl;
 }
+
 function j1_PostData_1for_judiciary(url) {
     //console.log(url);
     $.ajax({
@@ -152,7 +153,11 @@ function j1_PostData_1for_judiciary(url) {
                 var tIndex = 0;
                 ///*********************************************///
                 switch (_haxCrtKey[this.tmpdata]) {
-                    case "cacfi": case "ct": case "lands": case "dc": case "dcmc":
+                    case "cacfi":
+                    case "ct":
+                    case "lands":
+                    case "dc":
+                    case "dcmc":
                         var tmpremark = "终审及高等法院:"
                         console.log(tmpremark + _haxCrtKey[this.tmpdata]);
                         //审查案件表-终审及高等法院
@@ -160,7 +165,8 @@ function j1_PostData_1for_judiciary(url) {
                         var tmpStartTable = 3;
                         var tmpStartTR = 0;
                         switch (_haxCrtKey[this.tmpdata]) {
-                            case "dc": case "dcmc":
+                            case "dc":
+                            case "dcmc":
                                 tmpStartTable = 1;
                                 tmpStartTR = 1;
                                 break;
@@ -192,7 +198,7 @@ function j1_PostData_1for_judiciary(url) {
 
                                 console.log($tmptrTDall.length);
 
-                                if ($tmptrTDall.length < 7 || ($tmptrTDall.eq(4).text().trim().length < 7 && $tmptrTDall.eq(0).text().trim().length < 7)) {
+                                if (tmpCourtID == "Court" || $tmptrTDall.length < 7 || ($tmptrTDall.eq(4).text().trim().length < 7 && $tmptrTDall.eq(0).text().trim().length < 7)) {
                                     console.log("td<7,td4:" + $tmptrTDall.eq(4).text().trim().length + $tmptrTDall.eq(0).text().trim().length);
                                     //console.log($tmptr.text());
                                     continue;
@@ -205,7 +211,9 @@ function j1_PostData_1for_judiciary(url) {
                                 tmpNature = getContenTD($tmptrTDall.eq(5), tmpNature, 2);
                                 tmpRepresentation = getContenTD($tmptrTDall.eq(6), tmpRepresentation, 2);
 
-                                if (!tmpCourtID) continue;
+                                if (!tmpCaseNo) continue;
+                                if (tmpCaseNo.indexOf('/') < 0) continue;
+
 
                                 tIndex++;
                                 var tmpItem = {
@@ -227,7 +235,7 @@ function j1_PostData_1for_judiciary(url) {
                                     CaseType: undefined,
                                     PlainTiff: tmpPlainTiff,
                                     Defendant: undefined,
-                                    Cause: undefined,//$tmptrTDall.eq(5).text(),
+                                    Cause: undefined, //$tmptrTDall.eq(5).text(),
                                     Nature: tmpNature,
                                     Representation: tmpRepresentation,
                                     Remark: tmpremark + _haxCrtKey[this.tmpdata],
@@ -274,8 +282,8 @@ function j1_PostData_1for_judiciary(url) {
                                 // console.log($next1table.find('tr').eq(0).text());
                                 // console.log($next2table.find('tr').eq(0).text());
 
-                                var _tmpCourtID = getContenP($next1tableTR.eq(0).find('td').eq(2), 1, 1);
-                                var _Judge = getContenP($next1tableTR.eq(1).find('td').eq(2), 1, 1);
+                                var _tmpCourtID = getContenP($next1tableTR.eq(0).find('td').eq(2), "", 1, 1);
+                                var _Judge = getContenP($next1tableTR.eq(1).find('td').eq(2), "", 1, 1);
 
                                 var tmpCourtDay = '';
                                 var tmpCaseNo = '';
@@ -289,17 +297,20 @@ function j1_PostData_1for_judiciary(url) {
 
                                     //console.log($tmptrTDall.length);
 
-                                    if ($tmptrTDall.length < 5 || ($tmptrTDall.eq(2).text().length <= 7 && $tmptrTDall.eq(1).text() <= 7)) {
+                                    if (_tmpCourtID === "Court" || $tmptrTDall.length < 5 || ($tmptrTDall.eq(2).text().length <= 7 && $tmptrTDall.eq(1).text() <= 7)) {
                                         // console.log("td<5,td2:" + $tmptrTDall.eq(2).text().length);
                                         // console.log($tmptr.text());
                                         continue;
                                     }
 
-                                    tmpCourtDay = getContenP($tmptrTDall.eq(0), tmpCourtDay, 1, 1);
-                                    tmpCaseNo = getContenP($tmptrTDall.eq(1), tmpCaseNo, 1, 1);
-                                    tmpPlainTiff = getContenP($tmptrTDall.eq(2), tmpPlainTiff, 1, 1);
-                                    tmpNature = getContenP($tmptrTDall.eq(3), tmpPlainTiff, 1, 1);
-                                    tmpHearing = getContenP($tmptrTDall.eq(4), tmpPlainTiff, 1, 1);
+                                    tmpCourtDay = getContenP($tmptrTDall.eq(0), tmpCourtDay, 1, 0);
+                                    tmpCaseNo = getContenP($tmptrTDall.eq(1), tmpCaseNo, 1, 0);
+                                    tmpPlainTiff = getContenP($tmptrTDall.eq(2), tmpPlainTiff, 1, 0);
+                                    tmpNature = getContenP($tmptrTDall.eq(3), tmpNature, 1, 0);
+                                    tmpHearing = getContenP($tmptrTDall.eq(4), tmpHearing, 1, 0);
+
+                                    if (!tmpCaseNo) continue;
+                                    if (tmpCaseNo.indexOf('/') < 0) continue;
 
                                     tIndex++;
                                     var tmpItem = {
@@ -351,7 +362,7 @@ function j1_PostData_1for_judiciary(url) {
                             // console.log($next1table.find('tr').eq(0).text());
                             // console.log($next2table.find('tr').eq(0).text());
                             var _tmpCourtID = getContenP($next1tableTR.eq(0).find('td').eq(2), '', 1, 1);
-                            var _Judge = getContenP($next1tableTR.eq(1).find('td').eq(2), '', 1, 0);
+                            var _Judge = getContenP($next1tableTR.eq(1).find('td').eq(2), '', 1, 1);
 
                             var tmpCourtDay = '';
                             var tmpCaseNo = '';
@@ -365,18 +376,23 @@ function j1_PostData_1for_judiciary(url) {
 
                                 //console.log($tmptrTDall.length);
 
-                                if ($tmptrTDall.length < 5 || ($tmptrTDall.eq(2).text().length <= 7 && $tmptrTDall.eq(1).text() <= 7)) {
+                                if (_tmpCourtID == "Court" || $tmptrTDall.length < 5 || ($tmptrTDall.eq(2).text().length <= 7 && $tmptrTDall.eq(1).text() <= 7)) {
                                     // console.log("td<5,td2:" + $tmptrTDall.eq(2).text().length);
                                     // console.log($tmptr.text());
                                     continue;
                                 }
-                                tIndex++;
+
 
                                 tmpCourtDay = getContenP($tmptrTDall.eq(0), tmpCourtDay, 1, 0);
                                 tmpCaseNo = getContenP($tmptrTDall.eq(1), tmpCaseNo, 1, 0);
                                 tmpPlainTiff = getContenP($tmptrTDall.eq(2), tmpPlainTiff, 1, 0);
                                 tmpNature = getContenP($tmptrTDall.eq(3), tmpNature, 1, 0);
                                 tmpHearing = getContenP($tmptrTDall.eq(4), tmpHearing, 1, 0);
+
+                                if (!tmpCaseNo) continue;
+                                if (tmpCaseNo.indexOf('/') < 0) continue;
+
+                                tIndex++;
                                 var tmpItem = {
                                     $id: tIndex,
                                     htmlID: 0,
@@ -440,15 +456,18 @@ function j1_PostData_1for_judiciary(url) {
 
                                 //console.log($tmptrTDall.length);
 
-                                if ($tmptrTDall.length < 3 || ($tmptrTDall.eq(0).text().length <= 7 && $tmptrTDall.eq(1).text() <= 7)) {
+                                if (_tmpCourtID == "Court" || $tmptrTDall.length < 3 || ($tmptrTDall.eq(0).text().length <= 7 && $tmptrTDall.eq(1).text() <= 7)) {
                                     // console.log("td<5,td2:" + $tmptrTDall.eq(2).text().length);
                                     // console.log($tmptr.text());
                                     continue;
                                 }
 
                                 tmpCourtDay = getContenTD($tmptrTDall.eq(2), tmpCourtDay, 1);
-                                tmpCaseNo = getContenTD($tmptrTDall.eq(0), tmpCaseNo, 1);
-                                tmpPlainTiff = getContenTD($tmptrTDall.eq(1), tmpPlainTiff, 1);
+                                tmpCaseNo = getContenTD($tmptrTDall.eq(0), '', 1);
+                                tmpPlainTiff = getContenTD($tmptrTDall.eq(1), '', 1);
+
+                                if (!tmpCaseNo) continue;
+                                if (tmpCaseNo.indexOf('/') < 0) continue;
 
                                 tIndex++;
                                 var tmpItem = {
@@ -547,10 +566,13 @@ function j1_PostData_1for_judiciary(url) {
 
                                         tmpCourtDay = getContenP($tmptrTDall.eq(0), tmpCourtDay, 1, 1);
                                         tmpCaseNo = getContenP($tmptrTDall.eq(1), tmpCaseNo, 1, 1);
-                                        tmpPlainTiff = getContenP($tmptrTDall.eq(2), tmpPlainTiff, 1, 1);
-                                        tmpDefendant = getContenP($tmptrTDall.eq(3), tmpDefendant, 1, 1);
+                                        tmpPlainTiff = getContenP($tmptrTDall.eq(2), tmpPlainTiff, 1, 0);
+                                        tmpDefendant = getContenP($tmptrTDall.eq(3), tmpDefendant, 1, 0);
                                         tmpNature = getContenP($tmptrTDall.eq(4), tmpNature, 1, 1);
                                         tmpHearing = getContenP($tmptrTDall.eq(5), tmpHearing, 1, 1);
+
+                                        if (!tmpCaseNo) continue;
+                                        if (tmpCaseNo.indexOf('/') < 0) continue;
 
                                         tIndex++;
                                         var tmpItem = {
@@ -618,17 +640,19 @@ function j1_PostData_1for_judiciary(url) {
         dataType: "text"
     });
 }
+
 function j1_PostAll(arrurl) {
     sendMsg("removeUrl", "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm");
     arrurl.forEach(function (url) {
         j1_PostData_1for_judiciary(url);
     }, this);
 }
-function getContenTD($td, tmptext, lenP) {
+
+function getContenTD($td, tmpText, lenP) {
     var allp = $td.children('p');
 
-    if (allp.length === 1) return (allp.find('span').length > 0 && allp.eq(0).text().trim().length < 6) ? tmptext : allp.eq(0).text().trim();
-    if (allp.length < lenP) return tmptext;
+    if (allp.length === 1) return (allp.eq(0).find('span').length > 0 && allp.eq(0).find('span').eq(0).text().trim().length < 1) || allp.eq(0).text().trim().length < 1 ? tmpText : allp.eq(0).text().trim();
+    if (allp.length < lenP) return tmpText;
 
     var tmpAllText = '';
     for (var x = 0; x < allp.length; x++) {
@@ -640,23 +664,24 @@ function getContenTD($td, tmptext, lenP) {
     }
     return tmpAllText.replace(/[\↵\t\n\v\r]/g, '').trim();
 }
-function getContenP($td, tmpText, lenP, isTwoRe) {
-    var allp = $td.children('p');
-    if (allp.length < lenP) return tmpText;
-    if (allp.length === 1) if (!allp.eq(0).text().trim()) return tmpText;
 
-    for (var x = 0; x < allp.length; x++) {
-        var $p = allp.eq(x);
-
-        var allspan = $p.children('span');
-        if (allspan.length < 1) continue;
-
+function getContenP($td, tmpText, lenP, isSpanZH) {
+    if (isSpanZH === 1) {
+        var allspan = $td.find('span[lang="ZH-CN"]');
         for (var x = 0; x < allspan.length; x++) {
-            var span = allspan.eq(x);
-            var reText = isTwoRe === 1 ? "@" + span.text().trim() + "@" : span.text().trim() + "@"
-            span.replaceWith(reText);
+            var $span = allspan.eq(x);
+            if (!$span.text().trim()) continue;
+
+            var reText = $span.text().trim() + "@"
+            $span.replaceWith(reText);
         }
     }
+
+    var allp = $td.find('p');
+
+    if (allp.length === 1) return (allp.eq(0).find('span').length > 0 && allp.eq(0).find('span').eq(0).text().trim().length < 1) || allp.eq(0).text().trim().length < 1 ? tmpText : allp.eq(0).text().trim();
+    if (allp.length < lenP) return tmpText;
+
 
     return $td.text().replace(/[\↵\t\n\v\r]/g, '').trim();
 }

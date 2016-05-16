@@ -156,6 +156,10 @@
     <Compile Include="Migrations\201605110618249_changeColforCaseTable.Designer.cs">
       <DependentUpon>201605110618249_changeColforCaseTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605120248042_addColForCase.cs" />
+    <Compile Include="Migrations\201605120248042_addColForCase.Designer.cs">
+      <DependentUpon>201605120248042_addColForCase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -216,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605110618249_changeColforCaseTable.resx">
       <DependentUpon>201605110618249_changeColforCaseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605120248042_addColForCase.resx">
+      <DependentUpon>201605120248042_addColForCase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -101,6 +101,14 @@ namespace WebGetApi.Controllers
                                         getItem.tStatus = item.tStatus;
                                         getItem.ttype = item.ttype;
                                         getItem.UpdateDate = DateTime.Now;
+
+                                        getItem.Actiondate = item.Actiondate;
+                                        getItem.Currency = item.Currency;
+                                        getItem.Amount = item.Amount;
+                                        getItem.CheckField = item.CheckField;
+
+
+
                                     }
 
                                 }
