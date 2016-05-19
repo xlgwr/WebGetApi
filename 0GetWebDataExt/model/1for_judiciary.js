@@ -45,7 +45,18 @@ function getListURL(key, day, eng) {
 
 }
 
+function addDate(dd, dadd) {
+    a = dd.valueOf()
+    a = a + dadd * 24 * 60 * 60 * 1000
+    a = new Date(a)
+    return a;
+}
+
 function listdaykey(day) {
+    // day = addDate(day, 3);
+    // if (day.getDay() === 0) {
+    //     day = addDate(day, 1);
+    // }
     var r = '';
     r += ((day.getDate() < 10) ? '0' : '') + day.getDate();
     r += (((day.getMonth() + 1) < 10) ? '0' : '') + (day.getMonth() + 1);
