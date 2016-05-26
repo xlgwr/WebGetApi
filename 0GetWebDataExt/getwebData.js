@@ -25,28 +25,31 @@ $(function() {
         console.clear();
         console.log("绿色安全");
         var tmpUrl = currLocal.indexOf('125.88.131.8:3004') > -1 ? "125.88.131.8:3004" : "121.15.207.49:3006";
+        $("#text_password").val('88888888');
 
         $.ajax({
             type: "POST",
             url: "http://" + tmpUrl + "/Intercept/GoOnVist",
             data: {
-                FilterType: "" + $("#hid_filtertype").attr("value") + "",
-                UserId: "" + $("#hid_userid").attr("value") + "",
-                Urlpath: "" + $("#hid_urlpath").attr("value") + "",
-                Logid: "" + $("#hid_logid").attr("value") + "",
-                Password: '88888888'
+                FilterType: "" + $("#hid_filtertype").val() + "",
+                UserId: "" + $("#hid_userid").val() + "",
+                Urlpath: "" + $("#hid_urlpath").val() + "",
+                Logid: "" + $("#hid_logid").val() + "",
+                Password: "" + $("#text_password").val() + "",
+                citycode: "" + $("#hid_citycode").val() + ""
             },
             success: function(data, textStatus) {
-                console.log(this.data);
+
                 if (data[0].code != 0)
-                    console.log(data[0].msg)
+                    alert(data[0].msg)
                 else {
                     window.location.href = data[0].msg;
                     window.event.returnValue = false;
                 }
             },
             error: function(e) {
-                console.log(e)
+                console.log(e);
+                $('#img_govist').click();
             }
         });
     }
