@@ -9,3 +9,18 @@ ORDER BY a.UpdateDate desc
 
 SELECT top 100 * from gwd_ICRIS_main a 
 ORDER BY tid ASC
+
+
+
+
+
+create table #t(
+　　name varchar(200),
+　　rows int,
+　　reserved varchar(25),
+　　data varchar(25),
+　　index_size varchar(25),
+　　unused varchar(25))
+　　exec sp_MSforeachtable "insert into #t exec sp_spaceused '?'"
+　　select TOP 100 * from #t ORDER BY rows DESC
+drop table #t
