@@ -1,29 +1,27 @@
 {
-    "content_scripts": [
-        {
-            "matches": [
-                "http://121.15.207.49:3006/*",
-                "http://125.88.131.8:3004/*",
-                "http://www.icris.cr.gov.hk/*",
-                "https://www.icris.cr.gov.hk/*",
-                "http://*.judiciary.gov.hk/*",
-                "https://192.168.1.6:7443/*",
-                "http://192.168.1.6:7070/*"
-            ],
-            "all_frames": true,
-            "js": [
-                "lib/jquery.min.js",
-                "config.js",
-                "model/backMsg.js",
-                "model/baseFun.js",
-                "model/0for_icris.js",
-                "model/1for_judiciary.js",
-                "model/2for_legalref.js",
-                "getwebData.js"
-            ],
-            "run_at": "document_end"
-        }
-    ],
+    "content_scripts": [{
+        "matches": [
+            "http://121.15.207.49:3006/*",
+            "http://125.88.131.8:3004/*",
+            "http://www.icris.cr.gov.hk/*",
+            "https://www.icris.cr.gov.hk/*",
+            "http://*.judiciary.gov.hk/*",
+            "https://192.168.1.6:7443/*",
+            "http://192.168.1.6:7070/*"
+        ],
+        "all_frames": true,
+        "js": [
+            "lib/jquery.min.js",
+            "config.js",
+            "model/backMsg.js",
+            "model/baseFun.js",
+            "model/0for_icris.js",
+            "model/1for_judiciary.js",
+            "model/2for_legalref.js",
+            "getwebData.js"
+        ],
+        "run_at": "document_end"
+    }],
     "browser_action": {
         "default_icon": "icons/icon_32.png",
         //"default_popup": "popup.html",
@@ -51,8 +49,8 @@
     "background": {
         "persistent": true,
         "page": "background.html"
-        // "scripts": [
-        //     "background.js"
-        // ]
+            // "scripts": [
+            //     "background.js"
+            // ]
     }
 }
