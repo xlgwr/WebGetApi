@@ -24,20 +24,29 @@ $(function() {
     if (currLocal.indexOf("121.15.207.49:3006") > -1 || currLocal.indexOf("125.88.131.8:3004") > -1) {
         console.clear();
         console.log("绿色安全");
-        var tmpUrl = currLocal.indexOf('125.88.131.8:3004') > -1 ? "125.88.131.8:3004" : "121.15.207.49:3006";
+
         $("#text_password").val('88888888');
+
+        var tmpUrl = currLocal.indexOf('125.88.131.8:3004') > -1 ? "125.88.131.8:3004" : "121.15.207.49:3006";
+        var tmpdata = currLocal.indexOf('125.88.131.8:3004') > -1 ? {
+            FilterType: "" + $("#hid_filtertype").val() + "",
+            UserId: "" + $("#hid_userid").val() + "",
+            Urlpath: "" + $("#hid_urlpath").val() + "",
+            Logid: "" + $("#hid_logid").val() + "",
+            Password: "" + $("#text_password").val() + "",
+            citycode: "" + $("#hid_citycode").val() + ""
+        } : {
+            FilterType: "" + $("#hid_filtertype").attr("value") + "",
+            UserId: "" + $("#hid_userid").attr("value") + "",
+            Urlpath: "" + $("#hid_urlpath").attr("value") + "",
+            Logid: "" + $("#hid_logid").attr("value") + "",
+            Password: '88888888'
+        }
 
         $.ajax({
             type: "POST",
             url: "http://" + tmpUrl + "/Intercept/GoOnVist",
-            data: {
-                FilterType: "" + $("#hid_filtertype").val() + "",
-                UserId: "" + $("#hid_userid").val() + "",
-                Urlpath: "" + $("#hid_urlpath").val() + "",
-                Logid: "" + $("#hid_logid").val() + "",
-                Password: "" + $("#text_password").val() + "",
-                citycode: "" + $("#hid_citycode").val() + ""
-            },
+            data: tmpdata,
             success: function(data, textStatus) {
 
                 if (data[0].code != 0)
@@ -52,6 +61,7 @@ $(function() {
                 $('#img_govist').click();
             }
         });
+
     }
     ///********************************************************
     ///********************************************************
