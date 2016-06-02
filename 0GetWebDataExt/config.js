@@ -7,37 +7,40 @@ var $gbHttPSip = "https://192.168.1.6:7443";
 var config = {
     //API 接口
     //公司注册处
-    urlApi_icris: $gbHttPSip + "/api/gwd_CompaniesRegistry_main",//post    
-    urlApi_icris_DisOrders: $gbHttPSip + "/api/GWDCompaniesRegistry/gwd_CompaniesRegistry_DisOrders",//post    
+    // urlApi_icris: $gbHttPSip + "/api/gwd_CompaniesRegistry_main", //post    
+    // urlApi_icris_DisOrders: $gbHttPSip + "/api/GWDCompaniesRegistry/gwd_CompaniesRegistry_DisOrders", //post 
+    urlApi_icris: $gbHttPSip + "/api/gwd_CompaniesRegistry_mainNew", //post New    
+    urlApi_icris_DisOrders: $gbHttPSip + "/api/GWDCompaniesRegistryNew/gwd_CompaniesRegistry_DisOrders", //post New
+
     urlApi_GetWebDatasMaxName: $gbHttPSip + "/api/GWDCompaniesRegistry/GetWebDatasMaxName/",
     //案件，法院
-    urlApi_judiciary: $gbHttPip + "/api/gwd_Case_main",//post
+    urlApi_judiciary: $gbHttPip + "/api/gwd_Case_main", //post
     //上诉记录
-    urlApi_legalref: $gbHttPip + "/api/gwd_AppealCases",//post    
-    urlApi_legalref_html: $gbHttPip + "/api/gwd_RatioDecidendis",//post 
+    urlApi_legalref: $gbHttPip + "/api/gwd_AppealCases", //post    
+    urlApi_legalref_html: $gbHttPip + "/api/gwd_RatioDecidendis", //post 
     urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealCases/GetWebDatasMaxTDis",
     //律师界名录
-    urlApi_hklawsoc: $gbHttPip + "/api/gwd_Lawyers_main",//post
+    urlApi_hklawsoc: $gbHttPip + "/api/gwd_Lawyers_main", //post
     //电话本
-    urlApi_directory: $gbHttPip + "/api/gwd_GovernmentPhonebook_main",//post
+    urlApi_directory: $gbHttPip + "/api/gwd_GovernmentPhonebook_main", //post
     //大律师
-    urlApi_hkba: $gbHttPip + "/api/gwd_Barristers_main",//post
+    urlApi_hkba: $gbHttPip + "/api/gwd_Barristers_main", //post
     //注册药剂师名单
-    urlApi_RP_items: $gbHttPip + "/api/gwd_RegisteredPharmacists_items",//post
+    urlApi_RP_items: $gbHttPip + "/api/gwd_RegisteredPharmacists_items", //post
     //香港测量师学会
-    urlApi_IS_items: $gbHttPip + "/api/gwd_InstituteSurveyors_items",//post
+    urlApi_IS_items: $gbHttPip + "/api/gwd_InstituteSurveyors_items", //post
     //香港心理学会 PsychologistsList
-    urlApi_PL_items: $gbHttPip + "/api/gwd_PsychologistsList_items",//post
+    urlApi_PL_items: $gbHttPip + "/api/gwd_PsychologistsList_items", //post
     //注册建筑师(Registered Professionals or Contractors)
-    urlApi_RPC_P_items: $gbHttPip + "/api/gwd_RegArchitect_items",//post
-    urlApi_RPC_C_items: $gbHttPip + "/api/gwd_RegBuildingCompany_items",//post
+    urlApi_RPC_P_items: $gbHttPip + "/api/gwd_RegArchitect_items", //post
+    urlApi_RPC_C_items: $gbHttPip + "/api/gwd_RegBuildingCompany_items", //post
     //建筑师,公司
-    urlApi_A_items: $gbHttPip + "/api/gwd_architect_items",//post
-    urlApi_AC_items: $gbHttPip + "/api/gwd_ConstructionCompany_items",//post
+    urlApi_A_items: $gbHttPip + "/api/gwd_architect_items", //post
+    urlApi_AC_items: $gbHttPip + "/api/gwd_ConstructionCompany_items", //post
     //香港特别行政区政府保安局
-    urlApi_SB_items: $gbHttPip + "/api/gwd_SecurityBureau_items",//post
+    urlApi_SB_items: $gbHttPip + "/api/gwd_SecurityBureau_items", //post
     //Secretaries
-    urlApi_ST_items: $gbHttPip + "/api/gwd_Secretaries_items",//post    
+    urlApi_ST_items: $gbHttPip + "/api/gwd_Secretaries_items", //post    
     //参数
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
     urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",
@@ -57,7 +60,11 @@ var configGetUrl = {
     //0:US,1:HK,2:ZH
     //0:英文,1:繁体,2:简体
     //0:US,en,1:HK,zh,2:CN,zh
-    url_icris_home_lang: { country: "US", language: "en", flag: 0 },
+    url_icris_home_lang: {
+        country: "US",
+        language: "en",
+        flag: 0
+    },
     // url_icris_home_lang: { country: "HK", language: "zh", flag: 1 },
     // url_icris_home_lang: {country:"CN",language:"zh", flag: 2},
 

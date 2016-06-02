@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{735EC534-C0C8-4B81-9B17-CA6FCAB5E535}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EFLibEMMS</RootNamespace>
+    <AssemblyName>EFLibEMMS</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net1211, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Log4Net1211.3.3.1\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EMMSDbContext.cs" />
+    <Compile Include="EMMS\m_ContactPerson.cs" />
+    <Compile Include="EMMS\m_Country.cs" />
+    <Compile Include="EMMS\m_DataGrade.cs" />
+    <Compile Include="EMMS\m_Member.cs" />
+    <Compile Include="EMMS\m_MemberComany.cs" />
+    <Compile Include="EMMS\m_MemberGrade.cs" />
+    <Compile Include="EMMS\m_MemberRight.cs" />
+    <Compile Include="EMMS\m_MemberSetMealRelation.cs" />
+    <Compile Include="EMMS\m_Package.cs" />
+    <Compile Include="EMMS\m_PackageList.cs" />
+    <Compile Include="EMMS\m_Parameter.cs" />
+    <Compile Include="EMMS\m_Product.cs" />
+    <Compile Include="EMMS\m_ProductTable.cs" />
+    <Compile Include="EMMS\m_RightKey.cs" />
+    <Compile Include="EMMS\m_SetEmail.cs" />
+    <Compile Include="EMMS\m_ShortName.cs" />
+    <Compile Include="EMMS\m_SysModule.cs" />
+    <Compile Include="EMMS\m_SysModuleDetail.cs" />
+    <Compile Include="EMMS\m_Table.cs" />
+    <Compile Include="EMMS\m_TableField.cs" />
+    <Compile Include="EMMS\m_URL.cs" />
+    <Compile Include="EMMS\m_User.cs" />
+    <Compile Include="EMMS\m_UserAuthority.cs" />
+    <Compile Include="EMMS\m_UserDataRelation.cs" />
+    <Compile Include="EMMS\m_UserGrade.cs" />
+    <Compile Include="EMMS\m_Word.cs" />
+    <Compile Include="EMMS\s_Company.cs" />
+    <Compile Include="EMMS\s_Company_html.cs" />
+    <Compile Include="EMMS\s_Entity.cs" />
+    <Compile Include="EMMS\s_Person.cs" />
+    <Compile Include="EMMS\s_Unknown.cs" />
+    <Compile Include="EMMS\t_Address.cs" />
+    <Compile Include="EMMS\t_AppealCase.cs" />
+    <Compile Include="EMMS\t_ApplyOfflineCase.cs" />
+    <Compile Include="EMMS\t_ApplyOfflineCompany.cs" />
+    <Compile Include="EMMS\t_ApplyOfflineLand.cs" />
+    <Compile Include="EMMS\t_ApplyOfflineLoan.cs" />
+    <Compile Include="EMMS\t_ApplyOfflineOther.cs" />
+    <Compile Include="EMMS\t_ApplyOfflinePublic.cs" />
+    <Compile Include="EMMS\t_ApplySouch.cs" />
+    <Compile Include="EMMS\t_BankAccount.cs" />
+    <Compile Include="EMMS\t_Case.cs" />
+    <Compile Include="EMMS\t_CaseType.cs" />
+    <Compile Include="EMMS\t_Collateral.cs" />
+    <Compile Include="EMMS\t_CollateralShare.cs" />
+    <Compile Include="EMMS\t_CompanyChange.cs" />
+    <Compile Include="EMMS\t_CompanyReport.cs" />
+    <Compile Include="EMMS\t_Court.cs" />
+    <Compile Include="EMMS\t_Defendant.cs" />
+    <Compile Include="EMMS\t_Directors.cs" />
+    <Compile Include="EMMS\t_Disqualification.cs" />
+    <Compile Include="EMMS\t_DownLoadReport.cs" />
+    <Compile Include="EMMS\t_D_Representation.cs" />
+    <Compile Include="EMMS\t_Education.cs" />
+    <Compile Include="EMMS\t_EmailList.cs" />
+    <Compile Include="EMMS\t_Emails.cs" />
+    <Compile Include="EMMS\t_EmploymentHistory.cs" />
+    <Compile Include="EMMS\t_IDDocuments.cs" />
+    <Compile Include="EMMS\t_Incumbrances.cs" />
+    <Compile Include="EMMS\t_Invoice.cs" />
+    <Compile Include="EMMS\t_InvoiceList.cs" />
+    <Compile Include="EMMS\t_Judge.cs" />
+    <Compile Include="EMMS\t_Judgment.cs" />
+    <Compile Include="EMMS\t_Land.cs" />
+    <Compile Include="EMMS\t_Loan.cs" />
+    <Compile Include="EMMS\t_LogRecord.cs" />
+    <Compile Include="EMMS\t_MediaReport.cs" />
+    <Compile Include="EMMS\t_Message.cs" />
+    <Compile Include="EMMS\t_Order.cs" />
+    <Compile Include="EMMS\t_OrderList.cs" />
+    <Compile Include="EMMS\t_OwnerRelation.cs" />
+    <Compile Include="EMMS\t_Payment.cs" />
+    <Compile Include="EMMS\t_Plaintiff.cs" />
+    <Compile Include="EMMS\t_PublicData.cs" />
+    <Compile Include="EMMS\t_PublicRelation.cs" />
+    <Compile Include="EMMS\t_P_Representation.cs" />
+    <Compile Include="EMMS\t_Quote.cs" />
+    <Compile Include="EMMS\t_QuoteList.cs" />
+    <Compile Include="EMMS\t_RatioDecidendi.cs" />
+    <Compile Include="EMMS\t_Recipient.cs" />
+    <Compile Include="EMMS\t_Relationships.cs" />
+    <Compile Include="EMMS\t_ReportAutoMonitoring.cs" />
+    <Compile Include="EMMS\t_ReportOfflineCase.cs" />
+    <Compile Include="EMMS\t_ReportOfflineCom.cs" />
+    <Compile Include="EMMS\t_ReportOfflineLand.cs" />
+    <Compile Include="EMMS\t_ReportOfflineLoan.cs" />
+    <Compile Include="EMMS\t_ReportOfflineOther.cs" />
+    <Compile Include="EMMS\t_ReportOfflinePublic.cs" />
+    <Compile Include="EMMS\t_ReportOnlineCase.cs" />
+    <Compile Include="EMMS\t_ReportOnlineCom.cs" />
+    <Compile Include="EMMS\t_ReportOnlineLand.cs" />
+    <Compile Include="EMMS\t_ReportOnlineLoan.cs" />
+    <Compile Include="EMMS\t_ResultAutoMonitoring.cs" />
+    <Compile Include="EMMS\t_ResultOfflineCase.cs" />
+    <Compile Include="EMMS\t_ResultOfflineCom.cs" />
+    <Compile Include="EMMS\t_ResultOfflineLand.cs" />
+    <Compile Include="EMMS\t_ResultOfflineLoan.cs" />
+    <Compile Include="EMMS\t_ResultOfflineOther.cs" />
+    <Compile Include="EMMS\t_ResultOfflinePublic.cs" />
+    <Compile Include="EMMS\t_ResultOnlineCase.cs" />
+    <Compile Include="EMMS\t_ResultOnlineCom.cs" />
+    <Compile Include="EMMS\t_ResultOnlineLand.cs" />
+    <Compile Include="EMMS\t_Shareholders.cs" />
+    <Compile Include="EMMS\t_SocialNetwork.cs" />
+    <Compile Include="EMMS\t_TaskAutoGroup.cs" />
+    <Compile Include="EMMS\t_TaskAutoList.cs" />
+    <Compile Include="EMMS\t_TaskAutoMonitoring.cs" />
+    <Compile Include="EMMS\t_TaskOfflineCase.cs" />
+    <Compile Include="EMMS\t_TaskOfflineCompany.cs" />
+    <Compile Include="EMMS\t_TaskOfflineLand.cs" />
+    <Compile Include="EMMS\t_TaskOfflineLoan.cs" />
+    <Compile Include="EMMS\t_TaskOfflineOther.cs" />
+    <Compile Include="EMMS\t_TaskOnlineCase.cs" />
+    <Compile Include="EMMS\t_TaskOnlineCompany.cs" />
+    <Compile Include="EMMS\t_TaskOnlineLand.cs" />
+    <Compile Include="EMMS\t_TaskOnlineLoan.cs" />
+    <Compile Include="EMMS\t_TaskOnlinePublic.cs" />
+    <Compile Include="EMMS\t_Telephones.cs" />
+    <Compile Include="EMMS\t_UpdateLog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="viewsModels\entityWithHtml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

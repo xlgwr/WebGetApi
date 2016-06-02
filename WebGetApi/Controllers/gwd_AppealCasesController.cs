@@ -20,6 +20,7 @@ namespace WebGetApi.Controllers
     [RoutePrefix("api/GWDAppealCases")]
     public class gwd_AppealCasesController : ApiController
     {
+        public static Dictionary<long, bool> tmpExit = new Dictionary<long, bool>();
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
 
@@ -152,6 +153,27 @@ namespace WebGetApi.Controllers
                 if (m_parameterCurr != null)
                 {
                     long.TryParse(m_parameterCurr.paramvalue, out tmpCurrMax);
+                    if (gwd_AppealCases.TGetDis > tmpCurrMax)
+                    {
+                        m_parameterCurr.paramvalue = gwd_AppealCases.TGetDis.ToString();
+                        m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
+                        m_parameterCurr.UpdateDate = DateTime.Now;
+                    }
+                }
+
+                logger.InfoFormat("TDis Count:{0}", tmpExit.Count);
+                if (tmpExit.ContainsKey(gwd_AppealCases.TDis))
+                {
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+                else
+                {
+                    if (tmpExit.Count > 1000)
+                    {
+                        tmpExit.Clear();
+                    }
+                    tmpExit.Add(gwd_AppealCases.TDis, true);
                 }
 
                 var tmpexitAs = gwtMainExistsAsync(gwd_AppealCases.caseNo, gwd_AppealCases.tLang, gwd_AppealCases.caseDate, gwd_AppealCases.TDis, gwd_AppealCases.tIndex);
@@ -173,16 +195,6 @@ namespace WebGetApi.Controllers
                     db.gwd_AppealCases.Add(gwd_AppealCases);
                 }
 
-                if (m_parameterCurr != null)
-                {
-                    if (gwd_AppealCases.TGetDis > tmpCurrMax)
-                    {
-                        m_parameterCurr.paramvalue = gwd_AppealCases.TGetDis.ToString();
-                        m_parameterCurr.ClientIP = HttpContext.Current.Request.UserHostAddress;
-                        m_parameterCurr.UpdateDate = DateTime.Now;
-                    }
-                }
-
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateException)
@@ -194,13 +206,45 @@ namespace WebGetApi.Controllers
             //return CreatedAtRoute("DefaultApi", new { id = gwd_AppealCases.Tid }, gwd_AppealCases);
 
         }
+        /// <summary>
+        ///         e.caseNo == caseNo && e.caseDate == tdate &&
+        /// </summary>
         private bool gwtMainExistsAsync(string caseNo, long tlang, string tdate, long tdis, long index)
         {
-            return db.gwd_AppealCases.Count(e => e.tLang == tlang && e.caseNo == caseNo && e.caseDate == tdate && e.TDis == tdis && e.tIndex == index) > 0;
+            //logger.InfoFormat("Lang:{0},caseNo:{1},tdate:{2}", tlang, caseNo, tdate);
+            try
+            {
+                return db.gwd_AppealCases.Count(e => e.tLang == tlang && e.TDis == tdis) > 0;
+            }
+            catch (Exception ex)
+            {
+                logger.Debug(ex);
+                return false;
+            }
+
         }
+        /// <summary>
+        ///  e.caseNo == caseNo && e.caseDate == tdate &&
+        /// </summary>
+        /// <param name="caseNo"></param>
+        /// <param name="tlang"></param>
+        /// <param name="tdate"></param>
+        /// <param name="tdis"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         private gwd_AppealCases gwtMainModel(string caseNo, long tlang, string tdate, long tdis, long index)
         {
-            return db.gwd_AppealCases.Where(e => e.tLang == tlang && e.caseNo == caseNo && e.caseDate == tdate && e.TDis == tdis && e.tIndex == index).FirstOrDefault();
+            try
+            {
+
+                //logger.InfoFormat("Lang:{0},caseNo:{1},tdate:{2}", tlang, caseNo, tdate);
+                return db.gwd_AppealCases.Where(e => e.tLang == tlang && e.TDis == tdis).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                logger.Debug(ex);
+                return null;
+            }
         }
     }
 }

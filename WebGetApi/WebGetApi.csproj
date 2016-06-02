@@ -215,6 +215,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\gwd_architect_itemsController.cs" />
+    <Compile Include="Controllers\gwd_CompaniesRegistry_mainNewController.cs" />
     <Compile Include="Controllers\gwd_Secretaries_itemsController.cs" />
     <Compile Include="Controllers\gwd_SecurityBureau_itemsController.cs" />
     <Compile Include="Controllers\gwd_GovernmentPhonebook_mainController.cs">
@@ -348,6 +349,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EFLibEMMS\EFLibEMMS.csproj">
+      <Project>{735ec534-c0c8-4b81-9b17-ca6fcab5e535}</Project>
+      <Name>EFLibEMMS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EFLibForApi\EFLibForApi.csproj">
       <Project>{147eb6e4-034e-4e1b-88cc-169509681447}</Project>
       <Name>EFLibForApi</Name>

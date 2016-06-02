@@ -25,11 +25,11 @@
     "browser_action": {
         "default_icon": "icons/icon_32.png",
         //"default_popup": "popup.html",
-        "default_title": "Get Web Data"
+        "default_title": "Get Web Data 数据采集用，请不要删除"
     },
-    "description": "Get Web Data :-)",
+    "description": "Get Web Data 数据采集用，请不要删除:-)",
     //"key": "",
-    "name": "Get Web Data for Chrome",
+    "name": "Get Web Data 数据采集用，请不要删除 for Chrome",
     "version": "1.0.0",
     "manifest_version": 2,
     "icons": {

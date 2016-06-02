@@ -20,6 +20,7 @@ namespace WebGetApi.Controllers
     [RoutePrefix("api/GWDAppealCases")]
     public class gwd_RatioDecidendisController : ApiController
     {
+        public static Dictionary<long, bool> tmpExit = new Dictionary<long, bool>();
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
 
@@ -43,6 +44,20 @@ namespace WebGetApi.Controllers
             {
                 gwd_RatioDecidendis.UpdateDate = DateTime.Now;
                 gwd_RatioDecidendis.ClientIP = HttpContext.Current.Request.UserHostAddress;
+
+                logger.InfoFormat("gwd_RatioDecidendis TDis Count:{0}", tmpExit.Count);
+                if (tmpExit.ContainsKey(gwd_RatioDecidendis.TDis))
+                {                   
+                    return Ok();
+                }
+                else
+                {
+                    if (tmpExit.Count > 1000)
+                    {
+                        tmpExit.Clear();
+                    }
+                    tmpExit.Add(gwd_RatioDecidendis.TDis, true);
+                }
 
                 var tmpexitAs = gwtMainExistsAsync(gwd_RatioDecidendis.caseNo, gwd_RatioDecidendis.tLang, gwd_RatioDecidendis.TDis, gwd_RatioDecidendis.caseDate);
                 if (tmpexitAs)

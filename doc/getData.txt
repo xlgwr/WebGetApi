@@ -1,0 +1,28 @@
+select top 10  * from [dbo].[gwd_AppealCases] order by TGetDis ;
+select top 10  * from [dbo].[gwd_RatioDecidendis]order by TGetDis ;
+
+
+select top 100 * from  [dbo].[gwd_Lawyers_items] where ttype='律师界名录'and tLang=0;
+select top 100 * from  [dbo].[gwd_Lawyers_items]where ttype='注册外地律师'and tLang=0;
+select top 100 * from  [dbo].[gwd_Barristers_items] where tLang=0;
+select top 100 * from [dbo].[gwd_GovernmentPhonebook_items]where tLang=0;
+select top 100 * from [dbo].[gwd_RegisteredPharmacists_items] where tLang=0;
+select top 100 * from [dbo].[gwd_PsychologistsList_items] where tLang=0;
+select top 100 * from [dbo].[gwd_InstituteSurveyors_items] where tLang=0;
+
+
+
+select top 100 * from [dbo].[gwd_RegArchitect_items];
+
+select top 100 * from  [dbo].[gwd_architect_items];
+
+select top 100 * from [dbo].[gwd_ConstructionCompany_items];
+
+
+
+
+
+select top 100 * from [dbo].[gwd_RegBuildingCompany_items] where tLang=0;
+
+select top 100 * from [dbo].[gwd_Secretaries_items];
+select top 100 * from [dbo].[gwd_SecurityBureau_items]where tLang=0;
