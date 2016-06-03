@@ -81,7 +81,11 @@ namespace EFLibForApi.emms.models
         /// </summary>
        // [Column(TypeName = "text")]
         public string CaseType { get; set; }
-
+        /// <summary>
+        /// 原告 Old
+        /// </summary>
+       // [Column(TypeName = "text")]
+        public string Parties { get; set; }
         /// <summary>
         /// 原告
         /// </summary>

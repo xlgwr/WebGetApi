@@ -229,7 +229,7 @@ function openURLForICRIS(ttype) {
 //上诉记录
 function GetWebDatasMaxTDisToOpen() {
     ////获取上诉记录,最大一记录
-    console.log("上诉记录,每30秒检查一次:" + _postOK_2_legalref);
+    console.log("上诉记录,每3分钟检查一次:" + _postOK_2_legalref);
     if (!_postOK_2_legalref) {
         _postOK_2_legalref = true;
         $.ajax({
@@ -301,11 +301,11 @@ function fun0icris() {
 //法庭数据
 function fun1sjudiciary() {
     //每5秒检查一次参数
-    var sgetParameter = window.setInterval(getParameter, 1 * 5 * 1000);
+    var sgetParameter = window.setInterval(getParameter, (1 * 5 * 1000));
     //法庭数据-审查案件表
-    chrome.tabs.create({
-        url: "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm"
-    });
+    // chrome.tabs.create({
+    //     url: "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm"
+    // });
     //每30秒检查一次
     var sjudiciary = window.setInterval(openURLjudiciary, 1 * 30 * 1000);
 }
@@ -314,8 +314,8 @@ function fun1TDis() {
 
     _postOK_2_legalref = false;
     GetWebDatasMaxTDisToOpen();
-    //每30秒检查一次
-    var sjudiciary = window.setInterval(GetWebDatasMaxTDisToOpen, 1 * 60 * 1000);
+    //每3*60秒检查一次
+    var sjudiciary = window.setInterval(GetWebDatasMaxTDisToOpen, (3 * 60 * 1000));
 }
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////

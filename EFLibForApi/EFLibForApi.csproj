@@ -160,6 +160,14 @@
     <Compile Include="Migrations\201605120248042_addColForCase.Designer.cs">
       <DependentUpon>201605120248042_addColForCase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606020716397_changeTnameLenght.cs" />
+    <Compile Include="Migrations\201606020716397_changeTnameLenght.Designer.cs">
+      <DependentUpon>201606020716397_changeTnameLenght.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606030248143_addPartiesForCaseTable.cs" />
+    <Compile Include="Migrations\201606030248143_addPartiesForCaseTable.Designer.cs">
+      <DependentUpon>201606030248143_addPartiesForCaseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -223,6 +231,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605120248042_addColForCase.resx">
       <DependentUpon>201605120248042_addColForCase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606020716397_changeTnameLenght.resx">
+      <DependentUpon>201606020716397_changeTnameLenght.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606030248143_addPartiesForCaseTable.resx">
+      <DependentUpon>201606030248143_addPartiesForCaseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

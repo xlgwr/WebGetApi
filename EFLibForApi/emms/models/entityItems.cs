@@ -25,7 +25,7 @@ namespace EFLibForApi.emms.models
         [Column(Order = 3)]
         public long tIndex { get; set; }
 
-        [StringLength(500)]
+        //[StringLength(500)]
         public string tname { get; set; }
 
 

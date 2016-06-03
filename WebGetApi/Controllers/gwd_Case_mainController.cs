@@ -93,6 +93,7 @@ namespace WebGetApi.Controllers
                                         getItem.Hearing = item.Hearing;
                                         getItem.Judge = item.Judge;
                                         getItem.Nature = item.Nature;
+                                        //getItem.Parties = item.Parties;
                                         getItem.PlainTiff = item.PlainTiff;
                                         getItem.Remark = item.Remark;
                                         getItem.Representation = item.Representation;
