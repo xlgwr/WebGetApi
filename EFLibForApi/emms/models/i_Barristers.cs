@@ -42,24 +42,22 @@ namespace EFLibForApi.emms.models
         public string Sex { get; set; }
 
         /// <summary>
-        /// 职位
-        /// </summary>
-        public string Title { get; set; }
-
-        /// <summary>
         /// 地址
         /// </summary>
         public string Address { get; set; }
-
-        /// <summary>
+      /// <summary>
         /// 电话
         /// </summary>
-        public string Telphone { get; set; }
+        public string Tel { get; set; }
 
         /// <summary>
         /// 手提电话
         /// </summary>
         public string Mobile { get; set; }
+        /// <summary>
+        /// 职位
+        /// </summary>
+        public string Title { get; set; }  
 
         /// <summary>
         /// 传真

@@ -20,7 +20,7 @@ namespace WebGetApi.Controllers
     /// <summary>
     /// 香港大律师表
     /// </summary>
-    [RoutePrefix("api/GWDBarristers")]
+    [RoutePrefix("api/iBarristers")]
     public class i_BarristersController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -84,7 +84,7 @@ namespace WebGetApi.Controllers
                                         getItem.Quals = item.Quals;
                                         getItem.Remark = item.Remark;
                                         getItem.Sex = item.Sex;
-                                        getItem.Telphone = item.Telphone;
+                                        getItem.Tel = item.Tel;
                                         getItem.Title = item.Title;
 
                                         getItem.tname = item.tname;

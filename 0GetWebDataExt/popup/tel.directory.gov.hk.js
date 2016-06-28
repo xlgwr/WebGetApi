@@ -1,6 +1,6 @@
-$(function () {
+$(function() {
     console.log("香港特别行政区政府及有关机构电话薄初始化..");
-    $('#btn4').click(function () {
+    $('#btn4').click(function() {
         $('#panel4').removeClass('panel-default')
         $('#panel4').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -19,6 +19,7 @@ $(function () {
             return undefined;
         }
     }
+
     function gwd_tel_directory(btn, msgid) {
         console.clear();
 
@@ -40,11 +41,13 @@ $(function () {
         //获取记录 中文
         $.ajax({
             url: configGetUrl.getUrl_tel_directory,
-            data: { accept_disclaimer: 'yes' },
+            data: {
+                accept_disclaimer: 'yes'
+            },
             tmpdata: 0,
             timeout: 50000,
             type: "get",
-            success: function (data, state, xhr) {
+            success: function(data, state, xhr) {
                 console.log(_tTitle + this.url);
                 var $body = $('<div></div>').html(data);
                 var $table0 = $body.find('#tbl_dept_list').eq(0);
@@ -87,7 +90,7 @@ $(function () {
                     }
                     _alltel_directoryCN.push(curitem);
                     tmpitem += 1;
-                }//
+                } //
                 ///end for
                 //console.log(_alltel_directoryCN);
 
@@ -95,7 +98,7 @@ $(function () {
                 getItems_alltel_directoryCN(1, _tTitle + "(中文)", "电话薄");
 
             },
-            error: function (err) {
+            error: function(err) {
                 console.log(_tTitle + this.url);
                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                 console.log(err);
@@ -142,11 +145,13 @@ $(function () {
                     //获取明细-下级
                     $.ajax({
                         url: configGetUrl.getUrl_tel_directory_prefix + currItem.url,
-                        data: { accept_disclaimer: 'yes' },
+                        data: {
+                            accept_disclaimer: 'yes'
+                        },
                         tmpdata: currItem,
                         timeout: 50000,
                         type: "get",
-                        success: function (data, state, xhr) {
+                        success: function(data, state, xhr) {
                             console.log(_tTitle + "," + this.tmpdata.tTitle + "," + this.url);
                             var $body = $('<div></div>').html(data);
                             var $table0 = $body.find('#content_container').eq(0);
@@ -163,11 +168,14 @@ $(function () {
                                 //获取电话号，提交
                                 $.ajax({
                                     url: currHref,
-                                    data: { accept_disclaimer: 'yes' },
+                                    data: {
+                                        accept_disclaimer: 'yes'
+                                    },
                                     tmpdata: currTitle,
+                                    tmpID: this.tmpdata.itemNo,
                                     timeout: 50000,
                                     type: "get",
-                                    success: function (data, state, xhr) {
+                                    success: function(data, state, xhr) {
                                         console.log(_tTitle + "," + this.tmpdata + "," + this.url);
                                         var $body = $('<div></div>').html(data);
                                         var $table0 = $body.find('#content_container').eq(0);
@@ -178,7 +186,7 @@ $(function () {
                                         console.log(this.tmpdata + ",tbl_dept_contact_list:" + $table1TR.length);
 
                                         var postMain = {
-                                            gwd_GovernmentPhonebook_items: [],
+                                            i_GovPhonebook: [],
                                             tLang: _langFlag,
                                             tname: this.tmpdata,
                                             ttype: _ttype,
@@ -191,27 +199,29 @@ $(function () {
                                             UpdateDate: undefined
                                         }
                                         var postItemTop = {
-                                            $id: 1,
-                                            htmlID: 0,
-                                            FullName: undefined,
-                                            Title: undefined,
-                                            OfficePhone: undefined,
-                                            Email: undefined,
-                                            Address: undefined,
-                                            Fax: undefined,
-                                            tLang: _langFlag,
-                                            tkeyNo: this.tmpdata,
-                                            tIndex: 1,
-                                            tname: undefined,
-                                            ttype: _ttype,
-                                            Tid: 0,
-                                            Remark: this.url,
-                                            tStatus: 1,
-                                            ClientIP: undefined,
-                                            addDate: undefined,
-                                            UpdateDate: undefined
-                                        }
-                                        //电话薄，列表头
+                                                $id: 1,
+                                                htmlID: 0,
+                                                GovId: this.tmpID,
+                                                GovName: this.tmpdata,
+                                                FullName: undefined,
+                                                PostTitle: undefined,
+                                                OfficePhone: undefined,
+                                                Email: undefined,
+                                                Address: undefined,
+                                                Fax: undefined,
+                                                tLang: _langFlag,
+                                                tkeyNo: this.tmpdata,
+                                                tIndex: 1,
+                                                tname: undefined,
+                                                ttype: _ttype,
+                                                Tid: 0,
+                                                Remark: this.url,
+                                                tStatus: 1,
+                                                ClientIP: undefined,
+                                                addDate: undefined,
+                                                UpdateDate: undefined
+                                            }
+                                            //电话薄，列表头
                                         for (var r = 1; r < $table0TR.length; r++) {
                                             var tr = $table0TR.eq(r);
                                             var alltd = tr.children('td');
@@ -225,16 +235,20 @@ $(function () {
                                             }
                                             //["地址", "辦公室電話", "傳真", "電郵"]
                                             switch (tmptitle) {
-                                                case "地址": case "Address":
+                                                case "地址":
+                                                case "Address":
                                                     postItemTop.Address = $ctd1;
                                                     break;
-                                                case "辦公室電話": case "Office Tel":
+                                                case "辦公室電話":
+                                                case "Office Tel":
                                                     postItemTop.OfficePhone = $ctd1;
                                                     break;
-                                                case "傳真": case "Fax":
+                                                case "傳真":
+                                                case "Fax":
                                                     postItemTop.Fax = $ctd1;
                                                     break;
-                                                case "電郵": case "Email":
+                                                case "電郵":
+                                                case "Email":
                                                     postItemTop.Email = getEmail($ctd1);
                                                     break;
                                                 default:
@@ -242,7 +256,7 @@ $(function () {
                                             }
 
                                         }
-                                        postMain.gwd_GovernmentPhonebook_items.push(postItemTop);
+                                        postMain.i_GovPhonebook.push(postItemTop);
                                         //
                                         //console.log(_allColNameCN);
                                         //列表明细
@@ -252,26 +266,28 @@ $(function () {
                                             var tmpemail = alltd.eq(3).text().trim();
 
                                             var postItem = {
-                                                $id: (r + 1),
-                                                htmlID: 0,
-                                                FullName: alltd.eq(0).text().trim(),
-                                                Title: alltd.eq(1).text().trim(),
-                                                OfficePhone: alltd.eq(2).text().trim(),
-                                                Email: getEmail(tmpemail),
-                                                tLang: _langFlag,
-                                                tkeyNo: this.tmpdata,
-                                                tIndex: (r + 1),
-                                                tname: undefined,
-                                                ttype: _ttype,
-                                                Tid: 0,
-                                                Remark: this.url,
-                                                tStatus: 0,
-                                                ClientIP: undefined,
-                                                addDate: undefined,
-                                                UpdateDate: undefined
-                                            }
-                                            //
-                                            postMain.gwd_GovernmentPhonebook_items.push(postItem);
+                                                    $id: (r + 1),
+                                                    htmlID: 0,
+                                                    GovId: this.tmpID,
+                                                    GovName: this.tmpdata,
+                                                    FullName: alltd.eq(0).text().trim(),
+                                                    PostTitle: alltd.eq(1).text().trim(),
+                                                    OfficePhone: alltd.eq(2).text().trim(),
+                                                    Email: getEmail(tmpemail),
+                                                    tLang: _langFlag,
+                                                    tkeyNo: this.tmpdata,
+                                                    tIndex: (r + 1),
+                                                    tname: undefined,
+                                                    ttype: _ttype,
+                                                    Tid: 0,
+                                                    Remark: this.url,
+                                                    tStatus: 0,
+                                                    ClientIP: undefined,
+                                                    addDate: undefined,
+                                                    UpdateDate: undefined
+                                                }
+                                                //
+                                            postMain.i_GovPhonebook.push(postItem);
                                         }
                                         //end
 
@@ -285,11 +301,11 @@ $(function () {
                                             timeout: 50000,
                                             contentType: 'application/json; charset=utf-8',
                                             data: JSON.stringify(postMain)
-                                        }).done(function (data) {
+                                        }).done(function(data) {
                                             console.log(_tTitle + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                                             // sendMsg('jsonDate', "Set Date Now.");
                                             //console.log(data);
-                                        }).fail(function (err) {
+                                        }).fail(function(err) {
                                             //showError
                                             console.log(this.tmpdata);
                                             console.log(err);
@@ -298,7 +314,7 @@ $(function () {
 
 
                                     },
-                                    error: function (err) {
+                                    error: function(err) {
                                         console.log(_tTitle + "," + this.tmpdata + "," + this.url);
                                         console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                                         console.log(err);
@@ -311,7 +327,7 @@ $(function () {
                             ///////////////////////////end for
 
                         },
-                        error: function (err) {
+                        error: function(err) {
                             console.log(_tTitle + "," + this.tmpdata.tTitle + "," + this.url);
                             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                             console.log(err);
@@ -331,11 +347,13 @@ $(function () {
         //获取记录 英文
         $.ajax({
             url: configGetUrl.getUrl_tel_directoryEN,
-            data: { accept_disclaimer: 'yes' },
+            data: {
+                accept_disclaimer: 'yes'
+            },
             tmpdata: 0,
             timeout: 50000,
             type: "get",
-            success: function (data, state, xhr) {
+            success: function(data, state, xhr) {
                 console.log(_tTitle + this.url);
                 var $body = $('<div></div>').html(data);
                 var $table0 = $body.find('#tbl_dept_list').eq(0);
@@ -378,7 +396,7 @@ $(function () {
                     }
                     _alltel_directoryEN.push(curitem);
                     tmpitem += 1;
-                }//
+                } //
                 ///end for
                 //console.log(_alltel_directoryCN);
 
@@ -386,7 +404,7 @@ $(function () {
                 getItems_alltel_directoryEN(1, _tTitle + "(英文)", "Full List");
 
             },
-            error: function (err) {
+            error: function(err) {
                 console.log(_tTitle + this.url);
                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                 console.log(err);
@@ -431,11 +449,13 @@ $(function () {
                     //获取明细-下级
                     $.ajax({
                         url: configGetUrl.getUrl_tel_directory_prefix + currItem.url,
-                        data: { accept_disclaimer: 'yes' },
+                        data: {
+                            accept_disclaimer: 'yes'
+                        },
                         tmpdata: currItem,
                         timeout: 50000,
                         type: "get",
-                        success: function (data, state, xhr) {
+                        success: function(data, state, xhr) {
                             console.log(_tTitle + "," + this.tmpdata.tTitle + "," + this.url);
                             var $body = $('<div></div>').html(data);
                             var $table0 = $body.find('#content_container').eq(0);
@@ -455,11 +475,14 @@ $(function () {
                                 //获取电话号，提交
                                 $.ajax({
                                     url: currHref,
-                                    data: { accept_disclaimer: 'yes' },
+                                    data: {
+                                        accept_disclaimer: 'yes'
+                                    },
                                     tmpdata: currTitle,
+                                    tmpID: this.tmpdata.itemNo,
                                     timeout: (2 * 60 * 1000),
                                     type: "get",
-                                    success: function (data, state, xhr) {
+                                    success: function(data, state, xhr) {
                                         console.log(_tTitle + "," + this.tmpdata + "," + this.url);
                                         var $body = $('<div></div>').html(data);
                                         var $table0 = $body.find('#content_container').eq(0);
@@ -470,7 +493,7 @@ $(function () {
                                         console.log(this.tmpdata + ",tbl_dept_contact_list:" + $table1TR.length);
 
                                         var postMain = {
-                                            gwd_GovernmentPhonebook_items: [],
+                                            i_GovPhonebook: [],
                                             tLang: _langFlag,
                                             tname: this.tmpdata,
                                             ttype: _ttype,
@@ -483,27 +506,29 @@ $(function () {
                                             UpdateDate: undefined
                                         }
                                         var postItemTop = {
-                                            $id: 1,
-                                            htmlID: 0,
-                                            FullName: undefined,
-                                            Title: undefined,
-                                            OfficePhone: undefined,
-                                            Email: undefined,
-                                            Address: undefined,
-                                            Fax: undefined,
-                                            tLang: _langFlag,
-                                            tkeyNo: this.tmpdata,
-                                            tIndex: 1,
-                                            tname: undefined,
-                                            ttype: _ttype,
-                                            Tid: 0,
-                                            Remark: this.url,
-                                            tStatus: 1,
-                                            ClientIP: undefined,
-                                            addDate: undefined,
-                                            UpdateDate: undefined
-                                        }
-                                        //电话薄，列表头
+                                                $id: 1,
+                                                htmlID: 0,
+                                                GovId: this.tmpID,
+                                                GovName: this.tmpdata,
+                                                FullName: undefined,
+                                                PostTitle: undefined,
+                                                OfficePhone: undefined,
+                                                Email: undefined,
+                                                Address: undefined,
+                                                Fax: undefined,
+                                                tLang: _langFlag,
+                                                tkeyNo: this.tmpdata,
+                                                tIndex: 1,
+                                                tname: undefined,
+                                                ttype: _ttype,
+                                                Tid: 0,
+                                                Remark: this.url,
+                                                tStatus: 1,
+                                                ClientIP: undefined,
+                                                addDate: undefined,
+                                                UpdateDate: undefined
+                                            }
+                                            //电话薄，列表头
                                         for (var r = 1; r < $table0TR.length; r++) {
                                             var tr = $table0TR.eq(r);
                                             var alltd = tr.children('td');
@@ -517,16 +542,20 @@ $(function () {
                                             }
                                             //["地址", "辦公室電話", "傳真", "電郵"]
                                             switch (tmptitle) {
-                                                case "地址": case "Address":
+                                                case "地址":
+                                                case "Address":
                                                     postItemTop.Address = $ctd1;
                                                     break;
-                                                case "辦公室電話": case "Office Tel":
+                                                case "辦公室電話":
+                                                case "Office Tel":
                                                     postItemTop.OfficePhone = $ctd1;
                                                     break;
-                                                case "傳真": case "Fax":
+                                                case "傳真":
+                                                case "Fax":
                                                     postItemTop.Fax = $ctd1;
                                                     break;
-                                                case "電郵": case "Email":
+                                                case "電郵":
+                                                case "Email":
                                                     postItemTop.Email = getEmail($ctd1);
                                                     break;
                                                 default:
@@ -534,7 +563,7 @@ $(function () {
                                             }
 
                                         }
-                                        postMain.gwd_GovernmentPhonebook_items.push(postItemTop);
+                                        postMain.i_GovPhonebook.push(postItemTop);
                                         //
                                         //console.log(_allColNameCN);
                                         //列表明细
@@ -544,26 +573,28 @@ $(function () {
                                             var tmpemail = alltd.eq(3).text().trim();
 
                                             var postItem = {
-                                                $id: (r + 1),
-                                                htmlID: 0,
-                                                FullName: alltd.eq(0).text().trim(),
-                                                Title: alltd.eq(1).text().trim(),
-                                                OfficePhone: alltd.eq(2).text().trim(),
-                                                Email: getEmail(tmpemail),
-                                                tLang: _langFlag,
-                                                tkeyNo: this.tmpdata,
-                                                tIndex: (r + 1),
-                                                tname: undefined,
-                                                ttype: _ttype,
-                                                Tid: 0,
-                                                Remark: this.url,
-                                                tStatus: 0,
-                                                ClientIP: undefined,
-                                                addDate: undefined,
-                                                UpdateDate: undefined
-                                            }
-                                            //
-                                            postMain.gwd_GovernmentPhonebook_items.push(postItem);
+                                                    $id: (r + 1),
+                                                    htmlID: 0,
+                                                    GovId: this.tmpID,
+                                                    GovName: this.tmpdata,
+                                                    FullName: alltd.eq(0).text().trim(),
+                                                    PostTitle: alltd.eq(1).text().trim(),
+                                                    OfficePhone: alltd.eq(2).text().trim(),
+                                                    Email: getEmail(tmpemail),
+                                                    tLang: _langFlag,
+                                                    tkeyNo: this.tmpdata,
+                                                    tIndex: (r + 1),
+                                                    tname: undefined,
+                                                    ttype: _ttype,
+                                                    Tid: 0,
+                                                    Remark: this.url,
+                                                    tStatus: 0,
+                                                    ClientIP: undefined,
+                                                    addDate: undefined,
+                                                    UpdateDate: undefined
+                                                }
+                                                //
+                                            postMain.i_GovPhonebook.push(postItem);
                                         }
                                         //end
 
@@ -577,11 +608,11 @@ $(function () {
                                             timeout: 50000,
                                             contentType: 'application/json; charset=utf-8',
                                             data: JSON.stringify(postMain)
-                                        }).done(function (data) {
+                                        }).done(function(data) {
                                             console.log(_tTitle + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                                             // sendMsg('jsonDate', "Set Date Now.");
                                             //console.log(data);
-                                        }).fail(function (err) {
+                                        }).fail(function(err) {
                                             //showError
                                             console.log(this.tmpdata);
                                             console.log(err);
@@ -590,7 +621,7 @@ $(function () {
 
 
                                     },
-                                    error: function (err) {
+                                    error: function(err) {
                                         console.log(_tTitle + "," + this.tmpdata + "," + this.url);
                                         console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                                         console.log(err);
@@ -603,7 +634,7 @@ $(function () {
                             ///////////////////////////end for
 
                         },
-                        error: function (err) {
+                        error: function(err) {
                             console.log(_tTitle + "," + this.tmpdata.tTitle + "," + this.url);
                             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                             console.log(err);

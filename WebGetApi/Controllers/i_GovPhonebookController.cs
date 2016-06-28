@@ -20,7 +20,7 @@ namespace WebGetApi.Controllers
     /// <summary>
     /// 香港特别行政区政府及有关机构电话薄
     /// </summary>
-    [RoutePrefix("api/GWDGovernmentPhonebook")]
+    [RoutePrefix("api/iGovPhonebook")]
     public class i_GovPhonebookController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

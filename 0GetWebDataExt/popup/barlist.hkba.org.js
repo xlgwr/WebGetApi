@@ -1,6 +1,6 @@
-$(function () {
+$(function() {
     console.log("香港大律师初始化..");
-    $('#btn1hklaw3').click(function () {
+    $('#btn1hklaw3').click(function() {
         $('#panelhklaw3').removeClass('panel-default')
         $('#panelhklaw3').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -47,7 +47,7 @@ function gwd_hkba_barlist(btn, msgid) {
         tmpdata: currPage,
         timeout: 50000,
         type: "get",
-        success: function (data, state, xhr) {
+        success: function(data, state, xhr) {
             console.log(this.url);
             var $body = $('<div></div>').html(data);
             var $table0 = $body.find('table[border="1"]').eq(0);
@@ -83,7 +83,7 @@ function gwd_hkba_barlist(btn, msgid) {
                 }
                 var curitem = {
                     id: tmpid,
-                    LawyerName: tmpname,
+                    LawyerNameEn: tmpname,
                     Sex: tmpsex,
                     Title: "資深大律師"
                 }
@@ -96,7 +96,7 @@ function gwd_hkba_barlist(btn, msgid) {
             //获取明细
             getItems_seniorityStep5(1, "資深大律師(中文)");
         },
-        error: function (err) {
+        error: function(err) {
             console.log("資深大律師:" + this.url);
             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
             console.log(err);
@@ -139,7 +139,7 @@ function gwd_hkba_barlist(btn, msgid) {
                     tmpdata: currItem,
                     timeout: 50000,
                     type: "get",
-                    success: function (data, state, xhr) {
+                    success: function(data, state, xhr) {
                         console.log(this.url);
                         var $body = $('<div></div>').html(data);
                         var $div0 = $body.children('div').eq(0);
@@ -167,19 +167,20 @@ function gwd_hkba_barlist(btn, msgid) {
                             ClientIP: undefined,
                             addDate: undefined,
                             UpdateDate: undefined,
-                            gwd_Barristers_items: []
+                            i_Barristers: []
                         }
                         var postItem = {
                             tLang: tindex,
                             tkeyNo: this.tmpdata.id.split(".")[0],
                             tIndex: 0,
                             Tid: 0,
-                            LawyerName: this.tmpdata.LawyerName,
-                            ChineseName: this.tmpdata.LawyerName,
+                            LawyerId: this.tmpdata.id.split(".")[0],
+                            LawyerNameEn: this.tmpdata.LawyerNameEn,
+                            LawyerNameCn: this.tmpdata.LawyerNameEn,
                             Sex: this.tmpdata.Sex,
                             Title: this.tmpdata.Title,
                             Address: undefined,
-                            Telphone: undefined,
+                            Tel: undefined,
                             Mobile: undefined,
                             Fax: undefined,
                             PracticeAreas: undefined,
@@ -217,28 +218,36 @@ function gwd_hkba_barlist(btn, msgid) {
                             // ["地址:", "電話:", "傳真:", "", "認許年份:", "電郵:", "執業範圍:", "學歷/資歷:", "手提電話:"]
                             //["Address:", "Tel. No.:", "Fax  No.:", "Call:", "Areas of Practice:", "E-mail:", "Quals:", "Mob:"]
                             switch ($ctd0) {
-                                case "地址:": case "Address:":
+                                case "地址:":
+                                case "Address:":
                                     postItem.Address = $ctd1;
                                     break;
-                                case "電話:": case "Tel. No.:":
-                                    postItem.Telphone = $ctd1;
+                                case "電話:":
+                                case "Tel. No.:":
+                                    postItem.Tel = $ctd1;
                                     break;
-                                case "傳真:": case "Fax  No.:":
+                                case "傳真:":
+                                case "Fax  No.:":
                                     postItem.Fax = $ctd1;
                                     break;
-                                case "認許年份:": case "Call:":
+                                case "認許年份:":
+                                case "Call:":
                                     postItem.ApproveYear = $ctd1;
                                     break;
-                                case "電郵:": case "E-mail:":
+                                case "電郵:":
+                                case "E-mail:":
                                     postItem.Email = $ctd1;
                                     break;
-                                case "執業範圍:": case "Areas of Practice:":
+                                case "執業範圍:":
+                                case "Areas of Practice:":
                                     postItem.PracticeAreas = $ctd1;
                                     break;
-                                case "學歷/資歷:": case "Quals:":
+                                case "學歷/資歷:":
+                                case "Quals:":
                                     postItem.Quals = $ctd1;
                                     break;
-                                case "手提電話:": case "Mob:":
+                                case "手提電話:":
+                                case "Mob:":
                                     postItem.Mobile = $ctd1;
                                     break;
                                 default:
@@ -249,7 +258,7 @@ function gwd_hkba_barlist(btn, msgid) {
                         /////
                         //console.log(_allColNameZH);
                         //console.log(postItem);
-                        toPostMain.gwd_Barristers_items.push(postItem);
+                        toPostMain.i_Barristers.push(postItem);
                         //提交数据库
                         $.ajax({
                             type: 'POST',
@@ -258,11 +267,11 @@ function gwd_hkba_barlist(btn, msgid) {
                             timeout: 50000,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(toPostMain)
-                        }).done(function (data) {
+                        }).done(function(data) {
                             console.log(_ttype + "," + typemsg + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                             // sendMsg('jsonDate', "Set Date Now.");
                             //console.log(data);
-                        }).fail(function (err) {
+                        }).fail(function(err) {
                             //showError
                             console.log(this.tmpdata);
                             console.log(err);
@@ -270,7 +279,7 @@ function gwd_hkba_barlist(btn, msgid) {
                         });
 
                     },
-                    error: function (err) {
+                    error: function(err) {
                         console.log(this.url);
                         console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                         console.log(err);
@@ -290,7 +299,7 @@ function gwd_hkba_barlist(btn, msgid) {
         tmpdata: currPage,
         timeout: 50000,
         type: "get",
-        success: function (data, state, xhr) {
+        success: function(data, state, xhr) {
             console.log(this.url);
             var $body = $('<div></div>').html(data);
             var $table0 = $body.find('table[border="1"]').eq(0);
@@ -327,7 +336,7 @@ function gwd_hkba_barlist(btn, msgid) {
                 }
                 var curitem = {
                     id: tmpid,
-                    LawyerName: tmpname,
+                    LawyerNameEn: tmpname,
                     Sex: tmpsex,
                     Title: "Senior Counsel"
                 }
@@ -340,7 +349,7 @@ function gwd_hkba_barlist(btn, msgid) {
             //获取明细
             getItems_Counsel_EnStep5(0, "資深大律師 英文");
         },
-        error: function (err) {
+        error: function(err) {
             console.log(this.url);
             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
             console.log(err);
@@ -383,7 +392,7 @@ function gwd_hkba_barlist(btn, msgid) {
                     tmpdata: currItem,
                     timeout: 50000,
                     type: "get",
-                    success: function (data, state, xhr) {
+                    success: function(data, state, xhr) {
                         console.log(typemsg + "," + this.url);
                         var $body = $('<div></div>').html(data);
                         var $div0 = $body.children('div').eq(0);
@@ -412,19 +421,20 @@ function gwd_hkba_barlist(btn, msgid) {
                             ClientIP: undefined,
                             addDate: undefined,
                             UpdateDate: undefined,
-                            gwd_Barristers_items: []
+                            i_Barristers: []
                         }
                         var postItem = {
                             tLang: tindex,
                             tkeyNo: this.tmpdata.id.split(".")[0],
                             tIndex: 0,
                             Tid: 0,
-                            LawyerName: this.tmpdata.LawyerName,
-                            ChineseName: this.tmpdata.LawyerName,
+                            LawyerId: this.tmpdata.id.split(".")[0],
+                            LawyerNameEn: this.tmpdata.LawyerNameEn,
+                            LawyerNameCn: this.tmpdata.LawyerNameEn,
                             Sex: this.tmpdata.Sex,
                             Title: this.tmpdata.Title,
                             Address: undefined,
-                            Telphone: undefined,
+                            Tel: undefined,
                             Mobile: undefined,
                             Fax: undefined,
                             PracticeAreas: undefined,
@@ -462,28 +472,36 @@ function gwd_hkba_barlist(btn, msgid) {
                             // ["地址:", "電話:", "傳真:", "", "認許年份:", "電郵:", "執業範圍:", "學歷/資歷:", "手提電話:"]
                             //["Address:", "Tel. No.:", "Fax  No.:", "Call:", "Areas of Practice:", "E-mail:", "Quals:", "Mob:"]
                             switch ($ctd0) {
-                                case "地址:": case "Address:":
+                                case "地址:":
+                                case "Address:":
                                     postItem.Address = $ctd1;
                                     break;
-                                case "電話:": case "Tel. No.:":
-                                    postItem.Telphone = $ctd1;
+                                case "電話:":
+                                case "Tel. No.:":
+                                    postItem.Tel = $ctd1;
                                     break;
-                                case "傳真:": case "Fax  No.:":
+                                case "傳真:":
+                                case "Fax  No.:":
                                     postItem.Fax = $ctd1;
                                     break;
-                                case "認許年份:": case "Call:":
+                                case "認許年份:":
+                                case "Call:":
                                     postItem.ApproveYear = $ctd1;
                                     break;
-                                case "電郵:": case "E-mail:":
+                                case "電郵:":
+                                case "E-mail:":
                                     postItem.Email = $ctd1;
                                     break;
-                                case "執業範圍:": case "Areas of Practice:":
+                                case "執業範圍:":
+                                case "Areas of Practice:":
                                     postItem.PracticeAreas = $ctd1;
                                     break;
-                                case "學歷/資歷:": case "Quals:":
+                                case "學歷/資歷:":
+                                case "Quals:":
                                     postItem.Quals = $ctd1;
                                     break;
-                                case "手提電話:": case "Mob:":
+                                case "手提電話:":
+                                case "Mob:":
                                     postItem.Mobile = $ctd1;
                                     break;
                                 default:
@@ -494,7 +512,7 @@ function gwd_hkba_barlist(btn, msgid) {
                         /////
                         //console.log(_allColNameZH);
                         //console.log(postItem);
-                        toPostMain.gwd_Barristers_items.push(postItem);
+                        toPostMain.i_Barristers.push(postItem);
                         //提交数据库
                         $.ajax({
                             type: 'POST',
@@ -503,18 +521,18 @@ function gwd_hkba_barlist(btn, msgid) {
                             timeout: 50000,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(toPostMain)
-                        }).done(function (data) {
+                        }).done(function(data) {
                             console.log(_ttype + "," + typemsg + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                             // sendMsg('jsonDate', "Set Date Now.");
                             //console.log(data);
-                        }).fail(function (err) {
+                        }).fail(function(err) {
                             //showError
                             console.log(this.tmpdata);
                             console.log(err);
                         });
 
                     },
-                    error: function (err) {
+                    error: function(err) {
                         console.log(this.url);
                         console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                         console.log(err);
@@ -535,7 +553,7 @@ function gwd_hkba_barlist(btn, msgid) {
         tmpdata: currPage,
         timeout: 50000,
         type: "get",
-        success: function (data, state, xhr) {
+        success: function(data, state, xhr) {
             console.log(this.url);
             var $body = $('<div></div>').html(data);
             var $table0 = $body.find('table[border="1"]').eq(0);
@@ -572,7 +590,7 @@ function gwd_hkba_barlist(btn, msgid) {
                 }
                 var curitem = {
                     id: tmpid,
-                    LawyerName: tmpname,
+                    LawyerNameEn: tmpname,
                     Sex: tmpsex,
                     Title: "大律師"
                 }
@@ -585,7 +603,7 @@ function gwd_hkba_barlist(btn, msgid) {
             //获取明细
             getItems_JuniorCounselStep5(1, "大律師（中文）");
         },
-        error: function (err) {
+        error: function(err) {
             console.log("大律師:" + this.url);
             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
             console.log(err);
@@ -630,7 +648,7 @@ function gwd_hkba_barlist(btn, msgid) {
                     tmpdata: currItem,
                     timeout: 50000,
                     type: "get",
-                    success: function (data, state, xhr) {
+                    success: function(data, state, xhr) {
                         console.log(typemsg + "," + this.url);
                         var $body = $('<div></div>').html(data);
                         var $div0 = $body.children('div').eq(0);
@@ -659,19 +677,20 @@ function gwd_hkba_barlist(btn, msgid) {
                             ClientIP: undefined,
                             addDate: undefined,
                             UpdateDate: undefined,
-                            gwd_Barristers_items: []
+                            i_Barristers: []
                         }
                         var postItem = {
                             tLang: tindex,
                             tkeyNo: this.tmpdata.id.split(".")[0],
                             tIndex: 0,
                             Tid: 0,
-                            LawyerName: this.tmpdata.LawyerName,
-                            ChineseName: this.tmpdata.LawyerName,
+                            LawyerId: this.tmpdata.id.split(".")[0],
+                            LawyerNameEn: this.tmpdata.LawyerNameEn,
+                            LawyerNameCn: this.tmpdata.LawyerNameEn,
                             Sex: this.tmpdata.Sex,
                             Title: this.tmpdata.Title,
                             Address: undefined,
-                            Telphone: undefined,
+                            Tel: undefined,
                             Mobile: undefined,
                             Fax: undefined,
                             PracticeAreas: undefined,
@@ -709,28 +728,36 @@ function gwd_hkba_barlist(btn, msgid) {
                             // ["地址:", "電話:", "傳真:", "", "認許年份:", "電郵:", "執業範圍:", "學歷/資歷:", "手提電話:"]
                             //["Address:", "Tel. No.:", "Fax  No.:", "Call:", "Areas of Practice:", "E-mail:", "Quals:", "Mob:"]
                             switch ($ctd0) {
-                                case "地址:": case "Address:":
+                                case "地址:":
+                                case "Address:":
                                     postItem.Address = $ctd1;
                                     break;
-                                case "電話:": case "Tel. No.:":
-                                    postItem.Telphone = $ctd1;
+                                case "電話:":
+                                case "Tel. No.:":
+                                    postItem.Tel = $ctd1;
                                     break;
-                                case "傳真:": case "Fax  No.:":
+                                case "傳真:":
+                                case "Fax  No.:":
                                     postItem.Fax = $ctd1;
                                     break;
-                                case "認許年份:": case "Call:":
+                                case "認許年份:":
+                                case "Call:":
                                     postItem.ApproveYear = $ctd1;
                                     break;
-                                case "電郵:": case "E-mail:":
+                                case "電郵:":
+                                case "E-mail:":
                                     postItem.Email = $ctd1;
                                     break;
-                                case "執業範圍:": case "Areas of Practice:":
+                                case "執業範圍:":
+                                case "Areas of Practice:":
                                     postItem.PracticeAreas = $ctd1;
                                     break;
-                                case "學歷/資歷:": case "Quals:":
+                                case "學歷/資歷:":
+                                case "Quals:":
                                     postItem.Quals = $ctd1;
                                     break;
-                                case "手提電話:": case "Mob:":
+                                case "手提電話:":
+                                case "Mob:":
                                     postItem.Mobile = $ctd1;
                                     break;
                                 default:
@@ -741,7 +768,7 @@ function gwd_hkba_barlist(btn, msgid) {
                         /////
                         //console.log(_allColNameZH);
                         //console.log(postItem);
-                        toPostMain.gwd_Barristers_items.push(postItem);
+                        toPostMain.i_Barristers.push(postItem);
                         //提交数据库
                         $.ajax({
                             type: 'POST',
@@ -750,18 +777,18 @@ function gwd_hkba_barlist(btn, msgid) {
                             timeout: 50000,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(toPostMain)
-                        }).done(function (data) {
+                        }).done(function(data) {
                             console.log(_ttype + "," + typemsg + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                             // sendMsg('jsonDate', "Set Date Now.");
                             //console.log(data);
-                        }).fail(function (err) {
+                        }).fail(function(err) {
                             //showError
                             console.log(this.tmpdata);
                             console.log(err);
                         });
 
                     },
-                    error: function (err) {
+                    error: function(err) {
                         console.log(this.url);
                         console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                         console.log(err);
@@ -780,7 +807,7 @@ function gwd_hkba_barlist(btn, msgid) {
         tmpdata: currPage,
         timeout: 50000,
         type: "get",
-        success: function (data, state, xhr) {
+        success: function(data, state, xhr) {
             console.log(this.url);
             var $body = $('<div></div>').html(data);
             var $table0 = $body.find('table[border="1"]').eq(0);
@@ -817,7 +844,7 @@ function gwd_hkba_barlist(btn, msgid) {
                 }
                 var curitem = {
                     id: tmpid,
-                    LawyerName: tmpname,
+                    LawyerNameEn: tmpname,
                     Sex: tmpsex,
                     Title: "Junior Counsel"
                 }
@@ -830,7 +857,7 @@ function gwd_hkba_barlist(btn, msgid) {
             //获取明细
             getItems_JuniorCounselEnStep5(0, "大律師（英文）");
         },
-        error: function (err) {
+        error: function(err) {
             console.log(this.url);
             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
             console.log(err);
@@ -875,7 +902,7 @@ function gwd_hkba_barlist(btn, msgid) {
                     tmpdata: currItem,
                     timeout: 50000,
                     type: "get",
-                    success: function (data, state, xhr) {
+                    success: function(data, state, xhr) {
                         console.log(typemsg + "," + this.url);
                         var $body = $('<div></div>').html(data);
                         var $div0 = $body.children('div').eq(0);
@@ -903,19 +930,20 @@ function gwd_hkba_barlist(btn, msgid) {
                             ClientIP: undefined,
                             addDate: undefined,
                             UpdateDate: undefined,
-                            gwd_Barristers_items: []
+                            i_Barristers: []
                         }
                         var postItem = {
                             tLang: tindex,
                             tkeyNo: this.tmpdata.id.split(".")[0],
                             tIndex: 0,
                             Tid: 0,
-                            LawyerName: this.tmpdata.LawyerName,
-                            ChineseName: this.tmpdata.LawyerName,
+                            LawyerId: this.tmpdata.id.split(".")[0],
+                            LawyerNameEn: this.tmpdata.LawyerNameEn,
+                            LawyerNameCn: this.tmpdata.LawyerNameEn,
                             Sex: this.tmpdata.Sex,
                             Title: this.tmpdata.Title,
                             Address: undefined,
-                            Telphone: undefined,
+                            Tel: undefined,
                             Mobile: undefined,
                             Fax: undefined,
                             PracticeAreas: undefined,
@@ -953,28 +981,36 @@ function gwd_hkba_barlist(btn, msgid) {
                             // ["地址:", "電話:", "傳真:", "", "認許年份:", "電郵:", "執業範圍:", "學歷/資歷:", "手提電話:"]
                             //["Address:", "Tel. No.:", "Fax  No.:", "Call:", "Areas of Practice:", "E-mail:", "Quals:", "Mob:"]
                             switch ($ctd0) {
-                                case "地址:": case "Address:":
+                                case "地址:":
+                                case "Address:":
                                     postItem.Address = $ctd1;
                                     break;
-                                case "電話:": case "Tel. No.:":
-                                    postItem.Telphone = $ctd1;
+                                case "電話:":
+                                case "Tel. No.:":
+                                    postItem.Tel = $ctd1;
                                     break;
-                                case "傳真:": case "Fax  No.:":
+                                case "傳真:":
+                                case "Fax  No.:":
                                     postItem.Fax = $ctd1;
                                     break;
-                                case "認許年份:": case "Call:":
+                                case "認許年份:":
+                                case "Call:":
                                     postItem.ApproveYear = $ctd1;
                                     break;
-                                case "電郵:": case "E-mail:":
+                                case "電郵:":
+                                case "E-mail:":
                                     postItem.Email = $ctd1;
                                     break;
-                                case "執業範圍:": case "Areas of Practice:":
+                                case "執業範圍:":
+                                case "Areas of Practice:":
                                     postItem.PracticeAreas = $ctd1;
                                     break;
-                                case "學歷/資歷:": case "Quals:":
+                                case "學歷/資歷:":
+                                case "Quals:":
                                     postItem.Quals = $ctd1;
                                     break;
-                                case "手提電話:": case "Mob:":
+                                case "手提電話:":
+                                case "Mob:":
                                     postItem.Mobile = $ctd1;
                                     break;
                                 default:
@@ -985,7 +1021,7 @@ function gwd_hkba_barlist(btn, msgid) {
                         /////
                         //console.log(_allColNameZH);
                         //console.log(postItem);
-                        toPostMain.gwd_Barristers_items.push(postItem);
+                        toPostMain.i_Barristers.push(postItem);
                         //提交数据库
                         $.ajax({
                             type: 'POST',
@@ -994,18 +1030,18 @@ function gwd_hkba_barlist(btn, msgid) {
                             timeout: 50000,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(toPostMain)
-                        }).done(function (data) {
+                        }).done(function(data) {
                             console.log(_ttype + "," + typemsg + "," + this.tmpdata.tname + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                             // sendMsg('jsonDate', "Set Date Now.");
                             //console.log(data);
-                        }).fail(function (err) {
+                        }).fail(function(err) {
                             //showError
                             console.log(this.tmpdata);
                             console.log(err);
                         });
 
                     },
-                    error: function (err) {
+                    error: function(err) {
                         console.log(this.url);
                         console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                         console.log(err);
