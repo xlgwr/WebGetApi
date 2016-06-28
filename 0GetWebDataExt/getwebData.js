@@ -54,6 +54,7 @@ $(function() {
                 else {
                     window.location.href = data[0].msg;
                     window.event.returnValue = false;
+                    window.close();
                 }
             },
             error: function(e) {

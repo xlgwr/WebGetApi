@@ -29,33 +29,35 @@
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
 
-        public virtual DbSet<gwd_CompaniesRegistry_main> gwd_CompaniesRegistry_main { get; set; }
-        public virtual DbSet<gwd_CompaniesRegistry_items> gwd_CompaniesRegistry_items { get; set; }
-        public virtual DbSet<gwd_CompaniesRegistry_itemsChange> gwd_CompaniesRegistry_itemsChange { get; set; }
-        public virtual DbSet<gwd_CompaniesRegistry_DisOrders> gwd_CompaniesRegistry_DisOrders { get; set; }
+        public virtual DbSet<m_CompaniesRegistry_main> m_CompaniesRegistry_main { get; set; }
+        public virtual DbSet<m_CompaniesRegistry_items> m_CompaniesRegistry_items { get; set; }
+        public virtual DbSet<m_CompaniesRegistry_itemsChange> m_CompaniesRegistry_itemsChange { get; set; }
+        public virtual DbSet<m_CompaniesRegistry_DisOrders> m_CompaniesRegistry_DisOrders { get; set; }
 
-        public virtual DbSet<gwd_Case_main> gwd_Case_main { get; set; }
-        public virtual DbSet<gwd_Case_items> gwd_Case_items { get; set; }
+        public virtual DbSet<m_Case_main> m_Case_main { get; set; }
+        public virtual DbSet<m_Case_items> m_Case_items { get; set; }
 
 
-        public virtual DbSet<gwd_AppealCases> gwd_AppealCases { get; set; }
-        public virtual DbSet<gwd_RatioDecidendis> gwd_RatioDecidendis { get; set; }
+        public virtual DbSet<m_AppealCases> m_AppealCases { get; set; }
+        public virtual DbSet<m_RatioDecidendis> m_RatioDecidendis { get; set; }
 
         //公共主表
         public virtual DbSet<entityCommMain> entityCommMain { get; set; }
 
-        public virtual DbSet<gwd_Lawyers_items> gwd_Lawyers_items { get; set; }
-        public virtual DbSet<gwd_Barristers_items> gwd_Barristers_items { get; set; }
-        public virtual DbSet<gwd_GovernmentPhonebook_items> gwd_GovernmentPhonebook_items { get; set; }
-        public virtual DbSet<gwd_RegisteredPharmacists_items> gwd_RegisteredPharmacists_items { get; set; }
-        public virtual DbSet<gwd_InstituteSurveyors_items> gwd_InstituteSurveyors_items { get; set; }
-        public virtual DbSet<gwd_PsychologistsList_items> gwd_PsychologistsList_items { get; set; }
-        public virtual DbSet<gwd_RegBuildingCompany_items> gwd_RegBuildingCompany_items { get; set; }
-        public virtual DbSet<gwd_RegArchitect_items> gwd_RegArchitect_items { get; set; }
-        public virtual DbSet<gwd_architect_items> gwd_architect_items { get; set; }
-        public virtual DbSet<gwd_ConstructionCompany_items> gwd_ConstructionCompany_items { get; set; }
-        public virtual DbSet<gwd_SecurityBureau_items> gwd_SecurityBureau_items { get; set; }
-        public virtual DbSet<gwd_Secretaries_items> gwd_Secretaries_items { get; set; }
+        public virtual DbSet<i_WithCertLawyers> i_WithCertLawyers { get; set; }
+        public virtual DbSet<i_ForeignLawyers> i_ForeignLawyers { get; set; }
+
+        public virtual DbSet<i_Barristers> i_Barristers { get; set; }
+        public virtual DbSet<i_GovPhonebook> i_GovPhonebook { get; set; }
+        public virtual DbSet<i_RegPharmacist> i_RegPharmacist { get; set; }
+        public virtual DbSet<i_InstituteSurveyors> i_InstituteSurveyors { get; set; }
+        public virtual DbSet<i_PsychologicalSociety> i_PsychologicalSociety { get; set; }
+        public virtual DbSet<i_RegBuildingCom> i_RegBuildingCom { get; set; }
+        public virtual DbSet<i_RegArchitect> i_RegArchitect { get; set; }
+        public virtual DbSet<i_Architect> i_Architect { get; set; }
+        public virtual DbSet<i_BuildingCom> i_BuildingCom { get; set; }
+        public virtual DbSet<i_SecurityBureau> i_SecurityBureau { get; set; }
+        public virtual DbSet<i_Secretaries> i_Secretaries { get; set; }
 
 
 
@@ -67,48 +69,48 @@
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_CompaniesRegistry_main>()
+            modelBuilder.Entity<m_CompaniesRegistry_main>()
             .Property(e => e.Remark)
             .IsUnicode(false);
-            modelBuilder.Entity<gwd_CompaniesRegistry_items>()
+            modelBuilder.Entity<m_CompaniesRegistry_items>()
             .Property(e => e.Remark)
             .IsUnicode(false);
-            modelBuilder.Entity<gwd_CompaniesRegistry_itemsChange>()
+            modelBuilder.Entity<m_CompaniesRegistry_itemsChange>()
             .Property(e => e.Remark)
             .IsUnicode(false);
-            modelBuilder.Entity<gwd_CompaniesRegistry_DisOrders>()
+            modelBuilder.Entity<m_CompaniesRegistry_DisOrders>()
             .Property(e => e.Remark)
             .IsUnicode(false);
 
 
-            modelBuilder.Entity<gwd_Case_main>()
+            modelBuilder.Entity<m_Case_main>()
             .Property(e => e.Remark)
             .IsUnicode(false);
-            modelBuilder.Entity<gwd_Case_items>()
+            modelBuilder.Entity<m_Case_items>()
               .Property(e => e.Remark)
               .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_AppealCases>()
+            modelBuilder.Entity<m_AppealCases>()
             .Property(e => e.Remark)
             .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_RatioDecidendis>()
+            modelBuilder.Entity<m_RatioDecidendis>()
             .Property(e => e.Remark)
             .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_Lawyers_items>()
+            modelBuilder.Entity<i_WithCertLawyers>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_Barristers_items>()
+            modelBuilder.Entity<i_Barristers>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gwd_GovernmentPhonebook_items>()
+            modelBuilder.Entity<i_GovPhonebook>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
 
-            //modelBuilder.Entity<gwd_Case_main>()
+            //modelBuilder.Entity<m_Case_main>()
             //  .HasRequired(t => t.gwd_Case_items)
             //    .WithRequiredPrincipal(t => t.gwd_Case_main);
 

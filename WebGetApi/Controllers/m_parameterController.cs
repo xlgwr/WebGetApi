@@ -51,7 +51,7 @@ namespace WebGetApi.Controllers
             {
                 return BadRequest();
             }
-            m_parameter.UpdateDate = DateTime.Now;
+            m_parameter.updtime = DateTime.Now;
 
             db.Entry(m_parameter).State = EntityState.Modified;
 
@@ -86,7 +86,7 @@ namespace WebGetApi.Controllers
 
             try
             {
-                m_parameter.UpdateDate = DateTime.Now;
+                m_parameter.updtime = DateTime.Now;
                 m_parameter.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
                 if (m_parameterExists(m_parameter.paramkey))
@@ -133,7 +133,7 @@ namespace WebGetApi.Controllers
 
                     if (tmpCurrGetValue > tmpCurrNowValue)
                     {
-                        m_parameterDB.UpdateDate = DateTime.Now;
+                        m_parameterDB.updtime = DateTime.Now;
                         m_parameterDB.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         m_parameterDB.tStatus = 1;
                         m_parameterDB.paramvalue = tmpCurrGetValue.ToString();
