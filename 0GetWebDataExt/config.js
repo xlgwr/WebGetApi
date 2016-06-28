@@ -31,7 +31,7 @@ var config = {
     //大律师
     urlApi_hkba: $gbHttPip + "/api/i_Barristers", //post
     //注册药剂师名单
-    urlApi_RP_items: $gbHttPip + "/api/gwd_RegisteredPharmacists_items", //post
+    urlApi_RP_items: $gbHttPip + "/api/i_RegPharmacist", //post
     //香港测量师学会
     urlApi_IS_items: $gbHttPip + "/api/gwd_InstituteSurveyors_items", //post
     //香港心理学会 PsychologistsList

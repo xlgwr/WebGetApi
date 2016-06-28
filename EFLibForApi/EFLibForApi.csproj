@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201606280617057_changeIBarrisers.Designer.cs">
       <DependentUpon>201606280617057_changeIBarrisers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606280701540_delIDForRegPharmacist.cs" />
+    <Compile Include="Migrations\201606280701540_delIDForRegPharmacist.Designer.cs">
+      <DependentUpon>201606280701540_delIDForRegPharmacist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606280617057_changeIBarrisers.resx">
       <DependentUpon>201606280617057_changeIBarrisers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606280701540_delIDForRegPharmacist.resx">
+      <DependentUpon>201606280701540_delIDForRegPharmacist.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

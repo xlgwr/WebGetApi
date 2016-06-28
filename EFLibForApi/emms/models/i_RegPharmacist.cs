@@ -23,11 +23,6 @@ namespace EFLibForApi.emms.models
         public long htmlID { get; set; }
 
         /// <summary>
-        /// 编号
-        /// </summary>
-        public long RegPharmacistId { get; set; }
-
-        /// <summary>
         /// 注册编号
         /// </summary>
         [Index]

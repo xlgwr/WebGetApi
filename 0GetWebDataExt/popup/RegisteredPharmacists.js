@@ -1,7 +1,7 @@
-$(function () {
+$(function() {
     var allTtype = "注册药剂师名单(Registered Pharmacists)";
     console.log(allTtype + "初始化..");
-    $('#btn5').click(function () {
+    $('#btn5').click(function() {
         $('#panel5').removeClass('panel-default')
         $('#panel5').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -32,12 +32,14 @@ $(function () {
         //获取记录 中文/英文一样
         $.ajax({
             url: configGetUrl.getUrl_RP_items,
-            data: { key: '' },
+            data: {
+                key: ''
+            },
             tmpdata: 0,
             tmpdataLang: 0,
             timeout: (1 * 60 * 1000),
             type: "get",
-            success: function (data, state, xhr) {
+            success: function(data, state, xhr) {
                 console.log(_tTitle + this.url);
 
                 var $body = $('<div></div>').html(data);
@@ -51,7 +53,7 @@ $(function () {
                 msgid.text(_tTitle + ":取得数居成功..有：" + $Gettable0TR.length + " 条记录。");
 
                 var postMain = {
-                    gwd_RegisteredPharmacists_items: [],
+                    i_RegPharmacist: [],
                     tLang: this.tmpdataLang,
                     tname: undefined,
                     ttype: _tTitle,
@@ -90,8 +92,8 @@ $(function () {
                         htmlID: 0,
 
                         RegNo: alltd.eq(0).text().trim(),
-                        RegName: nameEn,
-                        RegNameZH: nameZH,
+                        RegNameEn: nameEn,
+                        RegNameCn: nameZH,
                         Qualifications: alltd.eq(3).text().trim(),
                         RegDate: alltd.eq(5).text().trim(),
 
@@ -108,12 +110,12 @@ $(function () {
                         UpdateDate: undefined
                     }
 
-                    postMain.gwd_RegisteredPharmacists_items.push(postItem);
+                    postMain.i_RegPharmacist.push(postItem);
 
                     tmpitem += 1;
                 }
                 ///end for
-                postMain.tname = _tTitle + ":" + postMain.gwd_RegisteredPharmacists_items.length;
+                postMain.tname = _tTitle + ":" + postMain.i_RegPharmacist.length;
                 //console.log(postMain);
                 msgid.text(postMain.tname + "条，分析数据完成,准备更新到数据库..");
                 //提交数据库
@@ -121,23 +123,24 @@ $(function () {
                     type: 'POST',
                     url: config.urlApi_RP_items,
                     tmpdata: postMain,
-                    timeout: 50000,
+                    timeout: 80000,
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify(postMain)
-                }).done(function (data) {
+                }).done(function(data) {
                     console.log(_tTitle + "," + this.tmpdata.ttype + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                     // sendMsg('jsonDate', "Set Date Now.");
                     //console.log(data);
-                    msgid.text(_tTitle + " 更新完成，已更新：" + this.tmpdata.gwd_RegisteredPharmacists_items.length + " 条成功.");
+                    msgid.text(_tTitle + " 更新完成，已更新：" + this.tmpdata.i_RegPharmacist.length + " 条成功.");
                     btn.attr('disabled', null);
-                }).fail(function (err) {
+                }).fail(function(err) {
                     //showError
+                    config.log(this.url);
                     console.log(this.tmpdata);
                     console.log(err);
                 });
                 ////////////////////////////////////
             },
-            error: function (err) {
+            error: function(err) {
                 console.log(_tTitle + this.url);
                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                 console.log(err);
