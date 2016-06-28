@@ -27,7 +27,7 @@ namespace EFLibForApi.emms.models
         /// </summary>
         [Index]
         [StringLength(128)]
-        public string RegBuildingComId { get; set; }
+        public string RegNo { get; set; }
 
         /// <summary>
         /// 名称

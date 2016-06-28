@@ -1,7 +1,7 @@
-$(function () {
+$(function() {
     var allTtype = "注册建筑师(Registered Professionals or Contractors)";
     console.log(allTtype + "初始化..");
-    $('#btn8').click(function () {
+    $('#btn8').click(function() {
         $('#panel8').removeClass('panel-default')
         $('#panel8').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -69,23 +69,23 @@ $(function () {
             scsfPageNo: 0,
             scgiPageNo: 0,
             scvPageNo: 0,
-            apaMaxPageNo: 0,//24,
-            apeMaxPageNo: 0,//3,
-            apsMaxPageNo: 0,//5,
-            riaMaxPageNo: 0,//4,
-            rieMaxPageNo: 0,//4,
-            risMaxPageNo: 0,//3,
-            mwcMaxPageNo: 0,//253,
-            mwcwMaxPageNo: 0,//160,
-            mwcpMaxPageNo: 0,//0,
-            rseMaxPageNo: 0,//9,
-            rgeMaxPageNo: 0,//2,
-            gbcMaxPageNo: 0,//14,
-            scdMaxPageNo: 0,//3,
-            scfMaxPageNo: 0,//3,
-            scsfMaxPageNo: 0,//4,
-            scgiMaxPageNo: 0,//1,
-            scvMaxPageNo: 0,//4,
+            apaMaxPageNo: 0, //24,
+            apeMaxPageNo: 0, //3,
+            apsMaxPageNo: 0, //5,
+            riaMaxPageNo: 0, //4,
+            rieMaxPageNo: 0, //4,
+            risMaxPageNo: 0, //3,
+            mwcMaxPageNo: 0, //253,
+            mwcwMaxPageNo: 0, //160,
+            mwcpMaxPageNo: 0, //0,
+            rseMaxPageNo: 0, //9,
+            rgeMaxPageNo: 0, //2,
+            gbcMaxPageNo: 0, //14,
+            scdMaxPageNo: 0, //3,
+            scfMaxPageNo: 0, //3,
+            scsfMaxPageNo: 0, //4,
+            scgiMaxPageNo: 0, //1,
+            scvMaxPageNo: 0, //4,
             districtNotProvidedFlag: 0,
             classNotProvidedFlag: 0,
             itemNotProvidedFlag: 0,
@@ -103,12 +103,14 @@ $(function () {
         msgid.text(_tTitle + ":采集初始化..");
         $.ajax({
             url: configGetUrl.getUrl_RPC_items,
-            data: { method: 'PageRegistration' },
+            data: {
+                method: 'PageRegistration'
+            },
             tmpdata: _postData,
             tmpdataLang: 0,
             timeout: (1 * 60 * 1000),
             type: "get",
-            success: function (data, state, xhr) {
+            success: function(data, state, xhr) {
                 console.log(_tTitle + this.url);
                 console.log(this.tmpdata);
 
@@ -144,10 +146,10 @@ $(function () {
                 //compane
                 getItem_All(_postData, 3, 'GBC', ((evenTime + 9) * 1000), 0, 6);
                 getItem_All(_postData, 3, 'SC(D)', ((evenTime + 9) * 1000), 0, 6);
-                getItem_All(_postData, 2, 'SC(F)', ((evenTime + 8) * 1000), 0, 6);//4
+                getItem_All(_postData, 2, 'SC(F)', ((evenTime + 8) * 1000), 0, 6); //4
                 getItem_All(_postData, 3, 'SC(SF)', ((evenTime + 8) * 1000), 0, 6);
-                getItem_All(_postData, 2, 'SC(V)', ((evenTime + 10) * 1000), 0, 6);//5
-                getItem_All(_postData, 2, 'SC(GI)', ((evenTime + 10) * 1000), 0, 6);//4
+                getItem_All(_postData, 2, 'SC(V)', ((evenTime + 10) * 1000), 0, 6); //5
+                getItem_All(_postData, 2, 'SC(GI)', ((evenTime + 10) * 1000), 0, 6); //4
                 //compane 2
                 getItem_All(_postData, 3, 'MWC', ((evenTime + 3) * 1000), 1, 11);
                 getItem_All(_postData, 3, 'MWC(W)', ((evenTime + 3) * 1000), 0, 8);
@@ -155,7 +157,7 @@ $(function () {
 
 
             },
-            error: function (err) {
+            error: function(err) {
                 console.log(_tTitle + this.url);
                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                 console.log(err);
@@ -178,7 +180,7 @@ $(function () {
                 tmpdataLang: 0,
                 timeout: (1 * 60 * 1000),
                 type: "post",
-                success: function (data, state, xhr) {
+                success: function(data, state, xhr) {
                     console.log(_tTitle + this.url);
                     console.log(this.tmpdata);
 
@@ -195,7 +197,7 @@ $(function () {
                     getItem_AP_A(_allTrTd0.length, this.tmpdata, intTime)
 
                 },
-                error: function (err) {
+                error: function(err) {
                     console.log(_tTitle + this.url);
                     console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                     console.log(err);
@@ -253,7 +255,7 @@ $(function () {
                             tmpdataLang: 0,
                             timeout: (1 * 60 * 1000),
                             type: "post",
-                            success: function (data, state, xhr) {
+                            success: function(data, state, xhr) {
                                 //console.log(this.tmpdata);
                                 var $body = $('<div></div>').html(data);
                                 var $table0 = $body.find('#Table2').eq(0);
@@ -265,8 +267,8 @@ $(function () {
                                 //console.log(_allTrTd0);
 
                                 var postMain = {
-                                    gwd_RegArchitect_items: [],
-                                    gwd_RegBuildingCompany_items: [],
+                                    i_RegArchitect: [],
+                                    i_RegBuildingCom: [],
                                     tLang: this.tmpdataLang,
                                     tname: _ttype + ":" + (this.tmpdata.page + 1),
                                     ttype: _ttype,
@@ -300,19 +302,21 @@ $(function () {
                                         $id: tmpitem,
                                         htmlID: 0,
 
+                                        RegArchitectId: tmpitem,
                                         RegNo: alltd.eq(1).text().trim(),
                                         ArchitectsName: alltd.eq(0).text().trim(),
                                         ArchitectsNameZH: undefined,
                                         ExpiryDate: alltd.eq(2).text().trim(),
 
                                         // BuildingSafety: alltd.eq(3).text().trim(),
-                                        // PhoneNo: alltd.eq(4).text().trim(),
+                                        // Tel: alltd.eq(4).text().trim(),
 
                                         tLang: this.tmpdataLang,
                                         tkeyNo: alltd.eq(1).text().trim(),
                                         tIndex: tmpitem,
                                         tname: _ttype + ":" + (this.tmpdata.page + 1) + ":" + (x + 1),
                                         ttype: _ttype,
+                                        Type: _ttype,
                                         Tid: 0,
                                         Remark: this.url,
                                         tStatus: 0,
@@ -323,28 +327,29 @@ $(function () {
                                     switch (trLen) {
                                         case 4:
                                             postItem.BuildingSafety = undefined;
-                                            postItem.PhoneNo = alltd.eq(3).text().trim();
+                                            postItem.Tel = alltd.eq(3).text().trim();
 
-                                            postMain.gwd_RegArchitect_items.push(postItem);
+                                            postMain.i_RegArchitect.push(postItem);
                                             tmpitem += 1;
                                             break;
                                         case 5:
                                             postItem.BuildingSafety = alltd.eq(3).text().trim();
-                                            postItem.PhoneNo = alltd.eq(4).text().trim();
+                                            postItem.Tel = alltd.eq(4).text().trim();
 
 
-                                            postMain.gwd_RegArchitect_items.push(postItem);
+                                            postMain.i_RegArchitect.push(postItem);
                                             tmpitem += 1;
                                             break;
                                         case 6:
                                             var allName = alltd.eq(1).text().trim();
                                             var allNameArr = allName.split('@');
 
-                                            allNameArr.forEach(function (tmpname) {
+                                            allNameArr.forEach(function(tmpname) {
                                                 var postItemArr = {
                                                     $id: tmpitem,
                                                     htmlID: 0,
 
+                                                    RegBuildingComId: tmpitem,
                                                     //compane
                                                     CompanyName: alltd.eq(0).text().trim(),
                                                     CompanyNameZH: undefined,
@@ -352,13 +357,14 @@ $(function () {
                                                     RegNo: alltd.eq(2).text().trim(),
                                                     ExpiryDate: alltd.eq(3).text().trim(),
                                                     BuildingSafety: alltd.eq(4).text().trim(),
-                                                    PhoneNo: alltd.eq(5).text().trim(),
+                                                    Tel: alltd.eq(5).text().trim(),
 
                                                     tLang: this.tmpdataLang,
                                                     tkeyNo: alltd.eq(2).text().trim() + "@" + tmpname,
                                                     tIndex: tmpitem,
                                                     tname: _ttype + ":" + (this.tmpdata.page + 1) + ":" + (x + 1),
                                                     ttype: _ttype,
+                                                    Type: _ttype,
                                                     Tid: 0,
                                                     Remark: this.url,
                                                     tStatus: 0,
@@ -368,9 +374,9 @@ $(function () {
                                                 }
                                                 if (alltd.length === 5) {
                                                     postItemArr.BuildingSafety = undefined;
-                                                    postItemArr.PhoneNo = alltd.eq(4).text().trim();
+                                                    postItemArr.Tel = alltd.eq(4).text().trim();
                                                 }
-                                                postMain.gwd_RegBuildingCompany_items.push(postItemArr);
+                                                postMain.i_RegBuildingCom.push(postItemArr);
                                                 tmpitem += 1;
                                             }, this);
 
@@ -380,6 +386,7 @@ $(function () {
                                                 $id: tmpitem,
                                                 htmlID: 0,
 
+                                                RegBuildingComId: tmpitem,
                                                 //compane
                                                 CompanyName: alltd.eq(0).text().trim(),
                                                 CompanyNameZH: undefined,
@@ -387,7 +394,7 @@ $(function () {
                                                 RegNo: alltd.eq(2).text().trim(),
                                                 ExpiryDate: alltd.eq(3).text().trim(),
                                                 BuildingSafety: undefined,
-                                                PhoneNo: alltd.eq(4).text().trim(),
+                                                Tel: alltd.eq(4).text().trim(),
 
                                                 classType: alltd.eq(1).text().trim(),
                                                 Districtarea: alltd.eq(5).text().trim(),
@@ -399,6 +406,7 @@ $(function () {
                                                 tIndex: tmpitem,
                                                 tname: _ttype + ":" + (this.tmpdata.page + 1) + ":" + (x + 1),
                                                 ttype: _ttype,
+                                                Type: _ttype,
                                                 Tid: 0,
                                                 Remark: this.url,
                                                 tStatus: 0,
@@ -406,7 +414,7 @@ $(function () {
                                                 addDate: undefined,
                                                 UpdateDate: undefined
                                             }
-                                            postMain.gwd_RegBuildingCompany_items.push(postItemArr8);
+                                            postMain.i_RegBuildingCom.push(postItemArr8);
                                             tmpitem += 1;
                                             break;
                                         case 11:
@@ -414,6 +422,7 @@ $(function () {
                                                 $id: tmpitem,
                                                 htmlID: 0,
 
+                                                RegBuildingComId: tmpitem,
                                                 //compane
                                                 CompanyName: alltd.eq(0).text().trim(),
                                                 CompanyNameZH: undefined,
@@ -421,7 +430,7 @@ $(function () {
                                                 RegNo: alltd.eq(5).text().trim(),
                                                 ExpiryDate: alltd.eq(6).text().trim(),
                                                 BuildingSafety: undefined,
-                                                PhoneNo: alltd.eq(7).text().trim(),
+                                                Tel: alltd.eq(7).text().trim(),
 
                                                 classType: alltd.eq(1).text().trim() + "@" + alltd.eq(2).text().trim(),
                                                 Districtarea: alltd.eq(8).text().trim(),
@@ -433,6 +442,7 @@ $(function () {
                                                 tIndex: tmpitem,
                                                 tname: _ttype + ":" + (this.tmpdata.page + 1) + ":" + (x + 1),
                                                 ttype: _ttype,
+                                                Type: _ttype,
                                                 Tid: 0,
                                                 Remark: this.url,
                                                 tStatus: 0,
@@ -440,7 +450,7 @@ $(function () {
                                                 addDate: undefined,
                                                 UpdateDate: undefined
                                             }
-                                            postMain.gwd_RegBuildingCompany_items.push(postItemArr11);
+                                            postMain.i_RegBuildingCom.push(postItemArr11);
                                             tmpitem += 1;
                                             break;
                                         default:
@@ -453,10 +463,13 @@ $(function () {
 
                                 var tmpUrlpost = config.urlApi_RPC_P_items;
                                 switch (trLen) {
-                                    case 4: case 5:
+                                    case 4:
+                                    case 5:
                                         tmpUrlpost = config.urlApi_RPC_P_items;
                                         break;
-                                    case 6: case 8: case 11:
+                                    case 6:
+                                    case 8:
+                                    case 11:
                                         tmpUrlpost = config.urlApi_RPC_C_items;
                                         break;
                                     default:
@@ -471,11 +484,11 @@ $(function () {
                                     timeout: 50000,
                                     contentType: 'application/json; charset=utf-8',
                                     data: JSON.stringify(postMain)
-                                }).done(function (data) {
+                                }).done(function(data) {
                                     console.log(tmpmsg + "," + this.tmpdata.ttype + "," + ",Index:" + this.tmpdata.tLang + "PostUrl:" + this.url + "--> Post Done!");
                                     // sendMsg('jsonDate', "Set Date Now.");
                                     //console.log(data);                            
-                                }).fail(function (err) {
+                                }).fail(function(err) {
                                     //showError
                                     console.log(this.tmpdata);
                                     console.log(err);
@@ -483,7 +496,7 @@ $(function () {
                                 });
 
                             },
-                            error: function (err) {
+                            error: function(err) {
                                 console.log(this.tmpdata.type + ":" + this.url);
                                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                                 console.log(err);

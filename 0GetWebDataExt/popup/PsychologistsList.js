@@ -1,7 +1,7 @@
-$(function () {
+$(function() {
     var allTtype = "香港心理学会 (PsychologistsList)";
     console.log(allTtype + "初始化..");
-    $('#btn7').click(function () {
+    $('#btn7').click(function() {
         $('#panel7').removeClass('panel-default')
         $('#panel7').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -34,12 +34,15 @@ $(function () {
         //获取记录 中文/英文一样
         $.ajax({
             url: configGetUrl.getUrl_PL_items,
-            data: { fi: 'public', lang: 1 },
+            data: {
+                fi: 'public',
+                lang: 1
+            },
             tmpdata: 0,
             tmpdataLang: 0,
             timeout: (1 * 60 * 1000),
             type: "get",
-            success: function (data, state, xhr) {
+            success: function(data, state, xhr) {
                 console.log(_tTitle + this.url);
 
                 var $body = $('<div></div>').html(data);
@@ -53,7 +56,7 @@ $(function () {
                 msgid.text(_tTitle + ":取得数居成功..有：" + $Gettable0TR.length + " 条记录。");
 
                 var postMain = {
-                    gwd_PsychologistsList_items: [],
+                    i_PsychologicalSociety: [],
                     tLang: this.tmpdataLang,
                     tname: undefined,
                     ttype: _tTitle,
@@ -94,13 +97,14 @@ $(function () {
                     var postItem = {
                         $id: tmpitem,
                         htmlID: 0,
+                        PsychologicalId: tmpitem,
 
-                        Name: nameEn,
-                        NameZh: nameZH,
+                        Name_En: nameEn,
+                        Name_Cn: nameZH,
                         Address: alltd.eq(6).text().trim(),
                         RegisteredNo: alltd.eq(1).text().trim(),
                         Specialization: alltd.eq(2).text().trim(),
-                        Phone: alltd.eq(4).text().trim(),
+                        Tel: alltd.eq(4).text().trim(),
                         Fax: alltd.eq(5).text().trim(),
                         Email: alltd.eq(3).find('img').eq(0).attr('alt'),
 
@@ -117,12 +121,12 @@ $(function () {
                         UpdateDate: undefined
                     }
 
-                    postMain.gwd_PsychologistsList_items.push(postItem);
+                    postMain.i_PsychologicalSociety.push(postItem);
 
                     tmpitem += 1;
                 }
                 ///end for
-                postMain.tname = _tTitle + ":" + postMain.gwd_PsychologistsList_items.length;
+                postMain.tname = _tTitle + ":" + postMain.i_PsychologicalSociety.length;
                 //console.log(postMain);
 
                 msgid.text(postMain.tname + "条，分析数据完成,准备更新到数据库..");
@@ -134,20 +138,20 @@ $(function () {
                     timeout: 50000,
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify(postMain)
-                }).done(function (data) {
+                }).done(function(data) {
                     console.log(_tTitle + "," + this.tmpdata.ttype + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                     // sendMsg('jsonDate', "Set Date Now.");
                     //console.log(data);
-                    msgid.text(_tTitle + " 更新完成，已更新：" + this.tmpdata.gwd_PsychologistsList_items.length + " 条成功.");
+                    msgid.text(_tTitle + " 更新完成，已更新：" + this.tmpdata.i_PsychologicalSociety.length + " 条成功.");
                     btn.attr('disabled', null);
-                }).fail(function (err) {
+                }).fail(function(err) {
                     //showError
                     console.log(this.tmpdata);
                     console.log(err);
                 });
                 ////////////////////////////////////
             },
-            error: function (err) {
+            error: function(err) {
                 console.log(_tTitle + this.url);
                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                 console.log(err);

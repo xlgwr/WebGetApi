@@ -20,7 +20,7 @@ namespace WebGetApi.Controllers
     /// <summary>
     /// Registered Pharmacists
     /// </summary>
-    [RoutePrefix("api/GWDPsychologistsList")]
+    [RoutePrefix("api/iPsychologicalSociety")]
     public class i_PsychologicalSocietyController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

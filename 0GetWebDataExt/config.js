@@ -33,12 +33,12 @@ var config = {
     //注册药剂师名单
     urlApi_RP_items: $gbHttPip + "/api/i_RegPharmacist", //post
     //香港测量师学会
-    urlApi_IS_items: $gbHttPip + "/api/gwd_InstituteSurveyors_items", //post
+    urlApi_IS_items: $gbHttPip + "/api/i_InstituteSurveyors", //post
     //香港心理学会 PsychologistsList
-    urlApi_PL_items: $gbHttPip + "/api/gwd_PsychologistsList_items", //post
+    urlApi_PL_items: $gbHttPip + "/api/i_PsychologicalSociety", //post
     //注册建筑师(Registered Professionals or Contractors)
-    urlApi_RPC_P_items: $gbHttPip + "/api/gwd_RegArchitect_items", //post
-    urlApi_RPC_C_items: $gbHttPip + "/api/gwd_RegBuildingCompany_items", //post
+    urlApi_RPC_P_items: $gbHttPip + "/api/i_RegArchitect", //post
+    urlApi_RPC_C_items: $gbHttPip + "/api/i_RegBuildingCom", //post
     //建筑师,公司
     urlApi_A_items: $gbHttPip + "/api/gwd_architect_items", //post
     urlApi_AC_items: $gbHttPip + "/api/gwd_ConstructionCompany_items", //post

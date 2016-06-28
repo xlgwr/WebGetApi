@@ -1,7 +1,7 @@
-$(function () {
+$(function() {
     var allTtype = "香港测量师学会(InstituteSurveyors)";
     console.log(allTtype + " 初始化..");
-    $('#btn6').click(function () {
+    $('#btn6').click(function() {
         $('#panel6').removeClass('panel-default')
         $('#panel6').addClass('panel-success')
 
@@ -48,7 +48,7 @@ $(function () {
 
         //获取记录 中文 明细
         getItems_alltel_directoryCN(1, _tTitle, maxid)
-        //获取记录 中文 明细
+            //获取记录 中文 明细
         function getItems_alltel_directoryCN(tlangFlag, typemsg, tmaxid) {
             var _langFlag = tlangFlag;
             var currX = 1;
@@ -84,12 +84,14 @@ $(function () {
                     //获取记录 中文/英文一样
                     $.ajax({
                         url: configGetUrl.getUrl_IS_items,
-                        data: { id: currX },
+                        data: {
+                            id: currX
+                        },
                         tmpdata: currX,
                         tmpdataLang: tlangFlag,
                         timeout: (1 * 60 * 1000),
                         type: "get",
-                        success: function (data, state, xhr) {
+                        success: function(data, state, xhr) {
                             console.log(tmpmsg + this.url);
 
                             var $body = $('<div></div>').html(data);
@@ -110,7 +112,7 @@ $(function () {
                             }
 
                             var postMain = {
-                                gwd_InstituteSurveyors_items: [],
+                                i_InstituteSurveyors: [],
                                 tLang: this.tmpdataLang,
                                 tname: this.tmpdata,
                                 ttype: tmpmsg,
@@ -126,11 +128,12 @@ $(function () {
                             var postItem = {
                                 $id: 1,
                                 htmlID: 0,
+                                InstituteId: this.tmpdata,
 
                                 CompanyName: $Gettable0TR.eq(0).find('td').eq(2).text().trim(),
                                 Address: $Gettable0TR.eq(1).find('td').eq(2).text().trim(),
                                 ContactPerson: $Gettable0TR.eq(2).find('td').eq(2).text().trim(),
-                                TelNo: $Gettable0TR.eq(3).find('td').eq(2).text().trim(),
+                                Tel: $Gettable0TR.eq(3).find('td').eq(2).text().trim(),
                                 Fax: $Gettable0TR.eq(4).find('td').eq(2).text().trim(),
                                 Email: $Gettable0TR.eq(5).find('td').eq(2).text().trim(),
                                 Website: $Gettable0TR.eq(6).find('td').eq(2).text().trim(),
@@ -147,7 +150,7 @@ $(function () {
                                 addDate: undefined,
                                 UpdateDate: undefined
                             }
-                            postMain.gwd_InstituteSurveyors_items.push(postItem);
+                            postMain.i_InstituteSurveyors.push(postItem);
                             ///end for
                             //console.log(postMain);
 
@@ -159,11 +162,11 @@ $(function () {
                                 timeout: 50000,
                                 contentType: 'application/json; charset=utf-8',
                                 data: JSON.stringify(postMain)
-                            }).done(function (data) {
+                            }).done(function(data) {
                                 console.log(tmpmsg + "," + this.tmpdata.ttype + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                                 // sendMsg('jsonDate', "Set Date Now.");
                                 //console.log(data);                            
-                            }).fail(function (err) {
+                            }).fail(function(err) {
                                 //showError
                                 console.log(this.tmpdata);
                                 console.log(err);
@@ -171,7 +174,7 @@ $(function () {
                             });
                             ////////////////////////////////////
                         },
-                        error: function (err) {
+                        error: function(err) {
                             console.log(tmpmsg + this.url);
                             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                             console.log(err);
@@ -187,7 +190,7 @@ $(function () {
         ///////////////////////////////////////
         //获取记录 英文 明细
         getItems_alltel_directoryEN(0, _tTitle, maxid)
-        //获取记录 英文 明细
+            //获取记录 英文 明细
         function getItems_alltel_directoryEN(tlangFlag, typemsg, tmaxid) {
             var _langFlag = tlangFlag;
             var currX = 1;
@@ -223,12 +226,14 @@ $(function () {
                     //获取记录 中文/英文一样
                     $.ajax({
                         url: configGetUrl.getUrl_IS_itemsEN,
-                        data: { id: currX },
+                        data: {
+                            id: currX
+                        },
                         tmpdata: currX,
                         tmpdataLang: tlangFlag,
                         timeout: (1 * 60 * 1000),
                         type: "get",
-                        success: function (data, state, xhr) {
+                        success: function(data, state, xhr) {
                             console.log(tmpmsg + this.url);
 
                             var $body = $('<div></div>').html(data);
@@ -249,7 +254,7 @@ $(function () {
                             }
 
                             var postMain = {
-                                gwd_InstituteSurveyors_items: [],
+                                i_InstituteSurveyors: [],
                                 tLang: this.tmpdataLang,
                                 tname: this.tmpdata,
                                 ttype: tmpmsg,
@@ -265,11 +270,12 @@ $(function () {
                             var postItem = {
                                 $id: 1,
                                 htmlID: 0,
+                                InstituteId: this.tmpdata,
 
                                 CompanyName: $Gettable0TR.eq(0).find('td').eq(2).text().trim(),
                                 Address: $Gettable0TR.eq(1).find('td').eq(2).text().trim(),
                                 ContactPerson: $Gettable0TR.eq(2).find('td').eq(2).text().trim(),
-                                TelNo: $Gettable0TR.eq(3).find('td').eq(2).text().trim(),
+                                Tel: $Gettable0TR.eq(3).find('td').eq(2).text().trim(),
                                 Fax: $Gettable0TR.eq(4).find('td').eq(2).text().trim(),
                                 Email: $Gettable0TR.eq(5).find('td').eq(2).text().trim(),
                                 Website: $Gettable0TR.eq(6).find('td').eq(2).text().trim(),
@@ -286,7 +292,7 @@ $(function () {
                                 addDate: undefined,
                                 UpdateDate: undefined
                             }
-                            postMain.gwd_InstituteSurveyors_items.push(postItem);
+                            postMain.i_InstituteSurveyors.push(postItem);
                             ///end for
                             //console.log(postMain);
 
@@ -298,11 +304,11 @@ $(function () {
                                 timeout: 50000,
                                 contentType: 'application/json; charset=utf-8',
                                 data: JSON.stringify(postMain)
-                            }).done(function (data) {
+                            }).done(function(data) {
                                 console.log(tmpmsg + "," + this.tmpdata.ttype + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                                 // sendMsg('jsonDate', "Set Date Now.");
                                 //console.log(data);                            
-                            }).fail(function (err) {
+                            }).fail(function(err) {
                                 //showError
                                 console.log(this.tmpdata);
                                 console.log(err);
@@ -310,7 +316,7 @@ $(function () {
                             });
                             ////////////////////////////////////
                         },
-                        error: function (err) {
+                        error: function(err) {
                             console.log(tmpmsg + this.url);
                             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                             console.log(err);

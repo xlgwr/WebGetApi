@@ -79,7 +79,7 @@ namespace WebGetApi.Controllers
                                         getItem.BuildingSafety = item.BuildingSafety;
                                         getItem.ExpiryDate = item.ExpiryDate;
                                         getItem.Tel = item.Tel;
-                                        getItem.RegArchitectId = item.RegArchitectId;
+                                        getItem.RegNo = item.RegNo;
 
                                         getItem.ClientIP = item.ClientIP;
                                         getItem.Remark = item.Remark;

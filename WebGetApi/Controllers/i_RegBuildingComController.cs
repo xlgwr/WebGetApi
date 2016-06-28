@@ -81,7 +81,7 @@ namespace WebGetApi.Controllers
                                         getItem.BuildingSafety = item.BuildingSafety;
                                         getItem.ExpiryDate = item.ExpiryDate;
                                         getItem.Tel = item.Tel;
-                                        getItem.RegBuildingComId = item.RegBuildingComId;
+                                        getItem.RegNo = item.RegNo;
                                         getItem.Districtarea = item.Districtarea;
                                         getItem.Emailaddress = item.Emailaddress;
                                         getItem.Faxno = item.Faxno;
