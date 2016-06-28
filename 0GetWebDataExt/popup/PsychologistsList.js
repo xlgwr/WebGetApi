@@ -135,7 +135,7 @@ $(function() {
                     type: 'POST',
                     url: config.urlApi_PL_items,
                     tmpdata: postMain,
-                    timeout: 50000,
+                    timeout: 80000,
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify(postMain)
                 }).done(function(data) {

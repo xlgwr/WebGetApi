@@ -1,7 +1,7 @@
-$(function () {
+$(function() {
     var allTtype = "特许秘书";
     console.log(allTtype + " 初始化..");
-    $('#btn12').click(function () {
+    $('#btn12').click(function() {
         $('#panel12').removeClass('panel-default')
         $('#panel12').addClass('panel-success')
 
@@ -48,7 +48,7 @@ $(function () {
 
         //获取记录  明细
         getItems_ST(1, _tTitle, maxid)
-        //获取记录  明细
+            //获取记录  明细
         function getItems_ST(tlangFlag, typemsg, tmaxid) {
             var _langFlag = tlangFlag;
             var currX = 1;
@@ -84,12 +84,16 @@ $(function () {
                     //获取记录 中文/英文一样
                     $.ajax({
                         url: configGetUrl.getUrl_ST_items,
-                        data: { _room: "member", searchDone: 1, _page: currX },
+                        data: {
+                            _room: "member",
+                            searchDone: 1,
+                            _page: currX
+                        },
                         tmpdata: currX,
                         tmpdataLang: tlangFlag,
                         timeout: (1 * 60 * 1000),
                         type: "get",
-                        success: function (data, state, xhr) {
+                        success: function(data, state, xhr) {
                             console.log(tmpmsg + this.url);
 
                             var $body = $('<div></div>').html(data);
@@ -109,7 +113,7 @@ $(function () {
                                 return;
                             }
                             var postMain = {
-                                gwd_Secretaries_items: [],
+                                i_Secretaries: [],
                                 tLang: this.tmpdataLang,
                                 tname: this.tmpdata,
                                 ttype: tmpmsg,
@@ -150,7 +154,7 @@ $(function () {
                                     addDate: undefined,
                                     UpdateDate: undefined
                                 }
-                                postMain.gwd_Secretaries_items.push(postItem);
+                                postMain.i_Secretaries.push(postItem);
 
                                 tmpitem += 1;
                             }
@@ -162,14 +166,14 @@ $(function () {
                                 type: 'POST',
                                 url: config.urlApi_ST_items,
                                 tmpdata: postMain,
-                                timeout: 50000,
+                                timeout: 80000,
                                 contentType: 'application/json; charset=utf-8',
                                 data: JSON.stringify(postMain)
-                            }).done(function (data) {
+                            }).done(function(data) {
                                 console.log(tmpmsg + "," + this.tmpdata.ttype + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                                 // sendMsg('jsonDate', "Set Date Now.");
                                 //console.log(data);                            
-                            }).fail(function (err) {
+                            }).fail(function(err) {
                                 //showError
                                 console.log(this.tmpdata);
                                 console.log(err);
@@ -177,7 +181,7 @@ $(function () {
                             });
                             ////////////////////////////////////
                         },
-                        error: function (err) {
+                        error: function(err) {
                             console.log(tmpmsg + this.url);
                             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                             console.log(err);

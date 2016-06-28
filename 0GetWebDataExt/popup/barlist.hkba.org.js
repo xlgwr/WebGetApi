@@ -45,7 +45,7 @@ function gwd_hkba_barlist(btn, msgid) {
         url: configGetUrl.getUrl_hkba_seniority_CN,
         //data: { name: '', pg: currPage, sj: 0 },
         tmpdata: currPage,
-        timeout: 50000,
+        timeout: 80000,
         type: "get",
         success: function(data, state, xhr) {
             console.log(this.url);
@@ -137,7 +137,7 @@ function gwd_hkba_barlist(btn, msgid) {
                     url: configGetUrl.getUrl_hkba_seniority_details_CN + currItem.id,
                     //data: { name: '', pg: currPage, sj: 0 },
                     tmpdata: currItem,
-                    timeout: 50000,
+                    timeout: 80000,
                     type: "get",
                     success: function(data, state, xhr) {
                         console.log(this.url);
@@ -264,7 +264,7 @@ function gwd_hkba_barlist(btn, msgid) {
                             type: 'POST',
                             url: config.urlApi_hkba,
                             tmpdata: toPostMain,
-                            timeout: 50000,
+                            timeout: 80000,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(toPostMain)
                         }).done(function(data) {
@@ -297,7 +297,7 @@ function gwd_hkba_barlist(btn, msgid) {
         url: configGetUrl.getUrl_hkba_seniority_EN,
         //data: { name: '', pg: currPage, sj: 0 },
         tmpdata: currPage,
-        timeout: 50000,
+        timeout: 80000,
         type: "get",
         success: function(data, state, xhr) {
             console.log(this.url);
@@ -390,7 +390,7 @@ function gwd_hkba_barlist(btn, msgid) {
                     url: configGetUrl.getUrl_hkba_seniority_details_EN + currItem.id,
                     //data: { name: '', pg: currPage, sj: 0 },
                     tmpdata: currItem,
-                    timeout: 50000,
+                    timeout: 80000,
                     type: "get",
                     success: function(data, state, xhr) {
                         console.log(typemsg + "," + this.url);
@@ -518,7 +518,7 @@ function gwd_hkba_barlist(btn, msgid) {
                             type: 'POST',
                             url: config.urlApi_hkba,
                             tmpdata: toPostMain,
-                            timeout: 50000,
+                            timeout: 80000,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(toPostMain)
                         }).done(function(data) {
@@ -551,7 +551,7 @@ function gwd_hkba_barlist(btn, msgid) {
         url: configGetUrl.getUrl_hkba_JuniorCounsel_CN,
         //data: { name: '', pg: currPage, sj: 0 },
         tmpdata: currPage,
-        timeout: 50000,
+        timeout: 80000,
         type: "get",
         success: function(data, state, xhr) {
             console.log(this.url);
@@ -646,7 +646,7 @@ function gwd_hkba_barlist(btn, msgid) {
                     url: configGetUrl.getUrl_hkba_JuniorCounsel_details_CN + currItem.id,
                     //data: { name: '', pg: currPage, sj: 0 },
                     tmpdata: currItem,
-                    timeout: 50000,
+                    timeout: 80000,
                     type: "get",
                     success: function(data, state, xhr) {
                         console.log(typemsg + "," + this.url);
@@ -774,7 +774,7 @@ function gwd_hkba_barlist(btn, msgid) {
                             type: 'POST',
                             url: config.urlApi_hkba,
                             tmpdata: toPostMain,
-                            timeout: 50000,
+                            timeout: 80000,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(toPostMain)
                         }).done(function(data) {
@@ -805,7 +805,7 @@ function gwd_hkba_barlist(btn, msgid) {
         url: configGetUrl.getUrl_hkba_JuniorCounsel_EN,
         //data: { name: '', pg: currPage, sj: 0 },
         tmpdata: currPage,
-        timeout: 50000,
+        timeout: 80000,
         type: "get",
         success: function(data, state, xhr) {
             console.log(this.url);
@@ -900,7 +900,7 @@ function gwd_hkba_barlist(btn, msgid) {
                     url: configGetUrl.getUrl_hkba_JuniorCounsel_details_EN + currItem.id,
                     //data: { name: '', pg: currPage, sj: 0 },
                     tmpdata: currItem,
-                    timeout: 50000,
+                    timeout: 80000,
                     type: "get",
                     success: function(data, state, xhr) {
                         console.log(typemsg + "," + this.url);
@@ -1027,7 +1027,7 @@ function gwd_hkba_barlist(btn, msgid) {
                             type: 'POST',
                             url: config.urlApi_hkba,
                             tmpdata: toPostMain,
-                            timeout: 50000,
+                            timeout: 80000,
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(toPostMain)
                         }).done(function(data) {

@@ -93,37 +93,9 @@
     <Compile Include="emms\models\i_RegArchitect.cs" />
     <Compile Include="emms\models\i_RegPharmacist.cs" />
     <Compile Include="emms\models\m_parameter.cs" />
-    <Compile Include="Migrations\201606280222430_initfirst.cs" />
-    <Compile Include="Migrations\201606280222430_initfirst.Designer.cs">
-      <DependentUpon>201606280222430_initfirst.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280617057_changeIBarrisers.cs" />
-    <Compile Include="Migrations\201606280617057_changeIBarrisers.Designer.cs">
-      <DependentUpon>201606280617057_changeIBarrisers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280701540_delIDForRegPharmacist.cs" />
-    <Compile Include="Migrations\201606280701540_delIDForRegPharmacist.Designer.cs">
-      <DependentUpon>201606280701540_delIDForRegPharmacist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280724321_delIDForInstitute.cs" />
-    <Compile Include="Migrations\201606280724321_delIDForInstitute.Designer.cs">
-      <DependentUpon>201606280724321_delIDForInstitute.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280736173_AddIDForInstitute.cs" />
-    <Compile Include="Migrations\201606280736173_AddIDForInstitute.Designer.cs">
-      <DependentUpon>201606280736173_AddIDForInstitute.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280830255_AddIDForRegArchie.cs" />
-    <Compile Include="Migrations\201606280830255_AddIDForRegArchie.Designer.cs">
-      <DependentUpon>201606280830255_AddIDForRegArchie.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280947561_AddLicenceNo.cs" />
-    <Compile Include="Migrations\201606280947561_AddLicenceNo.Designer.cs">
-      <DependentUpon>201606280947561_AddLicenceNo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280952490_AddLicenceNo2.cs" />
-    <Compile Include="Migrations\201606280952490_AddLicenceNo2.Designer.cs">
-      <DependentUpon>201606280952490_AddLicenceNo2.cs</DependentUpon>
+    <Compile Include="Migrations\201606281010165_initFirst.cs" />
+    <Compile Include="Migrations\201606281010165_initFirst.Designer.cs">
+      <DependentUpon>201606281010165_initFirst.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,29 +110,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606280222430_initfirst.resx">
-      <DependentUpon>201606280222430_initfirst.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280617057_changeIBarrisers.resx">
-      <DependentUpon>201606280617057_changeIBarrisers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280701540_delIDForRegPharmacist.resx">
-      <DependentUpon>201606280701540_delIDForRegPharmacist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280724321_delIDForInstitute.resx">
-      <DependentUpon>201606280724321_delIDForInstitute.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280736173_AddIDForInstitute.resx">
-      <DependentUpon>201606280736173_AddIDForInstitute.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280830255_AddIDForRegArchie.resx">
-      <DependentUpon>201606280830255_AddIDForRegArchie.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280947561_AddLicenceNo.resx">
-      <DependentUpon>201606280947561_AddLicenceNo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280952490_AddLicenceNo2.resx">
-      <DependentUpon>201606280952490_AddLicenceNo2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606281010165_initFirst.resx">
+      <DependentUpon>201606281010165_initFirst.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -45,7 +45,7 @@ $(function() {
                 accept_disclaimer: 'yes'
             },
             tmpdata: 0,
-            timeout: 50000,
+            timeout: 80000,
             type: "get",
             success: function(data, state, xhr) {
                 console.log(_tTitle + this.url);
@@ -149,7 +149,7 @@ $(function() {
                             accept_disclaimer: 'yes'
                         },
                         tmpdata: currItem,
-                        timeout: 50000,
+                        timeout: 80000,
                         type: "get",
                         success: function(data, state, xhr) {
                             console.log(_tTitle + "," + this.tmpdata.tTitle + "," + this.url);
@@ -173,7 +173,7 @@ $(function() {
                                     },
                                     tmpdata: currTitle,
                                     tmpID: this.tmpdata.itemNo,
-                                    timeout: 50000,
+                                    timeout: 80000,
                                     type: "get",
                                     success: function(data, state, xhr) {
                                         console.log(_tTitle + "," + this.tmpdata + "," + this.url);
@@ -298,7 +298,7 @@ $(function() {
                                             type: 'POST',
                                             url: config.urlApi_directory,
                                             tmpdata: postMain,
-                                            timeout: 50000,
+                                            timeout: 80000,
                                             contentType: 'application/json; charset=utf-8',
                                             data: JSON.stringify(postMain)
                                         }).done(function(data) {
@@ -351,7 +351,7 @@ $(function() {
                 accept_disclaimer: 'yes'
             },
             tmpdata: 0,
-            timeout: 50000,
+            timeout: 80000,
             type: "get",
             success: function(data, state, xhr) {
                 console.log(_tTitle + this.url);
@@ -453,7 +453,7 @@ $(function() {
                             accept_disclaimer: 'yes'
                         },
                         tmpdata: currItem,
-                        timeout: 50000,
+                        timeout: 80000,
                         type: "get",
                         success: function(data, state, xhr) {
                             console.log(_tTitle + "," + this.tmpdata.tTitle + "," + this.url);
@@ -605,7 +605,7 @@ $(function() {
                                             type: 'POST',
                                             url: config.urlApi_directory,
                                             tmpdata: postMain,
-                                            timeout: 50000,
+                                            timeout: 80000,
                                             contentType: 'application/json; charset=utf-8',
                                             data: JSON.stringify(postMain)
                                         }).done(function(data) {
