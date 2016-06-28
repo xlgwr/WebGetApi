@@ -40,12 +40,12 @@ var config = {
     urlApi_RPC_P_items: $gbHttPip + "/api/i_RegArchitect", //post
     urlApi_RPC_C_items: $gbHttPip + "/api/i_RegBuildingCom", //post
     //建筑师,公司
-    urlApi_A_items: $gbHttPip + "/api/gwd_architect_items", //post
-    urlApi_AC_items: $gbHttPip + "/api/gwd_ConstructionCompany_items", //post
+    urlApi_A_items: $gbHttPip + "/api/i_Architect", //post
+    urlApi_AC_items: $gbHttPip + "/api/i_BuildingCom", //post
     //香港特别行政区政府保安局
-    urlApi_SB_items: $gbHttPip + "/api/gwd_SecurityBureau_items", //post
+    urlApi_SB_items: $gbHttPip + "/api/i_SecurityBureau", //post
     //Secretaries
-    urlApi_ST_items: $gbHttPip + "/api/gwd_Secretaries_items", //post    
+    urlApi_ST_items: $gbHttPip + "/api/i_Secretaries", //post    
     //参数
     urlApim_parameter: $gbHttPip + "/api/m_parameter",
     urlApim_parameterMax: $gbHttPip + "/api/m_parameterSetMax",

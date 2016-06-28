@@ -44,6 +44,12 @@ namespace EFLibForApi.emms.models
         /// </summary>
         public string WorkType { get; set; }
 
+        /// <summary>
+        /// 牌照编号
+        /// </summary>
+        public string LicenceNo { get; set; }
+
+
         public string address { get; set; }
 
         [StringLength(128)]

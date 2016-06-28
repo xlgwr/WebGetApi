@@ -20,7 +20,7 @@ namespace WebGetApi.Controllers
     /// <summary>
     /// Registered Pharmacists
     /// </summary>
-    [RoutePrefix("api/GWDarchitect")]
+    [RoutePrefix("api/i_Architect")]
     public class i_ArchitectController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

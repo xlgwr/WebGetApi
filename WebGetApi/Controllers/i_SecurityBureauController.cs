@@ -20,7 +20,7 @@ namespace WebGetApi.Controllers
     /// <summary>
     /// Registered Pharmacists
     /// </summary>
-    [RoutePrefix("api/GWDSecurityBureau")]
+    [RoutePrefix("api/iSecurityBureau")]
     public class i_SecurityBureauController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

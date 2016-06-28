@@ -20,8 +20,8 @@ namespace WebGetApi.Controllers
     /// <summary>
     /// Registered Pharmacists
     /// </summary>
-    [RoutePrefix("api/GWDConstructionCompany")]
-    public class i_BuildingComCompany_itemsController : ApiController
+    [RoutePrefix("api/iBuildingCom")]
+    public class i_BuildingComController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();

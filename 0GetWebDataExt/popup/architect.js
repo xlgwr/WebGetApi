@@ -1,7 +1,7 @@
-$(function () {
+$(function() {
     var allTtype = "建筑";
     console.log(allTtype + "初始化..");
-    $('#btn9').click(function () {
+    $('#btn9').click(function() {
         $('#panel9').removeClass('panel-default')
         $('#panel9').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -11,7 +11,7 @@ $(function () {
         //$(this).attr('disabled', null);
     });
 
-    $('#btn10').click(function () {
+    $('#btn10').click(function() {
         $('#panel10').removeClass('panel-default')
         $('#panel10').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -95,7 +95,7 @@ $(function () {
                         tmpdataLang: 0,
                         timeout: (1 * 60 * 1000),
                         type: "get",
-                        success: function (data, state, xhr) {
+                        success: function(data, state, xhr) {
                             console.log(_tTitle + this.url);
 
                             var $body = $('<div></div>').html(data);
@@ -109,7 +109,7 @@ $(function () {
                             msgid.text(_tTitle + ":取得数居成功..有：" + $Gettable0TR.length + " 条记录。");
 
                             var postMain = {
-                                gwd_architect_items: [],
+                                i_Architect: [],
                                 tLang: this.tmpdataLang,
                                 tname: undefined,
                                 ttype: _tTitle + ":" + this.tmpdata,
@@ -159,9 +159,9 @@ $(function () {
                                     $id: tmpitem,
                                     htmlID: 0,
 
-                                    RegNo: nameNo,
-                                    MembershipNo: nameEN,
-                                    MembershipNoZH: nameZH,
+                                    ArchitectId: nameNo,
+                                    MembershipEn: nameEN,
+                                    MembershipCn: nameZH,
                                     MembershipType: alltd.eq(2).text().trim(),
                                     MembershipYear: alltd.eq(1).text().trim(),
 
@@ -178,12 +178,12 @@ $(function () {
                                     UpdateDate: undefined
                                 }
 
-                                postMain.gwd_architect_items.push(postItem);
+                                postMain.i_Architect.push(postItem);
 
                                 tmpitem += 1;
                             }
                             ///end for
-                            postMain.tname = postMain.ttype + ":" + postMain.gwd_architect_items.length;
+                            postMain.tname = postMain.ttype + ":" + postMain.i_Architect.length;
                             //console.log(postMain);
 
                             msgid.text(postMain.tname + "条，分析数据完成,准备更新到数据库..");
@@ -195,20 +195,20 @@ $(function () {
                                 timeout: 50000,
                                 contentType: 'application/json; charset=utf-8',
                                 data: JSON.stringify(postMain)
-                            }).done(function (data) {
+                            }).done(function(data) {
                                 console.log(_tTitle + "," + this.tmpdata.ttype + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                                 // sendMsg('jsonDate', "Set Date Now.");
                                 //console.log(data);
-                                //msgid.text(_tTitle + " 更新完成，已更新：" + this.tmpdata.gwd_architect_items.length + " 条成功.");
+                                //msgid.text(_tTitle + " 更新完成，已更新：" + this.tmpdata.i_Architect.length + " 条成功.");
                                 //btn.attr('disabled', null);
-                            }).fail(function (err) {
+                            }).fail(function(err) {
                                 //showError
                                 console.log(this.tmpdata);
                                 console.log(err);
                             });
                             ////////////////////////////////////
                         },
-                        error: function (err) {
+                        error: function(err) {
                             console.log(_tTitle + this.url);
                             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                             console.log(err);
@@ -273,7 +273,7 @@ $(function () {
                         tmpdataLang: 0,
                         timeout: (1 * 60 * 1000),
                         type: "get",
-                        success: function (data, state, xhr) {
+                        success: function(data, state, xhr) {
                             console.log(_tTitle + this.url);
 
                             var $body = $('<div></div>').html(data);
@@ -285,7 +285,7 @@ $(function () {
                             msgid.text(_tTitle + ":取得数居成功..有：" + $Gettable0TD.length + " 条记录。");
 
                             var postMain = {
-                                gwd_ConstructionCompany_items: [],
+                                i_BuildingCom: [],
                                 tLang: this.tmpdataLang,
                                 tname: undefined,
                                 ttype: _tTitle + ":" + this.tmpdata,
@@ -358,13 +358,13 @@ $(function () {
                                     $id: tmpitem,
                                     htmlID: 0,
 
-                                    ConstructionCyID: tmpitem,
-                                    CompanyName: nameEN,
-                                    ChineseName: nameZH,
+                                    BuildingComID: tmpitem,
+                                    CompanyNameEn: nameEN,
+                                    CompanyNameCn: nameZH,
                                     Summary: currDiv.text(),
 
-                                    address: taddress,
-                                    addressZH: taddressZH,
+                                    AddressEn: taddress,
+                                    AddressCn: taddressZH,
                                     Tel: tTel,
                                     Fax: tFax,
                                     Email: tEmail,
@@ -383,12 +383,12 @@ $(function () {
                                     UpdateDate: undefined
                                 }
 
-                                postMain.gwd_ConstructionCompany_items.push(postItem);
+                                postMain.i_BuildingCom.push(postItem);
 
                                 tmpitem += 1;
                             }
                             ///end for
-                            postMain.tname = postMain.ttype + ":" + postMain.gwd_ConstructionCompany_items.length;
+                            postMain.tname = postMain.ttype + ":" + postMain.i_BuildingCom.length;
                             //console.log(postMain);
 
                             msgid.text(postMain.tname + "条，分析数据完成,准备更新到数据库..");
@@ -400,20 +400,20 @@ $(function () {
                                 timeout: 50000,
                                 contentType: 'application/json; charset=utf-8',
                                 data: JSON.stringify(postMain)
-                            }).done(function (data) {
+                            }).done(function(data) {
                                 console.log(_tTitle + "," + this.tmpdata.ttype + "," + ",Index:" + this.tmpdata.tLang + "--> Post Done!");
                                 // sendMsg('jsonDate', "Set Date Now.");
                                 //console.log(data);
-                                //msgid.text(_tTitle + " 更新完成，已更新：" + this.tmpdata.gwd_ConstructionCompany_items.length + " 条成功.");
+                                //msgid.text(_tTitle + " 更新完成，已更新：" + this.tmpdata.i_BuildingCom.length + " 条成功.");
                                 //btn.attr('disabled', null);
-                            }).fail(function (err) {
+                            }).fail(function(err) {
                                 //showError
                                 console.log(this.tmpdata);
                                 console.log(err);
                             });
                             ////////////////////////////////////
                         },
-                        error: function (err) {
+                        error: function(err) {
                             console.log(_tTitle + this.url);
                             console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                             console.log(err);
