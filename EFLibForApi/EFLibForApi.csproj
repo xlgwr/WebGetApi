@@ -93,9 +93,9 @@
     <Compile Include="emms\models\i_RegArchitect.cs" />
     <Compile Include="emms\models\i_RegPharmacist.cs" />
     <Compile Include="emms\models\m_parameter.cs" />
-    <Compile Include="Migrations\201606170249280_initFirst.cs" />
-    <Compile Include="Migrations\201606170249280_initFirst.Designer.cs">
-      <DependentUpon>201606170249280_initFirst.cs</DependentUpon>
+    <Compile Include="Migrations\201606280222430_initfirst.cs" />
+    <Compile Include="Migrations\201606280222430_initfirst.Designer.cs">
+      <DependentUpon>201606280222430_initfirst.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,8 +110,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606170249280_initFirst.resx">
-      <DependentUpon>201606170249280_initFirst.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606280222430_initfirst.resx">
+      <DependentUpon>201606280222430_initfirst.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

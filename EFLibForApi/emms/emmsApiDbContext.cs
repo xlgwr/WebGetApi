@@ -29,10 +29,10 @@
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
 
-        public virtual DbSet<m_CompaniesRegistry_main> m_CompaniesRegistry_main { get; set; }
-        public virtual DbSet<m_CompaniesRegistry_items> m_CompaniesRegistry_items { get; set; }
-        public virtual DbSet<m_CompaniesRegistry_itemsChange> m_CompaniesRegistry_itemsChange { get; set; }
-        public virtual DbSet<m_CompaniesRegistry_DisOrders> m_CompaniesRegistry_DisOrders { get; set; }
+        //public virtual DbSet<m_CompaniesRegistry_main> m_CompaniesRegistry_main { get; set; }
+        //public virtual DbSet<m_CompaniesRegistry_items> m_CompaniesRegistry_items { get; set; }
+        //public virtual DbSet<m_CompaniesRegistry_itemsChange> m_CompaniesRegistry_itemsChange { get; set; }
+        //public virtual DbSet<m_CompaniesRegistry_DisOrders> m_CompaniesRegistry_DisOrders { get; set; }
 
         public virtual DbSet<m_Case_main> m_Case_main { get; set; }
         public virtual DbSet<m_Case_items> m_Case_items { get; set; }
@@ -68,47 +68,7 @@
             modelBuilder.Entity<entityCommMain>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<m_CompaniesRegistry_main>()
-            .Property(e => e.Remark)
-            .IsUnicode(false);
-            modelBuilder.Entity<m_CompaniesRegistry_items>()
-            .Property(e => e.Remark)
-            .IsUnicode(false);
-            modelBuilder.Entity<m_CompaniesRegistry_itemsChange>()
-            .Property(e => e.Remark)
-            .IsUnicode(false);
-            modelBuilder.Entity<m_CompaniesRegistry_DisOrders>()
-            .Property(e => e.Remark)
-            .IsUnicode(false);
-
-
-            modelBuilder.Entity<m_Case_main>()
-            .Property(e => e.Remark)
-            .IsUnicode(false);
-            modelBuilder.Entity<m_Case_items>()
-              .Property(e => e.Remark)
-              .IsUnicode(false);
-
-            modelBuilder.Entity<m_AppealCases>()
-            .Property(e => e.Remark)
-            .IsUnicode(false);
-
-            modelBuilder.Entity<m_RatioDecidendis>()
-            .Property(e => e.Remark)
-            .IsUnicode(false);
-
-            modelBuilder.Entity<i_WithCertLawyers>()
-                .Property(e => e.Remark)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<i_Barristers>()
-                .Property(e => e.Remark)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<i_GovPhonebook>()
-                .Property(e => e.Remark)
-                .IsUnicode(false);
+            
 
             //modelBuilder.Entity<m_Case_main>()
             //  .HasRequired(t => t.gwd_Case_items)

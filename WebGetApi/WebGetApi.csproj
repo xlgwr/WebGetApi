@@ -214,35 +214,33 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\gwd_architect_itemsController.cs" />
-    <Compile Include="Controllers\gwd_CompaniesRegistry_mainNewController.cs" />
-    <Compile Include="Controllers\gwd_Secretaries_itemsController.cs" />
-    <Compile Include="Controllers\gwd_SecurityBureau_itemsController.cs" />
-    <Compile Include="Controllers\gwd_GovernmentPhonebook_mainController.cs">
+    <Compile Include="Controllers\i_ArchitectController.cs" />
+    <Compile Include="Controllers\i_ForeignLawyersController.cs" />
+    <Compile Include="Controllers\m_CompaniesRegistry_mainNewController.cs" />
+    <Compile Include="Controllers\i_SecretariesController.cs" />
+    <Compile Include="Controllers\i_SecurityBureauController.cs" />
+    <Compile Include="Controllers\i_GovPhonebookController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\gwd_Barristers_mainController.cs">
+    <Compile Include="Controllers\i_BarristersController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\gwd_ConstructionCompany_itemsController.cs" />
-    <Compile Include="Controllers\gwd_RegBuildingCompany_itemsController.cs" />
-    <Compile Include="Controllers\gwd_RegArchitect_itemsController.cs" />
-    <Compile Include="Controllers\gwd_PsychologistsList_itemsController.cs" />
-    <Compile Include="Controllers\gwd_InstituteSurveyors_itemsController.cs" />
-    <Compile Include="Controllers\gwd_Lawyers_mainController.cs">
+    <Compile Include="Controllers\i_BuildingComController.cs" />
+    <Compile Include="Controllers\i_RegBuildingComController.cs" />
+    <Compile Include="Controllers\i_RegArchitectController.cs" />
+    <Compile Include="Controllers\i_PsychologicalSocietyController.cs" />
+    <Compile Include="Controllers\i_InstituteSurveyorsController.cs" />
+    <Compile Include="Controllers\i_WithCertLawyersController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\gwd_CompaniesRegistry_mainController.cs">
+    <Compile Include="Controllers\m_Case_mainController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\gwd_Case_mainController.cs">
+    <Compile Include="Controllers\m_AppealCasesController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\gwd_AppealCasesController.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controllers\gwd_RatioDecidendisController.cs" />
-    <Compile Include="Controllers\gwd_RegisteredPharmacists_itemsController.cs" />
+    <Compile Include="Controllers\m_RatioDecidendisController.cs" />
+    <Compile Include="Controllers\i_RegPharmacistController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>Code</SubType>
     </Compile>

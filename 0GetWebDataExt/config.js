@@ -1,8 +1,8 @@
-// var $gbHttPip = "http://192.168.1.136:8081";
-// var $gbHttPSip = "https://192.168.1.136";
+var $gbHttPip = "http://192.168.1.136:8081";
+var $gbHttPSip = "https://192.168.1.136";
 
-var $gbHttPip = "http://192.168.1.6:7070";
-var $gbHttPSip = "https://192.168.1.6:7443";
+// var $gbHttPip = "http://192.168.1.6:7070";
+// var $gbHttPSip = "https://192.168.1.6:7443";
 
 var config = {
     //API 接口
@@ -19,8 +19,13 @@ var config = {
     urlApi_legalref: $gbHttPip + "/api/gwd_AppealCases", //post    
     urlApi_legalref_html: $gbHttPip + "/api/gwd_RatioDecidendis", //post 
     urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealCases/GetWebDatasMaxTDis",
+
+
+
     //律师界名录
-    urlApi_hklawsoc: $gbHttPip + "/api/gwd_Lawyers_main", //post
+    urlApi_withcert: $gbHttPip + "/api/i_WithCertLawyers", //post
+    //注册外地律师
+    urlApi_foreignlawyers: $gbHttPip + "/api/i_ForeignLawyers", //post
     //电话本
     urlApi_directory: $gbHttPip + "/api/gwd_GovernmentPhonebook_main", //post
     //大律师
@@ -77,6 +82,10 @@ var configGetUrl = {
     //注册外地律师
     //?name=&pg=2&sort=eng&order=&sj=&sessionid=
     getUrl_fjt2_mem_foreignlawyers: "http://www.hklawsoc.org.hk/pub_c/memberlawlist/mem_foreignlawyers.asp",
+
+     //{id:944512}
+    getUrl_fjt2_mem_foreignlawyersEN: "http://www.hklawsoc.org.hk/pub_e/memberlawlist/member.asp",
+    getUrl_fjt2_mem_foreignlawyersCN: "http://www.hklawsoc.org.hk/pub_c/memberlawlist/member.asp",
 
     ///
     //香港大律师表

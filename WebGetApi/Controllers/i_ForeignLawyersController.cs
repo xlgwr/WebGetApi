@@ -17,8 +17,8 @@ using Common.Logging;
 
 namespace WebGetApi.Controllers
 {
-    [RoutePrefix("api/iWithCertLawyers")]
-    public class i_WithCertLawyersController : ApiController
+    [RoutePrefix("api/iForeignLawyers")]
+    public class i_ForeignLawyersController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
@@ -42,24 +42,24 @@ namespace WebGetApi.Controllers
                 entityMainComm.updtime = DateTime.Now;
                 entityMainComm.ClientIP = HttpContext.Current.Request.UserHostAddress;
 
-                if (entityMainComm.i_WithCertLawyers != null)
+                if (entityMainComm.i_ForeignLawyers != null)
                 {
-                    foreach (var item in entityMainComm.i_WithCertLawyers)
+                    foreach (var item in entityMainComm.i_ForeignLawyers)
                     {
                         item.htmlID = entityMainComm.Tid;
                         item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         item.updtime = DateTime.Now;
                     }
 
-                    if (entityMainComm.i_WithCertLawyers.Count > 0)
+                    if (entityMainComm.i_ForeignLawyers.Count > 0)
                     {
-                        var tmpfirst = entityMainComm.i_WithCertLawyers.First();
+                        var tmpfirst = entityMainComm.i_ForeignLawyers.First();
 
                         var tmpExitItem = gwd_Lawyers_itemsExists(tmpfirst.tkeyNo, tmpfirst.tLang, tmpfirst.tIndex);
                         if (tmpExitItem)
                         {
                             long tmpHtmlId = 0;
-                            foreach (var item in entityMainComm.i_WithCertLawyers)
+                            foreach (var item in entityMainComm.i_ForeignLawyers)
                             {
                                 if (!string.IsNullOrEmpty(item.LawyerNameEn) || !string.IsNullOrEmpty(item.LawyerNameCn))
                                 {
@@ -68,8 +68,6 @@ namespace WebGetApi.Controllers
                                     {
                                         tmpHtmlId = getItem.htmlID;
 
-                                        getItem.ApproveCountry = item.ApproveCountry;
-                                        getItem.ApproveDate = item.ApproveDate;
                                         getItem.BeforeName = item.BeforeName;
                                         getItem.ClientIP = item.ClientIP;
                                         getItem.ComAddressCn = item.ComAddressCn;
@@ -82,9 +80,7 @@ namespace WebGetApi.Controllers
                                         getItem.DxNO = item.DxNO;
                                         getItem.Remark = item.Remark;
                                         getItem.LawyerCompanyEn = item.LawyerCompanyEn;
-                                        getItem.LawyerEmail = item.LawyerEmail;
                                         getItem.LawyerNameEn = item.LawyerNameEn;
-                                        getItem.OtherDate = item.OtherDate;
                                         getItem.Title = item.Title;
 
                                         getItem.tname = item.tname;
@@ -147,11 +143,11 @@ namespace WebGetApi.Controllers
 
         private bool gwd_Lawyers_itemsExists(string id, long lang, long tindex)
         {
-            return db.i_WithCertLawyers.Count(e => e.tkeyNo == id && e.tLang == lang && e.tIndex == tindex) > 0;
+            return db.i_ForeignLawyers.Count(e => e.tkeyNo == id && e.tLang == lang && e.tIndex == tindex) > 0;
         }
-        private i_WithCertLawyers gwd_Lawyers_itemsByNo(string id, long lang, long tindex)
+        private i_ForeignLawyers gwd_Lawyers_itemsByNo(string id, long lang, long tindex)
         {
-            return db.i_WithCertLawyers.Where(e => e.tkeyNo == id && e.tLang == lang && e.tIndex == tindex).FirstOrDefault();
+            return db.i_ForeignLawyers.Where(e => e.tkeyNo == id && e.tLang == lang && e.tIndex == tindex).FirstOrDefault();
         }
         protected override void Dispose(bool disposing)
         {

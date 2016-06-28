@@ -36,6 +36,8 @@ namespace EFLibForApi.emms.models
 
             this.i_WithCertLawyers = new List<i_WithCertLawyers>();
 
+            this.i_ForeignLawyers = new List<i_ForeignLawyers>();
+
             this.i_GovPhonebook = new List<i_GovPhonebook>();
 
             this.i_RegPharmacist = new List<i_RegPharmacist>();
@@ -58,6 +60,8 @@ namespace EFLibForApi.emms.models
         }
         public ICollection<i_Barristers> i_Barristers { get; set; }
         public ICollection<i_WithCertLawyers> i_WithCertLawyers { get; set; }
+        public ICollection<i_ForeignLawyers> i_ForeignLawyers { get; set; }
+
         public ICollection<i_GovPhonebook> i_GovPhonebook { get; set; }
         public ICollection<i_RegPharmacist> i_RegPharmacist { get; set; }
         public ICollection<i_InstituteSurveyors> i_InstituteSurveyors { get; set; }

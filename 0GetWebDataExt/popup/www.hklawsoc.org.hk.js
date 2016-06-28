@@ -1,9 +1,10 @@
 ////律师界名录
+///注册外地律师
 
-$(function () {
+$(function() {
 
     console.log("律师界名录初始化..");
-    $('#btn1hklaw').click(function () {
+    $('#btn1hklaw').click(function() {
         $('#panelhklaw').removeClass('panel-default')
         $('#panelhklaw').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -13,7 +14,7 @@ $(function () {
         //$(this).attr('disabled', null);
     });
 
-    $('#btn1hklaw2').click(function () {
+    $('#btn1hklaw2').click(function() {
         $('#panelhklaw2').removeClass('panel-default')
         $('#panelhklaw2').addClass('panel-success')
         $(this).attr('disabled', 'disabled');
@@ -63,11 +64,15 @@ $(function () {
 
                 $.ajax({
                     url: configGetUrl.getUrl_fjt2_mem_withcert,
-                    data: { name: '', pg: currPage, sj: 0 },
+                    data: {
+                        name: '',
+                        pg: currPage,
+                        sj: 0
+                    },
                     tmpdata: currPage,
                     timeout: 50000,
                     type: "get",
-                    success: function (data, state, xhr) {
+                    success: function(data, state, xhr) {
                         console.log(this.url);
                         var $body = $('<div></div>').html(data);
                         var $table0 = $body.find('table[width="750"]').eq(0);
@@ -125,48 +130,53 @@ $(function () {
                                             ClientIP: undefined,
                                             addDate: undefined,
                                             UpdateDate: undefined,
-                                            gwd_Lawyers_items: []
+                                            i_WithCertLawyers: []
                                         }
-                                        var gwd_Lawyers_items = {
-                                            $id: "1",
-                                            htmlID: 0,
-                                            LawyerName: nameEn.text().trim(),
-                                            ChineseName: nameZH.text().trim(),
-                                            BeforeName: undefined,
-                                            ApproveDate: undefined,
-                                            ApproveCountry: undefined,
-                                            OtherDate: undefined,
-                                            LawyerEmail: undefined,
-                                            Title: undefined,
-                                            LawyerCompany: undefined,
-                                            ChineseCompany: undefined,
-                                            CompanyAddress: undefined,
-                                            ChineseAddress: undefined,
-                                            Companytel: undefined,
-                                            CompanyFax: undefined,
-                                            Dxnumber: undefined,
-                                            CompanyEmail: undefined,
-                                            tLang: 0,
-                                            tkeyNo: tmpId,
-                                            tIndex: 0,
-                                            tname: nameId,
-                                            ttype: "律师界名录",
-                                            Tid: 0,
-                                            Remark: undefined,
-                                            tStatus: 0,
-                                            ClientIP: undefined,
-                                            addDate: undefined,
-                                            UpdateDate: undefined
-                                        }
-                                        //英文
+                                        var i_WithCertLawyers = {
+                                                $id: "1",
+                                                htmlID: 0,
+
+                                                LawyerId: tmpId,
+                                                LawyerNameEn: nameEn.text().trim(),
+                                                LawyerNameCn: nameZH.text().trim(),
+                                                BeforeName: undefined,
+                                                ApproveDate: undefined,
+                                                ApproveCountry: '',
+                                                OtherDate: '',
+                                                LawyerEmail: undefined,
+                                                Title: undefined,
+                                                LawyerCompanyEn: undefined,
+                                                LawyerCompanyCn: undefined,
+                                                ComAddressEn: undefined,
+                                                ComAddressCn: undefined,
+                                                ComTel: undefined,
+                                                ComFax: undefined,
+                                                DxNO: undefined,
+                                                ComEmail: undefined,
+
+                                                tLang: 0,
+                                                tkeyNo: tmpId,
+                                                tIndex: 0,
+                                                tname: nameId,
+                                                ttype: "律师界名录",
+                                                Tid: 0,
+                                                Remark: undefined,
+                                                tStatus: 0,
+                                                ClientIP: undefined,
+                                                addDate: undefined,
+                                                UpdateDate: undefined
+                                            }
+                                            //英文
                                         $.ajax({
                                             url: configGetUrl.getUrl_fjt2_mem_withcertPageEN,
-                                            data: { id: tmpId },
+                                            data: {
+                                                id: tmpId
+                                            },
                                             tmpdata: toPostMain,
-                                            tmpdataItem: gwd_Lawyers_items,
+                                            tmpdataItem: i_WithCertLawyers,
                                             timeout: 50000,
                                             type: "get",
-                                            success: function (data, state, xhr) {
+                                            success: function(data, state, xhr) {
                                                 console.log("英文:" + this.url);
                                                 var $body = $('<div></div>').html(data);
                                                 var $table0 = $body.find('table[width="550"]').eq(0);
@@ -188,6 +198,7 @@ $(function () {
                                                     }
                                                     var $ctd0 = cTD.eq(0).text().trim();
                                                     var $ctd1 = cTD.eq(1).text().trim();
+                                                    var $ctd1Table = cTD.eq(1).find('table').eq(0);
 
                                                     // if (_allColNameEN.indexOf($ctd0) < 0) {
                                                     //     _allColNameEN.push($ctd0);
@@ -208,58 +219,89 @@ $(function () {
                                                     // "Fax", "E-mail", "Admission in Other Jurisdiction(s)", "DX No.",
                                                     // "Former Name (Chinese)"]
                                                     switch ($ctd0) {
-                                                        case "姓 名 (英 文)": case "Name (English)":
-                                                            this.tmpdataItem.LawyerName = $ctd1;
+                                                        case "姓 名 (英 文)":
+                                                        case "Name (English)":
+                                                            this.tmpdataItem.LawyerNameEn = $ctd1;
                                                             break;
-                                                        case "姓 名 (中 文)": case "Name (Chinese)":
-                                                            this.tmpdataItem.ChineseName = $ctd1;
+                                                        case "姓 名 (中 文)":
+                                                        case "Name (Chinese)":
+                                                            this.tmpdataItem.LawyerNameCn = $ctd1;
                                                             break;
-                                                        case "法 域": case "Jurisdiction":
-                                                            this.tmpdataItem.tcontent = $ctd1;
+                                                        case "法 域":
+                                                        case "Jurisdiction":
+                                                            this.tmpdataItem.Jurisdiction = $ctd1;
                                                             break;
-                                                        case "前 稱 (中 文)": case "Former Name (Chinese)":
+                                                        case "前 稱 (中 文)":
+                                                        case "Former Name (Chinese)":
                                                             this.tmpdataItem.BeforeName = $ctd1;
                                                             break;
-                                                        case "在 香 港 認 許 日 期": case "Admission in Hong Kong":
+                                                        case "在 香 港 認 許 日 期":
+                                                        case "Admission in Hong Kong":
                                                             this.tmpdataItem.ApproveDate = $ctd1;
                                                             break;
-                                                        case "備 註": case "Remark":
+                                                        case "備 註":
+                                                        case "Remark":
                                                             this.tmpdataItem.Remark = $ctd1;
                                                             break;
-                                                        case "在 其 他 法 域 認 許 日 期": case "Admission in Other Jurisdiction(s)":
-                                                            this.tmpdataItem.OtherDate = $ctd1;
+                                                        case "在 其 他 法 域 認 許 日 期":
+                                                        case "Admission in Other Jurisdiction(s)":
+                                                            if ($ctd1Table) {
+                                                                var tmpAlltr = $ctd1Table.find('tr');
+
+                                                                for (var index = 1; index < tmpAlltr.length; index++) {
+                                                                    var tr = tmpAlltr.eq(index);
+                                                                    var tdAll = tr.find('td');
+                                                                    this.tmpdataItem.ApproveCountry += tdAll.eq(0).text().trim() + ",";
+                                                                    this.tmpdataItem.OtherDate += tdAll.eq(1).text().trim() + ",";
+
+                                                                }
+                                                            } else {
+                                                                this.tmpdataItem.OtherDate = $ctd1;
+                                                            }
                                                             break;
-                                                        case "電 郵 地 址": case "Email": case "E-mail":
+                                                        case "電 郵 地 址":
+                                                        case "Email":
+                                                        case "E-mail":
                                                             if (!this.tmpdataItem.LawyerEmail) {
                                                                 this.tmpdataItem.LawyerEmail = $ctd1;
                                                             } else {
-                                                                this.tmpdataItem.CompanyEmail = $ctd1;
+                                                                this.tmpdataItem.ComEmail = $ctd1;
                                                             }
 
                                                             break;
-                                                        case "職 位": case "職 銜": case "Post":
+                                                        case "職 位":
+                                                        case "職 銜":
+                                                        case "Title":
+                                                        case "Post":
                                                             this.tmpdataItem.Title = $ctd1;
                                                             break;
-                                                        case "律 師 行 / 公 司 (英 文)": case "Firm/Company (English)":
-                                                            this.tmpdataItem.LawyerCompany = $ctd1;
+                                                        case "律 師 行 / 公 司 (英 文)":
+                                                        case "Firm/Company (English)":
+                                                            this.tmpdataItem.LawyerCompanyEn = $ctd1;
                                                             break;
-                                                        case "律 師 行 / 公 司 (中 文)": case "Firm/Company (Chinese)":
-                                                            this.tmpdataItem.ChineseCompany = $ctd1;
+                                                        case "律 師 行 / 公 司 (中 文)":
+                                                        case "Firm/Company (Chinese)":
+                                                            this.tmpdataItem.LawyerCompanyCn = $ctd1;
                                                             break;
-                                                        case "地 址 (英 文)": case "Address (English)":
-                                                            this.tmpdataItem.CompanyAddress = $ctd1;
+                                                        case "地 址 (英 文)":
+                                                        case "Address (English)":
+                                                            this.tmpdataItem.ComAddressEn = $ctd1;
                                                             break;
-                                                        case "地 址 (中 文)": case "Address (Chinese)":
-                                                            this.tmpdataItem.ChineseAddress = $ctd1;
+                                                        case "地 址 (中 文)":
+                                                        case "Address (Chinese)":
+                                                            this.tmpdataItem.ComAddressCn = $ctd1;
                                                             break;
-                                                        case "電 話": case "Telephone":
-                                                            this.tmpdataItem.Companytel = $ctd1;
+                                                        case "電 話":
+                                                        case "Telephone":
+                                                            this.tmpdataItem.ComTel = $ctd1;
                                                             break;
-                                                        case "傳 真": case "Fax":
-                                                            this.tmpdataItem.CompanyFax = $ctd1;
+                                                        case "傳 真":
+                                                        case "Fax":
+                                                            this.tmpdataItem.ComFax = $ctd1;
                                                             break;
-                                                        case "DX 號 碼": case "DX No.":
-                                                            this.tmpdataItem.Dxnumber = $ctd1;
+                                                        case "DX 號 碼":
+                                                        case "DX No.":
+                                                            this.tmpdataItem.DxNO = $ctd1;
                                                             break;
 
                                                         default:
@@ -271,27 +313,27 @@ $(function () {
                                                 //console.log(this.tmpdataItem);
                                                 //console.log(_allColNameEN.length + "," + _allColNameEN);
 
-                                                this.tmpdata.gwd_Lawyers_items.push(this.tmpdataItem);
+                                                this.tmpdata.i_WithCertLawyers.push(this.tmpdataItem);
 
                                                 //console.log(this.tmpdata);
                                                 //提交数据库
                                                 $.ajax({
                                                     type: 'POST',
-                                                    url: config.urlApi_hklawsoc,
+                                                    url: config.urlApi_withcert,
                                                     tmpdata: this.tmpdata,
                                                     timeout: 50000,
                                                     contentType: 'application/json; charset=utf-8',
                                                     data: JSON.stringify(this.tmpdata)
-                                                }).done(function (data) {
+                                                }).done(function(data) {
                                                     console.log(_ttype + "," + this.tmpdata.Tid + "," + ",Index:" + this.tmpdata.TIndex + ":英文 Post Done!");
                                                     // sendMsg('jsonDate', "Set Date Now.");
                                                     //console.log(data);
-                                                }).fail(function (err) {
+                                                }).fail(function(err) {
                                                     //showError
                                                     console.log(err);
                                                 });
                                             },
-                                            error: function (err) {
+                                            error: function(err) {
                                                 console.log(this.url);
                                                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                                                 console.log(err);
@@ -301,12 +343,14 @@ $(function () {
                                         //中文
                                         $.ajax({
                                             url: configGetUrl.getUrl_fjt2_mem_withcertPageCN,
-                                            data: { id: tmpId },
+                                            data: {
+                                                id: tmpId
+                                            },
                                             tmpdata: toPostMain,
-                                            tmpdataItem: gwd_Lawyers_items,
+                                            tmpdataItem: i_WithCertLawyers,
                                             timeout: 50000,
                                             type: "get",
-                                            success: function (data, state, xhr) {
+                                            success: function(data, state, xhr) {
                                                 console.log("中文:" + this.url);
                                                 var $body = $('<div></div>').html(data);
                                                 var $table0 = $body.find('table[width="550"]').eq(0);
@@ -328,6 +372,7 @@ $(function () {
                                                     }
                                                     var $ctd0 = cTD.eq(0).text().trim();
                                                     var $ctd1 = cTD.eq(1).text().trim();
+                                                    var $ctd1Table = cTD.eq(1).find('table').eq(0);
 
                                                     // if (_allColNameZH.indexOf($ctd0) < 0) {
                                                     //     _allColNameZH.push($ctd0);
@@ -348,58 +393,89 @@ $(function () {
                                                     // "Fax", "E-mail", "Admission in Other Jurisdiction(s)", "DX No.",
                                                     // "Former Name (Chinese)"]
                                                     switch ($ctd0) {
-                                                        case "姓 名 (英 文)": case "Name (English)":
-                                                            this.tmpdataItem.LawyerName = $ctd1;
+                                                        case "姓 名 (英 文)":
+                                                        case "Name (English)":
+                                                            this.tmpdataItem.LawyerNameEn = $ctd1;
                                                             break;
-                                                        case "姓 名 (中 文)": case "Name (Chinese)":
-                                                            this.tmpdataItem.ChineseName = $ctd1;
+                                                        case "姓 名 (中 文)":
+                                                        case "Name (Chinese)":
+                                                            this.tmpdataItem.LawyerNameCn = $ctd1;
                                                             break;
-                                                        case "法 域": case "Jurisdiction":
-                                                            this.tmpdataItem.tcontent = $ctd1;
+                                                        case "法 域":
+                                                        case "Jurisdiction":
+                                                            this.tmpdataItem.Jurisdiction = $ctd1;
                                                             break;
-                                                        case "前 稱 (中 文)": case "Former Name (Chinese)":
+                                                        case "前 稱 (中 文)":
+                                                        case "Former Name (Chinese)":
                                                             this.tmpdataItem.BeforeName = $ctd1;
                                                             break;
-                                                        case "在 香 港 認 許 日 期": case "Admission in Hong Kong":
+                                                        case "在 香 港 認 許 日 期":
+                                                        case "Admission in Hong Kong":
                                                             this.tmpdataItem.ApproveDate = $ctd1;
                                                             break;
-                                                        case "備 註": case "Remark":
+                                                        case "備 註":
+                                                        case "Remark":
                                                             this.tmpdataItem.Remark = $ctd1.replace(/\s/g, "");
                                                             break;
-                                                        case "在 其 他 法 域 認 許 日 期": case "Admission in Other Jurisdiction(s)":
-                                                            this.tmpdataItem.OtherDate = $ctd1;
+                                                        case "在 其 他 法 域 認 許 日 期":
+                                                        case "Admission in Other Jurisdiction(s)":
+                                                            if ($ctd1Table) {
+                                                                var tmpAlltr = $ctd1Table.find('tr');
+
+                                                                for (var index = 1; index < tmpAlltr.length; index++) {
+                                                                    var tr = tmpAlltr.eq(index);
+                                                                    var tdAll = tr.find('td');
+                                                                    this.tmpdataItem.ApproveCountry += tdAll.eq(0).text().trim() + ",";
+                                                                    this.tmpdataItem.OtherDate += tdAll.eq(1).text().trim() + ",";
+
+                                                                }
+                                                            } else {
+                                                                this.tmpdataItem.OtherDate = $ctd1;
+                                                            }
                                                             break;
-                                                        case "電 郵 地 址": case "Email": case "E-mail":
+                                                        case "電 郵 地 址":
+                                                        case "Email":
+                                                        case "E-mail":
                                                             if (!this.tmpdataItem.LawyerEmail) {
                                                                 this.tmpdataItem.LawyerEmail = $ctd1;
                                                             } else {
-                                                                this.tmpdataItem.CompanyEmail = $ctd1;
+                                                                this.tmpdataItem.ComEmail = $ctd1;
                                                             }
 
                                                             break;
-                                                        case "職 位": case "職 銜": case "Post":
+                                                        case "職 位":
+                                                        case "職 銜":
+                                                        case "Title":
+                                                        case "Post":
                                                             this.tmpdataItem.Title = $ctd1;
                                                             break;
-                                                        case "律 師 行 / 公 司 (英 文)": case "Firm/Company (English)":
-                                                            this.tmpdataItem.LawyerCompany = $ctd1;
+                                                        case "律 師 行 / 公 司 (英 文)":
+                                                        case "Firm/Company (English)":
+                                                            this.tmpdataItem.LawyerCompanyEn = $ctd1;
                                                             break;
-                                                        case "律 師 行 / 公 司 (中 文)": case "Firm/Company (Chinese)":
-                                                            this.tmpdataItem.ChineseCompany = $ctd1;
+                                                        case "律 師 行 / 公 司 (中 文)":
+                                                        case "Firm/Company (Chinese)":
+                                                            this.tmpdataItem.LawyerCompanyCn = $ctd1;
                                                             break;
-                                                        case "地 址 (英 文)": case "Address (English)":
-                                                            this.tmpdataItem.CompanyAddress = $ctd1;
+                                                        case "地 址 (英 文)":
+                                                        case "Address (English)":
+                                                            this.tmpdataItem.ComAddressEn = $ctd1;
                                                             break;
-                                                        case "地 址 (中 文)": case "Address (Chinese)":
-                                                            this.tmpdataItem.ChineseAddress = $ctd1;
+                                                        case "地 址 (中 文)":
+                                                        case "Address (Chinese)":
+                                                            this.tmpdataItem.ComAddressCn = $ctd1;
                                                             break;
-                                                        case "電 話": case "Telephone":
-                                                            this.tmpdataItem.Companytel = $ctd1;
+                                                        case "電 話":
+                                                        case "Telephone":
+                                                            this.tmpdataItem.ComTel = $ctd1;
                                                             break;
-                                                        case "傳 真": case "Fax":
-                                                            this.tmpdataItem.CompanyFax = $ctd1;
+                                                        case "傳 真":
+                                                        case "Fax":
+                                                            this.tmpdataItem.ComFax = $ctd1;
                                                             break;
-                                                        case "DX 號 碼": case "DX No.":
-                                                            this.tmpdataItem.Dxnumber = $ctd1;
+                                                        case "DX 號 碼":
+                                                        case "DX No.":
+                                                            this.tmpdataItem.DxNO = $ctd1;
                                                             break;
 
                                                         default:
@@ -410,27 +486,27 @@ $(function () {
                                                 //console.log(this.tmpdataItem);
                                                 //console.log(_allColNameZH.length + "," + _allColNameZH);
                                                 //提交数据库
-                                                this.tmpdata.gwd_Lawyers_items.push(this.tmpdataItem);
+                                                this.tmpdata.i_WithCertLawyers.push(this.tmpdataItem);
                                                 //console.log(this.tmpdata);
 
                                                 $.ajax({
                                                     type: 'POST',
-                                                    url: config.urlApi_hklawsoc,
+                                                    url: config.urlApi_withcert,
                                                     tmpdata: this.tmpdata,
                                                     timeout: 50000,
                                                     contentType: 'application/json; charset=utf-8',
                                                     data: JSON.stringify(this.tmpdata)
-                                                }).done(function (data) {
+                                                }).done(function(data) {
                                                     console.log(_ttype + "," + this.tmpdata.Tid + "," + ",Index:" + this.tmpdata.TIndex + ":中 文 Post Done!");
                                                     // sendMsg('jsonDate', "Set Date Now.");
                                                     //console.log(data);
-                                                }).fail(function (err) {
+                                                }).fail(function(err) {
                                                     //showError
                                                     console.log(err);
                                                 });
 
                                             },
-                                            error: function (err) {
+                                            error: function(err) {
                                                 console.log(this.url);
                                                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                                                 console.log(err);
@@ -453,7 +529,7 @@ $(function () {
                             console.log("非指定页面，没有记录。")
                         }
                     },
-                    error: function (err) {
+                    error: function(err) {
                         console.log(this.url);
                         console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                         console.log(err);
@@ -504,11 +580,18 @@ $(function () {
 
                 $.ajax({
                     url: configGetUrl.getUrl_fjt2_mem_foreignlawyers,
-                    data: { name: '', pg: currPage, sj: 0, sort: 'eng', order: '', sessionid: '' },
+                    data: {
+                        name: '',
+                        pg: currPage,
+                        sj: 0,
+                        sort: 'eng',
+                        order: '',
+                        sessionid: ''
+                    },
                     tmpdata: currPage,
                     timeout: 50000,
                     type: "get",
-                    success: function (data, state, xhr) {
+                    success: function(data, state, xhr) {
                         console.log(this.url);
                         var $body = $('<div></div>').html(data);
                         var $table0 = $body.find('table[width="750"]').eq(0);
@@ -568,48 +651,51 @@ $(function () {
                                             ClientIP: undefined,
                                             addDate: undefined,
                                             UpdateDate: undefined,
-                                            gwd_Lawyers_items: []
+                                            i_ForeignLawyers: []
                                         }
-                                        var gwd_Lawyers_items = {
-                                            $id: "1",
-                                            htmlID: 0,
-                                            LawyerName: nameEn.text().trim(),
-                                            ChineseName: nameZH.text().trim(),
-                                            BeforeName: undefined,
-                                            ApproveDate: undefined,
-                                            ApproveCountry: undefined,
-                                            OtherDate: undefined,
-                                            LawyerEmail: undefined,
-                                            Title: undefined,
-                                            LawyerCompany: undefined,
-                                            ChineseCompany: undefined,
-                                            CompanyAddress: undefined,
-                                            ChineseAddress: undefined,
-                                            Companytel: undefined,
-                                            CompanyFax: undefined,
-                                            Dxnumber: undefined,
-                                            CompanyEmail: undefined,
-                                            tLang: 0,
-                                            tkeyNo: tmpId,
-                                            tIndex: 0,
-                                            tname: nameId,
-                                            ttype: _ttype,
-                                            Tid: 0,
-                                            Remark: Jurisdiction,
-                                            tStatus: 0,
-                                            ClientIP: undefined,
-                                            addDate: undefined,
-                                            UpdateDate: undefined
-                                        }
-                                        //英文
+                                        var i_ForeignLawyers = {
+                                                $id: "1",
+                                                htmlID: 0,
+
+                                                LawyerId: tmpId,
+                                                LawyerName: nameEn.text().trim(),
+                                                LawyerNameCn: nameZH.text().trim(),
+                                                BeforeName: undefined,
+
+
+                                                Title: undefined,
+                                                LawyerCompanyEn: undefined,
+                                                LawyerCompanyCn: undefined,
+                                                ComAddressEn: undefined,
+                                                ComAddressCn: undefined,
+                                                ComTel: undefined,
+                                                ComFax: undefined,
+                                                DxNO: undefined,
+                                                ComEmail: undefined,
+
+                                                tLang: 0,
+                                                tkeyNo: tmpId,
+                                                tIndex: 0,
+                                                tname: nameId,
+                                                ttype: _ttype,
+                                                Tid: 0,
+                                                Remark: Jurisdiction,
+                                                tStatus: 0,
+                                                ClientIP: undefined,
+                                                addDate: undefined,
+                                                UpdateDate: undefined
+                                            }
+                                            //英文
                                         $.ajax({
                                             url: configGetUrl.getUrl_fjt2_mem_withcertPageEN,
-                                            data: { id: tmpId },
+                                            data: {
+                                                id: tmpId
+                                            },
                                             tmpdata: toPostMain,
-                                            tmpdataItem: gwd_Lawyers_items,
+                                            tmpdataItem: i_ForeignLawyers,
                                             timeout: 50000,
                                             type: "get",
-                                            success: function (data, state, xhr) {
+                                            success: function(data, state, xhr) {
                                                 console.log("英文:" + this.url);
                                                 var $body = $('<div></div>').html(data);
                                                 var $table0 = $body.find('table[width="550"]').eq(0);
@@ -653,57 +739,76 @@ $(function () {
                                                     // "Fax", "E-mail", "Admission in Other Jurisdiction(s)", "DX No.",
                                                     // "Former Name (Chinese)"]
                                                     switch ($ctd0) {
-                                                        case "姓 名 (英 文)": case "Name (English)":
-                                                            this.tmpdataItem.LawyerName = $ctd1;
+                                                        case "姓 名 (英 文)":
+                                                        case "Name (English)":
+                                                            this.tmpdataItem.LawyerNameEn = $ctd1;
                                                             break;
-                                                        case "姓 名 (中 文)": case "Name (Chinese)":
-                                                            this.tmpdataItem.ChineseName = $ctd1;
+                                                        case "姓 名 (中 文)":
+                                                        case "Name (Chinese)":
+                                                            this.tmpdataItem.LawyerNameCn = $ctd1;
                                                             break;
-                                                        case "法 域": case "Jurisdiction":
-                                                            this.tmpdataItem.tcontent = $ctd1;
+                                                        case "法 域":
+                                                        case "Jurisdiction":
+                                                            this.tmpdataItem.Jurisdiction = $ctd1;
                                                             break;
-                                                        case "前 稱 (中 文)": case "Former Name (Chinese)":
+                                                        case "前 稱 (中 文)":
+                                                        case "Former Name (Chinese)":
                                                             this.tmpdataItem.BeforeName = $ctd1;
                                                             break;
-                                                        case "在 香 港 認 許 日 期": case "Admission in Hong Kong":
+                                                        case "在 香 港 認 許 日 期":
+                                                        case "Admission in Hong Kong":
                                                             this.tmpdataItem.ApproveDate = $ctd1;
                                                             break;
-                                                        case "備 註": case "Remark":
+                                                        case "備 註":
+                                                        case "Remark":
                                                             this.tmpdataItem.Remark = $ctd1;
                                                             break;
-                                                        case "在 其 他 法 域 認 許 日 期": case "Admission in Other Jurisdiction(s)":
+                                                        case "在 其 他 法 域 認 許 日 期":
+                                                        case "Admission in Other Jurisdiction(s)":
                                                             this.tmpdataItem.OtherDate = $ctd1;
                                                             break;
-                                                        case "電 郵 地 址": case "Email": case "E-mail":
+                                                        case "電 郵 地 址":
+                                                        case "Email":
+                                                        case "E-mail":
                                                             if (!this.tmpdataItem.LawyerEmail) {
                                                                 this.tmpdataItem.LawyerEmail = $ctd1;
                                                             } else {
-                                                                this.tmpdataItem.CompanyEmail = $ctd1;
+                                                                this.tmpdataItem.ComEmail = $ctd1;
                                                             }
                                                             break;
-                                                        case "職 位": case "職 銜": case "Post":
+                                                        case "職 位":
+                                                        case "職 銜":
+                                                        case "Title":
+                                                        case "Post":
                                                             this.tmpdataItem.Title = $ctd1;
                                                             break;
-                                                        case "律 師 行 / 公 司 (英 文)": case "Firm/Company (English)":
-                                                            this.tmpdataItem.LawyerCompany = $ctd1;
+                                                        case "律 師 行 / 公 司 (英 文)":
+                                                        case "Firm/Company (English)":
+                                                            this.tmpdataItem.LawyerCompanyEn = $ctd1;
                                                             break;
-                                                        case "律 師 行 / 公 司 (中 文)": case "Firm/Company (Chinese)":
-                                                            this.tmpdataItem.ChineseCompany = $ctd1;
+                                                        case "律 師 行 / 公 司 (中 文)":
+                                                        case "Firm/Company (Chinese)":
+                                                            this.tmpdataItem.LawyerCompanyCn = $ctd1;
                                                             break;
-                                                        case "地 址 (英 文)": case "Address (English)":
-                                                            this.tmpdataItem.CompanyAddress = $ctd1;
+                                                        case "地 址 (英 文)":
+                                                        case "Address (English)":
+                                                            this.tmpdataItem.ComAddressEn = $ctd1;
                                                             break;
-                                                        case "地 址 (中 文)": case "Address (Chinese)":
-                                                            this.tmpdataItem.ChineseAddress = $ctd1;
+                                                        case "地 址 (中 文)":
+                                                        case "Address (Chinese)":
+                                                            this.tmpdataItem.ComAddressCn = $ctd1;
                                                             break;
-                                                        case "電 話": case "Telephone":
-                                                            this.tmpdataItem.Companytel = $ctd1;
+                                                        case "電 話":
+                                                        case "Telephone":
+                                                            this.tmpdataItem.ComTel = $ctd1;
                                                             break;
-                                                        case "傳 真": case "Fax":
-                                                            this.tmpdataItem.CompanyFax = $ctd1;
+                                                        case "傳 真":
+                                                        case "Fax":
+                                                            this.tmpdataItem.ComFax = $ctd1;
                                                             break;
-                                                        case "DX 號 碼": case "DX No.":
-                                                            this.tmpdataItem.Dxnumber = $ctd1;
+                                                        case "DX 號 碼":
+                                                        case "DX No.":
+                                                            this.tmpdataItem.DxNO = $ctd1;
                                                             break;
 
                                                         default:
@@ -715,24 +820,24 @@ $(function () {
                                                 //console.log(this.tmpdataItem);
                                                 //console.log(_allColNameEN.length + "," + _allColNameEN);
                                                 //提交数据库
-                                                this.tmpdata.gwd_Lawyers_items.push(this.tmpdataItem);
+                                                this.tmpdata.i_ForeignLawyers.push(this.tmpdataItem);
                                                 $.ajax({
                                                     type: 'POST',
-                                                    url: config.urlApi_hklawsoc,
+                                                    url: config.urlApi_foreignlawyers,
                                                     tmpdata: this.tmpdata,
                                                     timeout: 50000,
                                                     contentType: 'application/json; charset=utf-8',
                                                     data: JSON.stringify(this.tmpdata)
-                                                }).done(function (data) {
+                                                }).done(function(data) {
                                                     console.log(_ttype + "," + this.tmpdata.Tid + "," + ",Index:" + this.tmpdata.TIndex + ":英文 Post Done!");
                                                     // sendMsg('jsonDate', "Set Date Now.");
                                                     //console.log(data);
-                                                }).fail(function (err) {
+                                                }).fail(function(err) {
                                                     //showError
                                                     console.log(err);
                                                 });
                                             },
-                                            error: function (err) {
+                                            error: function(err) {
                                                 console.log(this.url);
                                                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                                                 console.log(err);
@@ -742,12 +847,14 @@ $(function () {
                                         //中文
                                         $.ajax({
                                             url: configGetUrl.getUrl_fjt2_mem_withcertPageCN,
-                                            data: { id: tmpId },
+                                            data: {
+                                                id: tmpId
+                                            },
                                             tmpdata: toPostMain,
-                                            tmpdataItem: gwd_Lawyers_items,
+                                            tmpdataItem: i_ForeignLawyers,
                                             timeout: 50000,
                                             type: "get",
-                                            success: function (data, state, xhr) {
+                                            success: function(data, state, xhr) {
                                                 console.log("中文:" + this.url);
                                                 var $body = $('<div></div>').html(data);
                                                 var $table0 = $body.find('table[width="550"]').eq(0);
@@ -789,58 +896,77 @@ $(function () {
                                                     // "Fax", "E-mail", "Admission in Other Jurisdiction(s)", "DX No.",
                                                     // "Former Name (Chinese)"]
                                                     switch ($ctd0) {
-                                                        case "姓 名 (英 文)": case "Name (English)":
-                                                            this.tmpdataItem.LawyerName = $ctd1;
+                                                        case "姓 名 (英 文)":
+                                                        case "Name (English)":
+                                                            this.tmpdataItem.LawyerNameEn = $ctd1;
                                                             break;
-                                                        case "姓 名 (中 文)": case "Name (Chinese)":
-                                                            this.tmpdataItem.ChineseName = $ctd1;
+                                                        case "姓 名 (中 文)":
+                                                        case "Name (Chinese)":
+                                                            this.tmpdataItem.LawyerNameCn = $ctd1;
                                                             break;
-                                                        case "法 域": case "Jurisdiction":
-                                                            this.tmpdataItem.tcontent = $ctd1;
+                                                        case "法 域":
+                                                        case "Jurisdiction":
+                                                            this.tmpdataItem.Jurisdiction = $ctd1;
                                                             break;
-                                                        case "前 稱 (中 文)": case "Former Name (Chinese)":
+                                                        case "前 稱 (中 文)":
+                                                        case "Former Name (Chinese)":
                                                             this.tmpdataItem.BeforeName = $ctd1;
                                                             break;
-                                                        case "在 香 港 認 許 日 期": case "Admission in Hong Kong":
+                                                        case "在 香 港 認 許 日 期":
+                                                        case "Admission in Hong Kong":
                                                             this.tmpdataItem.ApproveDate = $ctd1;
                                                             break;
-                                                        case "備 註": case "Remark":
+                                                        case "備 註":
+                                                        case "Remark":
                                                             this.tmpdataItem.Remark = $ctd1.replace(/\s/g, "");
                                                             break;
-                                                        case "在 其 他 法 域 認 許 日 期": case "Admission in Other Jurisdiction(s)":
+                                                        case "在 其 他 法 域 認 許 日 期":
+                                                        case "Admission in Other Jurisdiction(s)":
                                                             this.tmpdataItem.OtherDate = $ctd1;
                                                             break;
-                                                        case "電 郵 地 址": case "Email": case "E-mail":
+                                                        case "電 郵 地 址":
+                                                        case "Email":
+                                                        case "E-mail":
                                                             if (!this.tmpdataItem.LawyerEmail) {
                                                                 this.tmpdataItem.LawyerEmail = $ctd1;
                                                             } else {
-                                                                this.tmpdataItem.CompanyEmail = $ctd1;
+                                                                this.tmpdataItem.ComEmail = $ctd1;
                                                             }
 
                                                             break;
-                                                        case "職 位": case "職 銜": case "Post":
+                                                        case "職 位":
+                                                        case "職 銜":
+                                                        case "Title":
+                                                        case "Post":
                                                             this.tmpdataItem.Title = $ctd1;
                                                             break;
-                                                        case "律 師 行 / 公 司 (英 文)": case "Firm/Company (English)":
-                                                            this.tmpdataItem.LawyerCompany = $ctd1;
+                                                        case "律 師 行 / 公 司 (英 文)":
+                                                        case "Firm/Company (English)":
+                                                            this.tmpdataItem.LawyerCompanyEn = $ctd1;
                                                             break;
-                                                        case "律 師 行 / 公 司 (中 文)": case "Firm/Company (Chinese)":
-                                                            this.tmpdataItem.ChineseCompany = $ctd1;
+                                                        case "律 師 行 / 公 司 (中 文)":
+                                                        case "Firm/Company (Chinese)":
+                                                            this.tmpdataItem.LawyerCompanyCn = $ctd1;
                                                             break;
-                                                        case "地 址 (英 文)": case "Address (English)":
-                                                            this.tmpdataItem.CompanyAddress = $ctd1;
+                                                        case "地 址 (英 文)":
+                                                        case "Address (English)":
+                                                            this.tmpdataItem.ComAddressEn = $ctd1;
                                                             break;
-                                                        case "地 址 (中 文)": case "Address (Chinese)":
-                                                            this.tmpdataItem.ChineseAddress = $ctd1;
+                                                        case "地 址 (中 文)":
+                                                        case "Address (Chinese)":
+                                                            this.tmpdataItem.ComAddressCn = $ctd1;
                                                             break;
-                                                        case "電 話": case "Telephone":
-                                                            this.tmpdataItem.Companytel = $ctd1;
+                                                        case "電 話":
+                                                        case "Telephone":
+                                                            this.tmpdataItem.ComTel = $ctd1;
                                                             break;
-                                                        case "傳 真": case "Fax":
-                                                            this.tmpdataItem.CompanyFax = $ctd1;
+                                                        case "傳 真":
+                                                        case "Fax":
+                                                            this.tmpdataItem.ComFax = $ctd1;
                                                             break;
-                                                        case "DX 號 碼": case "DX No.":
-                                                            this.tmpdataItem.Dxnumber = $ctd1;
+                                                        case "DX 號 碼":
+                                                        case "DX No.":
+                                                            this.tmpdataItem.DxNO = $ctd1;
                                                             break;
 
                                                         default:
@@ -850,26 +976,26 @@ $(function () {
                                                 msgid.text(tmpmsg + "，正在提交第：" + this.tmpdataItem.tname + " 条记录。");
                                                 //console.log(this.tmpdataItem);
                                                 //console.log(_allColNameZH.length + "," + _allColNameZH);
-                                                this.tmpdata.gwd_Lawyers_items.push(this.tmpdataItem);
+                                                this.tmpdata.i_ForeignLawyers.push(this.tmpdataItem);
                                                 //提交数据库
                                                 $.ajax({
                                                     type: 'POST',
-                                                    url: config.urlApi_hklawsoc,
+                                                    url: config.urlApi_foreignlawyers,
                                                     tmpdata: this.tmpdata,
                                                     timeout: 50000,
                                                     contentType: 'application/json; charset=utf-8',
                                                     data: JSON.stringify(this.tmpdata)
-                                                }).done(function (data) {
+                                                }).done(function(data) {
                                                     console.log(_ttype + "," + this.tmpdata.Tid + "," + ",Index:" + this.tmpdata.TIndex + ":中 文 Post Done!");
                                                     // sendMsg('jsonDate', "Set Date Now.");
                                                     //console.log(data);
-                                                }).fail(function (err) {
+                                                }).fail(function(err) {
                                                     //showError
                                                     console.log(err);
                                                 });
 
                                             },
-                                            error: function (err) {
+                                            error: function(err) {
                                                 console.log(this.url);
                                                 console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                                                 console.log(err);
@@ -892,7 +1018,7 @@ $(function () {
                             console.log("非指定页面，没有记录。")
                         }
                     },
-                    error: function (err) {
+                    error: function(err) {
                         console.log(this.url);
                         console.log("提交预定请求发生错误，稍等重试！" + this.tmpdata);
                         console.log(err);
@@ -906,5 +1032,3 @@ $(function () {
 
     ///////////////////////////////////////
 });
-
-

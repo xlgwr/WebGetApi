@@ -21,7 +21,7 @@ namespace WebGetApi.Controllers
     /// Registered Pharmacists
     /// </summary>
     [RoutePrefix("api/GWDRegisteredPharmacists")]
-    public class gwd_RegisteredPharmacists_itemsController : ApiController
+    public class i_RegPharmacistController : ApiController
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private emmsApiDbContext db = new emmsApiDbContext();
