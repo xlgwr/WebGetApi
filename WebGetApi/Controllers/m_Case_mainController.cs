@@ -63,6 +63,45 @@ namespace WebGetApi.Controllers
                         item.htmlID = m_Case_main.Tid;
                         item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         item.updtime = DateTime.Now;
+                        #region
+                        //初始化，原告及被告
+                        if (string.IsNullOrEmpty(item.Defendant))
+                        {
+                            item.Parties = item.PlainTiff;
+                            //处理分开原告及被告
+                            if (item.PlainTiff.IndexOf("v.@", StringComparison.OrdinalIgnoreCase) > -1)
+                            {
+                                item.Defendant = item.PlainTiff.Substring(item.PlainTiff.IndexOf("v.@", StringComparison.OrdinalIgnoreCase) + 3); 
+                                item.PlainTiff = item.PlainTiff.Substring(0, item.PlainTiff.IndexOf("v.@", StringComparison.OrdinalIgnoreCase));
+                            }
+                            else if (item.PlainTiff.IndexOf("@and@", StringComparison.OrdinalIgnoreCase) > -1)
+                            {
+                                item.Defendant = item.PlainTiff.Substring(item.PlainTiff.IndexOf("@and@", StringComparison.OrdinalIgnoreCase) + 5);
+                                item.PlainTiff = item.PlainTiff.Substring(0, item.PlainTiff.IndexOf("@and@", StringComparison.OrdinalIgnoreCase));
+                            }
+                            else if (item.PlainTiff.IndexOf("D1:", StringComparison.OrdinalIgnoreCase) > -1 ||
+                                item.PlainTiff.IndexOf("D2:", StringComparison.OrdinalIgnoreCase) > -1 ||
+                                item.PlainTiff.IndexOf("D3:", StringComparison.OrdinalIgnoreCase) > -1)
+                            {
+                                item.Defendant = item.PlainTiff;
+                                item.PlainTiff = "";
+                            }
+                            else
+                            {
+                                item.Defendant = item.PlainTiff;
+                            }
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(item.PlainTiff))
+                            {
+                                item.Parties = item.PlainTiff + " @and@ " + item.Defendant;
+                            }
+                        }
+                        #endregion
+
+                        //
+
                     }
 
                     if (m_Case_main.m_Case_items.Count > 0)
@@ -92,6 +131,7 @@ namespace WebGetApi.Controllers
                                         getItem.Hearing = item.Hearing;
                                         getItem.Judge = item.Judge;
                                         getItem.Nature = item.Nature;
+
                                         getItem.Parties = item.Parties;
 
                                         getItem.Defendant = item.Defendant;

@@ -24,7 +24,7 @@ namespace EFLibEMMS.EMMS
         [ForeignKey("s_Entity")]
         public long Entityid { get; set; }
 
-        public long HtmlPageID { get; set; }
+        public long HtmlID { get; set; }
 
         /// <summary>
         /// 0:Ó¢ÎÄ 1:¼òÌå 2:·±Ìå

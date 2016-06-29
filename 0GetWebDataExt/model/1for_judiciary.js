@@ -136,10 +136,10 @@ function j1_PostData_1for_judiciary(url) {
 
             console.log($tableAll.length);
 
-            var gwd_Case_items = [];
+            var m_Case_items = [];
 
             var getWebDatas = {
-                    gwd_Case_items: gwd_Case_items,
+                    m_Case_items: m_Case_items,
                     tLang: 0,
                     tname: _haxCrtKey[this.tmpdata],
                     ttype: $PostType1for_judiciary,
@@ -159,7 +159,7 @@ function j1_PostData_1for_judiciary(url) {
                 getWebDatas.tStatus = 1;
                 getWebDatas.tGetTable = tmpmsg;
                 //getWebDatas.thtml = tmpmsg;
-                getWebDatas.gwd_Case_items = undefined;
+                getWebDatas.m_Case_items = undefined;
             } else {
                 var tIndex = 0;
                 ///*********************************************///
@@ -254,7 +254,7 @@ function j1_PostData_1for_judiciary(url) {
                                     addDate: undefined,
                                     UpdateDate: undefined
                                 }
-                                gwd_Case_items.push(tmpItem);
+                                m_Case_items.push(tmpItem);
                                 //console.log($tableAllTr.eq(t).html());
                             }
                         }
@@ -351,7 +351,7 @@ function j1_PostData_1for_judiciary(url) {
                                         addDate: undefined,
                                         UpdateDate: undefined
                                     }
-                                    gwd_Case_items.push(tmpItem);
+                                    m_Case_items.push(tmpItem);
                                 }
 
                             }
@@ -431,7 +431,7 @@ function j1_PostData_1for_judiciary(url) {
                                     addDate: undefined,
                                     UpdateDate: undefined
                                 }
-                                gwd_Case_items.push(tmpItem);
+                                m_Case_items.push(tmpItem);
                             }
                         }
                         //end
@@ -508,7 +508,7 @@ function j1_PostData_1for_judiciary(url) {
                                     addDate: undefined,
                                     UpdateDate: undefined
                                 }
-                                gwd_Case_items.push(tmpItem);
+                                m_Case_items.push(tmpItem);
                             }
                             //end for
                         }
@@ -613,7 +613,7 @@ function j1_PostData_1for_judiciary(url) {
                                             addDate: undefined,
                                             UpdateDate: undefined
                                         }
-                                        gwd_Case_items.push(tmpItem);
+                                        m_Case_items.push(tmpItem);
                                     }
                                 }
                             }

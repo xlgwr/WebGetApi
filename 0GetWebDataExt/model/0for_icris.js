@@ -1,4 +1,3 @@
-
 var $getHtml = "";
 var $countCurr = 0;
 //每10秒提交数 5
@@ -38,7 +37,7 @@ function subWeb1() {
     if ($submit) {
         SetCookie('web.country', configGetUrl.url_icris_home_lang.country, 1, '/csci')
         SetCookie('web.language', configGetUrl.url_icris_home_lang.language, 1, '/csci')
-        //console.log($submit);
+            //console.log($submit);
         $submit.click();
         //window.open ('https://www.icris.cr.gov.hk/csci/cps_criteria.jsp') 
         //window.close();       
@@ -127,7 +126,7 @@ function PostData() {
                 tmpdata: tmpCRNo,
                 timeout: 80000,
                 type: "get",
-                success: function (data, state, xhr) {
+                success: function(data, state, xhr) {
 
                     if (data.length < 10) {
                         console.log('没有记录。Length < 10. ');
@@ -191,7 +190,7 @@ function PostData() {
                         ttype: $ttype,
                         thtml: data,
                         Tid: 0,
-                        tLang: configGetUrl.url_icris_home_lang.flag,//0:US,1:HK,2:ZH
+                        tLang: configGetUrl.url_icris_home_lang.flag, //0:US,1:HK,2:ZH
                         Remark: this.url,
                         tStatus: 0,
                         ClientIP: undefined,
@@ -212,7 +211,7 @@ function PostData() {
                         ChargeState: $table0Tr.eq(8).find('td').eq(1).text().trim(),
                         Important: $table0Tr.eq(9).find('td').eq(1).text().trim(),
                         tSearchRes: $table0Tr.eq(10).find('td').eq(1).text().trim(),
-                        tLang: configGetUrl.url_icris_home_lang.flag,//0:US,1:HK,2:ZH
+                        tLang: configGetUrl.url_icris_home_lang.flag, //0:US,1:HK,2:ZH
                         tkeyNo: this.tmpdata,
                         tIndex: 0,
                         tname: "icris",
@@ -239,7 +238,7 @@ function PostData() {
                             CompanyName: undefined,
                             CompanyNameZH: undefined,
                             EffectiveDate: undefined,
-                            tLang: configGetUrl.url_icris_home_lang.flag,//0:US,1:HK,2:ZH
+                            tLang: configGetUrl.url_icris_home_lang.flag, //0:US,1:HK,2:ZH
                             tkeyNo: this.tmpdata,
                             tIndex: tmpindex,
                             tname: "icris",
@@ -275,7 +274,7 @@ function PostData() {
                         getWebDatas.m_CompaniesRegistry_itemsChange = undefined;
 
                     };
-                    
+
                     console.log(getWebDatas);
 
                     $.ajax({
@@ -285,18 +284,18 @@ function PostData() {
                         contentType: 'application/json; charset=utf-8',
                         timeout: 80000,
                         data: JSON.stringify(getWebDatas)
-                    }).done(function (data) {
+                    }).done(function(data) {
                         console.log(this.tmpdata + ":Post Done!");
                         sendMsg('jsonDate', "Set Date Now.");
                         //console.log(data);
-                    }).fail(function (err) {
+                    }).fail(function(err) {
                         //showError
                         $countCurr -= 5;
                         console.log(this.url);
                         console.log(err);
                     });
                 },
-                error: function () {
+                error: function() {
                     console.log("提交预定请求发生错误，稍等重试！");
                     $countCurr -= 5;
                 },
@@ -315,7 +314,7 @@ function PostData() {
             type: 'GET',
             timeout: 80000,
             url: tmpPostUrl + "1"
-        }).done(function (data) {
+        }).done(function(data) {
             if (data.length < 10) {
                 console.log('PageNO=1没有记录. ：' + data.length);
                 return;
@@ -341,7 +340,7 @@ function PostData() {
                     tmpdata: x,
                     timeout: 80000,
                     url: tmpPostUrl + x
-                }).done(function (data) {
+                }).done(function(data) {
                     if (data.length < 10) {
                         console.log(this.tmpdata + ":" + '没有记录. ：' + data.length);
                         return;
@@ -391,10 +390,10 @@ function PostData() {
                             contentType: 'application/json; charset=utf-8',
                             data: JSON.stringify(arrToPost),
                             timeout: 50000
-                        }).done(function (data) {
+                        }).done(function(data) {
                             console.log(this.tmpdata + ":Page 取消资格令纪录册 Post Done!");
                             //console.log(data);
-                        }).fail(function (err) {
+                        }).fail(function(err) {
                             //showError
                             console.log(this.url);
                             console.log(err);
@@ -402,18 +401,19 @@ function PostData() {
                     }
 
 
-                }).fail(function (err) {
+                }).fail(function(err) {
                     console.log(this.url);
                     console.log(err);
                 });
             }
             //end for
 
-        }).fail(function (err) {
+        }).fail(function(err) {
             console.log(this.url);
             console.log(err);
         });
     }
+
     function getText(value) {
         if (value.indexOf("'") > -1) {
             var arrS = value.split("'");

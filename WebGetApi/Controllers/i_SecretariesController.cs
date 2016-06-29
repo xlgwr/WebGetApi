@@ -73,7 +73,7 @@ namespace WebGetApi.Controllers
                                     {
                                         tmpHtmlId = getItem.htmlID;
 
-                                        getItem.tIndex = item.tIndex;
+                                        //getItem.tIndex = item.tIndex;
                                         getItem.Name = item.Name;
                                         getItem.Grade = item.Grade;
 

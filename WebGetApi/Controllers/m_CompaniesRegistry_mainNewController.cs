@@ -129,7 +129,7 @@ namespace WebGetApi.Controllers
                         //item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         var tmodel = new t_Disqualification();
 
-                        tmodel.HtmlPageID = saveModel.HtmlID;
+                        tmodel.HtmlID = saveModel.HtmlID;
 
                         tmodel.ChineseName = item.ChineseName;
                         tmodel.CorporateName = item.CorporateName;
@@ -254,7 +254,7 @@ namespace WebGetApi.Controllers
                         //处理明细
                         foreach (var item in s_Entity_model.s_Company)
                         {
-                            item.HtmlPageID = saveModel.HtmlID;
+                            item.HtmlID = saveModel.HtmlID;
                         }
 
 
@@ -318,7 +318,7 @@ namespace WebGetApi.Controllers
                                         getItem.WindingUpMode = item.WindingUpMode;
 
                                         //change main
-                                        var getMain = getHtmlById(getItem.HtmlPageID);
+                                        var getMain = getHtmlById(getItem.HtmlID);
                                         if (getMain != null)
                                         {
                                             getMain.HtmlPage = t_HtmlPage_model.HtmlPage;

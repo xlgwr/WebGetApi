@@ -1,8 +1,8 @@
-var $gbHttPip = "http://192.168.1.136:8081";
-var $gbHttPSip = "https://192.168.1.136";
+// var $gbHttPip = "http://192.168.1.136:8081";
+// var $gbHttPSip = "https://192.168.1.136";
 
-// var $gbHttPip = "http://192.168.1.6:7070";
-// var $gbHttPSip = "https://192.168.1.6:7443";
+var $gbHttPip = "http://192.168.1.6:7070";
+var $gbHttPSip = "https://192.168.1.6:7443";
 
 var config = {
     //API 接口
