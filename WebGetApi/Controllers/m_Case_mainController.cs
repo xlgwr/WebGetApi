@@ -89,12 +89,14 @@ namespace WebGetApi.Controllers
                                         getItem.CourtDay = item.CourtDay;
                                         getItem.CourtID = item.CourtID;
                                         getItem.CYear = item.CYear;
-                                        getItem.Defendant = item.Defendant;
                                         getItem.Hearing = item.Hearing;
                                         getItem.Judge = item.Judge;
                                         getItem.Nature = item.Nature;
-                                        //getItem.Parties = item.Parties;
+                                        getItem.Parties = item.Parties;
+
+                                        getItem.Defendant = item.Defendant;
                                         getItem.PlainTiff = item.PlainTiff;
+
                                         getItem.Remark = item.Remark;
                                         getItem.Representation = item.Representation;
                                         getItem.SerialNo = item.SerialNo;

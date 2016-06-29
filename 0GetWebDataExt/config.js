@@ -9,15 +9,15 @@ var config = {
     //公司注册处
     // urlApi_icris: $gbHttPSip + "/api/gwd_CompaniesRegistry_main", //post    
     // urlApi_icris_DisOrders: $gbHttPSip + "/api/GWDCompaniesRegistry/gwd_CompaniesRegistry_DisOrders", //post 
-    urlApi_icris: $gbHttPSip + "/api/gwd_CompaniesRegistry_mainNew", //post New    
-    urlApi_icris_DisOrders: $gbHttPSip + "/api/GWDCompaniesRegistryNew/gwd_CompaniesRegistry_DisOrders", //post New
+    urlApi_icris: $gbHttPSip + "/api/m_CompaniesRegistry_mainNew", //post New    
+    urlApi_icris_DisOrders: $gbHttPSip + "/api/GWDCompaniesRegistryNew/m_CompaniesRegistry_DisOrders", //post New
 
-    urlApi_GetWebDatasMaxName: $gbHttPSip + "/api/GWDCompaniesRegistry/GetWebDatasMaxName/",
+    urlApi_GetWebDatasMaxName: $gbHttPSip + "/api/GWDCompaniesRegistryNew/GetWebDatasMaxName/",
     //案件，法院
-    urlApi_judiciary: $gbHttPip + "/api/gwd_Case_main", //post
+    urlApi_judiciary: $gbHttPip + "/api/m_Case_main", //post
     //上诉记录
-    urlApi_legalref: $gbHttPip + "/api/gwd_AppealCases", //post    
-    urlApi_legalref_html: $gbHttPip + "/api/gwd_RatioDecidendis", //post 
+    urlApi_legalref: $gbHttPip + "/api/m_AppealCases", //post    
+    urlApi_legalref_html: $gbHttPip + "/api/m_RatioDecidendis", //post 
     urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealCases/GetWebDatasMaxTDis",
 
 

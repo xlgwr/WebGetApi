@@ -125,7 +125,7 @@ function PostData() {
                 url: 'https://www.icris.cr.gov.hk/csci/CBDS_Search.do?nextAction=CBDS_Search&CRNo=' + tmpCRNo + '&showMedium=true&showBack=true&searchPage=True',
                 data: {},
                 tmpdata: tmpCRNo,
-                timeout: 50000,
+                timeout: 80000,
                 type: "get",
                 success: function (data, state, xhr) {
 
@@ -185,8 +185,8 @@ function PostData() {
 
                     //提交到数据库
                     var getWebDatas = {
-                        gwd_CompaniesRegistry_items: [],
-                        gwd_CompaniesRegistry_itemsChange: [],
+                        m_CompaniesRegistry_items: [],
+                        m_CompaniesRegistry_itemsChange: [],
                         tname: "icris",
                         ttype: $ttype,
                         thtml: data,
@@ -198,7 +198,7 @@ function PostData() {
                         addDate: undefined,
                         UpdateDate: undefined
                     }
-                    var gwd_CompaniesRegistry_items = {
+                    var m_CompaniesRegistry_items = {
                         $id: "1",
                         htmlID: 0,
                         CompanyName: tmpname[0].replace('-THE-', '').replace('-The-', '').trim(),
@@ -224,7 +224,7 @@ function PostData() {
                         addDate: undefined,
                         UpdateDate: undefined
                     }
-                    getWebDatas.gwd_CompaniesRegistry_items.push(gwd_CompaniesRegistry_items);
+                    getWebDatas.m_CompaniesRegistry_items.push(m_CompaniesRegistry_items);
 
                     var tmpindex = 1;
                     var tmpDate = "";
@@ -233,7 +233,7 @@ function PostData() {
                         var alltd = $table1Tr.eq(r).children('td');
 
                         tmpName = alltd.eq(1).text().trim();
-                        var gwd_CompaniesRegistry_itemsChange = {
+                        var m_CompaniesRegistry_itemsChange = {
                             $id: tmpindex + 1,
                             htmlID: 0,
                             CompanyName: undefined,
@@ -254,15 +254,15 @@ function PostData() {
 
                         if (alltd.length > 1) {
                             tmpDate = alltd.eq(0).text().trim();
-                            gwd_CompaniesRegistry_itemsChange.CompanyName = tmpName.replace('-THE-', '').trim();
+                            m_CompaniesRegistry_itemsChange.CompanyName = tmpName.replace('-THE-', '').trim();
                         } else {
                             tmpName = alltd.eq(0).text().trim();
-                            gwd_CompaniesRegistry_itemsChange.CompanyNameZH = tmpName.replace('-THE-', '').trim();
+                            m_CompaniesRegistry_itemsChange.CompanyNameZH = tmpName.replace('-THE-', '').trim();
                         }
 
-                        gwd_CompaniesRegistry_itemsChange.EffectiveDate = tmpDate;
+                        m_CompaniesRegistry_itemsChange.EffectiveDate = tmpDate;
 
-                        getWebDatas.gwd_CompaniesRegistry_itemsChange.push(gwd_CompaniesRegistry_itemsChange);
+                        getWebDatas.m_CompaniesRegistry_itemsChange.push(m_CompaniesRegistry_itemsChange);
                         tmpindex += 1;
                     }
 
@@ -271,8 +271,8 @@ function PostData() {
                         console.log('没有纪录与输入的查询资料相符');
                         getWebDatas.tStatus = 1;
                         getWebDatas.Remark = '没有纪录与输入的查询资料相符';
-                        getWebDatas.gwd_ICRIS_items = undefined;
-                        getWebDatas.gwd_CompaniesRegistry_itemsChange = undefined;
+                        getWebDatas.m_CompaniesRegistry_items = undefined;
+                        getWebDatas.m_CompaniesRegistry_itemsChange = undefined;
 
                     };
                     
@@ -283,7 +283,7 @@ function PostData() {
                         url: config.urlApi_icris,
                         tmpdata: this.tmpdata,
                         contentType: 'application/json; charset=utf-8',
-                        timeout: 50000,
+                        timeout: 80000,
                         data: JSON.stringify(getWebDatas)
                     }).done(function (data) {
                         console.log(this.tmpdata + ":Post Done!");
@@ -313,7 +313,7 @@ function PostData() {
         //$('select[name="SelectPage"]').length
         $.ajax({
             type: 'GET',
-            timeout: 50000,
+            timeout: 80000,
             url: tmpPostUrl + "1"
         }).done(function (data) {
             if (data.length < 10) {
@@ -339,7 +339,7 @@ function PostData() {
                 $.ajax({
                     type: 'GET',
                     tmpdata: x,
-                    timeout: 50000,
+                    timeout: 80000,
                     url: tmpPostUrl + x
                 }).done(function (data) {
                     if (data.length < 10) {

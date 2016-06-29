@@ -88,7 +88,7 @@ function j1_gotoListGetAllURL(arrCrtKey, calname, eng) {
         var getDate = new Date(getSplitDate[2], getSplitDate[1] - 1, getSplitDate[0], 0, 0, 0, 0);
         var getDateUrl = listdaykey(getDate);
 
-        arrCrtKey.forEach(function (key) {
+        arrCrtKey.forEach(function(key) {
             var url = getListURL(key, getDateUrl, eng);
             allUrl.push(url);
             _haxCrtKey[url] = key;
@@ -107,7 +107,7 @@ function j1_gotoListGetAllURLNow(arrCrtKey, calname, eng) {
     var getDate = new Date();
     var getDateUrl = listdaykey(getDate);
 
-    arrCrtKey.forEach(function (key) {
+    arrCrtKey.forEach(function(key) {
         var url = getListURL(key, getDateUrl, eng);
         allUrl.push(url);
         _haxCrtKey[url] = key;
@@ -124,9 +124,9 @@ function j1_PostData_1for_judiciary(url) {
         url: url,
         data: {},
         tmpdata: url,
-        timeout: 50000,
+        timeout: 80000,
         type: "get",
-        success: function (data, state, xhr) {
+        success: function(data, state, xhr) {
             console.log(this.tmpdata);
             //console.log(data);
             var $findTable = $('<div></div>').html(data);
@@ -139,19 +139,19 @@ function j1_PostData_1for_judiciary(url) {
             var gwd_Case_items = [];
 
             var getWebDatas = {
-                gwd_Case_items: gwd_Case_items,
-                tLang: 0,
-                tname: _haxCrtKey[this.tmpdata],
-                ttype: $PostType1for_judiciary,
-                thtml: data,
-                Tid: 0,
-                Remark: this.url,
-                tStatus: 0,
-                ClientIP: undefined,
-                addDate: undefined,
-                UpdateDate: undefined
-            }
-            //提交到数据库
+                    gwd_Case_items: gwd_Case_items,
+                    tLang: 0,
+                    tname: _haxCrtKey[this.tmpdata],
+                    ttype: $PostType1for_judiciary,
+                    thtml: data,
+                    Tid: 0,
+                    Remark: this.url,
+                    tStatus: 0,
+                    ClientIP: undefined,
+                    addDate: undefined,
+                    UpdateDate: undefined
+                }
+                //提交到数据库
 
             if ($tableAll.length < 2) {
                 var tmpmsg = "当日,无资料"
@@ -359,7 +359,7 @@ function j1_PostData_1for_judiciary(url) {
 
                         ///////////////////////////////////////////////////////////////
                         console.log("后面的表")
-                        //后面的表
+                            //后面的表
                         for (var x = 0; x < $allDivCenter.length; x++) {
                             var $curDivCenter = $allDivCenter.eq(x);
                             var $curNextTable = $curDivCenter.nextAll('table');
@@ -634,16 +634,16 @@ function j1_PostData_1for_judiciary(url) {
                 tmpdata: getWebDatas.tname,
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(getWebDatas)
-            }).done(function (data) {
+            }).done(function(data) {
                 console.log(this.tmpdata + ":Post Done!");
                 //console.log(data);
-            }).fail(function (err) {
+            }).fail(function(err) {
                 //showError
                 sendMsg('postOK', "Set Date false.");
                 console.log(err);
             });
         },
-        error: function () {
+        error: function() {
             sendMsg('postOK', "Set Date false.");
             console.log(this.tmpdata);
             console.log("提交预定请求发生错误，稍等重试！");
@@ -654,7 +654,7 @@ function j1_PostData_1for_judiciary(url) {
 
 function j1_PostAll(arrurl) {
     sendMsg("removeUrl", "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm");
-    arrurl.forEach(function (url) {
+    arrurl.forEach(function(url) {
         j1_PostData_1for_judiciary(url);
     }, this);
 }
