@@ -168,13 +168,10 @@ namespace WebGetApi.Controllers
                     return Ok();
                 }
                 else
-                {
-                    if (tmpExit.Count > 1000)
-                    {
-                        tmpExit.Clear();
-                    }
+                { 
                     tmpExit.Add(m_AppealCases.TDis, true);
                 }
+               
 
                 var tmpexitAs = gwtMainExistsAsync(m_AppealCases.caseNo, m_AppealCases.tLang, m_AppealCases.caseDate, m_AppealCases.TDis, m_AppealCases.tIndex);
                 if (tmpexitAs)
@@ -193,6 +190,11 @@ namespace WebGetApi.Controllers
                 else
                 {
                     db.m_AppealCases.Add(m_AppealCases);
+                }
+
+                if (tmpExit.Count > 100)
+                {
+                    tmpExit.Clear();
                 }
 
                 await db.SaveChangesAsync();

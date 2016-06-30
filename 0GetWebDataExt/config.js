@@ -18,7 +18,8 @@ var config = {
     //上诉记录
     urlApi_legalref: $gbHttPip + "/api/m_AppealCases", //post    
     urlApi_legalref_html: $gbHttPip + "/api/m_RatioDecidendis", //post 
-    urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealCases/GetWebDatasMaxTDis",
+    //urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealCases/GetWebDatasMaxTDis",//
+    urlApi_GetWebDatasMaxTDis: $gbHttPip + "/api/GWDAppealCases/GetWebDatasMaxM_parameterTDis", //GetWebDatasMaxM_parameterTDis
 
 
 
