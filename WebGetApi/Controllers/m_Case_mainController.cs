@@ -123,7 +123,7 @@ namespace WebGetApi.Controllers
 
                                         getItem.CaseNo = item.CaseNo;
                                         getItem.CaseType = item.CaseType;
-                                        getItem.Cause = item.Cause;
+                                        //getItem.Cause = item.Cause;
                                         getItem.ClientIP = item.ClientIP;
                                         getItem.CourtDay = item.CourtDay;
                                         getItem.CourtID = item.CourtID;
@@ -145,10 +145,10 @@ namespace WebGetApi.Controllers
                                         getItem.ttype = item.ttype;
                                         getItem.updtime = DateTime.Now;
 
-                                        getItem.Actiondate = item.Actiondate;
+                                        //getItem.Actiondate = item.Actiondate;
                                         getItem.Currency = item.Currency;
                                         getItem.Amount = item.Amount;
-                                        getItem.CheckField = item.CheckField;
+                                        //getItem.CheckField = item.CheckField;
 
 
 

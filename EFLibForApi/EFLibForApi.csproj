@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201606281010165_initFirst.Designer.cs">
       <DependentUpon>201606281010165_initFirst.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607120114445_changeCaseCol.cs" />
+    <Compile Include="Migrations\201607120114445_changeCaseCol.Designer.cs">
+      <DependentUpon>201607120114445_changeCaseCol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -112,6 +116,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606281010165_initFirst.resx">
       <DependentUpon>201606281010165_initFirst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120114445_changeCaseCol.resx">
+      <DependentUpon>201607120114445_changeCaseCol.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

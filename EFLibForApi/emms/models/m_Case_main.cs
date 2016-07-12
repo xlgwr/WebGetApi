@@ -30,10 +30,12 @@ namespace EFLibForApi.emms.models
         [ForeignKey("m_Case_main")]
         public long htmlID { get; set; }
 
+
         /// <summary>
-        /// 序号
+        /// 案件编号
         /// </summary>
-        public int SerialNo { get; set; }
+       // [Column(TypeName = "text")]
+        public string CaseNo { get; set; }
 
         /// <summary>
         /// 法院ID
@@ -43,17 +45,23 @@ namespace EFLibForApi.emms.models
 
 
         /// <summary>
-        /// 法官
+        /// 案件类别
         /// </summary>
-       // [Column(TypeName = "text")]
-        public string Judge { get; set; }
-
+        // [Column(TypeName = "text")]
+        [Column("CaseTypeID")]
+        public string CaseType { get; set; }
 
         /// <summary>
         /// 案件年份
         /// </summary>
-       // [Column(TypeName = "text")]
+        // [Column(TypeName = "text")]
+        [Column("Year")]
         public string CYear { get; set; }
+
+        /// <summary>
+        /// 序号
+        /// </summary>
+        public int SerialNo { get; set; }
 
 
         /// <summary>
@@ -63,24 +71,8 @@ namespace EFLibForApi.emms.models
         public string CourtDay { get; set; }
 
 
-        /// <summary>
-        /// 聆讯
-        /// </summary>
-       // [Column(TypeName = "text")]
-        public string Hearing { get; set; }
 
 
-        /// <summary>
-        /// 案件编号
-        /// </summary>
-       // [Column(TypeName = "text")]
-        public string CaseNo { get; set; }
-
-        /// <summary>
-        /// 案件类别
-        /// </summary>
-       // [Column(TypeName = "text")]
-        public string CaseType { get; set; }
         /// <summary>
         /// 原告 Old
         /// </summary>
@@ -102,16 +94,20 @@ namespace EFLibForApi.emms.models
         /// <summary>
         /// 原因
         /// </summary>
-       // [Column(TypeName = "text")]
-        public string Cause { get; set; }
+        // [Column(TypeName = "text")]
+        //public string Cause { get; set; }
 
         /// <summary>
         /// 性质
         /// </summary>
-       // [Column(TypeName = "text")]
+        // [Column(TypeName = "text")]
         public string Nature { get; set; }
 
-
+        /// <summary>
+        /// 法官
+        /// </summary>
+       // [Column(TypeName = "text")]
+        public string Judge { get; set; }
 
         /// <summary>
         /// 应讯代表
@@ -120,9 +116,16 @@ namespace EFLibForApi.emms.models
         public string Representation { get; set; }
 
         /// <summary>
+        /// 聆讯
+        /// </summary>
+       // [Column(TypeName = "text")]
+        public string Hearing { get; set; }
+
+        /// <summary>
         /// 计划行动日期
         /// </summary>
-        public string Actiondate { get; set; }
+        //public string Actiondate { get; set; }
+
         /// <summary>
         /// 币别
         /// </summary>
@@ -134,7 +137,13 @@ namespace EFLibForApi.emms.models
         /// <summary>
         /// 检验区
         /// </summary>
-        public string CheckField { get; set; }
+        //public string CheckField { get; set; }
+
+        public string P_Address { get; set; }
+        public string D_Address { get; set; }
+        public string Other { get; set; }
+        public string Other1 { get; set; }
+
 
         [JsonIgnore]
         public m_Case_main m_Case_main { get; set; }
