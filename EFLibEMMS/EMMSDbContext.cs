@@ -45,7 +45,8 @@ namespace EFLibEMMS.EMMS
         public virtual DbSet<m_UserGrade> m_UserGrade { get; set; }
         public virtual DbSet<m_Word> m_Word { get; set; }
         public virtual DbSet<s_Company> s_Company { get; set; }
-        public virtual DbSet<t_HtmlPage> t_HtmlPage { get; set; }
+        public virtual DbSet<s_CompanyCHK> s_CompanyCHK { get; set; }
+        public virtual DbSet<t_HtmlPageCom> t_HtmlPage { get; set; }
         public virtual DbSet<s_Entity> s_Entity { get; set; }
         public virtual DbSet<s_Person> s_Person { get; set; }
         public virtual DbSet<s_Unknown> s_Unknown { get; set; }
@@ -60,7 +61,6 @@ namespace EFLibEMMS.EMMS
         public virtual DbSet<t_ApplySouch> t_ApplySouch { get; set; }
         public virtual DbSet<t_BankAccount> t_BankAccount { get; set; }
         public virtual DbSet<t_Case> t_Case { get; set; }
-        public virtual DbSet<t_CaseType> t_CaseType { get; set; }
         public virtual DbSet<t_Collateral> t_Collateral { get; set; }
         public virtual DbSet<t_CollateralShare> t_CollateralShare { get; set; }
         public virtual DbSet<t_CompanyChange> t_CompanyChange { get; set; }
@@ -215,28 +215,6 @@ namespace EFLibEMMS.EMMS
             modelBuilder.Entity<t_ApplySouch>()
                 .HasMany(e => e.t_Quote)
                 .WithRequired(e => e.t_ApplySouch)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<t_Case>()
-                .Property(e => e.Plaintiff)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_Case>()
-                .Property(e => e.Defendant)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_Case>()
-                .Property(e => e.Representation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_Case>()
-                .HasMany(e => e.t_Plaintiff)
-                .WithRequired(e => e.t_Case)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<t_Court>()
-                .HasMany(e => e.t_Case)
-                .WithRequired(e => e.t_Court)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<t_EmailList>()

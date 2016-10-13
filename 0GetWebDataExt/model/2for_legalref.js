@@ -13,6 +13,8 @@ var _getUrl2PressPrefix = "http://legalref.judiciary.gov.hk/";
 
 function legalref() {
     sendMsg("removeUrl", config.urlRedict_legalrefHOME);
+	sendMsg("removeUrl", "http://www.judiciary.gov.hk/maintenance");
+	sendMsg("removeUrl", "http://legalref.judiciary.gov.hk/lrs/notFileFound.jsp");
 
     console.log("text legalref ok. Tdis:" + _legalrefTdis);
     //每5秒开始运行，一次取5个
@@ -23,6 +25,9 @@ function legalref() {
 
     function runEven5() {
 
+	    sendMsg("removeUrl", "http://www.judiciary.gov.hk/maintenance");
+	    sendMsg("removeUrl", "http://legalref.judiciary.gov.hk/lrs/notFileFound.jsp");
+		
         _getAllMain_legalref = [];
 
         console.log("CurrTDis:" + _legalrefTdis + ",每:" + (config.getSetInterval / 1000) + "秒运行一次，每次取:" + config.getEven5Count);

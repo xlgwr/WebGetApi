@@ -137,7 +137,7 @@ function openURLjudiciary() {
             tmpRunHour = Number(_paramvalue_1evenyDataGet.split(':')[0]);
             tmpRunMin = Number(_paramvalue_1evenyDataGet.split(':')[1]);
         }
-
+	    removeTabUrl(999999, 'www.judiciary.gov.hk');
         console.log("Start Time:" + _paramvalue_1evenyDataGet + ",Date:" + tmpCurrDate + ",Hours:" + tmpGethour + ",Min:" + tmpGetMin + ",RunHours:" + tmpRunHour + ",RunMin:" + tmpRunMin);
 
         if (tmpGethour === tmpRunHour && (tmpGetMin === tmpRunMin || tmpRunMin + 1 == tmpGetMin)) {
@@ -168,6 +168,7 @@ function openURL() {
     console.log("RunInterval Check:" + $runTnter / (60 * 1000) + " Min,Restart url: https://www.icris.cr.gov.hk/csci/  Time:" + (new Date()).Format("yyyy-MM-dd hh:mm:ss.S"));
     var $nowDate = Date.now();
     if ($nowDate - $jsonDate >= (1 * 60 * 1000)) {
+		removeTabUrl(99999, 'www.icris.cr.gov.hk');
         console.log("Json Post is Over,Open new Windows。Now:" + $nowDate + ",JsonDate:" + $jsonDate + ",Diff:" + ($nowDate - $jsonDate) / (60 * 1000) + " Min");
         chrome.tabs.create({
             url: "https://www.icris.cr.gov.hk/csci/"
@@ -255,7 +256,8 @@ function GetWebDatasMaxTDisToOpen() {
         });
     }
     var $nowDate2 = Date.now();
-    if ($nowDate2 - $jsonDate2_legalref >= (5 * 60 * 1000)) {
+    if ($nowDate2 - $jsonDate2_legalref >= (24 * 60 * 60 * 1000)) {
+		removeTabUrl(99999, 'legalref.judiciary.gov.hk');
         console.log("2legalref Json Post is Over,Open new Windows。Now:" + $nowDate2 + ",JsonDate:" + $jsonDate2_legalref + ",Diff:" + ($nowDate2 - $jsonDate2_legalref) / (60 * 1000) + " Min");
         $.ajax({
             type: 'GET',

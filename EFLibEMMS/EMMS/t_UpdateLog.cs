@@ -22,7 +22,5 @@ namespace EFLibEMMS.EMMS
 
         [StringLength(16)]
         public string upduser { get; set; }
-
-        public virtual t_Case t_Case { get; set; }
     }
 }

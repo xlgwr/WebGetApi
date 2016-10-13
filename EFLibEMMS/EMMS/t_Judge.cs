@@ -19,7 +19,5 @@ namespace EFLibEMMS.EMMS
         public virtual s_Entity s_Entity { get; set; }
 
         public virtual s_Person s_Person { get; set; }
-
-        public virtual t_Case t_Case { get; set; }
     }
 }

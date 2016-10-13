@@ -14,14 +14,14 @@ namespace EFLibEMMS.EMMS
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long RecordID { get; set; }
 
-        [ForeignKey("s_Entity")]
+        //[ForeignKey("s_Entity")]
         public long Entityid { get; set; }
 
         public long HtmlID { get; set; }
 
         [Required]
         [StringLength(16)]
-        public string ItemNo { get; set; }
+        public string CRNo { get; set; }
 
         public int Language { get; set; }
 
@@ -50,7 +50,7 @@ namespace EFLibEMMS.EMMS
         [StringLength(16)]
         public string SameNo { get; set; }
 
-        [JsonIgnore]
-        public s_Entity s_Entity { get; set; }
+        //[JsonIgnore]
+        //public s_Entity s_Entity { get; set; }
     }
 }

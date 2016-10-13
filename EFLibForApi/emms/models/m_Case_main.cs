@@ -144,6 +144,15 @@ namespace EFLibForApi.emms.models
         public string Other { get; set; }
         public string Other1 { get; set; }
 
+        /// <summary>
+        /// 原告代表
+        /// </summary>
+        public virtual string Representation_P { get; set; }
+
+        /// <summary>
+        /// 被告代表
+        /// </summary>
+        public virtual string Representation_D { get; set; }
 
         [JsonIgnore]
         public m_Case_main m_Case_main { get; set; }

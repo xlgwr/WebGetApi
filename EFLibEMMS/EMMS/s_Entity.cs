@@ -14,7 +14,7 @@ namespace EFLibEMMS.EMMS
 
             s_Company = new HashSet<s_Company>();
             t_CompanyChange = new HashSet<t_CompanyChange>();
-            t_Disqualification = new HashSet<t_Disqualification>();
+            //t_Disqualification = new HashSet<t_Disqualification>();
         }
 
         [Key]
@@ -40,6 +40,6 @@ namespace EFLibEMMS.EMMS
 
         public ICollection<s_Company> s_Company { get; set; }
         public ICollection<t_CompanyChange> t_CompanyChange { get; set; }
-        public ICollection<t_Disqualification> t_Disqualification { get; set; }
+        //public ICollection<t_Disqualification> t_Disqualification { get; set; }
     }
 }

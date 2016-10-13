@@ -16,6 +16,7 @@ using Common.Logging;
 using EFLibForApi.emms.models;
 using EFLibForApi.emms;
 using EFLibEMMS.viewsModels;
+using System.Text.RegularExpressions;
 
 namespace WebGetApi.Controllers
 {
@@ -101,12 +102,8 @@ namespace WebGetApi.Controllers
 
             try
             {
-                var s_Entity_model = new s_Entity();
 
-                s_Entity_model.Type = 2;
-                s_Entity_model.Flag = 2;
-
-                var t_HtmlPage_model = new t_HtmlPage();
+                var t_HtmlPage_model = new t_HtmlPageCom();
                 //set t_HtmlPage_model
                 if (t_Disqualification != null && t_Disqualification.Count > 0)
                 {
@@ -128,28 +125,36 @@ namespace WebGetApi.Controllers
                         //item.UpdateDate = DateTime.Now;
                         //item.ClientIP = HttpContext.Current.Request.UserHostAddress;
                         var tmodel = new t_Disqualification();
+                        var tmpCRNO = "0000000" + item.RecordID.Trim();
+                        tmpCRNO = tmpCRNO.Substring(tmpCRNO.Length - 7);
 
                         tmodel.HtmlID = saveModel.HtmlID;
 
+                        tmodel.Entityid = s_CompanyEntityID(tmpCRNO, 0);
                         tmodel.ChineseName = item.ChineseName;
                         tmodel.CorporateName = item.CorporateName;
                         tmodel.IDCard = item.IDCard;
-                        tmodel.ItemNo = item.RecordID;
+                        tmodel.CRNo = tmpCRNO;
                         tmodel.Language = 0;
                         tmodel.OverseasPassportID = item.OverseasPassportID;
                         tmodel.PassportCountry = item.PassportCountry;
                         tmodel.SameNo = item.SameNo;
 
-                        if (!t_DisqualificationExists(tmodel.ItemNo))
+
+                        if (!t_DisqualificationExists(tmodel.CRNo))
                         {
-                            s_Entity_model.t_Disqualification.Add(tmodel);
+                            db.t_Disqualification.Add(tmodel);
+                        }
+                        else
+                        {
+                            var currD = t_DisqualificationByNo(tmodel.CRNo);
+                            if (tmodel.Entityid > 0)
+                            {
+                                currD.Entityid = tmodel.Entityid;
+                            }
                         }
                     }
-                    if (s_Entity_model.t_Disqualification.Count > 0)
-                    {
-                        db.s_Entity.Add(s_Entity_model);
-                        await db.SaveChangesAsync();
-                    }
+                    await db.SaveChangesAsync();
                 }
 
             }
@@ -170,13 +175,15 @@ namespace WebGetApi.Controllers
             {
                 return BadRequest(ModelState);
             }
+            Regex rgxCN = new Regex("[A-Za-z]{2,}", RegexOptions.IgnoreCase);
 
             long getMaxSetCurrValue = 1;
             long getNowValue = 1;
             m_parameter m_parameterCurr = new m_parameter();
             var tmpfirst = new s_Company();
-            var t_HtmlPage_model = new t_HtmlPage();
+            var t_HtmlPage_model = new t_HtmlPageCom();
             var s_Entity_model = new s_Entity();
+            var tmpCheckComp = new s_CompanyCHK();
 
             try
             {
@@ -196,6 +203,14 @@ namespace WebGetApi.Controllers
                     if (string.IsNullOrEmpty(item.CompanyName) && string.IsNullOrEmpty(item.CompanyNameZH))
                     {
                         continue;
+                    }
+                    if (string.IsNullOrEmpty(item.CompanyNameZH) && !string.IsNullOrEmpty(item.CompanyName))
+                    {
+                        if (!rgxCN.IsMatch(item.CompanyName))
+                        {
+                            item.CompanyNameZH = item.CompanyName;
+                            item.CompanyName = null;
+                        }
                     }
                     var getItem = new s_Company();
                     getItem.ActiveStatus = item.CurrentState;
@@ -227,10 +242,18 @@ namespace WebGetApi.Controllers
                     {
                         continue;
                     }
+                    if (string.IsNullOrEmpty(item.CompanyNameZH) && !string.IsNullOrEmpty(item.CompanyName))
+                    {
+                        if (!rgxCN.IsMatch(item.CompanyName))
+                        {
+                            item.CompanyNameZH = item.CompanyName;
+                            item.CompanyName = null;
+                        }
+                    }
                     var getItemChange = new t_CompanyChange();
-                    getItemChange.CRNo = item.tkeyNo;
+                    getItemChange.CRNo = item.tkeyNo;                   
                     getItemChange.ChangeContent_En = item.CompanyName;
-                    getItemChange.ChangeContent_Cn = item.CompanyNameZH;
+                    getItemChange.ChangeContent_Cn = item.CompanyNameZH;  
                     getItemChange.EffectiveDate = item.EffectiveDate;
                     getItemChange.Remark = item.Remark;
                     getItemChange.Sort = (int)item.tIndex;
@@ -277,6 +300,8 @@ namespace WebGetApi.Controllers
                         {
                             logger.Error(ex);
                         }
+                        tmpCheckComp.CRNo = tmpfirst.CRNo;
+                        tmpCheckComp.Language = tmpfirst.Language;
 
                         var tmpexit = s_CompanyExists(tmpfirst.CRNo, tmpfirst.Language);
                         if (tmpexit)
@@ -345,6 +370,7 @@ namespace WebGetApi.Controllers
                                 var item = s_Entity_model.t_CompanyChange.ElementAt(i);
                                 if (!string.IsNullOrEmpty(item.ChangeContent_En) || !string.IsNullOrEmpty(item.ChangeContent_Cn))
                                 {
+
                                     var getItemChange = t_CompanyChangeExistsByTkeyNo(item.CRNo, item.Language, item.Sort);
                                     if (getItemChange != null)
                                     {
@@ -378,6 +404,7 @@ namespace WebGetApi.Controllers
                         }
                         else
                         {
+                            db.s_CompanyCHK.Add(tmpCheckComp);
                             db.s_Entity.Add(s_Entity_model);
                         }
 
@@ -395,13 +422,13 @@ namespace WebGetApi.Controllers
                         }
 
                     }
-
                     await db.SaveChangesAsync();
                 }
             }
-            catch (DbUpdateException)
+            catch (Exception ex)
             {
-                throw;
+                logger.Error(ex);
+                logger.Error(postModel);
             }
 
             return Ok();
@@ -434,7 +461,7 @@ namespace WebGetApi.Controllers
             }
         }
 
-        private t_HtmlPage getHtmlById(long id)
+        private t_HtmlPageCom getHtmlById(long id)
         {
             try
             {
@@ -450,8 +477,22 @@ namespace WebGetApi.Controllers
 
         private bool s_CompanyExists(string id, long lang)
         {
-            var item = db.s_Company.Count(e => e.CRNo == id && e.Language == lang) > 0;
+            var item = db.s_CompanyCHK.Count(e => e.CRNo == id && e.Language == lang) > 0;
             return item;
+        }
+        private long s_CompanyEntityID(string id, long lang)
+        {
+            try
+            {
+                var item = db.s_Company.Where(e => e.CRNo == id && e.Language == lang).Select(a => a.Entityid).SingleOrDefault();
+                return item;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return 0;
+            }
+
         }
         private s_Company s_CompanyExistsByTkeyNo(string id, long lang)
         {
@@ -485,14 +526,14 @@ namespace WebGetApi.Controllers
         private bool t_DisqualificationExists(string id)
         {
 
-            return db.t_Disqualification.Count(e => e.ItemNo == id) > 0;
+            return db.t_Disqualification.Count(e => e.CRNo == id) > 0;
         }
 
         private t_Disqualification t_DisqualificationByNo(string id)
         {
             try
             {
-                return db.t_Disqualification.Where(e => e.ItemNo == id).FirstOrDefault();
+                return db.t_Disqualification.Where(e => e.CRNo == id).FirstOrDefault();
             }
             catch (Exception ex)
             {

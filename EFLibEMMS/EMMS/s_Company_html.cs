@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace EFLibEMMS.EMMS
 {
 
-    [Table("t_HtmlPage")]
-    public class t_HtmlPage
+    [Table("t_HtmlPageCom")]
+    public class t_HtmlPageCom
     {
         [Key]
         [Column(Order = 0)]

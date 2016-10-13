@@ -6,12 +6,23 @@ namespace EFLibEMMS.EMMS
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    public partial class s_CompanyCHK
+    {
+        [Key]
+        [Column(Order = 0)]
+        public string CRNo { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        public int Language { get; set; }
 
+    }
     public partial class s_Company
     {
         public s_Company()
         {
+            DataGradeID = 1;
             Language = 0;
+            Enable = 1;
             Show = 2;
         }
         [Key]
@@ -132,10 +143,14 @@ namespace EFLibEMMS.EMMS
         public int? Show { get; set; }
 
         /// <summary>
+        /// 0:禁用 1:启用
+        /// </summary>
+        public int? Enable { get; set; }
+
+        /// <summary>
         /// 数据级别
         /// </summary>
-        [StringLength(32)]
-        public string DataGradeID { get; set; }
+        public int DataGradeID { get; set; }
 
         [JsonIgnore]
         public s_Entity s_Entity { get; set; }

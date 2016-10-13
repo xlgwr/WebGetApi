@@ -14,7 +14,7 @@ namespace EFLibForApi.emms.models
     public abstract class entityItems : entityTID
     {
         [Key]
-        [Column(Order = 1)]
+        [Column("Language",Order = 1)]
         public long tLang { get; set; }
 
         [Key]

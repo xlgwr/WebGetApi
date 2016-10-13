@@ -17,6 +17,7 @@ namespace EFLibForApi.emms.models
     [Table("entityCommMain")]
     public class entityCommMain : entityTID
     {
+        [Column("Language")]
         public long tLang { get; set; }
 
         [StringLength(500)]

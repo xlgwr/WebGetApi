@@ -5,6 +5,8 @@ var $PostType1for_judiciary = "1for_judiciary";
 //"mcl",
 //"fmc"
 var _arrcrtkey = [
+    //終審法院
+    "cfa",
     //终审及高等法院
     "cacfi",
     "ct",
@@ -164,6 +166,7 @@ function j1_PostData_1for_judiciary(url) {
                 var tIndex = 0;
                 ///*********************************************///
                 switch (_haxCrtKey[this.tmpdata]) {
+                    case "cfa":
                     case "cacfi":
                     case "ct":
                     case "lands":
@@ -180,6 +183,10 @@ function j1_PostData_1for_judiciary(url) {
                             case "dcmc":
                                 tmpStartTable = 1;
                                 tmpStartTR = 1;
+                                break;
+                            case "cfa":
+                              tmpStartTable = 2;
+                                tmpStartTR = 5;
                                 break;
                             case "lands":
                                 tmpStartTable = 2;
@@ -208,8 +215,8 @@ function j1_PostData_1for_judiciary(url) {
                                 var $tmptrTDall = $tmptr.find('td');
 
                                 console.log($tmptrTDall.length);
-
-                                if (tmpCourtID == "Court" || $tmptrTDall.length < 7 || ($tmptrTDall.eq(4).text().trim().length < 7 && $tmptrTDall.eq(0).text().trim().length < 7)) {
+                                //少于7个td,第0，3，4个中的内容为空，跳出，重新开始
+                                if (tmpCourtID == "Court" || $tmptrTDall.length < 7 || ($tmptrTDall.eq(3).text().trim().length < 7 && $tmptrTDall.eq(4).text().trim().length < 7 && $tmptrTDall.eq(0).text().trim().length < 7)) {
                                     console.log("td<7,td4:" + $tmptrTDall.eq(4).text().trim().length + $tmptrTDall.eq(0).text().trim().length);
                                     //console.log($tmptr.text());
                                     continue;
@@ -654,6 +661,9 @@ function j1_PostData_1for_judiciary(url) {
 
 function j1_PostAll(arrurl) {
     sendMsg("removeUrl", "http://www.judiciary.gov.hk/en/crt_lists/daily_caulist.htm");
+    sendMsg("removeUrl", "http://www.judiciary.gov.hk/maintenance");
+    sendMsg("removeUrl", "http://legalref.judiciary.gov.hk/lrs/notFileFound.jsp");
+	
     arrurl.forEach(function(url) {
         j1_PostData_1for_judiciary(url);
     }, this);

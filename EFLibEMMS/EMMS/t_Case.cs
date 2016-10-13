@@ -6,110 +6,197 @@ namespace EFLibEMMS.EMMS
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class t_Case
+    [Table("t_Case")]
+    public class t_Case
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public t_Case()
-        {
-            t_D_Representation = new HashSet<t_D_Representation>();
-            t_Defendant = new HashSet<t_Defendant>();
-            t_Judge = new HashSet<t_Judge>();
-            t_Judgment = new HashSet<t_Judgment>();
-            t_P_Representation = new HashSet<t_P_Representation>();
-            t_Plaintiff = new HashSet<t_Plaintiff>();
-            t_UpdateLog = new HashSet<t_UpdateLog>();
-        }
-
+        #region 实体属性
+        /// <summary>
+        /// 唯一标识(自动递增)
+        /// </summary>
         [Key]
-        [StringLength(32)]
-        public string Caseid { get; set; }
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual long Caseid { get; set; }
 
-        [Required]
-        [StringLength(32)]
-        public string CaseNo { get; set; }
 
-        [StringLength(32)]
-        public string CaseNoNew { get; set; }
+        /// <summary>
+        /// 案件编号(不是GUID,而是法院定的编号,不可以修改,系统内部关系用)
+        /// </summary>
+        public virtual string CaseNo { get; set; }
 
-        [StringLength(32)]
-        public string CaseNo_Cn { get; set; }
+        /// <summary>
+        /// 案件编号(默认与CaseNo是同一个，但这个可以人工修正,显示时都显示这个编号)
+        /// </summary>
+        public virtual string CaseNoNew { get; set; }
 
-        [StringLength(16)]
-        public string NumberTimes { get; set; }
+        /// <summary>
+        /// 有无判决书(0:无 1:有)
+        /// </summary>
+        public virtual int? Judgement { get; set; }
 
-        [Required]
-        [StringLength(32)]
-        public string CourtID { get; set; }
+        ///// <summary>
+        ///// 中文法庭编号 如(民事訴訟 001/2014) 是案件上解析出来的
+        ///// </summary>
+        //public virtual string CaseNo_Cn { get; set; }
 
-        [StringLength(32)]
-        public string CaseTypeID { get; set; }
+        ///// <summary>
+        ///// 次数[2/4]#
+        ///// </summary>
+        //public virtual string NumberTimes { get; set; }
 
-        [StringLength(8)]
-        public string Year { get; set; }
+        ///// <summary>
+        ///// 法院id
+        ///// </summary>
+        //public virtual long CourtID { get; set; }
 
-        [StringLength(8)]
-        public string SerialNo { get; set; }
+        ///// <summary>
+        ///// 案件类别:民事上訴/傷亡訴訟/民事訴訟/僱員補償案件/刑事案件/破產案件/雜項案件/小額錢債審裁處上訴/建築及仲裁訴訟/裁判法院上訴
+        ///// </summary>
+        //public virtual long CaseTypeID { get; set; }
 
-        public DateTime? CourtDay { get; set; }
+        ///// <summary>
+        ///// 案件年份2015
+        ///// </summary>
+        //public virtual string Year { get; set; }
 
-        [Column(TypeName = "text")]
-        public string Plaintiff { get; set; }
+        ///// <summary>
+        ///// 序号001
+        ///// </summary>
+        //public virtual string SerialNo { get; set; }
 
-        [Column(TypeName = "text")]
-        public string Defendant { get; set; }
+        ///// <summary>
+        ///// 开庭日期
+        ///// </summary>
+        //public virtual string CourtDay { get; set; }
 
-        [StringLength(256)]
-        public string Cause { get; set; }
+        ///// <summary>
+        ///// 当事人各方（原告，被告的原始记录)
+        ///// </summary>
+        //public virtual string Parties { get; set; }
 
-        [StringLength(256)]
-        public string Nature { get; set; }
+        ///// <summary>
+        ///// 原告
+        ///// </summary>
+        //public virtual string Plaintiff { get; set; }
 
-        [StringLength(256)]
-        public string Judge { get; set; }
+        ///// <summary>
+        ///// 原告地址
+        ///// </summary>
+        //public virtual string P_Address { get; set; }
 
-        [Column(TypeName = "text")]
-        public string Representation { get; set; }
+        ///// <summary>
+        ///// 被告
+        ///// </summary>
+        //public virtual string Defendant { get; set; }
 
-        [StringLength(256)]
-        public string Hearing { get; set; }
+        ///// <summary>
+        ///// 被告地址
+        ///// </summary>
+        //public virtual string D_Address { get; set; }
 
-        public DateTime? Actiondate { get; set; }
+        ///// <summary>
+        ///// 原因/性质
+        ///// </summary>
+        //public virtual string Nature { get; set; }
 
-        [StringLength(16)]
-        public string Currency { get; set; }
+        ///// <summary>
+        ///// 法官
+        ///// </summary>
+        //public virtual string Judge { get; set; }
 
-        public int? Amount { get; set; }
+        ///// <summary>
+        ///// 应讯代表
+        ///// </summary>
+        //public virtual string Representation { get; set; }
 
-        public int? CheckField { get; set; }
+        ///// <summary>
+        ///// 原告代表
+        ///// </summary>
+        //public virtual string Representation_P { get; set; }
 
-        public int? Show { get; set; }
+        ///// <summary>
+        ///// 被告代表
+        ///// </summary>
+        //public virtual string Representation_D { get; set; }
 
-        [StringLength(32)]
-        public string DataGradeID { get; set; }
+        ///// <summary>
+        ///// 聆讯
+        ///// </summary>
+        //public virtual string Hearing { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_D_Representation> t_D_Representation { get; set; }
+        ///// <summary>
+        ///// 币别(excel上有)
+        ///// </summary>
+        //public virtual string Currency { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_Defendant> t_Defendant { get; set; }
+        ///// <summary>
+        ///// 总金额(excel上有)
+        ///// </summary>
+        //public virtual int Amount { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_Judge> t_Judge { get; set; }
+        ///// <summary>
+        ///// 其他
+        ///// </summary>
+        //public virtual string Other { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_Judgment> t_Judgment { get; set; }
+        ///// <summary>
+        ///// 其他1
+        ///// </summary>
+        //public virtual string Other1 { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_P_Representation> t_P_Representation { get; set; }
+        ///// <summary>
+        ///// 有无判决书(0:无 1:有)
+        ///// </summary>
+        //public virtual int Judgement { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_Plaintiff> t_Plaintiff { get; set; }
+        ///// <summary>
+        ///// HtmlID
+        ///// </summary>
+        //public virtual long HtmlID { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_UpdateLog> t_UpdateLog { get; set; }
+        ///// <summary>
+        ///// 1：线下可见（未审） 2:线上可见（已审）
+        ///// </summary>
+        //public virtual int Show { get; set; }
 
-        public virtual t_CaseType t_CaseType { get; set; }
+        ///// <summary>
+        ///// 数据级别(0:公开 1:内部人员可见 2:主管可见 3:超级用户可见)
+        ///// </summary>
+        //public virtual string DataGradeID { get; set; }
 
-        public virtual t_Court t_Court { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual string AddUser { get; set; }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual System.DateTime? AddDatetime { get; set; }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual string UpdUser { get; set; }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual System.DateTime? UpdDatetime { get; set; }
+
+
+        ///// <summary>
+        ///// 备注
+        ///// </summary>
+        //public virtual string Remark { get; set; }
+        ///// <summary>
+        ///// 0:禁用 1:启用
+        ///// </summary>
+        //public virtual int Enable { get; set; }
+
+        #endregion
+
+
+
     }
 }

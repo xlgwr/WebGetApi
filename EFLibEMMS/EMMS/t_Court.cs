@@ -8,11 +8,7 @@ namespace EFLibEMMS.EMMS
 
     public partial class t_Court
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public t_Court()
-        {
-            t_Case = new HashSet<t_Case>();
-        }
+      
 
         [Key]
         [StringLength(32)]
@@ -35,8 +31,5 @@ namespace EFLibEMMS.EMMS
 
         [StringLength(256)]
         public string Remark { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_Case> t_Case { get; set; }
     }
 }

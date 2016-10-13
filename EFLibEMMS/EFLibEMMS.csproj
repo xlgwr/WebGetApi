@@ -114,7 +114,6 @@
     <Compile Include="EMMS\t_ApplySouch.cs" />
     <Compile Include="EMMS\t_BankAccount.cs" />
     <Compile Include="EMMS\t_Case.cs" />
-    <Compile Include="EMMS\t_CaseType.cs" />
     <Compile Include="EMMS\t_Collateral.cs" />
     <Compile Include="EMMS\t_CollateralShare.cs" />
     <Compile Include="EMMS\t_CompanyChange.cs" />

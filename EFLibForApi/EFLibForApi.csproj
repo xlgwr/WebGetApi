@@ -101,6 +101,14 @@
     <Compile Include="Migrations\201607120114445_changeCaseCol.Designer.cs">
       <DependentUpon>201607120114445_changeCaseCol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608180405434_changeLangOrOther.cs" />
+    <Compile Include="Migrations\201608180405434_changeLangOrOther.Designer.cs">
+      <DependentUpon>201608180405434_changeLangOrOther.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608250923220_addRepColPD.cs" />
+    <Compile Include="Migrations\201608250923220_addRepColPD.Designer.cs">
+      <DependentUpon>201608250923220_addRepColPD.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,6 +127,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607120114445_changeCaseCol.resx">
       <DependentUpon>201607120114445_changeCaseCol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608180405434_changeLangOrOther.resx">
+      <DependentUpon>201608180405434_changeLangOrOther.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608250923220_addRepColPD.resx">
+      <DependentUpon>201608250923220_addRepColPD.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

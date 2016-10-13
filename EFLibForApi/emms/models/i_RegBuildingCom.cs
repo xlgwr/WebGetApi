@@ -59,7 +59,11 @@ namespace EFLibForApi.emms.models
         public string Tel { get; set; }
 
         public string Districtarea { get; set; }
+
+        [Column("Email")]
         public string Emailaddress { get; set; }
+
+        [Column("Fax")]
         public string Faxno { get; set; }
 
         [JsonIgnore]
